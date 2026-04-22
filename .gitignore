@@ -1,0 +1,26 @@
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.vrb
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.xdv
+*.bbl
+*.blg
+*.thm
+*.pre
+*.lot
+*.lof
+
+# Python/Script artifacts if any
+__pycache__/
+*.py[cod]
+
+# OS files
+.DS_Store
+Thumbs.db
