@@ -1,0 +1,3037 @@
+% Helper: wrap in $...$ only if not already in math mode
+\newcommand{\mathOrText}[1]{\ifmmode#1 \else$#1 $\fi}
+\newcommand{\mathOrChar}[2]{\ifmmode#1\else\char#2 \fi}
+
+
+\newunicodechar{−}{\mathOrText{-}}
+
+%%%%%%%%%%%%%%%% Mathematics Unicodes Uppercase %%%%%%%%%%%%%%%%
+\newunicodechar{𝐴}{\mathOrText{A}}
+\newunicodechar{𝐵}{\mathOrText{B}}
+\newunicodechar{𝐶}{\mathOrText{C}}
+\newunicodechar{𝐷}{\mathOrText{D}}
+\newunicodechar{𝐸}{\mathOrText{E}}
+\newunicodechar{𝐹}{\mathOrText{F}}
+\newunicodechar{𝐺}{\mathOrText{G}}
+\newunicodechar{𝐻}{\mathOrText{H}}
+\newunicodechar{𝐼}{\mathOrText{I}}
+\newunicodechar{𝐽}{\mathOrText{J}}
+\newunicodechar{𝐾}{\mathOrText{K}}
+\newunicodechar{𝐿}{\mathOrText{L}}
+\newunicodechar{𝑀}{\mathOrText{M}}
+\newunicodechar{𝑁}{\mathOrText{N}}
+\newunicodechar{𝑂}{\mathOrText{O}}
+\newunicodechar{𝑃}{\mathOrText{P}}
+\newunicodechar{𝑄}{\mathOrText{Q}}
+\newunicodechar{𝑅}{\mathOrText{R}}
+\newunicodechar{𝑆}{\mathOrText{S}}
+\newunicodechar{𝑇}{\mathOrText{T}}
+\newunicodechar{𝑈}{\mathOrText{U}}
+\newunicodechar{𝑉}{\mathOrText{V}}
+\newunicodechar{𝑊}{\mathOrText{W}}
+\newunicodechar{𝑋}{\mathOrText{X}}
+\newunicodechar{𝑌}{\mathOrText{Y}}
+\newunicodechar{𝑍}{\mathOrText{Z}}
+
+%%%%%%%%%%%%%%%% Mathematics Unicodes lowercase %%%%%%%%%%%%%%%%
+\newunicodechar{𝑎}{\mathOrText{a}}
+\newunicodechar{𝑏}{\mathOrText{b}}
+\newunicodechar{𝑐}{\mathOrText{c}}
+\newunicodechar{𝑑}{\mathOrText{d}}
+\newunicodechar{𝑒}{\mathOrText{e}}
+\newunicodechar{𝑓}{\mathOrText{f}}
+\newunicodechar{𝑔}{\mathOrText{g}}
+\newunicodechar{𝑕}{\mathOrText{h}}
+\newunicodechar{𝑖}{\mathOrText{i}}
+\newunicodechar{𝑗}{\mathOrText{j}}
+\newunicodechar{𝑘}{\mathOrText{k}}
+\newunicodechar{𝑙}{\mathOrText{l}}
+\newunicodechar{𝑚}{\mathOrText{m}}
+\newunicodechar{𝑛}{\mathOrText{n}}
+\newunicodechar{𝑜}{\mathOrText{o}}
+\newunicodechar{𝑝}{\mathOrText{p}}
+\newunicodechar{𝑞}{\mathOrText{q}}
+\newunicodechar{𝑟}{\mathOrText{r}}
+\newunicodechar{𝑠}{\mathOrText{s}}
+\newunicodechar{𝑡}{\mathOrText{t}}
+\newunicodechar{𝑢}{\mathOrText{u}}
+\newunicodechar{𝑣}{\mathOrText{v}}
+\newunicodechar{𝑤}{\mathOrText{w}}
+\newunicodechar{𝑥}{\mathOrText{x}}
+\newunicodechar{𝑦}{\mathOrText{y}}
+\newunicodechar{𝑧}{\mathOrText{z}}
+
+%%%%%%%%%%%%%%%% Mathematics Bold Letters Uppercase %%%%%%%%%%%%%%%%
+\newunicodechar{𝐀}{\mathOrText{\mathbf{A}}}
+\newunicodechar{𝐁}{\mathOrText{\mathbf{B}}}
+\newunicodechar{𝐂}{\mathOrText{\mathbf{C}}}
+\newunicodechar{𝐃}{\mathOrText{\mathbf{D}}}
+\newunicodechar{𝐄}{\mathOrText{\mathbf{E}}}
+\newunicodechar{𝐅}{\mathOrText{\mathbf{F}}}
+\newunicodechar{𝐆}{\mathOrText{\mathbf{G}}}
+\newunicodechar{𝐇}{\mathOrText{\mathbf{H}}}
+\newunicodechar{𝐈}{\mathOrText{\mathbf{I}}}
+\newunicodechar{𝐉}{\mathOrText{\mathbf{J}}}
+\newunicodechar{𝐊}{\mathOrText{\mathbf{K}}}
+\newunicodechar{𝐋}{\mathOrText{\mathbf{L}}}
+\newunicodechar{𝐌}{\mathOrText{\mathbf{M}}}
+\newunicodechar{𝐍}{\mathOrText{\mathbf{N}}}
+\newunicodechar{𝐎}{\mathOrText{\mathbf{O}}}
+\newunicodechar{𝐏}{\mathOrText{\mathbf{P}}}
+\newunicodechar{𝐐}{\mathOrText{\mathbf{Q}}}
+\newunicodechar{𝐑}{\mathOrText{\mathbf{R}}}
+\newunicodechar{𝐒}{\mathOrText{\mathbf{S}}}
+\newunicodechar{𝐓}{\mathOrText{\mathbf{T}}}
+\newunicodechar{𝐔}{\mathOrText{\mathbf{U}}}
+\newunicodechar{𝐕}{\mathOrText{\mathbf{V}}}
+\newunicodechar{𝐖}{\mathOrText{\mathbf{W}}}
+\newunicodechar{𝐗}{\mathOrText{\mathbf{X}}}
+\newunicodechar{𝐘}{\mathOrText{\mathbf{Y}}}
+\newunicodechar{𝐙}{\mathOrText{\mathbf{Z}}}
+
+%%%%%%%%%%%%%%%% Mathematics Bold Letters lowercase %%%%%%%%%%%%%%%%
+\newunicodechar{𝐚}{\mathOrText{\mathbf{a}}}
+\newunicodechar{𝐛}{\mathOrText{\mathbf{b}}}
+\newunicodechar{𝐜}{\mathOrText{\mathbf{c}}}
+\newunicodechar{𝐝}{\mathOrText{\mathbf{d}}}
+\newunicodechar{𝐞}{\mathOrText{\mathbf{e}}}
+\newunicodechar{𝐟}{\mathOrText{\mathbf{f}}}
+\newunicodechar{𝐠}{\mathOrText{\mathbf{g}}}
+\newunicodechar{𝐡}{\mathOrText{\mathbf{h}}}
+\newunicodechar{𝐢}{\mathOrText{\mathbf{i}}}
+\newunicodechar{𝐣}{\mathOrText{\mathbf{j}}}
+\newunicodechar{𝐤}{\mathOrText{\mathbf{k}}}
+\newunicodechar{𝐥}{\mathOrText{\mathbf{l}}}
+\newunicodechar{𝐦}{\mathOrText{\mathbf{m}}}
+\newunicodechar{𝐧}{\mathOrText{\mathbf{n}}}
+\newunicodechar{𝐨}{\mathOrText{\mathbf{o}}}
+\newunicodechar{𝐩}{\mathOrText{\mathbf{p}}}
+\newunicodechar{𝐪}{\mathOrText{\mathbf{q}}}
+\newunicodechar{𝐫}{\mathOrText{\mathbf{r}}}
+\newunicodechar{𝐬}{\mathOrText{\mathbf{s}}}
+\newunicodechar{𝐭}{\mathOrText{\mathbf{t}}}
+\newunicodechar{𝐮}{\mathOrText{\mathbf{u}}}
+\newunicodechar{𝐯}{\mathOrText{\mathbf{v}}}
+\newunicodechar{𝐰}{\mathOrText{\mathbf{w}}}
+\newunicodechar{𝐱}{\mathOrText{\mathbf{x}}}
+\newunicodechar{𝐲}{\mathOrText{\mathbf{y}}}
+\newunicodechar{𝐳}{\mathOrText{\mathbf{z}}}
+
+%%%%%%%%%%%%%%%% Mathematics Blackboard Bold Letters Uppercase %%%%%%%%%%%%%%%
+\newunicodechar{𝔸}{\mathOrText{\mathbb{A}}}
+\newunicodechar{𝔹}{\mathOrText{\mathbb{B}}}
+\newunicodechar{ℂ}{\mathOrText{\mathbb{C}}}
+\newunicodechar{𝔻}{\mathOrText{\mathbb{D}}}
+\newunicodechar{𝔼}{\mathOrText{\mathbb{E}}}
+\newunicodechar{𝔽}{\mathOrText{\mathbb{F}}}
+\newunicodechar{𝔾}{\mathOrText{\mathbb{G}}}
+\newunicodechar{ℍ}{\mathOrText{\mathbb{H}}}
+\newunicodechar{𝕀}{\mathOrText{\mathbb{I}}}
+\newunicodechar{𝕁}{\mathOrText{\mathbb{J}}}
+\newunicodechar{𝕂}{\mathOrText{\mathbb{K}}}
+\newunicodechar{𝕃}{\mathOrText{\mathbb{L}}}
+\newunicodechar{𝕄}{\mathOrText{\mathbb{M}}}
+\newunicodechar{ℕ}{\mathOrText{\mathbb{N}}}
+\newunicodechar{𝕆}{\mathOrText{\mathbb{O}}}
+\newunicodechar{ℙ}{\mathOrText{\mathbb{P}}}
+\newunicodechar{ℚ}{\mathOrText{\mathbb{Q}}}
+\newunicodechar{ℝ}{\mathOrText{\mathbb{R}}}
+\newunicodechar{𝕊}{\mathOrText{\mathbb{S}}}
+\newunicodechar{𝕋}{\mathOrText{\mathbb{T}}}
+\newunicodechar{𝕌}{\mathOrText{\mathbb{U}}}
+\newunicodechar{𝕍}{\mathOrText{\mathbb{V}}}
+\newunicodechar{𝕎}{\mathOrText{\mathbb{W}}}
+\newunicodechar{𝕏}{\mathOrText{\mathbb{X}}}
+\newunicodechar{𝕐}{\mathOrText{\mathbb{Y}}}
+\newunicodechar{ℤ}{\mathOrText{\mathbb{Z}}}
+
+%%%%%%%%%%%%%%%% Mathematics Calligraphy Letters lowercase %%%%%%%%%%%%%%%
+\newunicodechar{𝕒}{\mathOrText{\mathbb{a}}}
+\newunicodechar{𝕓}{\mathOrText{\mathbb{b}}}
+\newunicodechar{𝕔}{\mathOrText{\mathbb{c}}}
+\newunicodechar{𝕕}{\mathOrText{\mathbb{d}}}
+\newunicodechar{𝕖}{\mathOrText{\mathbb{e}}}
+\newunicodechar{𝕗}{\mathOrText{\mathbb{f}}}
+\newunicodechar{𝕘}{\mathOrText{\mathbb{g}}}
+\newunicodechar{𝕙}{\mathOrText{\mathbb{h}}}
+\newunicodechar{𝕚}{\mathOrText{\mathbb{i}}}
+\newunicodechar{𝕛}{\mathOrText{\mathbb{j}}}
+\newunicodechar{𝕜}{\mathOrText{\mathbb{k}}}
+\newunicodechar{𝕝}{\mathOrText{\mathbb{l}}}
+\newunicodechar{𝕞}{\mathOrText{\mathbb{m}}}
+\newunicodechar{𝕟}{\mathOrText{\mathbb{n}}}
+\newunicodechar{𝕠}{\mathOrText{\mathbb{o}}}
+\newunicodechar{𝕡}{\mathOrText{\mathbb{p}}}
+\newunicodechar{𝕢}{\mathOrText{\mathbb{q}}}
+\newunicodechar{𝕣}{\mathOrText{\mathbb{r}}}
+\newunicodechar{𝕤}{\mathOrText{\mathbb{s}}}
+\newunicodechar{𝕥}{\mathOrText{\mathbb{t}}}
+\newunicodechar{𝕦}{\mathOrText{\mathbb{u}}}
+\newunicodechar{𝕧}{\mathOrText{\mathbb{v}}}
+\newunicodechar{𝕨}{\mathOrText{\mathbb{w}}}
+\newunicodechar{𝕩}{\mathOrText{\mathbb{x}}}
+\newunicodechar{𝕪}{\mathOrText{\mathbb{y}}}
+\newunicodechar{𝕫}{\mathOrText{\mathbb{z}}}
+
+%%%%%%%%%%%%%%%% Mathematics Calligraphy Letters Uppercase %%%%%%%%%%%%%%%
+\newunicodechar{𝒜}{\mathOrText{\mathcal{A}}}
+\newunicodechar{ℬ}{\mathOrText{\mathcal{B}}}
+\newunicodechar{𝒞}{\mathOrText{\mathcal{C}}}
+\newunicodechar{𝒟}{\mathOrText{\mathcal{D}}}
+\newunicodechar{ℰ}{\mathOrText{\mathcal{E}}}
+\newunicodechar{ℱ}{\mathOrText{\mathcal{F}}}
+\newunicodechar{𝒢}{\mathOrText{\mathcal{G}}}
+\newunicodechar{ℋ}{\mathOrText{\mathcal{H}}}
+\newunicodechar{ℐ}{\mathOrText{\mathcal{I}}}
+\newunicodechar{𝒥}{\mathOrText{\mathcal{J}}}
+\newunicodechar{𝒦}{\mathOrText{\mathcal{K}}}
+\newunicodechar{ℒ}{\mathOrText{\mathcal{L}}}
+\newunicodechar{ℳ}{\mathOrText{\mathcal{M}}}
+\newunicodechar{𝒩}{\mathOrText{\mathcal{N}}}
+\newunicodechar{𝒪}{\mathOrText{\mathcal{O}}}
+\newunicodechar{𝒫}{\mathOrText{\mathcal{P}}}
+\newunicodechar{𝒬}{\mathOrText{\mathcal{Q}}}
+\newunicodechar{ℛ}{\mathOrText{\mathcal{R}}}
+\newunicodechar{𝒮}{\mathOrText{\mathcal{S}}}
+\newunicodechar{𝒯}{\mathOrText{\mathcal{T}}}
+\newunicodechar{𝒰}{\mathOrText{\mathcal{U}}}
+\newunicodechar{𝒱}{\mathOrText{\mathcal{V}}}
+\newunicodechar{𝒲}{\mathOrText{\mathcal{W}}}
+\newunicodechar{𝒳}{\mathOrText{\mathcal{X}}}
+\newunicodechar{𝒴}{\mathOrText{\mathcal{Y}}}
+\newunicodechar{𝒵}{\mathOrText{\mathcal{Z}}}
+
+%%%%%%%%%%%%%%%% Mathematics Calligraphy Letters lowercase %%%%%%%%%%%%%%%
+\newunicodechar{𝒶}{\mathOrText{\mathcal{a}}}
+\newunicodechar{𝒷}{\mathOrText{\mathcal{b}}}
+\newunicodechar{𝒸}{\mathOrText{\mathcal{c}}}
+\newunicodechar{𝒹}{\mathOrText{\mathcal{d}}}
+\newunicodechar{ℯ}{\mathOrText{\mathcal{e}}}
+\newunicodechar{𝒻}{\mathOrText{\mathcal{f}}}
+\newunicodechar{ℊ}{\mathOrText{\mathcal{g}}}
+\newunicodechar{𝒽}{\mathOrText{\mathcal{h}}}
+\newunicodechar{𝒾}{\mathOrText{\mathcal{i}}}
+\newunicodechar{𝒿}{\mathOrText{\mathcal{j}}}
+\newunicodechar{𝓀}{\mathOrText{\mathcal{k}}}
+\newunicodechar{𝓁}{\mathOrText{\mathcal{l}}}
+\newunicodechar{𝓂}{\mathOrText{\mathcal{m}}}
+\newunicodechar{𝓃}{\mathOrText{\mathcal{n}}}
+\newunicodechar{ℴ}{\mathOrText{\mathcal{o}}}
+\newunicodechar{𝓅}{\mathOrText{\mathcal{p}}}
+\newunicodechar{𝓆}{\mathOrText{\mathcal{q}}}
+\newunicodechar{𝓇}{\mathOrText{\mathcal{r}}}
+\newunicodechar{𝓈}{\mathOrText{\mathcal{s}}}
+\newunicodechar{𝓉}{\mathOrText{\mathcal{t}}}
+\newunicodechar{𝓊}{\mathOrText{\mathcal{u}}}
+\newunicodechar{𝓋}{\mathOrText{\mathcal{v}}}
+\newunicodechar{𝓌}{\mathOrText{\mathcal{w}}}
+\newunicodechar{𝓍}{\mathOrText{\mathcal{x}}}
+\newunicodechar{𝓎}{\mathOrText{\mathcal{y}}}
+\newunicodechar{𝓏}{\mathOrText{\mathcal{z}}}
+
+%%%%%%%%%%%%%%%% Mathematics Fraktur Letters Uppercase %%%%%%%%%%%%%%%%
+\newunicodechar{𝕬}{\mathOrText{\mathfrak{A}}}
+\newunicodechar{𝕭}{\mathOrText{\mathfrak{B}}}
+\newunicodechar{𝕮}{\mathOrText{\mathfrak{C}}}
+\newunicodechar{𝕯}{\mathOrText{\mathfrak{D}}}
+\newunicodechar{𝕰}{\mathOrText{\mathfrak{E}}}
+\newunicodechar{𝕱}{\mathOrText{\mathfrak{F}}}
+\newunicodechar{𝕲}{\mathOrText{\mathfrak{G}}}
+\newunicodechar{𝕳}{\mathOrText{\mathfrak{H}}}
+\newunicodechar{𝕴}{\mathOrText{\mathfrak{I}}}
+\newunicodechar{𝕵}{\mathOrText{\mathfrak{J}}}
+\newunicodechar{𝕶}{\mathOrText{\mathfrak{K}}}
+\newunicodechar{𝕷}{\mathOrText{\mathfrak{L}}}
+\newunicodechar{𝕸}{\mathOrText{\mathfrak{M}}}
+\newunicodechar{𝕹}{\mathOrText{\mathfrak{N}}}
+\newunicodechar{𝕺}{\mathOrText{\mathfrak{O}}}
+\newunicodechar{𝕻}{\mathOrText{\mathfrak{P}}}
+\newunicodechar{𝕼}{\mathOrText{\mathfrak{Q}}}
+\newunicodechar{𝕽}{\mathOrText{\mathfrak{R}}}
+\newunicodechar{𝕾}{\mathOrText{\mathfrak{S}}}
+\newunicodechar{𝕿}{\mathOrText{\mathfrak{T}}}
+\newunicodechar{𝖀}{\mathOrText{\mathfrak{U}}}
+\newunicodechar{𝖁}{\mathOrText{\mathfrak{V}}}
+\newunicodechar{𝖂}{\mathOrText{\mathfrak{W}}}
+\newunicodechar{𝖃}{\mathOrText{\mathfrak{X}}}
+\newunicodechar{𝖄}{\mathOrText{\mathfrak{Y}}}
+\newunicodechar{𝖅}{\mathOrText{\mathfrak{Z}}}
+
+%%%%%%%%%%%%%%%% Mathematics Fraktur Letters lowercase %%%%%%%%%%%%%%%%
+\newunicodechar{𝖆}{\mathOrText{\mathfrak{a}}}
+\newunicodechar{𝖇}{\mathOrText{\mathfrak{b}}}
+\newunicodechar{𝖈}{\mathOrText{\mathfrak{c}}}
+\newunicodechar{𝖉}{\mathOrText{\mathfrak{d}}}
+\newunicodechar{𝖊}{\mathOrText{\mathfrak{e}}}
+\newunicodechar{𝖋}{\mathOrText{\mathfrak{f}}}
+\newunicodechar{𝖌}{\mathOrText{\mathfrak{g}}}
+\newunicodechar{𝖍}{\mathOrText{\mathfrak{h}}}
+\newunicodechar{𝖎}{\mathOrText{\mathfrak{i}}}
+\newunicodechar{𝖏}{\mathOrText{\mathfrak{j}}}
+\newunicodechar{𝖐}{\mathOrText{\mathfrak{k}}}
+\newunicodechar{𝖑}{\mathOrText{\mathfrak{l}}}
+\newunicodechar{𝖒}{\mathOrText{\mathfrak{m}}}
+\newunicodechar{𝖓}{\mathOrText{\mathfrak{n}}}
+\newunicodechar{𝖔}{\mathOrText{\mathfrak{o}}}
+\newunicodechar{𝖕}{\mathOrText{\mathfrak{p}}}
+\newunicodechar{𝖖}{\mathOrText{\mathfrak{q}}}
+\newunicodechar{𝖗}{\mathOrText{\mathfrak{r}}}
+\newunicodechar{𝖘}{\mathOrText{\mathfrak{s}}}
+\newunicodechar{𝖙}{\mathOrText{\mathfrak{t}}}
+\newunicodechar{𝖚}{\mathOrText{\mathfrak{u}}}
+\newunicodechar{𝖛}{\mathOrText{\mathfrak{v}}}
+\newunicodechar{𝖜}{\mathOrText{\mathfrak{w}}}
+\newunicodechar{𝖝}{\mathOrText{\mathfrak{x}}}
+\newunicodechar{𝖞}{\mathOrText{\mathfrak{y}}}
+\newunicodechar{𝖟}{\mathOrText{\mathfrak{z}}}
+
+%%%%%%%%%%%%%%%% Greek Letters Uppercase %%%%%%%%%%%%%%%
+\newunicodechar{Γ}{\mathOrText{\Gamma }}
+\newunicodechar{Δ}{\mathOrText{\Delta }}
+\newunicodechar{Θ}{\mathOrText{\Theta }}
+\newunicodechar{Λ}{\mathOrText{\Lambda }}
+\newunicodechar{Ξ}{\mathOrText{\Xi }}
+\newunicodechar{Π}{\mathOrText{\Pi }}
+\newunicodechar{Σ}{\mathOrText{\Sigma }}
+\newunicodechar{Φ}{\mathOrText{\Phi }}
+\newunicodechar{ϒ}{\mathOrText{\Upsilon }}
+\newunicodechar{Ψ}{\mathOrText{\Psi }}
+\newunicodechar{Ω}{\mathOrText{\Omega }}
+
+%%%%%%%%%%%%%%%% Greek Letters lowercase %%%%%%%%%%%%%%%
+\newunicodechar{𝛼}{\mathOrText{\alpha }}
+\newunicodechar{𝛽}{\mathOrText{\beta }}
+\newunicodechar{𝛾}{\mathOrText{\gamma }}
+\newunicodechar{𝛿}{\mathOrText{\delta }}
+\newunicodechar{𝜖}{\mathOrText{\epsilon }}
+\newunicodechar{𝜀}{\mathOrText{\varepsilon }}
+\newunicodechar{𝜁}{\mathOrText{\zeta }}
+\newunicodechar{𝜂}{\mathOrText{\eta }}
+\newunicodechar{𝜃}{\mathOrText{\theta }}
+\newunicodechar{𝜗}{\mathOrText{\vartheta }}
+\newunicodechar{𝜄}{\mathOrText{\iota }}
+\newunicodechar{𝜅}{\mathOrText{\kappa }}
+\newunicodechar{𝜆}{\mathOrText{\lambda }}
+\newunicodechar{𝜇}{\mathOrText{\mu }}
+\newunicodechar{𝜈}{\mathOrText{\nu }}
+\newunicodechar{𝜉}{\mathOrText{\xi }}
+\newunicodechar{𝜊}{\mathOrText{o}}
+\newunicodechar{𝜋}{\mathOrText{\pi }}
+\newunicodechar{𝜛}{\mathOrText{\varpi }}
+\newunicodechar{𝜌}{\mathOrText{\rho }}
+\newunicodechar{𝜚}{\mathOrText{\varrho }}
+\newunicodechar{𝜎}{\mathOrText{\sigma }}
+\newunicodechar{𝜍}{\mathOrText{\varsigma }}
+\newunicodechar{𝜏}{\mathOrText{\tau }}
+\newunicodechar{𝜐}{\mathOrText{\upsilon }}
+\newunicodechar{𝜙}{\mathOrText{\phi }}
+\newunicodechar{𝜑}{\mathOrText{\varphi }}
+\newunicodechar{𝜒}{\mathOrText{\chi }}
+\newunicodechar{𝜓}{\mathOrText{\psi }}
+\newunicodechar{𝜔}{\mathOrText{\omega }}
+\newunicodechar{𝜕}{\mathOrText{\partial }}
+
+%%%%%%%%%%%%%%%% http://www.unicode.org/charts/PDF/U2190.pdf %%%%%%%%%%%%%%%
+\newunicodechar{←}{\mathOrText{\leftarrow }}
+\newunicodechar{↑}{\mathOrText{\uparrow }}
+\newunicodechar{→}{\mathOrText{\to }}
+\newunicodechar{↓}{\mathOrText{\downarrow }}
+\newunicodechar{↔}{\mathOrText{\leftrightarrow }}
+\newunicodechar{↕}{\mathOrText{\updownarrow }}
+\newunicodechar{↖}{\mathOrText{\nwarrow }}
+\newunicodechar{↗}{\mathOrText{\nearrow }}
+\newunicodechar{↘}{\mathOrText{\searrow }}
+\newunicodechar{↙}{\mathOrText{\swarrow }}
+\newunicodechar{↚}{\mathOrText{\nleftarrow }}
+\newunicodechar{↛}{\mathOrText{\nrightarrow }}
+\newunicodechar{↝}{\mathOrText{\rightsquigarrow }}
+\newunicodechar{↞}{\mathOrText{\twoheadleftarrow }}
+\newunicodechar{↠}{\mathOrText{\twoheadrightarrow }}
+\newunicodechar{↢}{\mathOrText{\leftarrowtail }}
+\newunicodechar{↣}{\mathOrText{\rightarrowtail }}
+\newunicodechar{↦}{\mathOrText{\mapsto }}
+\newunicodechar{↩}{\mathOrText{\hookleftarrow }}
+\newunicodechar{↪}{\mathOrText{\hookrightarrow }}
+\newunicodechar{↫}{\mathOrText{\looparrowleft }}
+\newunicodechar{↬}{\mathOrText{\looparrowright }}
+\newunicodechar{↭}{\mathOrText{\leftrightsquigarrow }}
+\newunicodechar{↮}{\mathOrText{\nleftrightarrow }}
+\newunicodechar{↰}{\mathOrText{\Lsh }}
+\newunicodechar{↱}{\mathOrText{\Rsh }}
+\newunicodechar{↶}{\mathOrText{\curvearrowleft }}
+\newunicodechar{↷}{\mathOrText{\curvearrowright }}
+\newunicodechar{↺}{\mathOrText{\circlearrowleft }}
+\newunicodechar{↻}{\mathOrText{\circlearrowright }}
+\newunicodechar{↼}{\mathOrText{\leftharpoonup }}
+\newunicodechar{↽}{\mathOrText{\leftharpoondown }}
+\newunicodechar{↾}{\mathOrText{\upharpoonright }}
+\newunicodechar{↿}{\mathOrText{\upharpoonleft }}
+\newunicodechar{⇀}{\mathOrText{\rightharpoonup }}
+\newunicodechar{⇁}{\mathOrText{\rightharpoondown }}
+\newunicodechar{⇂}{\mathOrText{\downharpoonright }}
+\newunicodechar{⇃}{\mathOrText{\downharpoonleft }}
+\newunicodechar{⇄}{\mathOrText{\rightleftarrows }}
+\newunicodechar{⇆}{\mathOrText{\leftrightarrows }}
+\newunicodechar{⇇}{\mathOrText{\leftleftarrows }}
+\newunicodechar{⇈}{\mathOrText{\upuparrows }}
+\newunicodechar{⇉}{\mathOrText{\rightrightarrows }}
+\newunicodechar{⇊}{\mathOrText{\downdownarrows }}
+\newunicodechar{⇋}{\mathOrText{\leftrightharpoons }}
+\newunicodechar{⇌}{\mathOrText{\rightleftharpoons }}
+\newunicodechar{⇍}{\mathOrText{\nLeftarrow }}
+\newunicodechar{⇎}{\mathOrText{\nLeftrightarrow }}
+\newunicodechar{⇏}{\mathOrText{\nRightarrow }}
+\newunicodechar{⇐}{\mathOrText{\Leftarrow }}
+\newunicodechar{⇑}{\mathOrText{\Uparrow }}
+\newunicodechar{⇒}{\mathOrText{\Rightarrow }}
+\newunicodechar{⇓}{\mathOrText{\Downarrow }}
+\newunicodechar{⇔}{\mathOrText{\Leftrightarrow }}
+\newunicodechar{⇔}{\mathOrText{\iff }}
+\newunicodechar{⇕}{\mathOrText{\Updownarrow }}
+\newunicodechar{⇚}{\mathOrText{\Lleftarrow }}
+\newunicodechar{⇛}{\mathOrText{\Rrightarrow }}
+
+%%%%%%%%%%%%%%%% http://www.unicode.org/charts/PDF/U2200.pdf %%%%%%%%%%%%%%%
+\newunicodechar{∀}{\mathOrText{\forall }}
+\newunicodechar{∁}{\mathOrText{\complement }}
+\newunicodechar{∂}{\mathOrText{\partial }}
+\newunicodechar{∃}{\mathOrText{\exists }}
+\newunicodechar{∄}{\mathOrText{\nexists }}
+\newunicodechar{∅}{\mathOrText{\varnothing }}
+\newunicodechar{∇}{\mathOrText{\nabla }}
+\newunicodechar{∈}{\mathOrText{\in }}
+\newunicodechar{∉}{\mathOrText{\notin }}
+\newunicodechar{∋}{\mathOrText{\ni }}
+\newunicodechar{∌}{\mathOrText{\not\ni }}
+%\newunicodechar{∏}{\mathOrText{\prod }}
+\newunicodechar{∐}{\mathOrText{\coprod }}
+
+\newunicodechar{−}{\mathOrText{-}}
+\newunicodechar{∓}{\mathOrText{\mp}}
+\newunicodechar{∔}{\mathOrText{\dotplus }}
+\newunicodechar{∖}{\mathOrText{\setminus }}
+\newunicodechar{∗}{\mathOrText{\ast }}
+\newunicodechar{∘}{\mathOrText{\circ }}
+\newunicodechar{∙}{\mathOrText{\bullet }}
+\newunicodechar{√}{\mathOrText{\surd }}
+\newunicodechar{∝}{\mathOrText{\propto }}
+\newunicodechar{∞}{\mathOrText{\infty }}
+\newunicodechar{∠}{\mathOrText{\angle }}
+\newunicodechar{∡}{\mathOrText{\measuredangle }}
+\newunicodechar{∢}{\mathOrText{\sphericalangle }}
+\newunicodechar{∣}{\mathOrText{\mid }}
+\newunicodechar{∤}{\mathOrText{\nmid }}
+\newunicodechar{∥}{\mathOrText{\parallel }}
+\newunicodechar{∦}{\mathOrText{\nparallel }}
+\newunicodechar{∧}{\mathOrText{\wedge }}
+\newunicodechar{∨}{\mathOrText{\vee }}
+\newunicodechar{∩}{\mathOrText{\cap }}
+\newunicodechar{∪}{\mathOrText{\cup }}
+%\newunicodechar{∫}{\mathOrText{\int }}
+\newunicodechar{∬}{\mathOrText{\iint }}
+\newunicodechar{∭}{\mathOrText{\iiint }}
+\newunicodechar{∮}{\mathOrText{\oint }}
+\newunicodechar{∴}{\mathOrText{\therefore }}
+\newunicodechar{∵}{\mathOrText{\because }}
+\newunicodechar{∶}{:}
+\newunicodechar{∷}{\mathOrText{\colon\colon }}
+\newunicodechar{∸}{\mathOrText{\dot{-}}}
+\newunicodechar{∼}{\mathOrText{\sim }}
+\newunicodechar{∽}{\mathOrText{\backsim }}
+\newunicodechar{≀}{\mathOrText{\wr }}
+\newunicodechar{≁}{\mathOrText{\nsim }}
+\newunicodechar{≂}{\mathOrText{\eqsim }}
+\newunicodechar{≃}{\mathOrText{\simeq }}
+\newunicodechar{≄}{\mathOrText{\not\simeq }}
+\newunicodechar{≅}{\mathOrText{\cong }}
+\newunicodechar{≇}{\mathOrText{\ncong }}
+\newunicodechar{≈}{\mathOrText{\approx }}
+\newunicodechar{≉}{\mathOrText{\not\approx }}
+\newunicodechar{≊}{\mathOrText{\approxeq }}
+\newunicodechar{≍}{\mathOrText{\asymp }}
+\newunicodechar{≎}{\mathOrText{\Bumpeq }}
+\newunicodechar{≏}{\mathOrText{\bumpeq }}
+\newunicodechar{≐}{\mathOrText{\doteq }}
+\newunicodechar{≑}{\mathOrText{\doteqdot }}
+\newunicodechar{≒}{\mathOrText{\fallingdotseq }}
+\newunicodechar{≓}{\mathOrText{\risingdotseq }}
+\newunicodechar{≖}{\mathOrText{\eqcirc }}
+\newunicodechar{≗}{\mathOrText{\circeq }}
+\newunicodechar{≘}{\mathOrText{\stackrel{\frown}{=}}}
+\newunicodechar{≙}{\mathOrText{\stackrel{\wedge}{=}}}
+\newunicodechar{≚}{\mathOrText{\stackrel{\vee}{=}}}
+\newunicodechar{≛}{\mathOrText{\stackrel{\star}{=}}}
+\newunicodechar{≜}{\mathOrText{\triangleq }}
+\newunicodechar{≝}{\mathOrText{\stackrel{\scriptscriptstyle\mathrm{def}}{=}}}
+\newunicodechar{≞}{\mathOrText{\stackrel{\scriptscriptstyle\mathrm{m}}{=}}}
+\newunicodechar{≟}{\mathOrText{\stackrel{?}{=}}}
+\newunicodechar{≠}{\mathOrText{\ne}}
+\newunicodechar{≡}{\mathOrText{\equiv }}
+\newunicodechar{≢}{\mathOrText{\not\equiv }}
+\newunicodechar{≤}{\mathOrText{\le}}
+\newunicodechar{≥}{\mathOrText{\ge}}
+\newunicodechar{≦}{\mathOrText{\leqq }}
+\newunicodechar{≧}{\mathOrText{\geqq }}
+\newunicodechar{≨}{\mathOrText{\lneqq }}
+\newunicodechar{≩}{\mathOrText{\gneqq }}
+\newunicodechar{≪}{\mathOrText{\ll }}
+\newunicodechar{≫}{\mathOrText{\gg }}
+\newunicodechar{≬}{\mathOrText{\between }}
+\newunicodechar{≭}{\mathOrText{\not\asymp }}
+\newunicodechar{≮}{\mathOrText{\nless }}
+\newunicodechar{≯}{\mathOrText{\ngtr }}
+\newunicodechar{≱}{\mathOrText{\ngeqq }}
+\newunicodechar{≲}{\mathOrText{\lesssim }}
+\newunicodechar{≳}{\mathOrText{\gtrsim }}
+\newunicodechar{≴}{\mathOrText{\not\lesssim }}
+\newunicodechar{≵}{\mathOrText{\not\gtrsim }}
+\newunicodechar{≶}{\mathOrText{\lessgtr }}
+\newunicodechar{≷}{\mathOrText{\gtrless }}
+\newunicodechar{≸}{\mathOrText{\not\lessgtr }}
+\newunicodechar{≹}{\mathOrText{\not\gtrless }}
+\newunicodechar{≺}{\mathOrText{\prec }}
+\newunicodechar{≻}{\mathOrText{\succ }}
+\newunicodechar{≼}{\mathOrText{\preccurlyeq }}
+\newunicodechar{≽}{\mathOrText{\succcurlyeq }}
+\newunicodechar{≾}{\mathOrText{\precsim }}
+\newunicodechar{≿}{\mathOrText{\succsim }}
+\newunicodechar{⊀}{\mathOrText{\nprec }}
+\newunicodechar{⊁}{\mathOrText{\nsucc }}
+\newunicodechar{⊂}{\mathOrText{\subset }}
+\newunicodechar{⊃}{\mathOrText{\supset }}
+\newunicodechar{⊄}{\mathOrText{\not\subset }}
+\newunicodechar{⊅}{\mathOrText{\not\supset }}
+\newunicodechar{⊆}{\mathOrText{\subseteq }}
+\newunicodechar{⊇}{\mathOrText{\supseteq }}
+\newunicodechar{⊎}{\mathOrText{\uplus }}
+\newunicodechar{⊓}{\mathOrText{\sqcap }}
+\newunicodechar{⊔}{\mathOrText{\bigsqcup }}
+\newunicodechar{⊕}{\mathOrText{\oplus }}
+\newunicodechar{⊖}{\mathOrText{\ominus }}
+\newunicodechar{⊗}{\mathOrText{\otimes }}
+\newunicodechar{⊘}{\mathOrText{\oslash }}
+\newunicodechar{⊙}{\mathOrText{\odot }}
+\newunicodechar{⊟}{\mathOrText{\boxminus }}
+\newunicodechar{⊤}{\mathOrText{\top }}
+\newunicodechar{⊥}{\mathOrText{\perp }}
+\newunicodechar{⊦}{\mathOrText{\vdash }}
+\newunicodechar{⊧}{\mathOrText{\vDash }}
+\newunicodechar{⊨}{\mathOrText{\models }}
+\newunicodechar{⊪}{\mathOrText{\Vvdash }}
+\newunicodechar{⋀}{\mathOrText{\bigwedge }}
+\newunicodechar{⋁}{\mathOrText{\bigvee }}
+\newunicodechar{⋂}{\mathOrText{\bigcap }}
+\newunicodechar{⋃}{\mathOrText{\bigcup }}
+\newunicodechar{⋄}{\mathOrText{\diamond }}
+\newunicodechar{⋅}{\mathOrText{\cdot }}
+\newunicodechar{⋆}{\mathOrText{\star }}
+\newunicodechar{⋇}{\mathOrText{\divideontimes }}
+\newunicodechar{⋈}{\mathOrText{\bowtie }}
+\newunicodechar{⋍}{\mathOrText{\backsimeq }}
+\newunicodechar{⋯}{\mathOrText{\cdots }}
+\newunicodechar{⋱}{\mathOrText{\ddots }}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newunicodechar{£}{\mathOrText{\pounds }}
+\newunicodechar{¥}{\mathOrText{\yen }}
+\newunicodechar{§}{\mathOrText{\S }}
+\newunicodechar{©}{\mathOrText{\copyright }}
+\newunicodechar{¬}{\mathOrText{\neg }}
+\newunicodechar{®}{\mathOrText{\circledR }}
+\newunicodechar{±}{\mathOrText{\pm}}
+\newunicodechar{µ}{\mathOrText{\mu }}
+\newunicodechar{¶}{\mathOrText{\P }}
+\newunicodechar{Å}{\mathOrText{\AA }}
+\newunicodechar{Æ}{\mathOrText{\AE }}
+\newunicodechar{×}{\mathOrText{\times}}
+\newunicodechar{æ}{\mathOrText{\ae }}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newunicodechar{Α}{\mathOrText{{\rm A}}}
+\newunicodechar{Β}{\mathOrText{{\rm B}}}
+\newunicodechar{Γ}{\mathOrText{\Gamma }}
+\newunicodechar{Δ}{\mathOrText{\Delta }}
+\newunicodechar{Ε}{\mathOrText{{\rm E}}}
+\newunicodechar{Ζ}{\mathOrText{{\rm Z}}}
+\newunicodechar{Η}{\mathOrText{{\rm H}}}
+\newunicodechar{Θ}{\mathOrText{\Theta }}
+\newunicodechar{Ι}{\mathOrText{{\rm I}}}
+\newunicodechar{Κ}{\mathOrText{{\rm K}}}
+\newunicodechar{Λ}{\mathOrText{\Lambda }}
+\newunicodechar{Μ}{\mathOrText{{\rm M}}}
+\newunicodechar{Ν}{\mathOrText{{\rm N}}}
+\newunicodechar{Ξ}{\mathOrText{\Xi }}
+\newunicodechar{Ο}{\mathOrText{{\rm O}}}
+\newunicodechar{Π}{\mathOrText{\Pi }}
+\newunicodechar{Ρ}{\mathOrText{{\rm P}}}
+\newunicodechar{Σ}{\mathOrText{\Sigma }}
+\newunicodechar{Τ}{\mathOrText{{\rm T}}}
+\newunicodechar{Υ}{\mathOrText{{\rm Y}}}
+\newunicodechar{Φ}{\mathOrText{\Phi }}
+\newunicodechar{Χ}{\mathOrText{{\rm X}}}
+\newunicodechar{Ψ}{\mathOrText{\Psi }}
+\newunicodechar{Ω}{\mathOrText{\Omega }}
+\newunicodechar{α}{\mathOrText{\alpha }}
+\newunicodechar{β}{\mathOrText{\beta }}
+\newunicodechar{γ}{\mathOrText{\gamma }}
+\newunicodechar{δ}{\mathOrText{\delta }}
+\newunicodechar{ε}{\mathOrText{\epsilon }}
+\newunicodechar{ζ}{\mathOrText{\zeta }}
+\newunicodechar{η}{\mathOrText{\eta }}
+\newunicodechar{θ}{\mathOrText{\theta }}
+\newunicodechar{ι}{\mathOrText{\iota }}
+\newunicodechar{κ}{\mathOrText{\kappa }}
+\newunicodechar{λ}{\mathOrText{\lambda }}
+\newunicodechar{μ}{\mathOrText{\mu }}
+\newunicodechar{ν}{\mathOrText{\nu }}
+\newunicodechar{ξ}{\mathOrText{\xi }}
+\newunicodechar{ο}{\mathOrText{o}}
+\newunicodechar{π}{\mathOrText{\pi }}
+\newunicodechar{ρ}{\mathOrText{\rho }}
+\newunicodechar{ς}{\mathOrText{\varsigma }}
+\newunicodechar{σ}{\mathOrText{\sigma }}
+\newunicodechar{τ}{\mathOrText{\tau }}
+\newunicodechar{υ}{\mathOrText{\upsilon }}
+\newunicodechar{φ}{\mathOrText{\phi }}
+\newunicodechar{χ}{\mathOrText{\chi }}
+\newunicodechar{ψ}{\mathOrText{\psi }}
+\newunicodechar{ω}{\mathOrText{\omega }}
+\newunicodechar{ϑ}{\mathOrText{\vartheta }}
+\newunicodechar{ϒ}{\mathOrText{\Upsilon }}
+\newunicodechar{ϕ}{\mathOrText{\varphi }}
+\newunicodechar{ϖ}{\mathOrText{\varpi }}
+\newunicodechar{ϰ}{\mathOrText{\varkappa }}
+\newunicodechar{ϱ}{\mathOrText{\varrho }}
+
+\newunicodechar{□}{\mathOrText{\square }}
+\newunicodechar{▪}{\mathOrText{\blacksquare }}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\newunicodechar{\}{\mathOrText{\backslash }}
+\newunicodechar{£}{\mathOrText{\mathsterling }}
+\newunicodechar{¥}{\mathOrText{\mathyen }}
+\newunicodechar{¬}{\mathOrText{\neg }}
+\newunicodechar{±}{\mathOrText{\pm}}
+\newunicodechar{·}{\mathOrText{\cdotp }}
+\newunicodechar{×}{\mathOrText{\times}}
+\newunicodechar{ð}{\mathOrText{\matheth }}
+\newunicodechar{÷}{\mathOrText{\div}}
+\newunicodechar{Ƶ}{\mathOrText{\Zbar }}
+\newunicodechar{̀}{\mathOrText{\grave }}
+\newunicodechar{́}{\mathOrText{\acute }}
+\newunicodechar{̂}{\mathOrText{\hat }}
+\newunicodechar{̂}{\mathOrText{\widehat }}
+\newunicodechar{̃}{\mathOrText{\tilde }}
+\newunicodechar{̃}{\mathOrText{\widetilde }}
+\newunicodechar{̄}{\mathOrText{\bar }}
+\newunicodechar{̅}{\mathOrText{\overbar }}
+\newunicodechar{̆}{\mathOrText{\breve }}
+\newunicodechar{̇}{\mathOrText{\dot }}
+\newunicodechar{̈}{\mathOrText{\ddot }}
+\newunicodechar{̉}{\mathOrText{\ovhook }}
+\newunicodechar{̊}{\mathOrText{\ocirc }}
+\newunicodechar{̌}{\mathOrText{\check }}
+\newunicodechar{̐}{\mathOrText{\candra }}
+\newunicodechar{̒}{\mathOrText{\oturnedcomma }}
+\newunicodechar{̕}{\mathOrText{\ocommatopright }}
+\newunicodechar{̚}{\mathOrText{\droang }}
+\newunicodechar{̰}{\mathOrText{\wideutilde }}
+\newunicodechar{̲}{\mathOrText{\mathunderbar }}
+\newunicodechar{̸}{\mathOrText{\not }}
+\newunicodechar{͍}{\mathOrText{\underleftrightarrow }}
+\newunicodechar{Α}{\mathOrText{\mupAlpha }}
+\newunicodechar{Β}{\mathOrText{\mupBeta }}
+\newunicodechar{Γ}{\mathOrText{\mupGamma }}
+\newunicodechar{Δ}{\mathOrText{\mupDelta }}
+\newunicodechar{Ε}{\mathOrText{\mupEpsilon }}
+\newunicodechar{Ζ}{\mathOrText{\mupZeta }}
+\newunicodechar{Η}{\mathOrText{\mupEta }}
+\newunicodechar{Θ}{\mathOrText{\mupTheta }}
+\newunicodechar{Ι}{\mathOrText{\mupIota }}
+\newunicodechar{Κ}{\mathOrText{\mupKappa }}
+\newunicodechar{Λ}{\mathOrText{\mupLambda }}
+\newunicodechar{Μ}{\mathOrText{\mupMu }}
+\newunicodechar{Ν}{\mathOrText{\mupNu }}
+\newunicodechar{Ξ}{\mathOrText{\mupXi }}
+\newunicodechar{Ο}{\mathOrText{\mupOmicron }}
+\newunicodechar{Π}{\mathOrText{\mupPi }}
+\newunicodechar{Ρ}{\mathOrText{\mupRho }}
+\newunicodechar{Σ}{\mathOrText{\mupSigma }}
+\newunicodechar{Τ}{\mathOrText{\mupTau }}
+\newunicodechar{Υ}{\mathOrText{\mupUpsilon }}
+\newunicodechar{Φ}{\mathOrText{\mupPhi }}
+\newunicodechar{Χ}{\mathOrText{\mupChi }}
+\newunicodechar{Ψ}{\mathOrText{\mupPsi }}
+\newunicodechar{Ω}{\mathOrText{\mupOmega }}
+\newunicodechar{α}{\mathOrText{\mupalpha }}
+\newunicodechar{β}{\mathOrText{\mupbeta }}
+\newunicodechar{γ}{\mathOrText{\mupgamma }}
+\newunicodechar{δ}{\mathOrText{\mupdelta }}
+\newunicodechar{ε}{\mathOrText{\mupepsilon }}
+\newunicodechar{ζ}{\mathOrText{\mupzeta }}
+\newunicodechar{η}{\mathOrText{\mupeta }}
+\newunicodechar{θ}{\mathOrText{\muptheta }}
+\newunicodechar{ι}{\mathOrText{\mupiota }}
+\newunicodechar{κ}{\mathOrText{\mupkappa }}
+\newunicodechar{λ}{\mathOrText{\muplambda }}
+\newunicodechar{μ}{\mathOrText{\mupmu }}
+\newunicodechar{ν}{\mathOrText{\mupnu }}
+\newunicodechar{ξ}{\mathOrText{\mupxi }}
+\newunicodechar{ο}{\mathOrText{\mupomicron }}
+\newunicodechar{π}{\mathOrText{\muppi }}
+\newunicodechar{ρ}{\mathOrText{\muprho }}
+\newunicodechar{ς}{\mathOrText{\mupvarsigma }}
+\newunicodechar{σ}{\mathOrText{\mupsigma }}
+\newunicodechar{τ}{\mathOrText{\muptau }}
+\newunicodechar{υ}{\mathOrText{\mupupsilon }}
+\newunicodechar{φ}{\mathOrText{\mupvarphi }}
+\newunicodechar{χ}{\mathOrText{\mupchi }}
+\newunicodechar{ψ}{\mathOrText{\muppsi }}
+\newunicodechar{ω}{\mathOrText{\mupomega }}
+\newunicodechar{ϐ}{\mathOrText{\mupvarbeta }}
+\newunicodechar{ϑ}{\mathOrText{\mupvartheta }}
+\newunicodechar{ϕ}{\mathOrText{\mupphi }}
+\newunicodechar{ϖ}{\mathOrText{\mupvarpi }}
+\newunicodechar{Ϙ}{\mathOrText{\upoldKoppa }}
+\newunicodechar{ϙ}{\mathOrText{\upoldkoppa }}
+\newunicodechar{Ϛ}{\mathOrText{\upStigma }}
+\newunicodechar{ϛ}{\mathOrText{\upstigma }}
+\newunicodechar{Ϝ}{\mathOrText{\upDigamma }}
+\newunicodechar{ϝ}{\mathOrText{\updigamma }}
+\newunicodechar{Ϟ}{\mathOrText{\upKoppa }}
+\newunicodechar{ϟ}{\mathOrText{\upkoppa }}
+\newunicodechar{Ϡ}{\mathOrText{\upSampi }}
+\newunicodechar{ϡ}{\mathOrText{\upsampi }}
+\newunicodechar{ϰ}{\mathOrText{\mupvarkappa }}
+\newunicodechar{ϱ}{\mathOrText{\mupvarrho }}
+\newunicodechar{ϴ}{\mathOrText{\mupvarTheta }}
+\newunicodechar{ϵ}{\mathOrText{\mupvarepsilon }}
+\newunicodechar{϶}{\mathOrText{\upbackepsilon }}
+\newunicodechar{―}{\mathOrText{\horizbar }}
+\newunicodechar{‖}{\mathOrText{\Vert }}
+\newunicodechar{‗}{\mathOrText{\twolowline }}
+\newunicodechar{†}{\mathOrText{\dagger }}
+\newunicodechar{‡}{\mathOrText{\ddagger }}
+% \newunicodechar{•}{\mathOrText{\smblkcircle }}
+\newunicodechar{‥}{\mathOrText{\enleadertwodots }}
+\newunicodechar{…}{\mathOrText{\unicodeellipsis }}
+\newunicodechar{′}{\mathOrText{\prime }}
+\newunicodechar{″}{\mathOrText{\dprime }}
+\newunicodechar{‴}{\mathOrText{\trprime }}
+\newunicodechar{‵}{\mathOrText{\backprime }}
+\newunicodechar{‶}{\mathOrText{\backdprime }}
+\newunicodechar{‷}{\mathOrText{\backtrprime }}
+\newunicodechar{‸}{\mathOrText{\caretinsert }}
+\newunicodechar{‼}{\mathOrText{\Exclam }}
+\newunicodechar{⁀}{\mathOrText{\tieconcat }}
+\newunicodechar{⁃}{\mathOrText{\hyphenbullet }}
+\newunicodechar{⁄}{\mathOrText{\fracslash }}
+\newunicodechar{⁇}{\mathOrText{\Question }}
+\newunicodechar{⁐}{\mathOrText{\closure }}
+\newunicodechar{⁗}{\mathOrText{\qprime }}
+\newunicodechar{€}{\mathOrText{\euro }}
+\newunicodechar{⃐}{\mathOrText{\leftharpoonaccent }}
+\newunicodechar{⃐}{\mathOrText{\overleftharpoon }}
+\newunicodechar{⃑}{\mathOrText{\rightharpoonaccent }}
+\newunicodechar{⃑}{\mathOrText{\overrightharpoon }}
+\newunicodechar{⃒}{\mathOrText{\vertoverlay }}
+\newunicodechar{⃖}{\mathOrText{\overleftarrow }}
+\newunicodechar{⃗}{\mathOrText{\overrightarrow }}
+\newunicodechar{⃗}{\mathOrText{\vec }}
+\newunicodechar{⃛}{\mathOrText{\dddot }}
+\newunicodechar{⃜}{\mathOrText{\ddddot }}
+\newunicodechar{⃝}{\mathOrText{\enclosecircle }}
+\newunicodechar{⃞}{\mathOrText{\enclosesquare }}
+\newunicodechar{⃟}{\mathOrText{\enclosediamond }}
+\newunicodechar{⃡}{\mathOrText{\overleftrightarrow }}
+\newunicodechar{⃤}{\mathOrText{\enclosetriangle }}
+\newunicodechar{⃧}{\mathOrText{\annuity }}
+\newunicodechar{⃨}{\mathOrText{\threeunderdot }}
+\newunicodechar{⃩}{\mathOrText{\widebridgeabove }}
+\newunicodechar{⃬}{\mathOrText{\underrightharpoondown }}
+\newunicodechar{⃭}{\mathOrText{\underleftharpoondown }}
+\newunicodechar{⃮}{\mathOrText{\underleftarrow }}
+\newunicodechar{⃯}{\mathOrText{\underrightarrow }}
+\newunicodechar{⃰}{\mathOrText{\asteraccent }}
+\newunicodechar{ℂ}{\mathOrText{\BbbC }}
+\newunicodechar{ℇ}{\mathOrText{\Eulerconst }}
+\newunicodechar{ℊ}{\mathOrText{\mscrg }}
+\newunicodechar{ℋ}{\mathOrText{\mscrH }}
+\newunicodechar{ℌ}{\mathOrText{\mfrakH }}
+\newunicodechar{ℍ}{\mathOrText{\BbbH }}
+\newunicodechar{ℎ}{\mathOrText{\Planckconst }}
+\newunicodechar{ℏ}{\mathOrText{\hslash }}
+\newunicodechar{ℐ}{\mathOrText{\mscrI }}
+\newunicodechar{ℑ}{\mathOrText{\Im }}
+\newunicodechar{ℒ}{\mathOrText{\mscrL }}
+\newunicodechar{ℓ}{\mathOrText{\ell }}
+\newunicodechar{ℕ}{\mathOrText{\BbbN }}
+\newunicodechar{℘}{\mathOrText{\wp }}
+\newunicodechar{ℙ}{\mathOrText{\BbbP }}
+\newunicodechar{ℚ}{\mathOrText{\BbbQ }}
+\newunicodechar{ℛ}{\mathOrText{\mscrR }}
+\newunicodechar{ℜ}{\mathOrText{\Re }}
+\newunicodechar{ℝ}{\mathOrText{\BbbR }}
+\newunicodechar{ℤ}{\mathOrText{\BbbZ }}
+\newunicodechar{℧}{\mathOrText{\mho }}
+\newunicodechar{ℨ}{\mathOrText{\mfrakZ }}
+\newunicodechar{℩}{\mathOrText{\turnediota }}
+\newunicodechar{Å}{\mathOrText{\Angstrom }}
+\newunicodechar{ℬ}{\mathOrText{\mscrB }}
+\newunicodechar{ℭ}{\mathOrText{\mfrakC }}
+\newunicodechar{ℯ}{\mathOrText{\mscre }}
+\newunicodechar{ℰ}{\mathOrText{\mscrE }}
+\newunicodechar{ℱ}{\mathOrText{\mscrF }}
+\newunicodechar{Ⅎ}{\mathOrText{\Finv }}
+\newunicodechar{ℳ}{\mathOrText{\mscrM }}
+\newunicodechar{ℴ}{\mathOrText{\mscro }}
+\newunicodechar{ℵ}{\mathOrText{\aleph }}
+\newunicodechar{ℶ}{\mathOrText{\beth }}
+\newunicodechar{ℷ}{\mathOrText{\gimel }}
+\newunicodechar{ℸ}{\mathOrText{\daleth }}
+\newunicodechar{ℼ}{\mathOrText{\Bbbpi }}
+\newunicodechar{ℽ}{\mathOrText{\Bbbgamma }}
+\newunicodechar{ℾ}{\mathOrText{\BbbGamma }}
+\newunicodechar{ℿ}{\mathOrText{\BbbPi }}
+\newunicodechar{⅀}{\mathOrText{\Bbbsum }}
+\newunicodechar{⅁}{\mathOrText{\Game }}
+\newunicodechar{⅂}{\mathOrText{\sansLturned }}
+\newunicodechar{⅃}{\mathOrText{\sansLmirrored }}
+\newunicodechar{⅄}{\mathOrText{\Yup }}
+\newunicodechar{ⅅ}{\mathOrText{\mitBbbD }}
+\newunicodechar{ⅆ}{\mathOrText{\mitBbbd }}
+\newunicodechar{ⅇ}{\mathOrText{\mitBbbe }}
+\newunicodechar{ⅈ}{\mathOrText{\mitBbbi }}
+\newunicodechar{ⅉ}{\mathOrText{\mitBbbj }}
+\newunicodechar{⅊}{\mathOrText{\PropertyLine }}
+\newunicodechar{⅋}{\mathOrText{\upand }}
+
+\newunicodechar{←}{\mathOrText{\leftarrow }}
+\newunicodechar{↑}{\mathOrText{\uparrow }}
+\newunicodechar{→}{\mathOrText{\rightarrow }}
+\newunicodechar{↓}{\mathOrText{\downarrow }}
+\newunicodechar{↔}{\mathOrText{\leftrightarrow }}
+\newunicodechar{↕}{\mathOrText{\updownarrow }}
+\newunicodechar{↖}{\mathOrText{\nwarrow }}
+\newunicodechar{↗}{\mathOrText{\nearrow }}
+\newunicodechar{↘}{\mathOrText{\searrow }}
+\newunicodechar{↙}{\mathOrText{\swarrow }}
+\newunicodechar{↚}{\mathOrText{\nleftarrow }}
+\newunicodechar{↛}{\mathOrText{\nrightarrow }}
+\newunicodechar{↜}{\mathOrText{\leftwavearrow }}
+\newunicodechar{↝}{\mathOrText{\rightwavearrow }}
+\newunicodechar{↞}{\mathOrText{\twoheadleftarrow }}
+\newunicodechar{↟}{\mathOrText{\twoheaduparrow }}
+\newunicodechar{↠}{\mathOrText{\twoheadrightarrow }}
+\newunicodechar{↡}{\mathOrText{\twoheaddownarrow }}
+\newunicodechar{↢}{\mathOrText{\leftarrowtail }}
+\newunicodechar{↣}{\mathOrText{\rightarrowtail }}
+\newunicodechar{↤}{\mathOrText{\mapsfrom }}
+\newunicodechar{↥}{\mathOrText{\mapsup }}
+\newunicodechar{↦}{\mathOrText{\mapsto }}
+\newunicodechar{↧}{\mathOrText{\mapsdown }}
+\newunicodechar{↨}{\mathOrText{\updownarrowbar }}
+\newunicodechar{↩}{\mathOrText{\hookleftarrow }}
+\newunicodechar{↪}{\mathOrText{\hookrightarrow }}
+\newunicodechar{↫}{\mathOrText{\looparrowleft }}
+\newunicodechar{↬}{\mathOrText{\looparrowright }}
+\newunicodechar{↭}{\mathOrText{\leftrightsquigarrow }}
+\newunicodechar{↮}{\mathOrText{\nleftrightarrow }}
+\newunicodechar{↯}{\mathOrText{\downzigzagarrow }}
+\newunicodechar{↰}{\mathOrText{\Lsh }}
+\newunicodechar{↱}{\mathOrText{\Rsh }}
+\newunicodechar{↲}{\mathOrText{\Ldsh }}
+\newunicodechar{↳}{\mathOrText{\Rdsh }}
+\newunicodechar{↴}{\mathOrText{\linefeed }}
+\newunicodechar{↵}{\mathOrText{\carriagereturn }}
+\newunicodechar{↶}{\mathOrText{\curvearrowleft }}
+\newunicodechar{↷}{\mathOrText{\curvearrowright }}
+\newunicodechar{↸}{\mathOrText{\barovernorthwestarrow }}
+\newunicodechar{↹}{\mathOrText{\barleftarrowrightarrowbar }}
+\newunicodechar{↺}{\mathOrText{\acwopencirclearrow }}
+\newunicodechar{↻}{\mathOrText{\cwopencirclearrow }}
+\newunicodechar{↼}{\mathOrText{\leftharpoonup }}
+\newunicodechar{↽}{\mathOrText{\leftharpoondown }}
+\newunicodechar{↾}{\mathOrText{\upharpoonright }}
+\newunicodechar{↿}{\mathOrText{\upharpoonleft }}
+\newunicodechar{⇀}{\mathOrText{\rightharpoonup }}
+\newunicodechar{⇁}{\mathOrText{\rightharpoondown }}
+\newunicodechar{⇂}{\mathOrText{\downharpoonright }}
+\newunicodechar{⇃}{\mathOrText{\downharpoonleft }}
+\newunicodechar{⇄}{\mathOrText{\rightleftarrows }}
+\newunicodechar{⇅}{\mathOrText{\updownarrows }}
+\newunicodechar{⇆}{\mathOrText{\leftrightarrows }}
+\newunicodechar{⇇}{\mathOrText{\leftleftarrows }}
+\newunicodechar{⇈}{\mathOrText{\upuparrows }}
+\newunicodechar{⇉}{\mathOrText{\rightrightarrows }}
+\newunicodechar{⇊}{\mathOrText{\downdownarrows }}
+\newunicodechar{⇋}{\mathOrText{\leftrightharpoons }}
+\newunicodechar{⇌}{\mathOrText{\rightleftharpoons }}
+\newunicodechar{⇍}{\mathOrText{\nLeftarrow }}
+\newunicodechar{⇎}{\mathOrText{\nLeftrightarrow }}
+\newunicodechar{⇏}{\mathOrText{\nRightarrow }}
+\newunicodechar{⇐}{\mathOrText{\Leftarrow }}
+\newunicodechar{⇑}{\mathOrText{\Uparrow }}
+\newunicodechar{⇒}{\mathOrText{\Rightarrow }}
+\newunicodechar{⇓}{\mathOrText{\Downarrow }}
+\newunicodechar{⇔}{\mathOrText{\Leftrightarrow }}
+\newunicodechar{⇕}{\mathOrText{\Updownarrow }}
+\newunicodechar{⇖}{\mathOrText{\Nwarrow }}
+\newunicodechar{⇗}{\mathOrText{\Nearrow }}
+\newunicodechar{⇘}{\mathOrText{\Searrow }}
+\newunicodechar{⇙}{\mathOrText{\Swarrow }}
+\newunicodechar{⇚}{\mathOrText{\Lleftarrow }}
+\newunicodechar{⇛}{\mathOrText{\Rrightarrow }}
+\newunicodechar{⇜}{\mathOrText{\leftsquigarrow }}
+\newunicodechar{⇝}{\mathOrText{\rightsquigarrow }}
+\newunicodechar{⇞}{\mathOrText{\nHuparrow }}
+\newunicodechar{⇟}{\mathOrText{\nHdownarrow }}
+\newunicodechar{⇠}{\mathOrText{\leftdasharrow }}
+\newunicodechar{⇡}{\mathOrText{\updasharrow }}
+\newunicodechar{⇢}{\mathOrText{\rightdasharrow }}
+\newunicodechar{⇣}{\mathOrText{\downdasharrow }}
+\newunicodechar{⇤}{\mathOrText{\barleftarrow }}
+\newunicodechar{⇥}{\mathOrText{\rightarrowbar }}
+\newunicodechar{⇦}{\mathOrText{\leftwhitearrow }}
+\newunicodechar{⇧}{\mathOrText{\upwhitearrow }}
+\newunicodechar{⇨}{\mathOrText{\rightwhitearrow }}
+\newunicodechar{⇩}{\mathOrText{\downwhitearrow }}
+\newunicodechar{⇪}{\mathOrText{\whitearrowupfrombar }}
+\newunicodechar{⇴}{\mathOrText{\circleonrightarrow }}
+\newunicodechar{⇵}{\mathOrText{\downuparrows }}
+\newunicodechar{⇶}{\mathOrText{\rightthreearrows }}
+\newunicodechar{⇷}{\mathOrText{\nvleftarrow }}
+\newunicodechar{⇸}{\mathOrText{\nvrightarrow }}
+\newunicodechar{⇹}{\mathOrText{\nvleftrightarrow }}
+\newunicodechar{⇺}{\mathOrText{\nVleftarrow }}
+\newunicodechar{⇻}{\mathOrText{\nVrightarrow }}
+\newunicodechar{⇼}{\mathOrText{\nVleftrightarrow }}
+\newunicodechar{⇽}{\mathOrText{\leftarrowtriangle }}
+\newunicodechar{⇾}{\mathOrText{\rightarrowtriangle }}
+\newunicodechar{⇿}{\mathOrText{\leftrightarrowtriangle }}
+\newunicodechar{∀}{\mathOrText{\forall }}
+\newunicodechar{∁}{\mathOrText{\complement }}
+\newunicodechar{∂}{\mathOrText{\partial }}
+\newunicodechar{∃}{\mathOrText{\exists }}
+\newunicodechar{∄}{\mathOrText{\nexists }}
+\newunicodechar{∅}{\mathOrText{\varnothing }}
+\newunicodechar{∆}{\mathOrText{\increment }}
+\newunicodechar{∇}{\mathOrText{\nabla }}
+\newunicodechar{∈}{\mathOrText{\in }}
+\newunicodechar{∉}{\mathOrText{\notin }}
+\newunicodechar{∊}{\mathOrText{\smallin }}
+\newunicodechar{∋}{\mathOrText{\ni }}
+\newunicodechar{∌}{\mathOrText{\nni }}
+\newunicodechar{∍}{\mathOrText{\smallni }}
+\newunicodechar{∎}{\mathOrText{\QED }}
+%\newunicodechar{∏}{\mathOrText{\prod }}
+\newunicodechar{∐}{\mathOrText{\coprod }}
+
+\newunicodechar{−}{\mathOrText{\minus }}
+\newunicodechar{∓}{\mathOrText{\mp}}
+\newunicodechar{∔}{\mathOrText{\dotplus }}
+\newunicodechar{∕}{\mathOrText{\divslash }}
+\newunicodechar{∖}{\mathOrText{\smallsetminus }}
+\newunicodechar{∗}{\mathOrText{\ast }}
+\newunicodechar{∘}{\mathOrText{\vysmwhtcircle }}
+\newunicodechar{∙}{\mathOrText{\vysmblkcircle }}
+\newunicodechar{√}{\mathOrText{\sqrt }}
+\newunicodechar{∛}{\mathOrText{\cuberoot }}
+\newunicodechar{∜}{\mathOrText{\fourthroot }}
+\newunicodechar{∝}{\mathOrText{\propto }}
+\newunicodechar{∞}{\mathOrText{\infty }}
+\newunicodechar{∟}{\mathOrText{\rightangle }}
+\newunicodechar{∠}{\mathOrText{\angle }}
+\newunicodechar{∡}{\mathOrText{\measuredangle }}
+\newunicodechar{∢}{\mathOrText{\sphericalangle }}
+\newunicodechar{∣}{\mathOrText{\mid }}
+\newunicodechar{∤}{\mathOrText{\nmid }}
+\newunicodechar{∥}{\mathOrText{\parallel }}
+\newunicodechar{∦}{\mathOrText{\nparallel }}
+\newunicodechar{∧}{\mathOrText{\wedge }}
+\newunicodechar{∨}{\mathOrText{\vee }}
+\newunicodechar{∩}{\mathOrText{\cap }}
+\newunicodechar{∪}{\mathOrText{\cup }}
+%\newunicodechar{∫}{\mathOrText{\int }}
+\newunicodechar{∬}{\mathOrText{\iint }}
+\newunicodechar{∭}{\mathOrText{\iiint }}
+\newunicodechar{∮}{\mathOrText{\oint }}
+\newunicodechar{∯}{\mathOrText{\oiint }}
+\newunicodechar{∰}{\mathOrText{\oiiint }}
+\newunicodechar{∱}{\mathOrText{\intclockwise }}
+\newunicodechar{∲}{\mathOrText{\varointclockwise }}
+\newunicodechar{∳}{\mathOrText{\ointctrclockwise }}
+\newunicodechar{∴}{\mathOrText{\therefore }}
+\newunicodechar{∵}{\mathOrText{\because }}
+\newunicodechar{∶}{\mathOrText{\mathratio }}
+\newunicodechar{∷}{\mathOrText{\Colon }}
+\newunicodechar{∸}{\mathOrText{\dotminus }}
+\newunicodechar{∹}{\mathOrText{\dashcolon }}
+\newunicodechar{∺}{\mathOrText{\dotsminusdots }}
+\newunicodechar{∻}{\mathOrText{\kernelcontraction }}
+\newunicodechar{∼}{\mathOrText{\sim }}
+\newunicodechar{∽}{\mathOrText{\backsim }}
+\newunicodechar{∾}{\mathOrText{\invlazys }}
+\newunicodechar{∿}{\mathOrText{\sinewave }}
+\newunicodechar{≀}{\mathOrText{\wr }}
+\newunicodechar{≁}{\mathOrText{\nsim }}
+\newunicodechar{≂}{\mathOrText{\eqsim }}
+\newunicodechar{≃}{\mathOrText{\simeq }}
+\newunicodechar{≄}{\mathOrText{\nsime }}
+\newunicodechar{≅}{\mathOrText{\cong }}
+\newunicodechar{≆}{\mathOrText{\simneqq }}
+\newunicodechar{≇}{\mathOrText{\ncong }}
+\newunicodechar{≈}{\mathOrText{\approx }}
+\newunicodechar{≉}{\mathOrText{\napprox }}
+\newunicodechar{≊}{\mathOrText{\approxeq }}
+\newunicodechar{≋}{\mathOrText{\approxident }}
+\newunicodechar{≌}{\mathOrText{\backcong }}
+\newunicodechar{≍}{\mathOrText{\asymp }}
+\newunicodechar{≎}{\mathOrText{\Bumpeq }}
+\newunicodechar{≏}{\mathOrText{\bumpeq }}
+\newunicodechar{≐}{\mathOrText{\doteq }}
+\newunicodechar{≑}{\mathOrText{\Doteq }}
+\newunicodechar{≒}{\mathOrText{\fallingdotseq }}
+\newunicodechar{≓}{\mathOrText{\risingdotseq }}
+\newunicodechar{≔}{\mathOrText{\coloneq }}
+\newunicodechar{≕}{\mathOrText{\eqcolon }}
+\newunicodechar{≖}{\mathOrText{\eqcirc }}
+\newunicodechar{≗}{\mathOrText{\circeq }}
+\newunicodechar{≘}{\mathOrText{\arceq }}
+\newunicodechar{≙}{\mathOrText{\wedgeq }}
+\newunicodechar{≚}{\mathOrText{\veeeq }}
+\newunicodechar{≛}{\mathOrText{\stareq }}
+\newunicodechar{≜}{\mathOrText{\triangleq }}
+\newunicodechar{≝}{\mathOrText{\eqdef }}
+\newunicodechar{≞}{\mathOrText{\measeq }}
+\newunicodechar{≟}{\mathOrText{\questeq }}
+\newunicodechar{≠}{\mathOrText{\ne}}
+\newunicodechar{≡}{\mathOrText{\equiv }}
+\newunicodechar{≢}{\mathOrText{\nequiv }}
+\newunicodechar{≣}{\mathOrText{\Equiv }}
+\newunicodechar{≤}{\mathOrText{\leq}}
+\newunicodechar{≥}{\mathOrText{\geq}}
+\newunicodechar{≦}{\mathOrText{\leqq }}
+\newunicodechar{≧}{\mathOrText{\geqq }}
+\newunicodechar{≨}{\mathOrText{\lneqq }}
+\newunicodechar{≩}{\mathOrText{\gneqq }}
+\newunicodechar{≪}{\mathOrText{\ll }}
+\newunicodechar{≫}{\mathOrText{\gg }}
+\newunicodechar{≬}{\mathOrText{\between }}
+\newunicodechar{≭}{\mathOrText{\nasymp }}
+\newunicodechar{≮}{\mathOrText{\nless }}
+\newunicodechar{≯}{\mathOrText{\ngtr }}
+\newunicodechar{≰}{\mathOrText{\nleq }}
+\newunicodechar{≱}{\mathOrText{\ngeq }}
+\newunicodechar{≲}{\mathOrText{\lesssim }}
+\newunicodechar{≳}{\mathOrText{\gtrsim }}
+\newunicodechar{≴}{\mathOrText{\nlesssim }}
+\newunicodechar{≵}{\mathOrText{\ngtrsim }}
+\newunicodechar{≶}{\mathOrText{\lessgtr }}
+\newunicodechar{≷}{\mathOrText{\gtrless }}
+\newunicodechar{≸}{\mathOrText{\nlessgtr }}
+\newunicodechar{≹}{\mathOrText{\ngtrless }}
+\newunicodechar{≺}{\mathOrText{\prec }}
+\newunicodechar{≻}{\mathOrText{\succ }}
+\newunicodechar{≼}{\mathOrText{\preccurlyeq }}
+\newunicodechar{≽}{\mathOrText{\succcurlyeq }}
+\newunicodechar{≾}{\mathOrText{\precsim }}
+\newunicodechar{≿}{\mathOrText{\succsim }}
+\newunicodechar{⊀}{\mathOrText{\nprec }}
+\newunicodechar{⊁}{\mathOrText{\nsucc }}
+\newunicodechar{⊂}{\mathOrText{\subset }}
+\newunicodechar{⊃}{\mathOrText{\supset }}
+\newunicodechar{⊄}{\mathOrText{\nsubset }}
+\newunicodechar{⊅}{\mathOrText{\nsupset }}
+\newunicodechar{⊆}{\mathOrText{\subseteq }}
+\newunicodechar{⊇}{\mathOrText{\supseteq }}
+\newunicodechar{⊈}{\mathOrText{\nsubseteq }}
+\newunicodechar{⊉}{\mathOrText{\nsupseteq }}
+\newunicodechar{⊊}{\mathOrText{\subsetneq }}
+\newunicodechar{⊋}{\mathOrText{\supsetneq }}
+\newunicodechar{⊌}{\mathOrText{\cupleftarrow }}
+\newunicodechar{⊍}{\mathOrText{\cupdot }}
+\newunicodechar{⊎}{\mathOrText{\uplus }}
+\newunicodechar{⊏}{\mathOrText{\sqsubset }}
+\newunicodechar{⊐}{\mathOrText{\sqsupset }}
+\newunicodechar{⊑}{\mathOrText{\sqsubseteq }}
+\newunicodechar{⊒}{\mathOrText{\sqsupseteq }}
+\newunicodechar{⊓}{\mathOrText{\sqcap }}
+\newunicodechar{⊔}{\mathOrText{\sqcup }}
+\newunicodechar{⊕}{\mathOrText{\oplus }}
+\newunicodechar{⊖}{\mathOrText{\ominus }}
+\newunicodechar{⊗}{\mathOrText{\otimes }}
+\newunicodechar{⊘}{\mathOrText{\oslash }}
+\newunicodechar{⊙}{\mathOrText{\odot }}
+\newunicodechar{⊚}{\mathOrText{\circledcirc }}
+\newunicodechar{⊛}{\mathOrText{\circledast }}
+\newunicodechar{⊜}{\mathOrText{\circledequal }}
+\newunicodechar{⊝}{\mathOrText{\circleddash }}
+\newunicodechar{⊞}{\mathOrText{\boxplus }}
+\newunicodechar{⊟}{\mathOrText{\boxminus }}
+\newunicodechar{⊠}{\mathOrText{\boxtimes }}
+\newunicodechar{⊡}{\mathOrText{\boxdot }}
+\newunicodechar{⊢}{\mathOrText{\vdash }}
+\newunicodechar{⊣}{\mathOrText{\dashv }}
+\newunicodechar{⊤}{\mathOrText{\top }}
+\newunicodechar{⊥}{\mathOrText{\bot }}
+\newunicodechar{⊦}{\mathOrText{\assert }}
+\newunicodechar{⊧}{\mathOrText{\models }}
+\newunicodechar{⊨}{\mathOrText{\vDash }}
+\newunicodechar{⊩}{\mathOrText{\Vdash }}
+\newunicodechar{⊪}{\mathOrText{\Vvdash }}
+\newunicodechar{⊫}{\mathOrText{\VDash }}
+\newunicodechar{⊬}{\mathOrText{\nvdash }}
+\newunicodechar{⊭}{\mathOrText{\nvDash }}
+\newunicodechar{⊮}{\mathOrText{\nVdash }}
+\newunicodechar{⊯}{\mathOrText{\nVDash }}
+\newunicodechar{⊰}{\mathOrText{\prurel }}
+\newunicodechar{⊱}{\mathOrText{\scurel }}
+\newunicodechar{⊲}{\mathOrText{\vartriangleleft }}
+\newunicodechar{⊳}{\mathOrText{\vartriangleright }}
+\newunicodechar{⊴}{\mathOrText{\trianglelefteq }}
+\newunicodechar{⊵}{\mathOrText{\trianglerighteq }}
+\newunicodechar{⊶}{\mathOrText{\origof }}
+\newunicodechar{⊷}{\mathOrText{\imageof }}
+\newunicodechar{⊸}{\mathOrText{\multimap }}
+\newunicodechar{⊹}{\mathOrText{\hermitmatrix }}
+\newunicodechar{⊺}{\mathOrText{\intercal }}
+\newunicodechar{⊻}{\mathOrText{\veebar }}
+\newunicodechar{⊼}{\mathOrText{\barwedge }}
+\newunicodechar{⊽}{\mathOrText{\barvee }}
+\newunicodechar{⊾}{\mathOrText{\measuredrightangle }}
+\newunicodechar{⊿}{\mathOrText{\varlrtriangle }}
+\newunicodechar{⋀}{\mathOrText{\bigwedge }}
+\newunicodechar{⋁}{\mathOrText{\bigvee }}
+\newunicodechar{⋂}{\mathOrText{\bigcap }}
+\newunicodechar{⋃}{\mathOrText{\bigcup }}
+\newunicodechar{⋄}{\mathOrText{\smwhtdiamond }}
+\newunicodechar{⋅}{\mathOrText{\cdot }}
+\newunicodechar{⋆}{\mathOrText{\star }}
+\newunicodechar{⋇}{\mathOrText{\divideontimes }}
+\newunicodechar{⋈}{\mathOrText{\bowtie }}
+\newunicodechar{⋉}{\mathOrText{\ltimes }}
+\newunicodechar{⋊}{\mathOrText{\rtimes }}
+\newunicodechar{⋋}{\mathOrText{\leftthreetimes }}
+\newunicodechar{⋌}{\mathOrText{\rightthreetimes }}
+\newunicodechar{⋍}{\mathOrText{\backsimeq }}
+\newunicodechar{⋎}{\mathOrText{\curlyvee }}
+\newunicodechar{⋏}{\mathOrText{\curlywedge }}
+\newunicodechar{⋐}{\mathOrText{\Subset }}
+\newunicodechar{⋑}{\mathOrText{\Supset }}
+\newunicodechar{⋒}{\mathOrText{\Cap }}
+\newunicodechar{⋓}{\mathOrText{\Cup }}
+\newunicodechar{⋔}{\mathOrText{\pitchfork }}
+\newunicodechar{⋕}{\mathOrText{\equalparallel }}
+\newunicodechar{⋖}{\mathOrText{\lessdot }}
+\newunicodechar{⋗}{\mathOrText{\gtrdot }}
+\newunicodechar{⋘}{\mathOrText{\lll }}
+\newunicodechar{⋙}{\mathOrText{\ggg }}
+\newunicodechar{⋚}{\mathOrText{\lesseqgtr }}
+\newunicodechar{⋛}{\mathOrText{\gtreqless }}
+\newunicodechar{⋜}{\mathOrText{\eqless }}
+\newunicodechar{⋝}{\mathOrText{\eqgtr }}
+\newunicodechar{⋞}{\mathOrText{\curlyeqprec }}
+\newunicodechar{⋟}{\mathOrText{\curlyeqsucc }}
+\newunicodechar{⋠}{\mathOrText{\npreccurlyeq }}
+\newunicodechar{⋡}{\mathOrText{\nsucccurlyeq }}
+\newunicodechar{⋢}{\mathOrText{\nsqsubseteq }}
+\newunicodechar{⋣}{\mathOrText{\nsqsupseteq }}
+\newunicodechar{⋤}{\mathOrText{\sqsubsetneq }}
+\newunicodechar{⋥}{\mathOrText{\sqsupsetneq }}
+\newunicodechar{⋦}{\mathOrText{\lnsim }}
+\newunicodechar{⋧}{\mathOrText{\gnsim }}
+\newunicodechar{⋨}{\mathOrText{\precnsim }}
+\newunicodechar{⋩}{\mathOrText{\succnsim }}
+\newunicodechar{⋪}{\mathOrText{\nvartriangleleft }}
+\newunicodechar{⋫}{\mathOrText{\nvartriangleright }}
+\newunicodechar{⋬}{\mathOrText{\ntrianglelefteq }}
+\newunicodechar{⋭}{\mathOrText{\ntrianglerighteq }}
+\newunicodechar{⋮}{\mathOrText{\vdots }}
+\newunicodechar{⋯}{\mathOrText{\unicodecdots }}
+\newunicodechar{⋰}{\mathOrText{\adots }}
+\newunicodechar{⋱}{\mathOrText{\ddots }}
+\newunicodechar{⋲}{\mathOrText{\disin }}
+\newunicodechar{⋳}{\mathOrText{\varisins }}
+\newunicodechar{⋴}{\mathOrText{\isins }}
+\newunicodechar{⋵}{\mathOrText{\isindot }}
+\newunicodechar{⋶}{\mathOrText{\varisinobar }}
+\newunicodechar{⋷}{\mathOrText{\isinobar }}
+\newunicodechar{⋸}{\mathOrText{\isinvb }}
+\newunicodechar{⋹}{\mathOrText{\isinE }}
+\newunicodechar{⋺}{\mathOrText{\nisd }}
+\newunicodechar{⋻}{\mathOrText{\varnis }}
+\newunicodechar{⋼}{\mathOrText{\nis }}
+\newunicodechar{⋽}{\mathOrText{\varniobar }}
+\newunicodechar{⋾}{\mathOrText{\niobar }}
+\newunicodechar{⋿}{\mathOrText{\bagmember }}
+\newunicodechar{⌀}{\mathOrText{\diameter }}
+\newunicodechar{⌂}{\mathOrText{\house }}
+\newunicodechar{⌅}{\mathOrText{\varbarwedge }}
+\newunicodechar{⌆}{\mathOrText{\vardoublebarwedge }}
+\newunicodechar{⌈}{\mathOrText{\lceil }}
+\newunicodechar{⌉}{\mathOrText{\rceil }}
+\newunicodechar{⌊}{\mathOrText{\lfloor }}
+\newunicodechar{⌋}{\mathOrText{\rfloor }}
+\newunicodechar{⌐}{\mathOrText{\invnot }}
+\newunicodechar{⌑}{\mathOrText{\sqlozenge }}
+\newunicodechar{⌒}{\mathOrText{\profline }}
+\newunicodechar{⌓}{\mathOrText{\profsurf }}
+\newunicodechar{⌗}{\mathOrText{\viewdata }}
+\newunicodechar{⌙}{\mathOrText{\turnednot }}
+\newunicodechar{⌜}{\mathOrText{\ulcorner }}
+\newunicodechar{⌝}{\mathOrText{\urcorner }}
+\newunicodechar{⌞}{\mathOrText{\llcorner }}
+\newunicodechar{⌟}{\mathOrText{\lrcorner }}
+\newunicodechar{⌠}{\mathOrText{\inttop }}
+\newunicodechar{⌡}{\mathOrText{\intbottom }}
+\newunicodechar{⌢}{\mathOrText{\frown }}
+\newunicodechar{⌣}{\mathOrText{\smile }}
+\newunicodechar{⌬}{\mathOrText{\varhexagonlrbonds }}
+\newunicodechar{⌲}{\mathOrText{\conictaper }}
+\newunicodechar{⌶}{\mathOrText{\topbot }}
+\newunicodechar{⌽}{\mathOrText{\obar }}
+\newunicodechar{⌿}{\mathOrText{\APLnotslash }}
+\newunicodechar{⍀}{\mathOrText{\APLnotbackslash }}
+\newunicodechar{⍓}{\mathOrText{\APLboxupcaret }}
+\newunicodechar{⍰}{\mathOrText{\APLboxquestion }}
+\newunicodechar{⍼}{\mathOrText{\rangledownzigzagarrow }}
+\newunicodechar{⎔}{\mathOrText{\hexagon }}
+\newunicodechar{⎛}{\mathOrText{\lparenuend }}
+\newunicodechar{⎜}{\mathOrText{\lparenextender }}
+\newunicodechar{⎝}{\mathOrText{\lparenlend }}
+\newunicodechar{⎞}{\mathOrText{\rparenuend }}
+\newunicodechar{⎟}{\mathOrText{\rparenextender }}
+\newunicodechar{⎠}{\mathOrText{\rparenlend }}
+\newunicodechar{⎡}{\mathOrText{\lbrackuend }}
+\newunicodechar{⎢}{\mathOrText{\lbrackextender }}
+\newunicodechar{⎣}{\mathOrText{\lbracklend }}
+\newunicodechar{⎤}{\mathOrText{\rbrackuend }}
+\newunicodechar{⎥}{\mathOrText{\rbrackextender }}
+\newunicodechar{⎦}{\mathOrText{\rbracklend }}
+\newunicodechar{⎧}{\mathOrText{\lbraceuend }}
+\newunicodechar{⎨}{\mathOrText{\lbracemid }}
+\newunicodechar{⎩}{\mathOrText{\lbracelend }}
+\newunicodechar{⎪}{\mathOrText{\vbraceextender }}
+\newunicodechar{⎫}{\mathOrText{\rbraceuend }}
+\newunicodechar{⎬}{\mathOrText{\rbracemid }}
+\newunicodechar{⎭}{\mathOrText{\rbracelend }}
+\newunicodechar{⎮}{\mathOrText{\intextender }}
+\newunicodechar{⎯}{\mathOrText{\harrowextender }}
+\newunicodechar{⎰}{\mathOrText{\lmoustache }}
+\newunicodechar{⎱}{\mathOrText{\rmoustache }}
+\newunicodechar{⎲}{\mathOrText{\sumtop }}
+\newunicodechar{⎳}{\mathOrText{\sumbottom }}
+\newunicodechar{⎴}{\mathOrText{\overbracket }}
+\newunicodechar{⎵}{\mathOrText{\underbracket }}
+\newunicodechar{⎶}{\mathOrText{\bbrktbrk }}
+\newunicodechar{⎷}{\mathOrText{\sqrtbottom }}
+\newunicodechar{⎸}{\mathOrText{\lvboxline }}
+\newunicodechar{⎹}{\mathOrText{\rvboxline }}
+\newunicodechar{⏎}{\mathOrText{\varcarriagereturn }}
+\newunicodechar{⏜}{\mathOrText{\overparen }}
+\newunicodechar{⏝}{\mathOrText{\underparen }}
+\newunicodechar{⏞}{\mathOrText{\overbrace }}
+\newunicodechar{⏟}{\mathOrText{\underbrace }}
+\newunicodechar{⏠}{\mathOrText{\obrbrak }}
+\newunicodechar{⏡}{\mathOrText{\ubrbrak }}
+\newunicodechar{⏢}{\mathOrText{\trapezium }}
+\newunicodechar{⏣}{\mathOrText{\benzenr }}
+\newunicodechar{⏤}{\mathOrText{\strns }}
+\newunicodechar{⏥}{\mathOrText{\fltns }}
+\newunicodechar{⏦}{\mathOrText{\accurrent }}
+\newunicodechar{⏧}{\mathOrText{\elinters }}
+\newunicodechar{␢}{\mathOrText{\blanksymbol }}
+\newunicodechar{␣}{\mathOrText{\mathvisiblespace }}
+\newunicodechar{┆}{\mathOrText{\bdtriplevdash }}
+\newunicodechar{▀}{\mathOrText{\blockuphalf }}
+\newunicodechar{▄}{\mathOrText{\blocklowhalf }}
+\newunicodechar{█}{\mathOrText{\blockfull }}
+\newunicodechar{▌}{\mathOrText{\blocklefthalf }}
+\newunicodechar{▐}{\mathOrText{\blockrighthalf }}
+\newunicodechar{░}{\mathOrText{\blockqtrshaded }}
+\newunicodechar{▒}{\mathOrText{\blockhalfshaded }}
+\newunicodechar{▓}{\mathOrText{\blockthreeqtrshaded }}
+\newunicodechar{■}{\mathOrText{\mdlgblksquare }}
+\newunicodechar{□}{\mathOrText{\mdlgwhtsquare }}
+\newunicodechar{▢}{\mathOrText{\squoval }}
+\newunicodechar{▣}{\mathOrText{\blackinwhitesquare }}
+\newunicodechar{▤}{\mathOrText{\squarehfill }}
+\newunicodechar{▥}{\mathOrText{\squarevfill }}
+\newunicodechar{▦}{\mathOrText{\squarehvfill }}
+\newunicodechar{▧}{\mathOrText{\squarenwsefill }}
+\newunicodechar{▨}{\mathOrText{\squareneswfill }}
+\newunicodechar{▩}{\mathOrText{\squarecrossfill }}
+\newunicodechar{▪}{\mathOrText{\smblksquare }}
+\newunicodechar{▫}{\mathOrText{\smwhtsquare }}
+\newunicodechar{▬}{\mathOrText{\hrectangleblack }}
+\newunicodechar{▭}{\mathOrText{\hrectangle }}
+\newunicodechar{▮}{\mathOrText{\vrectangleblack }}
+\newunicodechar{▯}{\mathOrText{\vrectangle }}
+\newunicodechar{▰}{\mathOrText{\parallelogramblack }}
+\newunicodechar{▱}{\mathOrText{\parallelogram }}
+\newunicodechar{▲}{\mathOrText{\bigblacktriangleup }}
+\newunicodechar{△}{\mathOrText{\bigtriangleup }}
+\newunicodechar{▴}{\mathOrText{\blacktriangle }}
+\newunicodechar{▵}{\mathOrText{\vartriangle }}
+\newunicodechar{▶}{\mathOrText{\blacktriangleright }}
+\newunicodechar{▷}{\mathOrText{\triangleright }}
+\newunicodechar{▸}{\mathOrText{\smallblacktriangleright }}
+\newunicodechar{▹}{\mathOrText{\smalltriangleright }}
+\newunicodechar{►}{\mathOrText{\blackpointerright }}
+\newunicodechar{▻}{\mathOrText{\whitepointerright }}
+\newunicodechar{▼}{\mathOrText{\bigblacktriangledown }}
+\newunicodechar{▽}{\mathOrText{\bigtriangledown }}
+\newunicodechar{▾}{\mathOrText{\blacktriangledown }}
+\newunicodechar{▿}{\mathOrText{\triangledown }}
+\newunicodechar{◀}{\mathOrText{\blacktriangleleft }}
+\newunicodechar{◁}{\mathOrText{\triangleleft }}
+\newunicodechar{◂}{\mathOrText{\smallblacktriangleleft }}
+\newunicodechar{◃}{\mathOrText{\smalltriangleleft }}
+\newunicodechar{◄}{\mathOrText{\blackpointerleft }}
+\newunicodechar{◅}{\mathOrText{\whitepointerleft }}
+\newunicodechar{◆}{\mathOrText{\mdlgblkdiamond }}
+\newunicodechar{◇}{\mathOrText{\mdlgwhtdiamond }}
+\newunicodechar{◈}{\mathOrText{\blackinwhitediamond }}
+\newunicodechar{◉}{\mathOrText{\fisheye }}
+\newunicodechar{◊}{\mathOrText{\mdlgwhtlozenge }}
+\newunicodechar{○}{\mathOrText{\mdlgwhtcircle }}
+\newunicodechar{◌}{\mathOrText{\dottedcircle }}
+\newunicodechar{◍}{\mathOrText{\circlevertfill }}
+\newunicodechar{◎}{\mathOrText{\bullseye }}
+\newunicodechar{●}{\mathOrText{\mdlgblkcircle }}
+\newunicodechar{◐}{\mathOrText{\circlelefthalfblack }}
+\newunicodechar{◑}{\mathOrText{\circlerighthalfblack }}
+\newunicodechar{◒}{\mathOrText{\circlebottomhalfblack }}
+\newunicodechar{◓}{\mathOrText{\circletophalfblack }}
+\newunicodechar{◔}{\mathOrText{\circleurquadblack }}
+\newunicodechar{◕}{\mathOrText{\blackcircleulquadwhite }}
+\newunicodechar{◖}{\mathOrText{\blacklefthalfcircle }}
+\newunicodechar{◗}{\mathOrText{\blackrighthalfcircle }}
+\newunicodechar{◘}{\mathOrText{\inversebullet }}
+\newunicodechar{◙}{\mathOrText{\inversewhitecircle }}
+\newunicodechar{◚}{\mathOrText{\invwhiteupperhalfcircle }}
+\newunicodechar{◛}{\mathOrText{\invwhitelowerhalfcircle }}
+\newunicodechar{◜}{\mathOrText{\ularc }}
+\newunicodechar{◝}{\mathOrText{\urarc }}
+\newunicodechar{◞}{\mathOrText{\lrarc }}
+\newunicodechar{◟}{\mathOrText{\llarc }}
+\newunicodechar{◠}{\mathOrText{\topsemicircle }}
+\newunicodechar{◡}{\mathOrText{\botsemicircle }}
+\newunicodechar{◢}{\mathOrText{\lrblacktriangle }}
+\newunicodechar{◣}{\mathOrText{\llblacktriangle }}
+\newunicodechar{◤}{\mathOrText{\ulblacktriangle }}
+\newunicodechar{◥}{\mathOrText{\urblacktriangle }}
+\newunicodechar{◦}{\mathOrText{\smwhtcircle }}
+\newunicodechar{◧}{\mathOrText{\squareleftblack }}
+\newunicodechar{◨}{\mathOrText{\squarerightblack }}
+\newunicodechar{◩}{\mathOrText{\squareulblack }}
+\newunicodechar{◪}{\mathOrText{\squarelrblack }}
+\newunicodechar{◫}{\mathOrText{\boxbar }}
+\newunicodechar{◬}{\mathOrText{\trianglecdot }}
+\newunicodechar{◭}{\mathOrText{\triangleleftblack }}
+\newunicodechar{◮}{\mathOrText{\trianglerightblack }}
+\newunicodechar{◯}{\mathOrText{\lgwhtcircle }}
+\newunicodechar{◰}{\mathOrText{\squareulquad }}
+\newunicodechar{◱}{\mathOrText{\squarellquad }}
+\newunicodechar{◲}{\mathOrText{\squarelrquad }}
+\newunicodechar{◳}{\mathOrText{\squareurquad }}
+\newunicodechar{◴}{\mathOrText{\circleulquad }}
+\newunicodechar{◵}{\mathOrText{\circlellquad }}
+\newunicodechar{◶}{\mathOrText{\circlelrquad }}
+\newunicodechar{◷}{\mathOrText{\circleurquad }}
+\newunicodechar{◸}{\mathOrText{\ultriangle }}
+\newunicodechar{◹}{\mathOrText{\urtriangle }}
+\newunicodechar{◺}{\mathOrText{\lltriangle }}
+\newunicodechar{◻}{\mathOrText{\mdwhtsquare }}
+\newunicodechar{◼}{\mathOrText{\mdblksquare }}
+\newunicodechar{◽}{\mathOrText{\mdsmwhtsquare }}
+\newunicodechar{◾}{\mathOrText{\mdsmblksquare }}
+\newunicodechar{◿}{\mathOrText{\lrtriangle }}
+\newunicodechar{★}{\mathOrText{\bigstar }}
+\newunicodechar{☆}{\mathOrText{\bigwhitestar }}
+\newunicodechar{☉}{\mathOrText{\astrosun }}
+\newunicodechar{☡}{\mathOrText{\danger }}
+\newunicodechar{☻}{\mathOrText{\blacksmiley }}
+\newunicodechar{☼}{\mathOrText{\sun }}
+\newunicodechar{☽}{\mathOrText{\rightmoon }}
+\newunicodechar{☾}{\mathOrText{\leftmoon }}
+\newunicodechar{♀}{\mathOrText{\female }}
+\newunicodechar{♂}{\mathOrText{\male }}
+\newunicodechar{♠}{\mathOrText{\spadesuit }}
+\newunicodechar{♡}{\mathOrText{\heartsuit }}
+\newunicodechar{♢}{\mathOrText{\diamondsuit }}
+\newunicodechar{♣}{\mathOrText{\clubsuit }}
+\newunicodechar{♤}{\mathOrText{\varspadesuit }}
+\newunicodechar{♥}{\mathOrText{\varheartsuit }}
+\newunicodechar{♦}{\mathOrText{\vardiamondsuit }}
+\newunicodechar{♧}{\mathOrText{\varclubsuit }}
+\newunicodechar{♩}{\mathOrText{\quarternote }}
+\newunicodechar{♪}{\mathOrText{\eighthnote }}
+\newunicodechar{♫}{\mathOrText{\twonotes }}
+\newunicodechar{♭}{\mathOrText{\flat }}
+\newunicodechar{♮}{\mathOrText{\natural }}
+\newunicodechar{♯}{\mathOrText{\sharp }}
+\newunicodechar{♾}{\mathOrText{\acidfree }}
+\newunicodechar{⚀}{\mathOrText{\dicei }}
+\newunicodechar{⚁}{\mathOrText{\diceii }}
+\newunicodechar{⚂}{\mathOrText{\diceiii }}
+\newunicodechar{⚃}{\mathOrText{\diceiv }}
+\newunicodechar{⚄}{\mathOrText{\dicev }}
+\newunicodechar{⚅}{\mathOrText{\dicevi }}
+\newunicodechar{⚆}{\mathOrText{\circledrightdot }}
+\newunicodechar{⚇}{\mathOrText{\circledtwodots }}
+\newunicodechar{⚈}{\mathOrText{\blackcircledrightdot }}
+\newunicodechar{⚉}{\mathOrText{\blackcircledtwodots }}
+\newunicodechar{⚥}{\mathOrText{\Hermaphrodite }}
+\newunicodechar{⚪}{\mathOrText{\mdwhtcircle }}
+\newunicodechar{⚫}{\mathOrText{\mdblkcircle }}
+\newunicodechar{⚬}{\mathOrText{\mdsmwhtcircle }}
+\newunicodechar{⚲}{\mathOrText{\neuter }}
+\newunicodechar{✓}{\mathOrText{\checkmark }}
+\newunicodechar{✠}{\mathOrText{\maltese }}
+\newunicodechar{✪}{\mathOrText{\circledstar }}
+\newunicodechar{✶}{\mathOrText{\varstar }}
+\newunicodechar{✽}{\mathOrText{\dingasterisk }}
+\newunicodechar{❲}{\mathOrText{\lbrbrak }}
+\newunicodechar{❳}{\mathOrText{\rbrbrak }}
+\newunicodechar{➛}{\mathOrText{\draftingarrow }}
+\newunicodechar{⟀}{\mathOrText{\threedangle }}
+\newunicodechar{⟁}{\mathOrText{\whiteinwhitetriangle }}
+\newunicodechar{⟂}{\mathOrText{\perp }}
+\newunicodechar{⟃}{\mathOrText{\subsetcirc }}
+\newunicodechar{⟄}{\mathOrText{\supsetcirc }}
+\newunicodechar{⟅}{\mathOrText{\lbag }}
+\newunicodechar{⟆}{\mathOrText{\rbag }}
+\newunicodechar{⟇}{\mathOrText{\veedot }}
+\newunicodechar{⟈}{\mathOrText{\bsolhsub }}
+\newunicodechar{⟉}{\mathOrText{\suphsol }}
+\newunicodechar{⟌}{\mathOrText{\longdivision }}
+\newunicodechar{⟐}{\mathOrText{\diamondcdot }}
+\newunicodechar{⟑}{\mathOrText{\wedgedot }}
+\newunicodechar{⟒}{\mathOrText{\upin }}
+\newunicodechar{⟓}{\mathOrText{\pullback }}
+\newunicodechar{⟔}{\mathOrText{\pushout }}
+\newunicodechar{⟕}{\mathOrText{\leftouterjoin }}
+\newunicodechar{⟖}{\mathOrText{\rightouterjoin }}
+\newunicodechar{⟗}{\mathOrText{\fullouterjoin }}
+\newunicodechar{⟘}{\mathOrText{\bigbot }}
+\newunicodechar{⟙}{\mathOrText{\bigtop }}
+\newunicodechar{⟚}{\mathOrText{\DashVDash }}
+\newunicodechar{⟛}{\mathOrText{\dashVdash }}
+\newunicodechar{⟜}{\mathOrText{\multimapinv }}
+\newunicodechar{⟝}{\mathOrText{\vlongdash }}
+\newunicodechar{⟞}{\mathOrText{\longdashv }}
+\newunicodechar{⟟}{\mathOrText{\cirbot }}
+\newunicodechar{⟠}{\mathOrText{\lozengeminus }}
+\newunicodechar{⟡}{\mathOrText{\concavediamond }}
+\newunicodechar{⟢}{\mathOrText{\concavediamondtickleft }}
+\newunicodechar{⟣}{\mathOrText{\concavediamondtickright }}
+\newunicodechar{⟤}{\mathOrText{\whitesquaretickleft }}
+\newunicodechar{⟥}{\mathOrText{\whitesquaretickright }}
+\newunicodechar{⟦}{\mathOrText{\lBrack }}
+\newunicodechar{⟧}{\mathOrText{\rBrack }}
+\newunicodechar{⟨}{\mathOrText{\langle }}
+\newunicodechar{⟩}{\mathOrText{\rangle }}
+\newunicodechar{⟪}{\mathOrText{\lAngle }}
+\newunicodechar{⟫}{\mathOrText{\rAngle }}
+\newunicodechar{⟬}{\mathOrText{\Lbrbrak }}
+\newunicodechar{⟭}{\mathOrText{\Rbrbrak }}
+\newunicodechar{⟮}{\mathOrText{\lgroup }}
+\newunicodechar{⟯}{\mathOrText{\rgroup }}
+\newunicodechar{⟰}{\mathOrText{\UUparrow }}
+\newunicodechar{⟱}{\mathOrText{\DDownarrow }}
+\newunicodechar{⟲}{\mathOrText{\acwgapcirclearrow }}
+\newunicodechar{⟳}{\mathOrText{\cwgapcirclearrow }}
+\newunicodechar{⟴}{\mathOrText{\rightarrowonoplus }}
+\newunicodechar{⟵}{\mathOrText{\longleftarrow }}
+\newunicodechar{⟶}{\mathOrText{\longrightarrow }}
+\newunicodechar{⟷}{\mathOrText{\longleftrightarrow }}
+\newunicodechar{⟸}{\mathOrText{\Longleftarrow }}
+\newunicodechar{⟹}{\mathOrText{\Longrightarrow }}
+\newunicodechar{⟺}{\mathOrText{\Longleftrightarrow }}
+\newunicodechar{⟻}{\mathOrText{\longmapsfrom }}
+\newunicodechar{⟼}{\mathOrText{\longmapsto }}
+\newunicodechar{⟽}{\mathOrText{\Longmapsfrom }}
+\newunicodechar{⟾}{\mathOrText{\Longmapsto }}
+\newunicodechar{⟿}{\mathOrText{\longrightsquigarrow }}
+\newunicodechar{⤀}{\mathOrText{\nvtwoheadrightarrow }}
+\newunicodechar{⤁}{\mathOrText{\nVtwoheadrightarrow }}
+\newunicodechar{⤂}{\mathOrText{\nvLeftarrow }}
+\newunicodechar{⤃}{\mathOrText{\nvRightarrow }}
+\newunicodechar{⤄}{\mathOrText{\nvLeftrightarrow }}
+\newunicodechar{⤅}{\mathOrText{\twoheadmapsto }}
+\newunicodechar{⤆}{\mathOrText{\Mapsfrom }}
+\newunicodechar{⤇}{\mathOrText{\Mapsto }}
+\newunicodechar{⤈}{\mathOrText{\downarrowbarred }}
+\newunicodechar{⤉}{\mathOrText{\uparrowbarred }}
+\newunicodechar{⤊}{\mathOrText{\Uuparrow }}
+\newunicodechar{⤋}{\mathOrText{\Ddownarrow }}
+\newunicodechar{⤌}{\mathOrText{\leftbkarrow }}
+\newunicodechar{⤍}{\mathOrText{\rightbkarrow }}
+\newunicodechar{⤎}{\mathOrText{\leftdbkarrow }}
+\newunicodechar{⤏}{\mathOrText{\dbkarrow }}
+\newunicodechar{⤐}{\mathOrText{\drbkarrow }}
+\newunicodechar{⤑}{\mathOrText{\rightdotarrow }}
+\newunicodechar{⤒}{\mathOrText{\baruparrow }}
+\newunicodechar{⤓}{\mathOrText{\downarrowbar }}
+\newunicodechar{⤔}{\mathOrText{\nvrightarrowtail }}
+\newunicodechar{⤕}{\mathOrText{\nVrightarrowtail }}
+\newunicodechar{⤖}{\mathOrText{\twoheadrightarrowtail }}
+\newunicodechar{⤗}{\mathOrText{\nvtwoheadrightarrowtail }}
+\newunicodechar{⤘}{\mathOrText{\nVtwoheadrightarrowtail }}
+\newunicodechar{⤙}{\mathOrText{\lefttail }}
+\newunicodechar{⤚}{\mathOrText{\righttail }}
+\newunicodechar{⤛}{\mathOrText{\leftdbltail }}
+\newunicodechar{⤜}{\mathOrText{\rightdbltail }}
+\newunicodechar{⤝}{\mathOrText{\diamondleftarrow }}
+\newunicodechar{⤞}{\mathOrText{\rightarrowdiamond }}
+\newunicodechar{⤟}{\mathOrText{\diamondleftarrowbar }}
+\newunicodechar{⤠}{\mathOrText{\barrightarrowdiamond }}
+\newunicodechar{⤡}{\mathOrText{\nwsearrow }}
+\newunicodechar{⤢}{\mathOrText{\neswarrow }}
+\newunicodechar{⤣}{\mathOrText{\hknwarrow }}
+\newunicodechar{⤤}{\mathOrText{\hknearrow }}
+\newunicodechar{⤥}{\mathOrText{\hksearrow }}
+\newunicodechar{⤦}{\mathOrText{\hkswarrow }}
+\newunicodechar{⤧}{\mathOrText{\tona }}
+\newunicodechar{⤨}{\mathOrText{\toea }}
+\newunicodechar{⤩}{\mathOrText{\tosa }}
+\newunicodechar{⤪}{\mathOrText{\towa }}
+\newunicodechar{⤫}{\mathOrText{\rdiagovfdiag }}
+\newunicodechar{⤬}{\mathOrText{\fdiagovrdiag }}
+\newunicodechar{⤭}{\mathOrText{\seovnearrow }}
+\newunicodechar{⤮}{\mathOrText{\neovsearrow }}
+\newunicodechar{⤯}{\mathOrText{\fdiagovnearrow }}
+\newunicodechar{⤰}{\mathOrText{\rdiagovsearrow }}
+\newunicodechar{⤱}{\mathOrText{\neovnwarrow }}
+\newunicodechar{⤲}{\mathOrText{\nwovnearrow }}
+\newunicodechar{⤳}{\mathOrText{\rightcurvedarrow }}
+\newunicodechar{⤴}{\mathOrText{\uprightcurvearrow }}
+\newunicodechar{⤵}{\mathOrText{\downrightcurvedarrow }}
+\newunicodechar{⤶}{\mathOrText{\leftdowncurvedarrow }}
+\newunicodechar{⤷}{\mathOrText{\rightdowncurvedarrow }}
+\newunicodechar{⤸}{\mathOrText{\cwrightarcarrow }}
+\newunicodechar{⤹}{\mathOrText{\acwleftarcarrow }}
+\newunicodechar{⤺}{\mathOrText{\acwoverarcarrow }}
+\newunicodechar{⤻}{\mathOrText{\acwunderarcarrow }}
+\newunicodechar{⤼}{\mathOrText{\curvearrowrightminus }}
+\newunicodechar{⤽}{\mathOrText{\curvearrowleftplus }}
+\newunicodechar{⤾}{\mathOrText{\cwundercurvearrow }}
+\newunicodechar{⤿}{\mathOrText{\ccwundercurvearrow }}
+\newunicodechar{⥀}{\mathOrText{\acwcirclearrow }}
+\newunicodechar{⥁}{\mathOrText{\cwcirclearrow }}
+\newunicodechar{⥂}{\mathOrText{\rightarrowshortleftarrow }}
+\newunicodechar{⥃}{\mathOrText{\leftarrowshortrightarrow }}
+\newunicodechar{⥄}{\mathOrText{\shortrightarrowleftarrow }}
+\newunicodechar{⥅}{\mathOrText{\rightarrowplus }}
+\newunicodechar{⥆}{\mathOrText{\leftarrowplus }}
+\newunicodechar{⥇}{\mathOrText{\rightarrowx }}
+\newunicodechar{⥈}{\mathOrText{\leftrightarrowcircle }}
+\newunicodechar{⥉}{\mathOrText{\twoheaduparrowcircle }}
+\newunicodechar{⥊}{\mathOrText{\leftrightharpoonupdown }}
+\newunicodechar{⥋}{\mathOrText{\leftrightharpoondownup }}
+\newunicodechar{⥌}{\mathOrText{\updownharpoonrightleft }}
+\newunicodechar{⥍}{\mathOrText{\updownharpoonleftright }}
+\newunicodechar{⥎}{\mathOrText{\leftrightharpoonupup }}
+\newunicodechar{⥏}{\mathOrText{\updownharpoonrightright }}
+\newunicodechar{⥐}{\mathOrText{\leftrightharpoondowndown }}
+\newunicodechar{⥑}{\mathOrText{\updownharpoonleftleft }}
+\newunicodechar{⥒}{\mathOrText{\barleftharpoonup }}
+\newunicodechar{⥓}{\mathOrText{\rightharpoonupbar }}
+\newunicodechar{⥔}{\mathOrText{\barupharpoonright }}
+\newunicodechar{⥕}{\mathOrText{\downharpoonrightbar }}
+\newunicodechar{⥖}{\mathOrText{\barleftharpoondown }}
+\newunicodechar{⥗}{\mathOrText{\rightharpoondownbar }}
+\newunicodechar{⥘}{\mathOrText{\barupharpoonleft }}
+\newunicodechar{⥙}{\mathOrText{\downharpoonleftbar }}
+\newunicodechar{⥚}{\mathOrText{\leftharpoonupbar }}
+\newunicodechar{⥛}{\mathOrText{\barrightharpoonup }}
+\newunicodechar{⥜}{\mathOrText{\upharpoonrightbar }}
+\newunicodechar{⥝}{\mathOrText{\bardownharpoonright }}
+\newunicodechar{⥞}{\mathOrText{\leftharpoondownbar }}
+\newunicodechar{⥟}{\mathOrText{\barrightharpoondown }}
+\newunicodechar{⥠}{\mathOrText{\upharpoonleftbar }}
+\newunicodechar{⥡}{\mathOrText{\bardownharpoonleft }}
+\newunicodechar{⥢}{\mathOrText{\leftharpoonsupdown }}
+\newunicodechar{⥣}{\mathOrText{\upharpoonsleftright }}
+\newunicodechar{⥤}{\mathOrText{\rightharpoonsupdown }}
+\newunicodechar{⥥}{\mathOrText{\downharpoonsleftright }}
+\newunicodechar{⥦}{\mathOrText{\leftrightharpoonsup }}
+\newunicodechar{⥧}{\mathOrText{\leftrightharpoonsdown }}
+\newunicodechar{⥨}{\mathOrText{\rightleftharpoonsup }}
+\newunicodechar{⥩}{\mathOrText{\rightleftharpoonsdown }}
+\newunicodechar{⥪}{\mathOrText{\leftharpoonupdash }}
+\newunicodechar{⥫}{\mathOrText{\dashleftharpoondown }}
+\newunicodechar{⥬}{\mathOrText{\rightharpoonupdash }}
+\newunicodechar{⥭}{\mathOrText{\dashrightharpoondown }}
+\newunicodechar{⥮}{\mathOrText{\updownharpoonsleftright }}
+\newunicodechar{⥯}{\mathOrText{\downupharpoonsleftright }}
+\newunicodechar{⥰}{\mathOrText{\rightimply }}
+\newunicodechar{⥱}{\mathOrText{\equalrightarrow }}
+\newunicodechar{⥲}{\mathOrText{\similarrightarrow }}
+\newunicodechar{⥳}{\mathOrText{\leftarrowsimilar }}
+\newunicodechar{⥴}{\mathOrText{\rightarrowsimilar }}
+\newunicodechar{⥵}{\mathOrText{\rightarrowapprox }}
+\newunicodechar{⥶}{\mathOrText{\ltlarr }}
+\newunicodechar{⥷}{\mathOrText{\leftarrowless }}
+\newunicodechar{⥸}{\mathOrText{\gtrarr }}
+\newunicodechar{⥹}{\mathOrText{\subrarr }}
+\newunicodechar{⥺}{\mathOrText{\leftarrowsubset }}
+\newunicodechar{⥻}{\mathOrText{\suplarr }}
+\newunicodechar{⥼}{\mathOrText{\leftfishtail }}
+\newunicodechar{⥽}{\mathOrText{\rightfishtail }}
+\newunicodechar{⥾}{\mathOrText{\upfishtail }}
+\newunicodechar{⥿}{\mathOrText{\downfishtail }}
+\newunicodechar{⦀}{\mathOrText{\Vvert }}
+\newunicodechar{⦁}{\mathOrText{\mdsmblkcircle }}
+\newunicodechar{⦂}{\mathOrText{\typecolon }}
+\newunicodechar{⦃}{\mathOrText{\lBrace }}
+\newunicodechar{⦄}{\mathOrText{\rBrace }}
+\newunicodechar{⦅}{\mathOrText{\lParen }}
+\newunicodechar{⦆}{\mathOrText{\rParen }}
+\newunicodechar{⦇}{\mathOrText{\llparenthesis }}
+\newunicodechar{⦈}{\mathOrText{\rrparenthesis }}
+\newunicodechar{⦉}{\mathOrText{\llangle }}
+\newunicodechar{⦊}{\mathOrText{\rrangle }}
+\newunicodechar{⦋}{\mathOrText{\lbrackubar }}
+\newunicodechar{⦌}{\mathOrText{\rbrackubar }}
+\newunicodechar{⦍}{\mathOrText{\lbrackultick }}
+\newunicodechar{⦎}{\mathOrText{\rbracklrtick }}
+\newunicodechar{⦏}{\mathOrText{\lbracklltick }}
+\newunicodechar{⦐}{\mathOrText{\rbrackurtick }}
+\newunicodechar{⦑}{\mathOrText{\langledot }}
+\newunicodechar{⦒}{\mathOrText{\rangledot }}
+\newunicodechar{⦓}{\mathOrText{\lparenless }}
+\newunicodechar{⦔}{\mathOrText{\rparengtr }}
+\newunicodechar{⦕}{\mathOrText{\Lparengtr }}
+\newunicodechar{⦖}{\mathOrText{\Rparenless }}
+\newunicodechar{⦗}{\mathOrText{\lblkbrbrak }}
+\newunicodechar{⦘}{\mathOrText{\rblkbrbrak }}
+\newunicodechar{⦙}{\mathOrText{\fourvdots }}
+\newunicodechar{⦚}{\mathOrText{\vzigzag }}
+\newunicodechar{⦛}{\mathOrText{\measuredangleleft }}
+\newunicodechar{⦜}{\mathOrText{\rightanglesqr }}
+\newunicodechar{⦝}{\mathOrText{\rightanglemdot }}
+\newunicodechar{⦞}{\mathOrText{\angles }}
+\newunicodechar{⦟}{\mathOrText{\angdnr }}
+\newunicodechar{⦠}{\mathOrText{\gtlpar }}
+\newunicodechar{⦡}{\mathOrText{\sphericalangleup }}
+\newunicodechar{⦢}{\mathOrText{\turnangle }}
+\newunicodechar{⦣}{\mathOrText{\revangle }}
+\newunicodechar{⦤}{\mathOrText{\angleubar }}
+\newunicodechar{⦥}{\mathOrText{\revangleubar }}
+\newunicodechar{⦦}{\mathOrText{\wideangledown }}
+\newunicodechar{⦧}{\mathOrText{\wideangleup }}
+\newunicodechar{⦨}{\mathOrText{\measanglerutone }}
+\newunicodechar{⦩}{\mathOrText{\measanglelutonw }}
+\newunicodechar{⦪}{\mathOrText{\measanglerdtose }}
+\newunicodechar{⦫}{\mathOrText{\measangleldtosw }}
+\newunicodechar{⦬}{\mathOrText{\measangleurtone }}
+\newunicodechar{⦭}{\mathOrText{\measangleultonw }}
+\newunicodechar{⦮}{\mathOrText{\measangledrtose }}
+\newunicodechar{⦯}{\mathOrText{\measangledltosw }}
+\newunicodechar{⦰}{\mathOrText{\revemptyset }}
+\newunicodechar{⦱}{\mathOrText{\emptysetobar }}
+\newunicodechar{⦲}{\mathOrText{\emptysetocirc }}
+\newunicodechar{⦳}{\mathOrText{\emptysetoarr }}
+\newunicodechar{⦴}{\mathOrText{\emptysetoarrl }}
+\newunicodechar{⦵}{\mathOrText{\circlehbar }}
+\newunicodechar{⦶}{\mathOrText{\circledvert }}
+\newunicodechar{⦷}{\mathOrText{\circledparallel }}
+\newunicodechar{⦸}{\mathOrText{\obslash }}
+\newunicodechar{⦹}{\mathOrText{\operp }}
+\newunicodechar{⦺}{\mathOrText{\obot }}
+\newunicodechar{⦻}{\mathOrText{\olcross }}
+\newunicodechar{⦼}{\mathOrText{\odotslashdot }}
+\newunicodechar{⦽}{\mathOrText{\uparrowoncircle }}
+\newunicodechar{⦾}{\mathOrText{\circledwhitebullet }}
+\newunicodechar{⦿}{\mathOrText{\circledbullet }}
+\newunicodechar{⧀}{\mathOrText{\olessthan }}
+\newunicodechar{⧁}{\mathOrText{\ogreaterthan }}
+\newunicodechar{⧂}{\mathOrText{\cirscir }}
+\newunicodechar{⧃}{\mathOrText{\cirE }}
+\newunicodechar{⧄}{\mathOrText{\boxdiag }}
+\newunicodechar{⧅}{\mathOrText{\boxbslash }}
+\newunicodechar{⧆}{\mathOrText{\boxast }}
+\newunicodechar{⧇}{\mathOrText{\boxcircle }}
+\newunicodechar{⧈}{\mathOrText{\boxbox }}
+\newunicodechar{⧉}{\mathOrText{\boxonbox }}
+\newunicodechar{⧊}{\mathOrText{\triangleodot }}
+\newunicodechar{⧋}{\mathOrText{\triangleubar }}
+\newunicodechar{⧌}{\mathOrText{\triangles }}
+\newunicodechar{⧍}{\mathOrText{\triangleserifs }}
+\newunicodechar{⧎}{\mathOrText{\rtriltri }}
+\newunicodechar{⧏}{\mathOrText{\ltrivb }}
+\newunicodechar{⧐}{\mathOrText{\vbrtri }}
+\newunicodechar{⧑}{\mathOrText{\lfbowtie }}
+\newunicodechar{⧒}{\mathOrText{\rfbowtie }}
+\newunicodechar{⧓}{\mathOrText{\fbowtie }}
+\newunicodechar{⧔}{\mathOrText{\lftimes }}
+\newunicodechar{⧕}{\mathOrText{\rftimes }}
+\newunicodechar{⧖}{\mathOrText{\hourglass }}
+\newunicodechar{⧗}{\mathOrText{\blackhourglass }}
+\newunicodechar{⧘}{\mathOrText{\lvzigzag }}
+\newunicodechar{⧙}{\mathOrText{\rvzigzag }}
+\newunicodechar{⧚}{\mathOrText{\Lvzigzag }}
+\newunicodechar{⧛}{\mathOrText{\Rvzigzag }}
+\newunicodechar{⧜}{\mathOrText{\iinfin }}
+\newunicodechar{⧝}{\mathOrText{\tieinfty }}
+\newunicodechar{⧞}{\mathOrText{\nvinfty }}
+\newunicodechar{⧟}{\mathOrText{\dualmap }}
+\newunicodechar{⧠}{\mathOrText{\laplac }}
+\newunicodechar{⧡}{\mathOrText{\lrtriangleeq }}
+\newunicodechar{⧢}{\mathOrText{\shuffle }}
+\newunicodechar{⧣}{\mathOrText{\eparsl }}
+\newunicodechar{⧤}{\mathOrText{\smeparsl }}
+\newunicodechar{⧥}{\mathOrText{\eqvparsl }}
+\newunicodechar{⧦}{\mathOrText{\gleichstark }}
+\newunicodechar{⧧}{\mathOrText{\thermod }}
+\newunicodechar{⧨}{\mathOrText{\downtriangleleftblack }}
+\newunicodechar{⧩}{\mathOrText{\downtrianglerightblack }}
+\newunicodechar{⧪}{\mathOrText{\blackdiamonddownarrow }}
+\newunicodechar{⧫}{\mathOrText{\mdlgblklozenge }}
+\newunicodechar{⧬}{\mathOrText{\circledownarrow }}
+\newunicodechar{⧭}{\mathOrText{\blackcircledownarrow }}
+\newunicodechar{⧮}{\mathOrText{\errbarsquare }}
+\newunicodechar{⧯}{\mathOrText{\errbarblacksquare }}
+\newunicodechar{⧰}{\mathOrText{\errbardiamond }}
+\newunicodechar{⧱}{\mathOrText{\errbarblackdiamond }}
+\newunicodechar{⧲}{\mathOrText{\errbarcircle }}
+\newunicodechar{⧳}{\mathOrText{\errbarblackcircle }}
+\newunicodechar{⧴}{\mathOrText{\ruledelayed }}
+\newunicodechar{⧵}{\mathOrText{\setminus }}
+\newunicodechar{⧶}{\mathOrText{\dsol }}
+\newunicodechar{⧷}{\mathOrText{\rsolbar }}
+\newunicodechar{⧸}{\mathOrText{\xsol }}
+\newunicodechar{⧹}{\mathOrText{\xbsol }}
+\newunicodechar{⧺}{\mathOrText{\doubleplus }}
+\newunicodechar{⧻}{\mathOrText{\tripleplus }}
+\newunicodechar{⧼}{\mathOrText{\lcurvyangle }}
+\newunicodechar{⧽}{\mathOrText{\rcurvyangle }}
+\newunicodechar{⧾}{\mathOrText{\tplus }}
+\newunicodechar{⧿}{\mathOrText{\tminus }}
+\newunicodechar{⨀}{\mathOrText{\bigodot }}
+\newunicodechar{⨁}{\mathOrText{\bigoplus }}
+\newunicodechar{⨂}{\mathOrText{\bigotimes }}
+\newunicodechar{⨃}{\mathOrText{\bigcupdot }}
+\newunicodechar{⨄}{\mathOrText{\biguplus }}
+\newunicodechar{⨅}{\mathOrText{\bigsqcap }}
+\newunicodechar{⨆}{\mathOrText{\bigsqcup }}
+\newunicodechar{⨇}{\mathOrText{\conjquant }}
+\newunicodechar{⨈}{\mathOrText{\disjquant }}
+\newunicodechar{⨉}{\mathOrText{\bigtimes }}
+\newunicodechar{⨊}{\mathOrText{\modtwosum }}
+\newunicodechar{⨋}{\mathOrText{\sumint }}
+\newunicodechar{⨌}{\mathOrText{\iiiint }}
+\newunicodechar{⨍}{\mathOrText{\intbar }}
+\newunicodechar{⨎}{\mathOrText{\intBar }}
+\newunicodechar{⨏}{\mathOrText{\fint }}
+\newunicodechar{⨐}{\mathOrText{\cirfnint }}
+\newunicodechar{⨑}{\mathOrText{\awint }}
+\newunicodechar{⨒}{\mathOrText{\rppolint }}
+\newunicodechar{⨓}{\mathOrText{\scpolint }}
+\newunicodechar{⨔}{\mathOrText{\npolint }}
+\newunicodechar{⨕}{\mathOrText{\pointint }}
+\newunicodechar{⨖}{\mathOrText{\sqint }}
+\newunicodechar{⨗}{\mathOrText{\intlarhk }}
+\newunicodechar{⨘}{\mathOrText{\intx }}
+\newunicodechar{⨙}{\mathOrText{\intcap }}
+\newunicodechar{⨚}{\mathOrText{\intcup }}
+\newunicodechar{⨛}{\mathOrText{\upint }}
+\newunicodechar{⨜}{\mathOrText{\lowint }}
+\newunicodechar{⨝}{\mathOrText{\Join }}
+\newunicodechar{⨞}{\mathOrText{\bigtriangleleft }}
+\newunicodechar{⨟}{\mathOrText{\zcmp }}
+\newunicodechar{⨠}{\mathOrText{\zpipe }}
+\newunicodechar{⨡}{\mathOrText{\zproject }}
+\newunicodechar{⨢}{\mathOrText{\ringplus }}
+\newunicodechar{⨣}{\mathOrText{\plushat }}
+\newunicodechar{⨤}{\mathOrText{\simplus }}
+\newunicodechar{⨥}{\mathOrText{\plusdot }}
+\newunicodechar{⨦}{\mathOrText{\plussim }}
+\newunicodechar{⨧}{\mathOrText{\plussubtwo }}
+\newunicodechar{⨨}{\mathOrText{\plustrif }}
+\newunicodechar{⨩}{\mathOrText{\commaminus }}
+\newunicodechar{⨪}{\mathOrText{\minusdot }}
+\newunicodechar{⨫}{\mathOrText{\minusfdots }}
+\newunicodechar{⨬}{\mathOrText{\minusrdots }}
+\newunicodechar{⨭}{\mathOrText{\opluslhrim }}
+\newunicodechar{⨮}{\mathOrText{\oplusrhrim }}
+\newunicodechar{⨯}{\mathOrText{\vectimes }}
+\newunicodechar{⨰}{\mathOrText{\dottimes }}
+\newunicodechar{⨱}{\mathOrText{\timesbar }}
+\newunicodechar{⨲}{\mathOrText{\btimes }}
+\newunicodechar{⨳}{\mathOrText{\smashtimes }}
+\newunicodechar{⨴}{\mathOrText{\otimeslhrim }}
+\newunicodechar{⨵}{\mathOrText{\otimesrhrim }}
+\newunicodechar{⨶}{\mathOrText{\otimeshat }}
+\newunicodechar{⨷}{\mathOrText{\Otimes }}
+\newunicodechar{⨸}{\mathOrText{\odiv }}
+\newunicodechar{⨹}{\mathOrText{\triangleplus }}
+\newunicodechar{⨺}{\mathOrText{\triangleminus }}
+\newunicodechar{⨻}{\mathOrText{\triangletimes }}
+\newunicodechar{⨼}{\mathOrText{\intprod }}
+\newunicodechar{⨽}{\mathOrText{\intprodr }}
+\newunicodechar{⨾}{\mathOrText{\fcmp }}
+\newunicodechar{⨿}{\mathOrText{\amalg }}
+\newunicodechar{⩀}{\mathOrText{\capdot }}
+\newunicodechar{⩁}{\mathOrText{\uminus }}
+\newunicodechar{⩂}{\mathOrText{\barcup }}
+\newunicodechar{⩃}{\mathOrText{\barcap }}
+\newunicodechar{⩄}{\mathOrText{\capwedge }}
+\newunicodechar{⩅}{\mathOrText{\cupvee }}
+\newunicodechar{⩆}{\mathOrText{\cupovercap }}
+\newunicodechar{⩇}{\mathOrText{\capovercup }}
+\newunicodechar{⩈}{\mathOrText{\cupbarcap }}
+\newunicodechar{⩉}{\mathOrText{\capbarcup }}
+\newunicodechar{⩊}{\mathOrText{\twocups }}
+\newunicodechar{⩋}{\mathOrText{\twocaps }}
+\newunicodechar{⩌}{\mathOrText{\closedvarcup }}
+\newunicodechar{⩍}{\mathOrText{\closedvarcap }}
+\newunicodechar{⩎}{\mathOrText{\Sqcap }}
+\newunicodechar{⩏}{\mathOrText{\Sqcup }}
+\newunicodechar{⩐}{\mathOrText{\closedvarcupsmashprod }}
+\newunicodechar{⩑}{\mathOrText{\wedgeodot }}
+\newunicodechar{⩒}{\mathOrText{\veeodot }}
+\newunicodechar{⩓}{\mathOrText{\Wedge }}
+\newunicodechar{⩔}{\mathOrText{\Vee }}
+\newunicodechar{⩕}{\mathOrText{\wedgeonwedge }}
+\newunicodechar{⩖}{\mathOrText{\veeonvee }}
+\newunicodechar{⩗}{\mathOrText{\bigslopedvee }}
+\newunicodechar{⩘}{\mathOrText{\bigslopedwedge }}
+\newunicodechar{⩙}{\mathOrText{\veeonwedge }}
+\newunicodechar{⩚}{\mathOrText{\wedgemidvert }}
+\newunicodechar{⩛}{\mathOrText{\veemidvert }}
+\newunicodechar{⩜}{\mathOrText{\midbarwedge }}
+\newunicodechar{⩝}{\mathOrText{\midbarvee }}
+\newunicodechar{⩞}{\mathOrText{\doublebarwedge }}
+\newunicodechar{⩟}{\mathOrText{\wedgebar }}
+\newunicodechar{⩠}{\mathOrText{\wedgedoublebar }}
+\newunicodechar{⩡}{\mathOrText{\varveebar }}
+\newunicodechar{⩢}{\mathOrText{\doublebarvee }}
+\newunicodechar{⩣}{\mathOrText{\veedoublebar }}
+\newunicodechar{⩤}{\mathOrText{\dsub }}
+\newunicodechar{⩥}{\mathOrText{\rsub }}
+\newunicodechar{⩦}{\mathOrText{\eqdot }}
+\newunicodechar{⩧}{\mathOrText{\dotequiv }}
+\newunicodechar{⩨}{\mathOrText{\equivVert }}
+\newunicodechar{⩩}{\mathOrText{\equivVvert }}
+\newunicodechar{⩪}{\mathOrText{\dotsim }}
+\newunicodechar{⩫}{\mathOrText{\simrdots }}
+\newunicodechar{⩬}{\mathOrText{\simminussim }}
+\newunicodechar{⩭}{\mathOrText{\congdot }}
+\newunicodechar{⩮}{\mathOrText{\asteq }}
+\newunicodechar{⩯}{\mathOrText{\hatapprox }}
+\newunicodechar{⩰}{\mathOrText{\approxeqq }}
+\newunicodechar{⩱}{\mathOrText{\eqqplus }}
+\newunicodechar{⩲}{\mathOrText{\pluseqq }}
+\newunicodechar{⩳}{\mathOrText{\eqqsim }}
+\newunicodechar{⩴}{\mathOrText{\Coloneq }}
+\newunicodechar{⩵}{\mathOrText{\eqeq }}
+\newunicodechar{⩶}{\mathOrText{\eqeqeq }}
+\newunicodechar{⩷}{\mathOrText{\ddotseq }}
+\newunicodechar{⩸}{\mathOrText{\equivDD }}
+\newunicodechar{⩹}{\mathOrText{\ltcir }}
+\newunicodechar{⩺}{\mathOrText{\gtcir }}
+\newunicodechar{⩻}{\mathOrText{\ltquest }}
+\newunicodechar{⩼}{\mathOrText{\gtquest }}
+\newunicodechar{⩽}{\mathOrText{\leqslant }}
+\newunicodechar{⩾}{\mathOrText{\geqslant }}
+\newunicodechar{⩿}{\mathOrText{\lesdot }}
+\newunicodechar{⪀}{\mathOrText{\gesdot }}
+\newunicodechar{⪁}{\mathOrText{\lesdoto }}
+\newunicodechar{⪂}{\mathOrText{\gesdoto }}
+\newunicodechar{⪃}{\mathOrText{\lesdotor }}
+\newunicodechar{⪄}{\mathOrText{\gesdotol }}
+\newunicodechar{⪅}{\mathOrText{\lessapprox }}
+\newunicodechar{⪆}{\mathOrText{\gtrapprox }}
+\newunicodechar{⪇}{\mathOrText{\lneq }}
+\newunicodechar{⪈}{\mathOrText{\gneq }}
+\newunicodechar{⪉}{\mathOrText{\lnapprox }}
+\newunicodechar{⪊}{\mathOrText{\gnapprox }}
+\newunicodechar{⪋}{\mathOrText{\lesseqqgtr }}
+\newunicodechar{⪌}{\mathOrText{\gtreqqless }}
+\newunicodechar{⪍}{\mathOrText{\lsime }}
+\newunicodechar{⪎}{\mathOrText{\gsime }}
+\newunicodechar{⪏}{\mathOrText{\lsimg }}
+\newunicodechar{⪐}{\mathOrText{\gsiml }}
+\newunicodechar{⪑}{\mathOrText{\lgE }}
+\newunicodechar{⪒}{\mathOrText{\glE }}
+\newunicodechar{⪓}{\mathOrText{\lesges }}
+\newunicodechar{⪔}{\mathOrText{\gesles }}
+\newunicodechar{⪕}{\mathOrText{\eqslantless }}
+\newunicodechar{⪖}{\mathOrText{\eqslantgtr }}
+\newunicodechar{⪗}{\mathOrText{\elsdot }}
+\newunicodechar{⪘}{\mathOrText{\egsdot }}
+\newunicodechar{⪙}{\mathOrText{\eqqless }}
+\newunicodechar{⪚}{\mathOrText{\eqqgtr }}
+\newunicodechar{⪛}{\mathOrText{\eqqslantless }}
+\newunicodechar{⪜}{\mathOrText{\eqqslantgtr }}
+\newunicodechar{⪝}{\mathOrText{\simless }}
+\newunicodechar{⪞}{\mathOrText{\simgtr }}
+\newunicodechar{⪟}{\mathOrText{\simlE }}
+\newunicodechar{⪠}{\mathOrText{\simgE }}
+\newunicodechar{⪡}{\mathOrText{\Lt }}
+\newunicodechar{⪢}{\mathOrText{\Gt }}
+\newunicodechar{⪣}{\mathOrText{\partialmeetcontraction }}
+\newunicodechar{⪤}{\mathOrText{\glj }}
+\newunicodechar{⪥}{\mathOrText{\gla }}
+\newunicodechar{⪦}{\mathOrText{\ltcc }}
+\newunicodechar{⪧}{\mathOrText{\gtcc }}
+\newunicodechar{⪨}{\mathOrText{\lescc }}
+\newunicodechar{⪩}{\mathOrText{\gescc }}
+\newunicodechar{⪪}{\mathOrText{\smt }}
+\newunicodechar{⪫}{\mathOrText{\lat }}
+\newunicodechar{⪬}{\mathOrText{\smte }}
+\newunicodechar{⪭}{\mathOrText{\late }}
+\newunicodechar{⪮}{\mathOrText{\bumpeqq }}
+\newunicodechar{⪯}{\mathOrText{\preceq }}
+\newunicodechar{⪰}{\mathOrText{\succeq }}
+\newunicodechar{⪱}{\mathOrText{\precneq }}
+\newunicodechar{⪲}{\mathOrText{\succneq }}
+\newunicodechar{⪳}{\mathOrText{\preceqq }}
+\newunicodechar{⪴}{\mathOrText{\succeqq }}
+\newunicodechar{⪵}{\mathOrText{\precneqq }}
+\newunicodechar{⪶}{\mathOrText{\succneqq }}
+\newunicodechar{⪷}{\mathOrText{\precapprox }}
+\newunicodechar{⪸}{\mathOrText{\succapprox }}
+\newunicodechar{⪹}{\mathOrText{\precnapprox }}
+\newunicodechar{⪺}{\mathOrText{\succnapprox }}
+\newunicodechar{⪻}{\mathOrText{\Prec }}
+\newunicodechar{⪼}{\mathOrText{\Succ }}
+\newunicodechar{⪽}{\mathOrText{\subsetdot }}
+\newunicodechar{⪾}{\mathOrText{\supsetdot }}
+\newunicodechar{⪿}{\mathOrText{\subsetplus }}
+\newunicodechar{⫀}{\mathOrText{\supsetplus }}
+\newunicodechar{⫁}{\mathOrText{\submult }}
+\newunicodechar{⫂}{\mathOrText{\supmult }}
+\newunicodechar{⫃}{\mathOrText{\subedot }}
+\newunicodechar{⫄}{\mathOrText{\supedot }}
+\newunicodechar{⫅}{\mathOrText{\subseteqq }}
+\newunicodechar{⫆}{\mathOrText{\supseteqq }}
+\newunicodechar{⫇}{\mathOrText{\subsim }}
+\newunicodechar{⫈}{\mathOrText{\supsim }}
+\newunicodechar{⫉}{\mathOrText{\subsetapprox }}
+\newunicodechar{⫊}{\mathOrText{\supsetapprox }}
+\newunicodechar{⫋}{\mathOrText{\subsetneqq }}
+\newunicodechar{⫌}{\mathOrText{\supsetneqq }}
+\newunicodechar{⫍}{\mathOrText{\lsqhook }}
+\newunicodechar{⫎}{\mathOrText{\rsqhook }}
+\newunicodechar{⫏}{\mathOrText{\csub }}
+\newunicodechar{⫐}{\mathOrText{\csup }}
+\newunicodechar{⫑}{\mathOrText{\csube }}
+\newunicodechar{⫒}{\mathOrText{\csupe }}
+\newunicodechar{⫓}{\mathOrText{\subsup }}
+\newunicodechar{⫔}{\mathOrText{\supsub }}
+\newunicodechar{⫕}{\mathOrText{\subsub }}
+\newunicodechar{⫖}{\mathOrText{\supsup }}
+\newunicodechar{⫗}{\mathOrText{\suphsub }}
+\newunicodechar{⫘}{\mathOrText{\supdsub }}
+\newunicodechar{⫙}{\mathOrText{\forkv }}
+\newunicodechar{⫚}{\mathOrText{\topfork }}
+\newunicodechar{⫛}{\mathOrText{\mlcp }}
+\newunicodechar{⫝̸}{\mathOrText{\forks }}
+\newunicodechar{⫝}{\mathOrText{\forksnot }}
+\newunicodechar{⫞}{\mathOrText{\shortlefttack }}
+\newunicodechar{⫟}{\mathOrText{\shortdowntack }}
+\newunicodechar{⫠}{\mathOrText{\shortuptack }}
+\newunicodechar{⫡}{\mathOrText{\perps }}
+\newunicodechar{⫢}{\mathOrText{\vDdash }}
+\newunicodechar{⫣}{\mathOrText{\dashV }}
+\newunicodechar{⫤}{\mathOrText{\Dashv }}
+\newunicodechar{⫥}{\mathOrText{\DashV }}
+\newunicodechar{⫦}{\mathOrText{\varVdash }}
+\newunicodechar{⫧}{\mathOrText{\Barv }}
+\newunicodechar{⫨}{\mathOrText{\vBar }}
+\newunicodechar{⫩}{\mathOrText{\vBarv }}
+\newunicodechar{⫪}{\mathOrText{\barV }}
+\newunicodechar{⫫}{\mathOrText{\Vbar }}
+\newunicodechar{⫬}{\mathOrText{\Not }}
+\newunicodechar{⫭}{\mathOrText{\bNot }}
+\newunicodechar{⫮}{\mathOrText{\revnmid }}
+\newunicodechar{⫯}{\mathOrText{\cirmid }}
+\newunicodechar{⫰}{\mathOrText{\midcir }}
+\newunicodechar{⫱}{\mathOrText{\topcir }}
+\newunicodechar{⫲}{\mathOrText{\nhpar }}
+\newunicodechar{⫳}{\mathOrText{\parsim }}
+\newunicodechar{⫴}{\mathOrText{\interleave }}
+\newunicodechar{⫵}{\mathOrText{\nhVvert }}
+\newunicodechar{⫶}{\mathOrText{\threedotcolon }}
+\newunicodechar{⫷}{\mathOrText{\lllnest }}
+\newunicodechar{⫸}{\mathOrText{\gggnest }}
+\newunicodechar{⫹}{\mathOrText{\leqqslant }}
+\newunicodechar{⫺}{\mathOrText{\geqqslant }}
+\newunicodechar{⫻}{\mathOrText{\trslash }}
+\newunicodechar{⫼}{\mathOrText{\biginterleave }}
+\newunicodechar{⫽}{\mathOrText{\sslash }}
+\newunicodechar{⫾}{\mathOrText{\talloblong }}
+\newunicodechar{⫿}{\mathOrText{\bigtalloblong }}
+\newunicodechar{⬒}{\mathOrText{\squaretopblack }}
+\newunicodechar{⬓}{\mathOrText{\squarebotblack }}
+\newunicodechar{⬔}{\mathOrText{\squareurblack }}
+\newunicodechar{⬕}{\mathOrText{\squarellblack }}
+\newunicodechar{⬖}{\mathOrText{\diamondleftblack }}
+\newunicodechar{⬗}{\mathOrText{\diamondrightblack }}
+\newunicodechar{⬘}{\mathOrText{\diamondtopblack }}
+\newunicodechar{⬙}{\mathOrText{\diamondbotblack }}
+\newunicodechar{⬚}{\mathOrText{\dottedsquare }}
+\newunicodechar{⬛}{\mathOrText{\lgblksquare }}
+\newunicodechar{⬜}{\mathOrText{\lgwhtsquare }}
+\newunicodechar{⬝}{\mathOrText{\vysmblksquare }}
+\newunicodechar{⬞}{\mathOrText{\vysmwhtsquare }}
+\newunicodechar{⬟}{\mathOrText{\pentagonblack }}
+\newunicodechar{⬠}{\mathOrText{\pentagon }}
+\newunicodechar{⬡}{\mathOrText{\varhexagon }}
+\newunicodechar{⬢}{\mathOrText{\varhexagonblack }}
+\newunicodechar{⬣}{\mathOrText{\hexagonblack }}
+\newunicodechar{⬤}{\mathOrText{\lgblkcircle }}
+\newunicodechar{⬥}{\mathOrText{\mdblkdiamond }}
+\newunicodechar{⬦}{\mathOrText{\mdwhtdiamond }}
+\newunicodechar{⬧}{\mathOrText{\mdblklozenge }}
+\newunicodechar{⬨}{\mathOrText{\mdwhtlozenge }}
+\newunicodechar{⬩}{\mathOrText{\smblkdiamond }}
+\newunicodechar{⬪}{\mathOrText{\smblklozenge }}
+\newunicodechar{⬫}{\mathOrText{\smwhtlozenge }}
+\newunicodechar{⬬}{\mathOrText{\blkhorzoval }}
+\newunicodechar{⬭}{\mathOrText{\whthorzoval }}
+\newunicodechar{⬮}{\mathOrText{\blkvertoval }}
+\newunicodechar{⬯}{\mathOrText{\whtvertoval }}
+\newunicodechar{⬰}{\mathOrText{\circleonleftarrow }}
+\newunicodechar{⬱}{\mathOrText{\leftthreearrows }}
+\newunicodechar{⬲}{\mathOrText{\leftarrowonoplus }}
+\newunicodechar{⬳}{\mathOrText{\longleftsquigarrow }}
+\newunicodechar{⬴}{\mathOrText{\nvtwoheadleftarrow }}
+\newunicodechar{⬵}{\mathOrText{\nVtwoheadleftarrow }}
+\newunicodechar{⬶}{\mathOrText{\twoheadmapsfrom }}
+\newunicodechar{⬷}{\mathOrText{\twoheadleftdbkarrow }}
+\newunicodechar{⬸}{\mathOrText{\leftdotarrow }}
+\newunicodechar{⬹}{\mathOrText{\nvleftarrowtail }}
+\newunicodechar{⬺}{\mathOrText{\nVleftarrowtail }}
+\newunicodechar{⬻}{\mathOrText{\twoheadleftarrowtail }}
+\newunicodechar{⬼}{\mathOrText{\nvtwoheadleftarrowtail }}
+\newunicodechar{⬽}{\mathOrText{\nVtwoheadleftarrowtail }}
+\newunicodechar{⬾}{\mathOrText{\leftarrowx }}
+\newunicodechar{⬿}{\mathOrText{\leftcurvedarrow }}
+\newunicodechar{⭀}{\mathOrText{\equalleftarrow }}
+\newunicodechar{⭁}{\mathOrText{\bsimilarleftarrow }}
+\newunicodechar{⭂}{\mathOrText{\leftarrowbackapprox }}
+\newunicodechar{⭃}{\mathOrText{\rightarrowgtr }}
+\newunicodechar{⭄}{\mathOrText{\rightarrowsupset }}
+\newunicodechar{⭅}{\mathOrText{\LLeftarrow }}
+\newunicodechar{⭆}{\mathOrText{\RRightarrow }}
+\newunicodechar{⭇}{\mathOrText{\bsimilarrightarrow }}
+\newunicodechar{⭈}{\mathOrText{\rightarrowbackapprox }}
+\newunicodechar{⭉}{\mathOrText{\similarleftarrow }}
+\newunicodechar{⭊}{\mathOrText{\leftarrowapprox }}
+\newunicodechar{⭋}{\mathOrText{\leftarrowbsimilar }}
+\newunicodechar{⭌}{\mathOrText{\rightarrowbsimilar }}
+\newunicodechar{⭐}{\mathOrText{\medwhitestar }}
+\newunicodechar{⭑}{\mathOrText{\medblackstar }}
+\newunicodechar{⭒}{\mathOrText{\smwhitestar }}
+\newunicodechar{⭓}{\mathOrText{\rightpentagonblack }}
+\newunicodechar{⭔}{\mathOrText{\rightpentagon }}
+\newunicodechar{〒}{\mathOrText{\postalmark }}
+\newunicodechar{〰}{\mathOrText{\hzigzag }}
+\newunicodechar{𝐀}{\mathOrText{\mbfA }}
+\newunicodechar{𝐁}{\mathOrText{\mbfB }}
+\newunicodechar{𝐂}{\mathOrText{\mbfC }}
+\newunicodechar{𝐃}{\mathOrText{\mbfD }}
+\newunicodechar{𝐄}{\mathOrText{\mbfE }}
+\newunicodechar{𝐅}{\mathOrText{\mbfF }}
+\newunicodechar{𝐆}{\mathOrText{\mbfG }}
+\newunicodechar{𝐇}{\mathOrText{\mbfH }}
+\newunicodechar{𝐈}{\mathOrText{\mbfI }}
+\newunicodechar{𝐉}{\mathOrText{\mbfJ }}
+\newunicodechar{𝐊}{\mathOrText{\mbfK }}
+\newunicodechar{𝐋}{\mathOrText{\mbfL }}
+\newunicodechar{𝐌}{\mathOrText{\mbfM }}
+\newunicodechar{𝐍}{\mathOrText{\mbfN }}
+\newunicodechar{𝐎}{\mathOrText{\mbfO }}
+\newunicodechar{𝐏}{\mathOrText{\mbfP }}
+\newunicodechar{𝐐}{\mathOrText{\mbfQ }}
+\newunicodechar{𝐑}{\mathOrText{\mbfR }}
+\newunicodechar{𝐒}{\mathOrText{\mbfS }}
+\newunicodechar{𝐓}{\mathOrText{\mbfT }}
+\newunicodechar{𝐔}{\mathOrText{\mbfU }}
+\newunicodechar{𝐕}{\mathOrText{\mbfV }}
+\newunicodechar{𝐖}{\mathOrText{\mbfW }}
+\newunicodechar{𝐗}{\mathOrText{\mbfX }}
+\newunicodechar{𝐘}{\mathOrText{\mbfY }}
+\newunicodechar{𝐙}{\mathOrText{\mbfZ }}
+\newunicodechar{𝐚}{\mathOrText{\mbfa }}
+\newunicodechar{𝐛}{\mathOrText{\mbfb }}
+\newunicodechar{𝐜}{\mathOrText{\mbfc }}
+\newunicodechar{𝐝}{\mathOrText{\mbfd }}
+\newunicodechar{𝐞}{\mathOrText{\mbfe }}
+\newunicodechar{𝐟}{\mathOrText{\mbff }}
+\newunicodechar{𝐠}{\mathOrText{\mbfg }}
+\newunicodechar{𝐡}{\mathOrText{\mbfh }}
+\newunicodechar{𝐢}{\mathOrText{\mbfi }}
+\newunicodechar{𝐣}{\mathOrText{\mbfj }}
+\newunicodechar{𝐤}{\mathOrText{\mbfk }}
+\newunicodechar{𝐥}{\mathOrText{\mbfl }}
+\newunicodechar{𝐦}{\mathOrText{\mbfm }}
+\newunicodechar{𝐧}{\mathOrText{\mbfn }}
+\newunicodechar{𝐨}{\mathOrText{\mbfo }}
+\newunicodechar{𝐩}{\mathOrText{\mbfp }}
+\newunicodechar{𝐪}{\mathOrText{\mbfq }}
+\newunicodechar{𝐫}{\mathOrText{\mbfr }}
+\newunicodechar{𝐬}{\mathOrText{\mbfs }}
+\newunicodechar{𝐭}{\mathOrText{\mbft }}
+\newunicodechar{𝐮}{\mathOrText{\mbfu }}
+\newunicodechar{𝐯}{\mathOrText{\mbfv }}
+\newunicodechar{𝐰}{\mathOrText{\mbfw }}
+\newunicodechar{𝐱}{\mathOrText{\mbfx }}
+\newunicodechar{𝐲}{\mathOrText{\mbfy }}
+\newunicodechar{𝐳}{\mathOrText{\mbfz }}
+\newunicodechar{𝑨}{\mathOrText{\mbfitA }}
+\newunicodechar{𝑩}{\mathOrText{\mbfitB }}
+\newunicodechar{𝑪}{\mathOrText{\mbfitC }}
+\newunicodechar{𝑫}{\mathOrText{\mbfitD }}
+\newunicodechar{𝑬}{\mathOrText{\mbfitE }}
+\newunicodechar{𝑭}{\mathOrText{\mbfitF }}
+\newunicodechar{𝑮}{\mathOrText{\mbfitG }}
+\newunicodechar{𝑯}{\mathOrText{\mbfitH }}
+\newunicodechar{𝑰}{\mathOrText{\mbfitI }}
+\newunicodechar{𝑱}{\mathOrText{\mbfitJ }}
+\newunicodechar{𝑲}{\mathOrText{\mbfitK }}
+\newunicodechar{𝑳}{\mathOrText{\mbfitL }}
+\newunicodechar{𝑴}{\mathOrText{\mbfitM }}
+\newunicodechar{𝑵}{\mathOrText{\mbfitN }}
+\newunicodechar{𝑶}{\mathOrText{\mbfitO }}
+\newunicodechar{𝑷}{\mathOrText{\mbfitP }}
+\newunicodechar{𝑸}{\mathOrText{\mbfitQ }}
+\newunicodechar{𝑹}{\mathOrText{\mbfitR }}
+\newunicodechar{𝑺}{\mathOrText{\mbfitS }}
+\newunicodechar{𝑻}{\mathOrText{\mbfitT }}
+\newunicodechar{𝑼}{\mathOrText{\mbfitU }}
+\newunicodechar{𝑽}{\mathOrText{\mbfitV }}
+\newunicodechar{𝑾}{\mathOrText{\mbfitW }}
+\newunicodechar{𝑿}{\mathOrText{\mbfitX }}
+\newunicodechar{𝒀}{\mathOrText{\mbfitY }}
+\newunicodechar{𝒁}{\mathOrText{\mbfitZ }}
+\newunicodechar{𝒂}{\mathOrText{\mbfita }}
+\newunicodechar{𝒃}{\mathOrText{\mbfitb }}
+\newunicodechar{𝒄}{\mathOrText{\mbfitc }}
+\newunicodechar{𝒅}{\mathOrText{\mbfitd }}
+\newunicodechar{𝒆}{\mathOrText{\mbfite }}
+\newunicodechar{𝒇}{\mathOrText{\mbfitf }}
+\newunicodechar{𝒈}{\mathOrText{\mbfitg }}
+\newunicodechar{𝒉}{\mathOrText{\mbfith }}
+\newunicodechar{𝒊}{\mathOrText{\mbfiti }}
+\newunicodechar{𝒋}{\mathOrText{\mbfitj }}
+\newunicodechar{𝒌}{\mathOrText{\mbfitk }}
+\newunicodechar{𝒍}{\mathOrText{\mbfitl }}
+\newunicodechar{𝒎}{\mathOrText{\mbfitm }}
+\newunicodechar{𝒏}{\mathOrText{\mbfitn }}
+\newunicodechar{𝒐}{\mathOrText{\mbfito }}
+\newunicodechar{𝒑}{\mathOrText{\mbfitp }}
+\newunicodechar{𝒒}{\mathOrText{\mbfitq }}
+\newunicodechar{𝒓}{\mathOrText{\mbfitr }}
+\newunicodechar{𝒔}{\mathOrText{\mbfits }}
+\newunicodechar{𝒕}{\mathOrText{\mbfitt }}
+\newunicodechar{𝒖}{\mathOrText{\mbfitu }}
+\newunicodechar{𝒗}{\mathOrText{\mbfitv }}
+\newunicodechar{𝒘}{\mathOrText{\mbfitw }}
+\newunicodechar{𝒙}{\mathOrText{\mbfitx }}
+\newunicodechar{𝒚}{\mathOrText{\mbfity }}
+\newunicodechar{𝒛}{\mathOrText{\mbfitz }}
+\newunicodechar{𝒜}{\mathOrText{\mscrA }}
+\newunicodechar{𝒞}{\mathOrText{\mscrC }}
+\newunicodechar{𝒟}{\mathOrText{\mscrD }}
+\newunicodechar{𝒢}{\mathOrText{\mscrG }}
+\newunicodechar{𝒥}{\mathOrText{\mscrJ }}
+\newunicodechar{𝒦}{\mathOrText{\mscrK }}
+\newunicodechar{𝒩}{\mathOrText{\mscrN }}
+\newunicodechar{𝒪}{\mathOrText{\mscrO }}
+\newunicodechar{𝒫}{\mathOrText{\mscrP }}
+\newunicodechar{𝒬}{\mathOrText{\mscrQ }}
+\newunicodechar{𝒮}{\mathOrText{\mscrS }}
+\newunicodechar{𝒯}{\mathOrText{\mscrT }}
+\newunicodechar{𝒰}{\mathOrText{\mscrU }}
+\newunicodechar{𝒱}{\mathOrText{\mscrV }}
+\newunicodechar{𝒲}{\mathOrText{\mscrW }}
+\newunicodechar{𝒳}{\mathOrText{\mscrX }}
+\newunicodechar{𝒴}{\mathOrText{\mscrY }}
+\newunicodechar{𝒵}{\mathOrText{\mscrZ }}
+\newunicodechar{𝒶}{\mathOrText{\mscra }}
+\newunicodechar{𝒷}{\mathOrText{\mscrb }}
+\newunicodechar{𝒸}{\mathOrText{\mscrc }}
+\newunicodechar{𝒹}{\mathOrText{\mscrd }}
+\newunicodechar{𝒻}{\mathOrText{\mscrf }}
+\newunicodechar{𝒽}{\mathOrText{\mscrh }}
+\newunicodechar{𝒾}{\mathOrText{\mscri }}
+\newunicodechar{𝒿}{\mathOrText{\mscrj }}
+\newunicodechar{𝓀}{\mathOrText{\mscrk }}
+\newunicodechar{𝓁}{\mathOrText{\mscrl }}
+\newunicodechar{𝓂}{\mathOrText{\mscrm }}
+\newunicodechar{𝓃}{\mathOrText{\mscrn }}
+\newunicodechar{𝓅}{\mathOrText{\mscrp }}
+\newunicodechar{𝓆}{\mathOrText{\mscrq }}
+\newunicodechar{𝓇}{\mathOrText{\mscrr }}
+\newunicodechar{𝓈}{\mathOrText{\mscrs }}
+\newunicodechar{𝓉}{\mathOrText{\mscrt }}
+\newunicodechar{𝓊}{\mathOrText{\mscru }}
+\newunicodechar{𝓋}{\mathOrText{\mscrv }}
+\newunicodechar{𝓌}{\mathOrText{\mscrw }}
+\newunicodechar{𝓍}{\mathOrText{\mscrx }}
+\newunicodechar{𝓎}{\mathOrText{\mscry }}
+\newunicodechar{𝓏}{\mathOrText{\mscrz }}
+\newunicodechar{𝓐}{\mathOrText{\mbfscrA }}
+\newunicodechar{𝓑}{\mathOrText{\mbfscrB }}
+\newunicodechar{𝓒}{\mathOrText{\mbfscrC }}
+\newunicodechar{𝓓}{\mathOrText{\mbfscrD }}
+\newunicodechar{𝓔}{\mathOrText{\mbfscrE }}
+\newunicodechar{𝓕}{\mathOrText{\mbfscrF }}
+\newunicodechar{𝓖}{\mathOrText{\mbfscrG }}
+\newunicodechar{𝓗}{\mathOrText{\mbfscrH }}
+\newunicodechar{𝓘}{\mathOrText{\mbfscrI }}
+\newunicodechar{𝓙}{\mathOrText{\mbfscrJ }}
+\newunicodechar{𝓚}{\mathOrText{\mbfscrK }}
+\newunicodechar{𝓛}{\mathOrText{\mbfscrL }}
+\newunicodechar{𝓜}{\mathOrText{\mbfscrM }}
+\newunicodechar{𝓝}{\mathOrText{\mbfscrN }}
+\newunicodechar{𝓞}{\mathOrText{\mbfscrO }}
+\newunicodechar{𝓟}{\mathOrText{\mbfscrP }}
+\newunicodechar{𝓠}{\mathOrText{\mbfscrQ }}
+\newunicodechar{𝓡}{\mathOrText{\mbfscrR }}
+\newunicodechar{𝓢}{\mathOrText{\mbfscrS }}
+\newunicodechar{𝓣}{\mathOrText{\mbfscrT }}
+\newunicodechar{𝓤}{\mathOrText{\mbfscrU }}
+\newunicodechar{𝓥}{\mathOrText{\mbfscrV }}
+\newunicodechar{𝓦}{\mathOrText{\mbfscrW }}
+\newunicodechar{𝓧}{\mathOrText{\mbfscrX }}
+\newunicodechar{𝓨}{\mathOrText{\mbfscrY }}
+\newunicodechar{𝓩}{\mathOrText{\mbfscrZ }}
+\newunicodechar{𝓪}{\mathOrText{\mbfscra }}
+\newunicodechar{𝓫}{\mathOrText{\mbfscrb }}
+\newunicodechar{𝓬}{\mathOrText{\mbfscrc }}
+\newunicodechar{𝓭}{\mathOrText{\mbfscrd }}
+\newunicodechar{𝓮}{\mathOrText{\mbfscre }}
+\newunicodechar{𝓯}{\mathOrText{\mbfscrf }}
+\newunicodechar{𝓰}{\mathOrText{\mbfscrg }}
+\newunicodechar{𝓱}{\mathOrText{\mbfscrh }}
+\newunicodechar{𝓲}{\mathOrText{\mbfscri }}
+\newunicodechar{𝓳}{\mathOrText{\mbfscrj }}
+\newunicodechar{𝓴}{\mathOrText{\mbfscrk }}
+\newunicodechar{𝓵}{\mathOrText{\mbfscrl }}
+\newunicodechar{𝓶}{\mathOrText{\mbfscrm }}
+\newunicodechar{𝓷}{\mathOrText{\mbfscrn }}
+\newunicodechar{𝓸}{\mathOrText{\mbfscro }}
+\newunicodechar{𝓹}{\mathOrText{\mbfscrp }}
+\newunicodechar{𝓺}{\mathOrText{\mbfscrq }}
+\newunicodechar{𝓻}{\mathOrText{\mbfscrr }}
+\newunicodechar{𝓼}{\mathOrText{\mbfscrs }}
+\newunicodechar{𝓽}{\mathOrText{\mbfscrt }}
+\newunicodechar{𝓾}{\mathOrText{\mbfscru }}
+\newunicodechar{𝓿}{\mathOrText{\mbfscrv }}
+\newunicodechar{𝔀}{\mathOrText{\mbfscrw }}
+\newunicodechar{𝔁}{\mathOrText{\mbfscrx }}
+\newunicodechar{𝔂}{\mathOrText{\mbfscry }}
+\newunicodechar{𝔃}{\mathOrText{\mbfscrz }}
+\newunicodechar{𝔄}{\mathOrText{\mfrakA }}
+\newunicodechar{𝔅}{\mathOrText{\mfrakB }}
+\newunicodechar{𝔇}{\mathOrText{\mfrakD }}
+\newunicodechar{𝔈}{\mathOrText{\mfrakE }}
+\newunicodechar{𝔉}{\mathOrText{\mfrakF }}
+\newunicodechar{𝔊}{\mathOrText{\mfrakG }}
+\newunicodechar{𝔍}{\mathOrText{\mfrakJ }}
+\newunicodechar{𝔎}{\mathOrText{\mfrakK }}
+\newunicodechar{𝔏}{\mathOrText{\mfrakL }}
+\newunicodechar{𝔐}{\mathOrText{\mfrakM }}
+\newunicodechar{𝔑}{\mathOrText{\mfrakN }}
+\newunicodechar{𝔒}{\mathOrText{\mfrakO }}
+\newunicodechar{𝔓}{\mathOrText{\mfrakP }}
+\newunicodechar{𝔔}{\mathOrText{\mfrakQ }}
+\newunicodechar{𝔖}{\mathOrText{\mfrakS }}
+\newunicodechar{𝔗}{\mathOrText{\mfrakT }}
+\newunicodechar{𝔘}{\mathOrText{\mfrakU }}
+\newunicodechar{𝔙}{\mathOrText{\mfrakV }}
+\newunicodechar{𝔚}{\mathOrText{\mfrakW }}
+\newunicodechar{𝔛}{\mathOrText{\mfrakX }}
+\newunicodechar{𝔜}{\mathOrText{\mfrakY }}
+\newunicodechar{𝔞}{\mathOrText{\mfraka }}
+\newunicodechar{𝔟}{\mathOrText{\mfrakb }}
+\newunicodechar{𝔠}{\mathOrText{\mfrakc }}
+\newunicodechar{𝔡}{\mathOrText{\mfrakd }}
+\newunicodechar{𝔢}{\mathOrText{\mfrake }}
+\newunicodechar{𝔣}{\mathOrText{\mfrakf }}
+\newunicodechar{𝔤}{\mathOrText{\mfrakg }}
+\newunicodechar{𝔥}{\mathOrText{\mfrakh }}
+\newunicodechar{𝔦}{\mathOrText{\mfraki }}
+\newunicodechar{𝔧}{\mathOrText{\mfrakj }}
+\newunicodechar{𝔨}{\mathOrText{\mfrakk }}
+\newunicodechar{𝔩}{\mathOrText{\mfrakl }}
+\newunicodechar{𝔪}{\mathOrText{\mfrakm }}
+\newunicodechar{𝔫}{\mathOrText{\mfrakn }}
+\newunicodechar{𝔬}{\mathOrText{\mfrako }}
+\newunicodechar{𝔭}{\mathOrText{\mfrakp }}
+\newunicodechar{𝔮}{\mathOrText{\mfrakq }}
+\newunicodechar{𝔯}{\mathOrText{\mfrakr }}
+\newunicodechar{𝔰}{\mathOrText{\mfraks }}
+\newunicodechar{𝔱}{\mathOrText{\mfrakt }}
+\newunicodechar{𝔲}{\mathOrText{\mfraku }}
+\newunicodechar{𝔳}{\mathOrText{\mfrakv }}
+\newunicodechar{𝔴}{\mathOrText{\mfrakw }}
+\newunicodechar{𝔵}{\mathOrText{\mfrakx }}
+\newunicodechar{𝔶}{\mathOrText{\mfraky }}
+\newunicodechar{𝔷}{\mathOrText{\mfrakz }}
+\newunicodechar{𝔸}{\mathOrText{\BbbA }}
+\newunicodechar{𝔹}{\mathOrText{\BbbB }}
+\newunicodechar{𝔻}{\mathOrText{\BbbD }}
+\newunicodechar{𝔼}{\mathOrText{\BbbE }}
+\newunicodechar{𝔽}{\mathOrText{\BbbF }}
+\newunicodechar{𝔾}{\mathOrText{\BbbG }}
+\newunicodechar{𝕀}{\mathOrText{\BbbI }}
+\newunicodechar{𝕁}{\mathOrText{\BbbJ }}
+\newunicodechar{𝕂}{\mathOrText{\BbbK }}
+\newunicodechar{𝕃}{\mathOrText{\BbbL }}
+\newunicodechar{𝕄}{\mathOrText{\BbbM }}
+\newunicodechar{𝕆}{\mathOrText{\BbbO }}
+\newunicodechar{𝕊}{\mathOrText{\BbbS }}
+\newunicodechar{𝕋}{\mathOrText{\BbbT }}
+\newunicodechar{𝕌}{\mathOrText{\BbbU }}
+\newunicodechar{𝕍}{\mathOrText{\BbbV }}
+\newunicodechar{𝕎}{\mathOrText{\BbbW }}
+\newunicodechar{𝕏}{\mathOrText{\BbbX }}
+\newunicodechar{𝕐}{\mathOrText{\BbbY }}
+\newunicodechar{𝕒}{\mathOrText{\Bbba }}
+\newunicodechar{𝕓}{\mathOrText{\Bbbb }}
+\newunicodechar{𝕔}{\mathOrText{\Bbbc }}
+\newunicodechar{𝕕}{\mathOrText{\Bbbd }}
+\newunicodechar{𝕖}{\mathOrText{\Bbbe }}
+\newunicodechar{𝕗}{\mathOrText{\Bbbf }}
+\newunicodechar{𝕘}{\mathOrText{\Bbbg }}
+\newunicodechar{𝕙}{\mathOrText{\Bbbh }}
+\newunicodechar{𝕚}{\mathOrText{\Bbbi }}
+\newunicodechar{𝕛}{\mathOrText{\Bbbj }}
+\newunicodechar{𝕜}{\mathOrText{\Bbbk }}
+\newunicodechar{𝕝}{\mathOrText{\Bbbl }}
+\newunicodechar{𝕞}{\mathOrText{\Bbbm }}
+\newunicodechar{𝕟}{\mathOrText{\Bbbn }}
+\newunicodechar{𝕠}{\mathOrText{\Bbbo }}
+\newunicodechar{𝕡}{\mathOrText{\Bbbp }}
+\newunicodechar{𝕢}{\mathOrText{\Bbbq }}
+\newunicodechar{𝕣}{\mathOrText{\Bbbr }}
+\newunicodechar{𝕤}{\mathOrText{\Bbbs }}
+\newunicodechar{𝕥}{\mathOrText{\Bbbt }}
+\newunicodechar{𝕦}{\mathOrText{\Bbbu }}
+\newunicodechar{𝕧}{\mathOrText{\Bbbv }}
+\newunicodechar{𝕨}{\mathOrText{\Bbbw }}
+\newunicodechar{𝕩}{\mathOrText{\Bbbx }}
+\newunicodechar{𝕪}{\mathOrText{\Bbby }}
+\newunicodechar{𝕫}{\mathOrText{\Bbbz }}
+\newunicodechar{𝕬}{\mathOrText{\mbffrakA }}
+\newunicodechar{𝕭}{\mathOrText{\mbffrakB }}
+\newunicodechar{𝕮}{\mathOrText{\mbffrakC }}
+\newunicodechar{𝕯}{\mathOrText{\mbffrakD }}
+\newunicodechar{𝕰}{\mathOrText{\mbffrakE }}
+\newunicodechar{𝕱}{\mathOrText{\mbffrakF }}
+\newunicodechar{𝕲}{\mathOrText{\mbffrakG }}
+\newunicodechar{𝕳}{\mathOrText{\mbffrakH }}
+\newunicodechar{𝕴}{\mathOrText{\mbffrakI }}
+\newunicodechar{𝕵}{\mathOrText{\mbffrakJ }}
+\newunicodechar{𝕶}{\mathOrText{\mbffrakK }}
+\newunicodechar{𝕷}{\mathOrText{\mbffrakL }}
+\newunicodechar{𝕸}{\mathOrText{\mbffrakM }}
+\newunicodechar{𝕹}{\mathOrText{\mbffrakN }}
+\newunicodechar{𝕺}{\mathOrText{\mbffrakO }}
+\newunicodechar{𝕻}{\mathOrText{\mbffrakP }}
+\newunicodechar{𝕼}{\mathOrText{\mbffrakQ }}
+\newunicodechar{𝕽}{\mathOrText{\mbffrakR }}
+\newunicodechar{𝕾}{\mathOrText{\mbffrakS }}
+\newunicodechar{𝕿}{\mathOrText{\mbffrakT }}
+\newunicodechar{𝖀}{\mathOrText{\mbffrakU }}
+\newunicodechar{𝖁}{\mathOrText{\mbffrakV }}
+\newunicodechar{𝖂}{\mathOrText{\mbffrakW }}
+\newunicodechar{𝖃}{\mathOrText{\mbffrakX }}
+\newunicodechar{𝖄}{\mathOrText{\mbffrakY }}
+\newunicodechar{𝖅}{\mathOrText{\mbffrakZ }}
+\newunicodechar{𝖆}{\mathOrText{\mbffraka }}
+\newunicodechar{𝖇}{\mathOrText{\mbffrakb }}
+\newunicodechar{𝖈}{\mathOrText{\mbffrakc }}
+\newunicodechar{𝖉}{\mathOrText{\mbffrakd }}
+\newunicodechar{𝖊}{\mathOrText{\mbffrake }}
+\newunicodechar{𝖋}{\mathOrText{\mbffrakf }}
+\newunicodechar{𝖌}{\mathOrText{\mbffrakg }}
+\newunicodechar{𝖍}{\mathOrText{\mbffrakh }}
+\newunicodechar{𝖎}{\mathOrText{\mbffraki }}
+\newunicodechar{𝖏}{\mathOrText{\mbffrakj }}
+\newunicodechar{𝖐}{\mathOrText{\mbffrakk }}
+\newunicodechar{𝖑}{\mathOrText{\mbffrakl }}
+\newunicodechar{𝖒}{\mathOrText{\mbffrakm }}
+\newunicodechar{𝖓}{\mathOrText{\mbffrakn }}
+\newunicodechar{𝖔}{\mathOrText{\mbffrako }}
+\newunicodechar{𝖕}{\mathOrText{\mbffrakp }}
+\newunicodechar{𝖖}{\mathOrText{\mbffrakq }}
+\newunicodechar{𝖗}{\mathOrText{\mbffrakr }}
+\newunicodechar{𝖘}{\mathOrText{\mbffraks }}
+\newunicodechar{𝖙}{\mathOrText{\mbffrakt }}
+\newunicodechar{𝖚}{\mathOrText{\mbffraku }}
+\newunicodechar{𝖛}{\mathOrText{\mbffrakv }}
+\newunicodechar{𝖜}{\mathOrText{\mbffrakw }}
+\newunicodechar{𝖝}{\mathOrText{\mbffrakx }}
+\newunicodechar{𝖞}{\mathOrText{\mbffraky }}
+\newunicodechar{𝖟}{\mathOrText{\mbffrakz }}
+\newunicodechar{𝖠}{\mathOrText{\msansA }}
+\newunicodechar{𝖡}{\mathOrText{\msansB }}
+\newunicodechar{𝖢}{\mathOrText{\msansC }}
+\newunicodechar{𝖣}{\mathOrText{\msansD }}
+\newunicodechar{𝖤}{\mathOrText{\msansE }}
+\newunicodechar{𝖥}{\mathOrText{\msansF }}
+\newunicodechar{𝖦}{\mathOrText{\msansG }}
+\newunicodechar{𝖧}{\mathOrText{\msansH }}
+\newunicodechar{𝖨}{\mathOrText{\msansI }}
+\newunicodechar{𝖩}{\mathOrText{\msansJ }}
+\newunicodechar{𝖪}{\mathOrText{\msansK }}
+\newunicodechar{𝖫}{\mathOrText{\msansL }}
+\newunicodechar{𝖬}{\mathOrText{\msansM }}
+\newunicodechar{𝖭}{\mathOrText{\msansN }}
+\newunicodechar{𝖮}{\mathOrText{\msansO }}
+\newunicodechar{𝖯}{\mathOrText{\msansP }}
+\newunicodechar{𝖰}{\mathOrText{\msansQ }}
+\newunicodechar{𝖱}{\mathOrText{\msansR }}
+\newunicodechar{𝖲}{\mathOrText{\msansS }}
+\newunicodechar{𝖳}{\mathOrText{\msansT }}
+\newunicodechar{𝖴}{\mathOrText{\msansU }}
+\newunicodechar{𝖵}{\mathOrText{\msansV }}
+\newunicodechar{𝖶}{\mathOrText{\msansW }}
+\newunicodechar{𝖷}{\mathOrText{\msansX }}
+\newunicodechar{𝖸}{\mathOrText{\msansY }}
+\newunicodechar{𝖹}{\mathOrText{\msansZ }}
+\newunicodechar{𝖺}{\mathOrText{\msansa }}
+\newunicodechar{𝖻}{\mathOrText{\msansb }}
+\newunicodechar{𝖼}{\mathOrText{\msansc }}
+\newunicodechar{𝖽}{\mathOrText{\msansd }}
+\newunicodechar{𝖾}{\mathOrText{\msanse }}
+\newunicodechar{𝖿}{\mathOrText{\msansf }}
+\newunicodechar{𝗀}{\mathOrText{\msansg }}
+\newunicodechar{𝗁}{\mathOrText{\msansh }}
+\newunicodechar{𝗂}{\mathOrText{\msansi }}
+\newunicodechar{𝗃}{\mathOrText{\msansj }}
+\newunicodechar{𝗄}{\mathOrText{\msansk }}
+\newunicodechar{𝗅}{\mathOrText{\msansl }}
+\newunicodechar{𝗆}{\mathOrText{\msansm }}
+\newunicodechar{𝗇}{\mathOrText{\msansn }}
+\newunicodechar{𝗈}{\mathOrText{\msanso }}
+\newunicodechar{𝗉}{\mathOrText{\msansp }}
+\newunicodechar{𝗊}{\mathOrText{\msansq }}
+\newunicodechar{𝗋}{\mathOrText{\msansr }}
+\newunicodechar{𝗌}{\mathOrText{\msanss }}
+\newunicodechar{𝗍}{\mathOrText{\msanst }}
+\newunicodechar{𝗎}{\mathOrText{\msansu }}
+\newunicodechar{𝗏}{\mathOrText{\msansv }}
+\newunicodechar{𝗐}{\mathOrText{\msansw }}
+\newunicodechar{𝗑}{\mathOrText{\msansx }}
+\newunicodechar{𝗒}{\mathOrText{\msansy }}
+\newunicodechar{𝗓}{\mathOrText{\msansz }}
+\newunicodechar{𝗔}{\mathOrText{\mbfsansA }}
+\newunicodechar{𝗕}{\mathOrText{\mbfsansB }}
+\newunicodechar{𝗖}{\mathOrText{\mbfsansC }}
+\newunicodechar{𝗗}{\mathOrText{\mbfsansD }}
+\newunicodechar{𝗘}{\mathOrText{\mbfsansE }}
+\newunicodechar{𝗙}{\mathOrText{\mbfsansF }}
+\newunicodechar{𝗚}{\mathOrText{\mbfsansG }}
+\newunicodechar{𝗛}{\mathOrText{\mbfsansH }}
+\newunicodechar{𝗜}{\mathOrText{\mbfsansI }}
+\newunicodechar{𝗝}{\mathOrText{\mbfsansJ }}
+\newunicodechar{𝗞}{\mathOrText{\mbfsansK }}
+\newunicodechar{𝗟}{\mathOrText{\mbfsansL }}
+\newunicodechar{𝗠}{\mathOrText{\mbfsansM }}
+\newunicodechar{𝗡}{\mathOrText{\mbfsansN }}
+\newunicodechar{𝗢}{\mathOrText{\mbfsansO }}
+\newunicodechar{𝗣}{\mathOrText{\mbfsansP }}
+\newunicodechar{𝗤}{\mathOrText{\mbfsansQ }}
+\newunicodechar{𝗥}{\mathOrText{\mbfsansR }}
+\newunicodechar{𝗦}{\mathOrText{\mbfsansS }}
+\newunicodechar{𝗧}{\mathOrText{\mbfsansT }}
+\newunicodechar{𝗨}{\mathOrText{\mbfsansU }}
+\newunicodechar{𝗩}{\mathOrText{\mbfsansV }}
+\newunicodechar{𝗪}{\mathOrText{\mbfsansW }}
+\newunicodechar{𝗫}{\mathOrText{\mbfsansX }}
+\newunicodechar{𝗬}{\mathOrText{\mbfsansY }}
+\newunicodechar{𝗭}{\mathOrText{\mbfsansZ }}
+\newunicodechar{𝗮}{\mathOrText{\mbfsansa }}
+\newunicodechar{𝗯}{\mathOrText{\mbfsansb }}
+\newunicodechar{𝗰}{\mathOrText{\mbfsansc }}
+\newunicodechar{𝗱}{\mathOrText{\mbfsansd }}
+\newunicodechar{𝗲}{\mathOrText{\mbfsanse }}
+\newunicodechar{𝗳}{\mathOrText{\mbfsansf }}
+\newunicodechar{𝗴}{\mathOrText{\mbfsansg }}
+\newunicodechar{𝗵}{\mathOrText{\mbfsansh }}
+\newunicodechar{𝗶}{\mathOrText{\mbfsansi }}
+\newunicodechar{𝗷}{\mathOrText{\mbfsansj }}
+\newunicodechar{𝗸}{\mathOrText{\mbfsansk }}
+\newunicodechar{𝗹}{\mathOrText{\mbfsansl }}
+\newunicodechar{𝗺}{\mathOrText{\mbfsansm }}
+\newunicodechar{𝗻}{\mathOrText{\mbfsansn }}
+\newunicodechar{𝗼}{\mathOrText{\mbfsanso }}
+\newunicodechar{𝗽}{\mathOrText{\mbfsansp }}
+\newunicodechar{𝗾}{\mathOrText{\mbfsansq }}
+\newunicodechar{𝗿}{\mathOrText{\mbfsansr }}
+\newunicodechar{𝘀}{\mathOrText{\mbfsanss }}
+\newunicodechar{𝘁}{\mathOrText{\mbfsanst }}
+\newunicodechar{𝘂}{\mathOrText{\mbfsansu }}
+\newunicodechar{𝘃}{\mathOrText{\mbfsansv }}
+\newunicodechar{𝘄}{\mathOrText{\mbfsansw }}
+\newunicodechar{𝘅}{\mathOrText{\mbfsansx }}
+\newunicodechar{𝘆}{\mathOrText{\mbfsansy }}
+\newunicodechar{𝘇}{\mathOrText{\mbfsansz }}
+\newunicodechar{𝘈}{\mathOrText{\mitsansA }}
+\newunicodechar{𝘉}{\mathOrText{\mitsansB }}
+\newunicodechar{𝘊}{\mathOrText{\mitsansC }}
+\newunicodechar{𝘋}{\mathOrText{\mitsansD }}
+\newunicodechar{𝘌}{\mathOrText{\mitsansE }}
+\newunicodechar{𝘍}{\mathOrText{\mitsansF }}
+\newunicodechar{𝘎}{\mathOrText{\mitsansG }}
+\newunicodechar{𝘏}{\mathOrText{\mitsansH }}
+\newunicodechar{𝘐}{\mathOrText{\mitsansI }}
+\newunicodechar{𝘑}{\mathOrText{\mitsansJ }}
+\newunicodechar{𝘒}{\mathOrText{\mitsansK }}
+\newunicodechar{𝘓}{\mathOrText{\mitsansL }}
+\newunicodechar{𝘔}{\mathOrText{\mitsansM }}
+\newunicodechar{𝘕}{\mathOrText{\mitsansN }}
+\newunicodechar{𝘖}{\mathOrText{\mitsansO }}
+\newunicodechar{𝘗}{\mathOrText{\mitsansP }}
+\newunicodechar{𝘘}{\mathOrText{\mitsansQ }}
+\newunicodechar{𝘙}{\mathOrText{\mitsansR }}
+\newunicodechar{𝘚}{\mathOrText{\mitsansS }}
+\newunicodechar{𝘛}{\mathOrText{\mitsansT }}
+\newunicodechar{𝘜}{\mathOrText{\mitsansU }}
+\newunicodechar{𝘝}{\mathOrText{\mitsansV }}
+\newunicodechar{𝘞}{\mathOrText{\mitsansW }}
+\newunicodechar{𝘟}{\mathOrText{\mitsansX }}
+\newunicodechar{𝘠}{\mathOrText{\mitsansY }}
+\newunicodechar{𝘡}{\mathOrText{\mitsansZ }}
+\newunicodechar{𝘢}{\mathOrText{\mitsansa }}
+\newunicodechar{𝘣}{\mathOrText{\mitsansb }}
+\newunicodechar{𝘤}{\mathOrText{\mitsansc }}
+\newunicodechar{𝘥}{\mathOrText{\mitsansd }}
+\newunicodechar{𝘦}{\mathOrText{\mitsanse }}
+\newunicodechar{𝘧}{\mathOrText{\mitsansf }}
+\newunicodechar{𝘨}{\mathOrText{\mitsansg }}
+\newunicodechar{𝘩}{\mathOrText{\mitsansh }}
+\newunicodechar{𝘪}{\mathOrText{\mitsansi }}
+\newunicodechar{𝘫}{\mathOrText{\mitsansj }}
+\newunicodechar{𝘬}{\mathOrText{\mitsansk }}
+\newunicodechar{𝘭}{\mathOrText{\mitsansl }}
+\newunicodechar{𝘮}{\mathOrText{\mitsansm }}
+\newunicodechar{𝘯}{\mathOrText{\mitsansn }}
+\newunicodechar{𝘰}{\mathOrText{\mitsanso }}
+\newunicodechar{𝘱}{\mathOrText{\mitsansp }}
+\newunicodechar{𝘲}{\mathOrText{\mitsansq }}
+\newunicodechar{𝘳}{\mathOrText{\mitsansr }}
+\newunicodechar{𝘴}{\mathOrText{\mitsanss }}
+\newunicodechar{𝘵}{\mathOrText{\mitsanst }}
+\newunicodechar{𝘶}{\mathOrText{\mitsansu }}
+\newunicodechar{𝘷}{\mathOrText{\mitsansv }}
+\newunicodechar{𝘸}{\mathOrText{\mitsansw }}
+\newunicodechar{𝘹}{\mathOrText{\mitsansx }}
+\newunicodechar{𝘺}{\mathOrText{\mitsansy }}
+\newunicodechar{𝘻}{\mathOrText{\mitsansz }}
+\newunicodechar{𝘼}{\mathOrText{\mbfitsansA }}
+\newunicodechar{𝘽}{\mathOrText{\mbfitsansB }}
+\newunicodechar{𝘾}{\mathOrText{\mbfitsansC }}
+\newunicodechar{𝘿}{\mathOrText{\mbfitsansD }}
+\newunicodechar{𝙀}{\mathOrText{\mbfitsansE }}
+\newunicodechar{𝙁}{\mathOrText{\mbfitsansF }}
+\newunicodechar{𝙂}{\mathOrText{\mbfitsansG }}
+\newunicodechar{𝙃}{\mathOrText{\mbfitsansH }}
+\newunicodechar{𝙄}{\mathOrText{\mbfitsansI }}
+\newunicodechar{𝙅}{\mathOrText{\mbfitsansJ }}
+\newunicodechar{𝙆}{\mathOrText{\mbfitsansK }}
+\newunicodechar{𝙇}{\mathOrText{\mbfitsansL }}
+\newunicodechar{𝙈}{\mathOrText{\mbfitsansM }}
+\newunicodechar{𝙉}{\mathOrText{\mbfitsansN }}
+\newunicodechar{𝙊}{\mathOrText{\mbfitsansO }}
+\newunicodechar{𝙋}{\mathOrText{\mbfitsansP }}
+\newunicodechar{𝙌}{\mathOrText{\mbfitsansQ }}
+\newunicodechar{𝙍}{\mathOrText{\mbfitsansR }}
+\newunicodechar{𝙎}{\mathOrText{\mbfitsansS }}
+\newunicodechar{𝙏}{\mathOrText{\mbfitsansT }}
+\newunicodechar{𝙐}{\mathOrText{\mbfitsansU }}
+\newunicodechar{𝙑}{\mathOrText{\mbfitsansV }}
+\newunicodechar{𝙒}{\mathOrText{\mbfitsansW }}
+\newunicodechar{𝙓}{\mathOrText{\mbfitsansX }}
+\newunicodechar{𝙔}{\mathOrText{\mbfitsansY }}
+\newunicodechar{𝙕}{\mathOrText{\mbfitsansZ }}
+\newunicodechar{𝙖}{\mathOrText{\mbfitsansa }}
+\newunicodechar{𝙗}{\mathOrText{\mbfitsansb }}
+\newunicodechar{𝙘}{\mathOrText{\mbfitsansc }}
+\newunicodechar{𝙙}{\mathOrText{\mbfitsansd }}
+\newunicodechar{𝙚}{\mathOrText{\mbfitsanse }}
+\newunicodechar{𝙛}{\mathOrText{\mbfitsansf }}
+\newunicodechar{𝙜}{\mathOrText{\mbfitsansg }}
+\newunicodechar{𝙝}{\mathOrText{\mbfitsansh }}
+\newunicodechar{𝙞}{\mathOrText{\mbfitsansi }}
+\newunicodechar{𝙟}{\mathOrText{\mbfitsansj }}
+\newunicodechar{𝙠}{\mathOrText{\mbfitsansk }}
+\newunicodechar{𝙡}{\mathOrText{\mbfitsansl }}
+\newunicodechar{𝙢}{\mathOrText{\mbfitsansm }}
+\newunicodechar{𝙣}{\mathOrText{\mbfitsansn }}
+\newunicodechar{𝙤}{\mathOrText{\mbfitsanso }}
+\newunicodechar{𝙥}{\mathOrText{\mbfitsansp }}
+\newunicodechar{𝙦}{\mathOrText{\mbfitsansq }}
+\newunicodechar{𝙧}{\mathOrText{\mbfitsansr }}
+\newunicodechar{𝙨}{\mathOrText{\mbfitsanss }}
+\newunicodechar{𝙩}{\mathOrText{\mbfitsanst }}
+\newunicodechar{𝙪}{\mathOrText{\mbfitsansu }}
+\newunicodechar{𝙫}{\mathOrText{\mbfitsansv }}
+\newunicodechar{𝙬}{\mathOrText{\mbfitsansw }}
+\newunicodechar{𝙭}{\mathOrText{\mbfitsansx }}
+\newunicodechar{𝙮}{\mathOrText{\mbfitsansy }}
+\newunicodechar{𝙯}{\mathOrText{\mbfitsansz }}
+\newunicodechar{𝙰}{\mathOrText{\mttA }}
+\newunicodechar{𝙱}{\mathOrText{\mttB }}
+\newunicodechar{𝙲}{\mathOrText{\mttC }}
+\newunicodechar{𝙳}{\mathOrText{\mttD }}
+\newunicodechar{𝙴}{\mathOrText{\mttE }}
+\newunicodechar{𝙵}{\mathOrText{\mttF }}
+\newunicodechar{𝙶}{\mathOrText{\mttG }}
+\newunicodechar{𝙷}{\mathOrText{\mttH }}
+\newunicodechar{𝙸}{\mathOrText{\mttI }}
+\newunicodechar{𝙹}{\mathOrText{\mttJ }}
+\newunicodechar{𝙺}{\mathOrText{\mttK }}
+\newunicodechar{𝙻}{\mathOrText{\mttL }}
+\newunicodechar{𝙼}{\mathOrText{\mttM }}
+\newunicodechar{𝙽}{\mathOrText{\mttN }}
+\newunicodechar{𝙾}{\mathOrText{\mttO }}
+\newunicodechar{𝙿}{\mathOrText{\mttP }}
+\newunicodechar{𝚀}{\mathOrText{\mttQ }}
+\newunicodechar{𝚁}{\mathOrText{\mttR }}
+\newunicodechar{𝚂}{\mathOrText{\mttS }}
+\newunicodechar{𝚃}{\mathOrText{\mttT }}
+\newunicodechar{𝚄}{\mathOrText{\mttU }}
+\newunicodechar{𝚅}{\mathOrText{\mttV }}
+\newunicodechar{𝚆}{\mathOrText{\mttW }}
+\newunicodechar{𝚇}{\mathOrText{\mttX }}
+\newunicodechar{𝚈}{\mathOrText{\mttY }}
+\newunicodechar{𝚉}{\mathOrText{\mttZ }}
+\newunicodechar{𝚊}{\mathOrText{\mtta }}
+\newunicodechar{𝚋}{\mathOrText{\mttb }}
+\newunicodechar{𝚌}{\mathOrText{\mttc }}
+\newunicodechar{𝚍}{\mathOrText{\mttd }}
+\newunicodechar{𝚎}{\mathOrText{\mtte }}
+\newunicodechar{𝚏}{\mathOrText{\mttf }}
+\newunicodechar{𝚐}{\mathOrText{\mttg }}
+\newunicodechar{𝚑}{\mathOrText{\mtth }}
+\newunicodechar{𝚒}{\mathOrText{\mtti }}
+\newunicodechar{𝚓}{\mathOrText{\mttj }}
+\newunicodechar{𝚔}{\mathOrText{\mttk }}
+\newunicodechar{𝚕}{\mathOrText{\mttl }}
+\newunicodechar{𝚖}{\mathOrText{\mttm }}
+\newunicodechar{𝚗}{\mathOrText{\mttn }}
+\newunicodechar{𝚘}{\mathOrText{\mtto }}
+\newunicodechar{𝚙}{\mathOrText{\mttp }}
+\newunicodechar{𝚚}{\mathOrText{\mttq }}
+\newunicodechar{𝚛}{\mathOrText{\mttr }}
+\newunicodechar{𝚜}{\mathOrText{\mtts }}
+\newunicodechar{𝚝}{\mathOrText{\mttt }}
+\newunicodechar{𝚞}{\mathOrText{\mttu }}
+\newunicodechar{𝚟}{\mathOrText{\mttv }}
+\newunicodechar{𝚠}{\mathOrText{\mttw }}
+\newunicodechar{𝚡}{\mathOrText{\mttx }}
+\newunicodechar{𝚢}{\mathOrText{\mtty }}
+\newunicodechar{𝚣}{\mathOrText{\mttz }}
+\newunicodechar{𝚤}{\mathOrText{\imath }}
+\newunicodechar{𝚥}{\mathOrText{\jmath }}
+\newunicodechar{𝚨}{\mathOrText{\mbfAlpha }}
+\newunicodechar{𝚩}{\mathOrText{\mbfBeta }}
+\newunicodechar{𝚪}{\mathOrText{\mbfGamma }}
+\newunicodechar{𝚫}{\mathOrText{\mbfDelta }}
+\newunicodechar{𝚬}{\mathOrText{\mbfEpsilon }}
+\newunicodechar{𝚭}{\mathOrText{\mbfZeta }}
+\newunicodechar{𝚮}{\mathOrText{\mbfEta }}
+\newunicodechar{𝚯}{\mathOrText{\mbfTheta }}
+\newunicodechar{𝚰}{\mathOrText{\mbfIota }}
+\newunicodechar{𝚱}{\mathOrText{\mbfKappa }}
+\newunicodechar{𝚲}{\mathOrText{\mbfLambda }}
+\newunicodechar{𝚳}{\mathOrText{\mbfMu }}
+\newunicodechar{𝚴}{\mathOrText{\mbfNu }}
+\newunicodechar{𝚵}{\mathOrText{\mbfXi }}
+\newunicodechar{𝚶}{\mathOrText{\mbfOmicron }}
+\newunicodechar{𝚷}{\mathOrText{\mbfPi }}
+\newunicodechar{𝚸}{\mathOrText{\mbfRho }}
+\newunicodechar{𝚹}{\mathOrText{\mbfvarTheta }}
+\newunicodechar{𝚺}{\mathOrText{\mbfSigma }}
+\newunicodechar{𝚻}{\mathOrText{\mbfTau }}
+\newunicodechar{𝚼}{\mathOrText{\mbfUpsilon }}
+\newunicodechar{𝚽}{\mathOrText{\mbfPhi }}
+\newunicodechar{𝚾}{\mathOrText{\mbfChi }}
+\newunicodechar{𝚿}{\mathOrText{\mbfPsi }}
+\newunicodechar{𝛀}{\mathOrText{\mbfOmega }}
+\newunicodechar{𝛁}{\mathOrText{\mbfnabla }}
+\newunicodechar{𝛂}{\mathOrText{\mbfalpha }}
+\newunicodechar{𝛃}{\mathOrText{\mbfbeta }}
+\newunicodechar{𝛄}{\mathOrText{\mbfgamma }}
+\newunicodechar{𝛅}{\mathOrText{\mbfdelta }}
+\newunicodechar{𝛆}{\mathOrText{\mbfepsilon }}
+\newunicodechar{𝛇}{\mathOrText{\mbfzeta }}
+\newunicodechar{𝛈}{\mathOrText{\mbfeta }}
+\newunicodechar{𝛉}{\mathOrText{\mbftheta }}
+\newunicodechar{𝛊}{\mathOrText{\mbfiota }}
+\newunicodechar{𝛋}{\mathOrText{\mbfkappa }}
+\newunicodechar{𝛌}{\mathOrText{\mbflambda }}
+\newunicodechar{𝛍}{\mathOrText{\mbfmu }}
+\newunicodechar{𝛎}{\mathOrText{\mbfnu }}
+\newunicodechar{𝛏}{\mathOrText{\mbfxi }}
+\newunicodechar{𝛐}{\mathOrText{\mbfomicron }}
+\newunicodechar{𝛑}{\mathOrText{\mbfpi }}
+\newunicodechar{𝛒}{\mathOrText{\mbfrho }}
+\newunicodechar{𝛓}{\mathOrText{\mbfvarsigma }}
+\newunicodechar{𝛔}{\mathOrText{\mbfsigma }}
+\newunicodechar{𝛕}{\mathOrText{\mbftau }}
+\newunicodechar{𝛖}{\mathOrText{\mbfupsilon }}
+\newunicodechar{𝛗}{\mathOrText{\mbfvarphi }}
+\newunicodechar{𝛘}{\mathOrText{\mbfchi }}
+\newunicodechar{𝛙}{\mathOrText{\mbfpsi }}
+\newunicodechar{𝛚}{\mathOrText{\mbfomega }}
+\newunicodechar{𝛛}{\mathOrText{\mbfpartial }}
+\newunicodechar{𝛜}{\mathOrText{\mbfvarepsilon }}
+\newunicodechar{𝛝}{\mathOrText{\mbfvartheta }}
+\newunicodechar{𝛞}{\mathOrText{\mbfvarkappa }}
+\newunicodechar{𝛟}{\mathOrText{\mbfphi }}
+\newunicodechar{𝛠}{\mathOrText{\mbfvarrho }}
+\newunicodechar{𝛡}{\mathOrText{\mbfvarpi }}
+\newunicodechar{𝛢}{\mathOrText{\mitAlpha }}
+\newunicodechar{𝛣}{\mathOrText{\mitBeta }}
+\newunicodechar{𝛤}{\mathOrText{\mitGamma }}
+\newunicodechar{𝛥}{\mathOrText{\mitDelta }}
+\newunicodechar{𝛦}{\mathOrText{\mitEpsilon }}
+\newunicodechar{𝛧}{\mathOrText{\mitZeta }}
+\newunicodechar{𝛨}{\mathOrText{\mitEta }}
+\newunicodechar{𝛩}{\mathOrText{\mitTheta }}
+\newunicodechar{𝛪}{\mathOrText{\mitIota }}
+\newunicodechar{𝛫}{\mathOrText{\mitKappa }}
+\newunicodechar{𝛬}{\mathOrText{\mitLambda }}
+\newunicodechar{𝛭}{\mathOrText{\mitMu }}
+\newunicodechar{𝛮}{\mathOrText{\mitNu }}
+\newunicodechar{𝛯}{\mathOrText{\mitXi }}
+\newunicodechar{𝛰}{\mathOrText{\mitOmicron }}
+\newunicodechar{𝛱}{\mathOrText{\mitPi }}
+\newunicodechar{𝛲}{\mathOrText{\mitRho }}
+\newunicodechar{𝛳}{\mathOrText{\mitvarTheta }}
+\newunicodechar{𝛴}{\mathOrText{\mitSigma }}
+\newunicodechar{𝛵}{\mathOrText{\mitTau }}
+\newunicodechar{𝛶}{\mathOrText{\mitUpsilon }}
+\newunicodechar{𝛷}{\mathOrText{\mitPhi }}
+\newunicodechar{𝛸}{\mathOrText{\mitChi }}
+\newunicodechar{𝛹}{\mathOrText{\mitPsi }}
+\newunicodechar{𝛺}{\mathOrText{\mitOmega }}
+\newunicodechar{𝛻}{\mathOrText{\mitnabla }}
+\newunicodechar{𝛼}{\mathOrText{\mitalpha }}
+\newunicodechar{𝛽}{\mathOrText{\mitbeta }}
+\newunicodechar{𝛾}{\mathOrText{\mitgamma }}
+\newunicodechar{𝛿}{\mathOrText{\mitdelta }}
+\newunicodechar{𝜀}{\mathOrText{\mitepsilon }}
+\newunicodechar{𝜁}{\mathOrText{\mitzeta }}
+\newunicodechar{𝜂}{\mathOrText{\miteta }}
+\newunicodechar{𝜃}{\mathOrText{\mittheta }}
+\newunicodechar{𝜄}{\mathOrText{\mitiota }}
+\newunicodechar{𝜅}{\mathOrText{\mitkappa }}
+\newunicodechar{𝜆}{\mathOrText{\mitlambda }}
+\newunicodechar{𝜇}{\mathOrText{\mitmu }}
+\newunicodechar{𝜈}{\mathOrText{\mitnu }}
+\newunicodechar{𝜉}{\mathOrText{\mitxi }}
+\newunicodechar{𝜊}{\mathOrText{\mitomicron }}
+\newunicodechar{𝜋}{\mathOrText{\mitpi }}
+\newunicodechar{𝜌}{\mathOrText{\mitrho }}
+\newunicodechar{𝜍}{\mathOrText{\mitvarsigma }}
+\newunicodechar{𝜎}{\mathOrText{\mitsigma }}
+\newunicodechar{𝜏}{\mathOrText{\mittau }}
+\newunicodechar{𝜐}{\mathOrText{\mitupsilon }}
+\newunicodechar{𝜑}{\mathOrText{\mitphi }}
+\newunicodechar{𝜒}{\mathOrText{\mitchi }}
+\newunicodechar{𝜓}{\mathOrText{\mitpsi }}
+\newunicodechar{𝜔}{\mathOrText{\mitomega }}
+\newunicodechar{𝜕}{\mathOrText{\mitpartial }}
+\newunicodechar{𝜖}{\mathOrText{\mitvarepsilon }}
+\newunicodechar{𝜗}{\mathOrText{\mitvartheta }}
+\newunicodechar{𝜘}{\mathOrText{\mitvarkappa }}
+\newunicodechar{𝜙}{\mathOrText{\mitvarphi }}
+\newunicodechar{𝜚}{\mathOrText{\mitvarrho }}
+\newunicodechar{𝜛}{\mathOrText{\mitvarpi }}
+\newunicodechar{𝜜}{\mathOrText{\mbfitAlpha }}
+\newunicodechar{𝜝}{\mathOrText{\mbfitBeta }}
+\newunicodechar{𝜞}{\mathOrText{\mbfitGamma }}
+\newunicodechar{𝜟}{\mathOrText{\mbfitDelta }}
+\newunicodechar{𝜠}{\mathOrText{\mbfitEpsilon }}
+\newunicodechar{𝜡}{\mathOrText{\mbfitZeta }}
+\newunicodechar{𝜢}{\mathOrText{\mbfitEta }}
+\newunicodechar{𝜣}{\mathOrText{\mbfitTheta }}
+\newunicodechar{𝜤}{\mathOrText{\mbfitIota }}
+\newunicodechar{𝜥}{\mathOrText{\mbfitKappa }}
+\newunicodechar{𝜦}{\mathOrText{\mbfitLambda }}
+\newunicodechar{𝜧}{\mathOrText{\mbfitMu }}
+\newunicodechar{𝜨}{\mathOrText{\mbfitNu }}
+\newunicodechar{𝜩}{\mathOrText{\mbfitXi }}
+\newunicodechar{𝜪}{\mathOrText{\mbfitOmicron }}
+\newunicodechar{𝜫}{\mathOrText{\mbfitPi }}
+\newunicodechar{𝜬}{\mathOrText{\mbfitRho }}
+\newunicodechar{𝜭}{\mathOrText{\mbfitvarTheta }}
+\newunicodechar{𝜮}{\mathOrText{\mbfitSigma }}
+\newunicodechar{𝜯}{\mathOrText{\mbfitTau }}
+\newunicodechar{𝜰}{\mathOrText{\mbfitUpsilon }}
+\newunicodechar{𝜱}{\mathOrText{\mbfitPhi }}
+\newunicodechar{𝜲}{\mathOrText{\mbfitChi }}
+\newunicodechar{𝜳}{\mathOrText{\mbfitPsi }}
+\newunicodechar{𝜴}{\mathOrText{\mbfitOmega }}
+\newunicodechar{𝜵}{\mathOrText{\mbfitnabla }}
+\newunicodechar{𝜶}{\mathOrText{\mbfitalpha }}
+\newunicodechar{𝜷}{\mathOrText{\mbfitbeta }}
+\newunicodechar{𝜸}{\mathOrText{\mbfitgamma }}
+\newunicodechar{𝜹}{\mathOrText{\mbfitdelta }}
+\newunicodechar{𝜺}{\mathOrText{\mbfitepsilon }}
+\newunicodechar{𝜻}{\mathOrText{\mbfitzeta }}
+\newunicodechar{𝜼}{\mathOrText{\mbfiteta }}
+\newunicodechar{𝜽}{\mathOrText{\mbfittheta }}
+\newunicodechar{𝜾}{\mathOrText{\mbfitiota }}
+\newunicodechar{𝜿}{\mathOrText{\mbfitkappa }}
+\newunicodechar{𝝀}{\mathOrText{\mbfitlambda }}
+\newunicodechar{𝝁}{\mathOrText{\mbfitmu }}
+\newunicodechar{𝝂}{\mathOrText{\mbfitnu }}
+\newunicodechar{𝝃}{\mathOrText{\mbfitxi }}
+\newunicodechar{𝝄}{\mathOrText{\mbfitomicron }}
+\newunicodechar{𝝅}{\mathOrText{\mbfitpi }}
+\newunicodechar{𝝆}{\mathOrText{\mbfitrho }}
+\newunicodechar{𝝇}{\mathOrText{\mbfitvarsigma }}
+\newunicodechar{𝝈}{\mathOrText{\mbfitsigma }}
+\newunicodechar{𝝉}{\mathOrText{\mbfittau }}
+\newunicodechar{𝝊}{\mathOrText{\mbfitupsilon }}
+\newunicodechar{𝝋}{\mathOrText{\mbfitphi }}
+\newunicodechar{𝝌}{\mathOrText{\mbfitchi }}
+\newunicodechar{𝝍}{\mathOrText{\mbfitpsi }}
+\newunicodechar{𝝎}{\mathOrText{\mbfitomega }}
+\newunicodechar{𝝏}{\mathOrText{\mbfitpartial }}
+\newunicodechar{𝝐}{\mathOrText{\mbfitvarepsilon }}
+\newunicodechar{𝝑}{\mathOrText{\mbfitvartheta }}
+\newunicodechar{𝝒}{\mathOrText{\mbfitvarkappa }}
+\newunicodechar{𝝓}{\mathOrText{\mbfitvarphi }}
+\newunicodechar{𝝔}{\mathOrText{\mbfitvarrho }}
+\newunicodechar{𝝕}{\mathOrText{\mbfitvarpi }}
+\newunicodechar{𝝖}{\mathOrText{\mbfsansAlpha }}
+\newunicodechar{𝝗}{\mathOrText{\mbfsansBeta }}
+\newunicodechar{𝝘}{\mathOrText{\mbfsansGamma }}
+\newunicodechar{𝝙}{\mathOrText{\mbfsansDelta }}
+\newunicodechar{𝝚}{\mathOrText{\mbfsansEpsilon }}
+\newunicodechar{𝝛}{\mathOrText{\mbfsansZeta }}
+\newunicodechar{𝝜}{\mathOrText{\mbfsansEta }}
+\newunicodechar{𝝝}{\mathOrText{\mbfsansTheta }}
+\newunicodechar{𝝞}{\mathOrText{\mbfsansIota }}
+\newunicodechar{𝝟}{\mathOrText{\mbfsansKappa }}
+\newunicodechar{𝝠}{\mathOrText{\mbfsansLambda }}
+\newunicodechar{𝝡}{\mathOrText{\mbfsansMu }}
+\newunicodechar{𝝢}{\mathOrText{\mbfsansNu }}
+\newunicodechar{𝝣}{\mathOrText{\mbfsansXi }}
+\newunicodechar{𝝤}{\mathOrText{\mbfsansOmicron }}
+\newunicodechar{𝝥}{\mathOrText{\mbfsansPi }}
+\newunicodechar{𝝦}{\mathOrText{\mbfsansRho }}
+\newunicodechar{𝝧}{\mathOrText{\mbfsansvarTheta }}
+\newunicodechar{𝝨}{\mathOrText{\mbfsansSigma }}
+\newunicodechar{𝝩}{\mathOrText{\mbfsansTau }}
+\newunicodechar{𝝪}{\mathOrText{\mbfsansUpsilon }}
+\newunicodechar{𝝫}{\mathOrText{\mbfsansPhi }}
+\newunicodechar{𝝬}{\mathOrText{\mbfsansChi }}
+\newunicodechar{𝝭}{\mathOrText{\mbfsansPsi }}
+\newunicodechar{𝝮}{\mathOrText{\mbfsansOmega }}
+\newunicodechar{𝝯}{\mathOrText{\mbfsansnabla }}
+\newunicodechar{𝝰}{\mathOrText{\mbfsansalpha }}
+\newunicodechar{𝝱}{\mathOrText{\mbfsansbeta }}
+\newunicodechar{𝝲}{\mathOrText{\mbfsansgamma }}
+\newunicodechar{𝝳}{\mathOrText{\mbfsansdelta }}
+\newunicodechar{𝝴}{\mathOrText{\mbfsansepsilon }}
+\newunicodechar{𝝵}{\mathOrText{\mbfsanszeta }}
+\newunicodechar{𝝶}{\mathOrText{\mbfsanseta }}
+\newunicodechar{𝝷}{\mathOrText{\mbfsanstheta }}
+\newunicodechar{𝝸}{\mathOrText{\mbfsansiota }}
+\newunicodechar{𝝹}{\mathOrText{\mbfsanskappa }}
+\newunicodechar{𝝺}{\mathOrText{\mbfsanslambda }}
+\newunicodechar{𝝻}{\mathOrText{\mbfsansmu }}
+\newunicodechar{𝝼}{\mathOrText{\mbfsansnu }}
+\newunicodechar{𝝽}{\mathOrText{\mbfsansxi }}
+\newunicodechar{𝝾}{\mathOrText{\mbfsansomicron }}
+\newunicodechar{𝝿}{\mathOrText{\mbfsanspi }}
+\newunicodechar{𝞀}{\mathOrText{\mbfsansrho }}
+\newunicodechar{𝞁}{\mathOrText{\mbfsansvarsigma }}
+\newunicodechar{𝞂}{\mathOrText{\mbfsanssigma }}
+\newunicodechar{𝞃}{\mathOrText{\mbfsanstau }}
+\newunicodechar{𝞄}{\mathOrText{\mbfsansupsilon }}
+\newunicodechar{𝞅}{\mathOrText{\mbfsansphi }}
+\newunicodechar{𝞆}{\mathOrText{\mbfsanschi }}
+\newunicodechar{𝞇}{\mathOrText{\mbfsanspsi }}
+\newunicodechar{𝞈}{\mathOrText{\mbfsansomega }}
+\newunicodechar{𝞉}{\mathOrText{\mbfsanspartial }}
+\newunicodechar{𝞊}{\mathOrText{\mbfsansvarepsilon }}
+\newunicodechar{𝞋}{\mathOrText{\mbfsansvartheta }}
+\newunicodechar{𝞌}{\mathOrText{\mbfsansvarkappa }}
+\newunicodechar{𝞍}{\mathOrText{\mbfsansvarphi }}
+\newunicodechar{𝞎}{\mathOrText{\mbfsansvarrho }}
+\newunicodechar{𝞏}{\mathOrText{\mbfsansvarpi }}
+\newunicodechar{𝞐}{\mathOrText{\mbfitsansAlpha }}
+\newunicodechar{𝞑}{\mathOrText{\mbfitsansBeta }}
+\newunicodechar{𝞒}{\mathOrText{\mbfitsansGamma }}
+\newunicodechar{𝞓}{\mathOrText{\mbfitsansDelta }}
+\newunicodechar{𝞔}{\mathOrText{\mbfitsansEpsilon }}
+\newunicodechar{𝞕}{\mathOrText{\mbfitsansZeta }}
+\newunicodechar{𝞖}{\mathOrText{\mbfitsansEta }}
+\newunicodechar{𝞗}{\mathOrText{\mbfitsansTheta }}
+\newunicodechar{𝞘}{\mathOrText{\mbfitsansIota }}
+\newunicodechar{𝞙}{\mathOrText{\mbfitsansKappa }}
+\newunicodechar{𝞚}{\mathOrText{\mbfitsansLambda }}
+\newunicodechar{𝞛}{\mathOrText{\mbfitsansMu }}
+\newunicodechar{𝞜}{\mathOrText{\mbfitsansNu }}
+\newunicodechar{𝞝}{\mathOrText{\mbfitsansXi }}
+\newunicodechar{𝞞}{\mathOrText{\mbfitsansOmicron }}
+\newunicodechar{𝞟}{\mathOrText{\mbfitsansPi }}
+\newunicodechar{𝞠}{\mathOrText{\mbfitsansRho }}
+\newunicodechar{𝞡}{\mathOrText{\mbfitsansvarTheta }}
+\newunicodechar{𝞢}{\mathOrText{\mbfitsansSigma }}
+\newunicodechar{𝞣}{\mathOrText{\mbfitsansTau }}
+\newunicodechar{𝞤}{\mathOrText{\mbfitsansUpsilon }}
+\newunicodechar{𝞥}{\mathOrText{\mbfitsansPhi }}
+\newunicodechar{𝞦}{\mathOrText{\mbfitsansChi }}
+\newunicodechar{𝞧}{\mathOrText{\mbfitsansPsi }}
+\newunicodechar{𝞨}{\mathOrText{\mbfitsansOmega }}
+\newunicodechar{𝞩}{\mathOrText{\mbfitsansnabla }}
+\newunicodechar{𝞪}{\mathOrText{\mbfitsansalpha }}
+\newunicodechar{𝞫}{\mathOrText{\mbfitsansbeta }}
+\newunicodechar{𝞬}{\mathOrText{\mbfitsansgamma }}
+\newunicodechar{𝞭}{\mathOrText{\mbfitsansdelta }}
+\newunicodechar{𝞮}{\mathOrText{\mbfitsansepsilon }}
+\newunicodechar{𝞯}{\mathOrText{\mbfitsanszeta }}
+\newunicodechar{𝞰}{\mathOrText{\mbfitsanseta }}
+\newunicodechar{𝞱}{\mathOrText{\mbfitsanstheta }}
+\newunicodechar{𝞲}{\mathOrText{\mbfitsansiota }}
+\newunicodechar{𝞳}{\mathOrText{\mbfitsanskappa }}
+\newunicodechar{𝞴}{\mathOrText{\mbfitsanslambda }}
+\newunicodechar{𝞵}{\mathOrText{\mbfitsansmu }}
+\newunicodechar{𝞶}{\mathOrText{\mbfitsansnu }}
+\newunicodechar{𝞷}{\mathOrText{\mbfitsansxi }}
+\newunicodechar{𝞸}{\mathOrText{\mbfitsansomicron }}
+\newunicodechar{𝞹}{\mathOrText{\mbfitsanspi }}
+\newunicodechar{𝞺}{\mathOrText{\mbfitsansrho }}
+\newunicodechar{𝞻}{\mathOrText{\mbfitsansvarsigma }}
+\newunicodechar{𝞼}{\mathOrText{\mbfitsanssigma }}
+\newunicodechar{𝞽}{\mathOrText{\mbfitsanstau }}
+\newunicodechar{𝞾}{\mathOrText{\mbfitsansupsilon }}
+\newunicodechar{𝞿}{\mathOrText{\mbfitsansphi }}
+\newunicodechar{𝟀}{\mathOrText{\mbfitsanschi }}
+\newunicodechar{𝟁}{\mathOrText{\mbfitsanspsi }}
+\newunicodechar{𝟂}{\mathOrText{\mbfitsansomega }}
+\newunicodechar{𝟃}{\mathOrText{\mbfitsanspartial }}
+\newunicodechar{𝟄}{\mathOrText{\mbfitsansvarepsilon }}
+\newunicodechar{𝟅}{\mathOrText{\mbfitsansvartheta }}
+\newunicodechar{𝟆}{\mathOrText{\mbfitsansvarkappa }}
+\newunicodechar{𝟇}{\mathOrText{\mbfitsansvarphi }}
+\newunicodechar{𝟈}{\mathOrText{\mbfitsansvarrho }}
+\newunicodechar{𝟉}{\mathOrText{\mbfitsansvarpi }}
+\newunicodechar{𝟊}{\mathOrText{\mbfDigamma }}
+\newunicodechar{𝟋}{\mathOrText{\mbfdigamma }}
+\newunicodechar{𝟎}{\mathOrText{\mbfzero }}
+\newunicodechar{𝟏}{\mathOrText{\mbfone }}
+\newunicodechar{𝟐}{\mathOrText{\mbftwo }}
+\newunicodechar{𝟑}{\mathOrText{\mbfthree }}
+\newunicodechar{𝟒}{\mathOrText{\mbffour }}
+\newunicodechar{𝟓}{\mathOrText{\mbffive }}
+\newunicodechar{𝟔}{\mathOrText{\mbfsix }}
+\newunicodechar{𝟕}{\mathOrText{\mbfseven }}
+\newunicodechar{𝟖}{\mathOrText{\mbfeight }}
+\newunicodechar{𝟗}{\mathOrText{\mbfnine }}
+\newunicodechar{𝟘}{\mathOrText{\Bbbzero }}
+\newunicodechar{𝟙}{\mathOrText{\Bbbone }}
+\newunicodechar{𝟚}{\mathOrText{\Bbbtwo }}
+\newunicodechar{𝟛}{\mathOrText{\Bbbthree }}
+\newunicodechar{𝟜}{\mathOrText{\Bbbfour }}
+\newunicodechar{𝟝}{\mathOrText{\Bbbfive }}
+\newunicodechar{𝟞}{\mathOrText{\Bbbsix }}
+\newunicodechar{𝟟}{\mathOrText{\Bbbseven }}
+\newunicodechar{𝟠}{\mathOrText{\Bbbeight }}
+\newunicodechar{𝟡}{\mathOrText{\Bbbnine }}
+\newunicodechar{𝟢}{\mathOrText{\msanszero }}
+\newunicodechar{𝟣}{\mathOrText{\msansone }}
+\newunicodechar{𝟤}{\mathOrText{\msanstwo }}
+\newunicodechar{𝟥}{\mathOrText{\msansthree }}
+\newunicodechar{𝟦}{\mathOrText{\msansfour }}
+\newunicodechar{𝟧}{\mathOrText{\msansfive }}
+\newunicodechar{𝟨}{\mathOrText{\msanssix }}
+\newunicodechar{𝟩}{\mathOrText{\msansseven }}
+\newunicodechar{𝟪}{\mathOrText{\msanseight }}
+\newunicodechar{𝟫}{\mathOrText{\msansnine }}
+\newunicodechar{𝟬}{\mathOrText{\mbfsanszero }}
+\newunicodechar{𝟭}{\mathOrText{\mbfsansone }}
+\newunicodechar{𝟮}{\mathOrText{\mbfsanstwo }}
+\newunicodechar{𝟯}{\mathOrText{\mbfsansthree }}
+\newunicodechar{𝟰}{\mathOrText{\mbfsansfour }}
+\newunicodechar{𝟱}{\mathOrText{\mbfsansfive }}
+\newunicodechar{𝟲}{\mathOrText{\mbfsanssix }}
+\newunicodechar{𝟳}{\mathOrText{\mbfsansseven }}
+\newunicodechar{𝟴}{\mathOrText{\mbfsanseight }}
+\newunicodechar{𝟵}{\mathOrText{\mbfsansnine }}
+\newunicodechar{𝟶}{\mathOrText{\mttzero }}
+\newunicodechar{𝟷}{\mathOrText{\mttone }}
+\newunicodechar{𝟸}{\mathOrText{\mtttwo }}
+\newunicodechar{𝟹}{\mathOrText{\mttthree }}
+\newunicodechar{𝟺}{\mathOrText{\mttfour }}
+\newunicodechar{𝟻}{\mathOrText{\mttfive }}
+\newunicodechar{𝟼}{\mathOrText{\mttsix }}
+\newunicodechar{𝟽}{\mathOrText{\mttseven }}
+\newunicodechar{𝟾}{\mathOrText{\mtteight }}
+\newunicodechar{𝟿}{\mathOrText{\mttnine }}
+\newunicodechar{𞻰}{\mathOrText{\arabicmaj }}
+\newunicodechar{𞻱}{\mathOrText{\arabichad }}
+
+
+\newunicodechar{ا}{\mathOrChar{\alef }{"0627}}
+\newunicodechar{ب}{\mathOrChar{\beh }{"0628}}
+\newunicodechar{ج}{\mathOrChar{\jeem }{"062C}}
+\newunicodechar{د}{\mathOrChar{\dal }{"062F}}
+\newunicodechar{ه}{\mathOrChar{\heh }{"0647}}
+\newunicodechar{و}{\mathOrChar{\waw }{"0648}}
+\newunicodechar{ز}{\mathOrChar{\zain }{"0632}}
+\newunicodechar{ح}{\mathOrChar{\hah }{"062D}}
+\newunicodechar{ط}{\mathOrChar{\tah }{"0637}}
+\newunicodechar{ي}{\mathOrChar{\yeh }{"064A}}
+\newunicodechar{ك}{\mathOrChar{\kaf }{"0643}}
+\newunicodechar{ل}{\mathOrChar{\lam }{"0644}}
+\newunicodechar{م}{\mathOrChar{\meem }{"0645}}
+\newunicodechar{ن}{\mathOrChar{\noon }{"0646}}
+\newunicodechar{س}{\mathOrChar{\seen }{"0633}}
+\newunicodechar{ع}{\mathOrChar{\ain }{"0639}}
+\newunicodechar{ف}{\mathOrChar{\feh }{"0641}}
+\newunicodechar{ص}{\mathOrChar{\sad }{"0635}}
+\newunicodechar{ق}{\mathOrChar{\qaf }{"0642}}
+\newunicodechar{ر}{\mathOrChar{\reh }{"0631}}
+\newunicodechar{ش}{\mathOrChar{\sheen }{"0634}}
+\newunicodechar{ت}{\mathOrChar{\teh }{"062A}}
+\newunicodechar{ث}{\mathOrChar{\theh }{"062B}}
+\newunicodechar{خ}{\mathOrChar{\khah }{"062E}}
+\newunicodechar{ذ}{\mathOrChar{\thal }{"0630}}
+\newunicodechar{ض}{\mathOrChar{\dad }{"0636}}
+\newunicodechar{ظ}{\mathOrChar{\zah }{"0638}}
+\newunicodechar{غ}{\mathOrChar{\ghain }{"063A}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newunicodechar{ℋ}{\mathOrText{\mathscr{H}}}
+\newunicodechar{ℏ}{\mathOrText{\hslash }}
+\newunicodechar{ℑ}{\mathOrText{\Im }}
+\newunicodechar{ℓ}{\mathOrText{\ell }}
+\newunicodechar{ℕ}{\mathOrText{\mathbb{N}}}
+\newunicodechar{℘}{\mathOrText{\wp }}
+\newunicodechar{ℙ}{\mathOrText{\mathbb{P}}}
+\newunicodechar{ℚ}{\mathOrText{\mathbb{Q}}}
+\newunicodechar{ℜ}{\mathOrText{\Re }}
+\newunicodechar{ℤ}{\mathOrText{\mathbb{Z}}}
+\newunicodechar{Ω}{\mathOrText{\Omega }}
+\newunicodechar{℧}{\mathOrText{\mho }}
+\newunicodechar{ℵ}{\mathOrText{\aleph }}
+\newunicodechar{ℶ}{\mathOrText{\beth }}
+\newunicodechar{ℷ}{\mathOrText{\gimel }}
+\newunicodechar{ℸ}{\mathOrText{\daleth }}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

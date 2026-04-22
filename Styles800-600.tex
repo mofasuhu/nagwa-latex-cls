@@ -1,0 +1,1570 @@
+\makeatletter
+
+\def\nagwaLmargin{24pt}
+\def\nagwaRmargin{24pt}
+\def\nagwaTmargin{24pt}
+\def\nagwaBmargin{24pt}
+
+\geometry{papersize={800pt,600pt},lmargin=\nagwaLmargin,rmargin=\nagwaRmargin,top=\nagwaTmargin,bottom=\nagwaBmargin}
+
+
+
+
+\oddsidemargin=-42pt
+\evensidemargin=-42pt
+\topmargin=1000pt
+\headsep=-42pt
+% \textwidth=733.5bp
+% \textheight=533.5bp
+\textwidth=752pt % 800 - (24 left margin + 24 right margin)
+\textheight=540pt % 600 - (60 that is the title box height)
+
+
+\usepackage{silence}
+\WarningsOff*
+
+\ifthenelse{\equal{\nagwalang}{ar}}
+{% ARABIC BLOCK
+\ifthenelse{\equal{\nagwagrade}{low}}
+{% ARABIC LOW 
+\renewcommand\normalsize{\@setfontsize\normalsize{22bp}{28bp}}
+\normalsize
+}
+{% ARABIC HIGH (Default)  
+\renewcommand\normalsize{\@setfontsize\normalsize{20pt}{28pt}}
+\normalsize
+}
+}
+{% ENGLISH BLOCK (Default)  
+\ifthenelse{\equal{\nagwagrade}{low}}
+{% ENGLISH LOW 
+\renewcommand\normalsize{\@setfontsize\normalsize{22bp}{26bp}}
+\normalsize  
+}
+{% ENGLISH HIGH (Default)  
+\renewcommand\normalsize{\@setfontsize\normalsize{20pt}{26pt}}
+\normalsize  
+}
+}
+
+
+\makeatother
+
+
+\ifthenelse{\equal{\nagwalang}{ar}}
+{% ARABIC BLOCK
+\ifthenelse{\equal{\nagwagrade}{low}}
+{% ARABIC LOW 
+
+		\setmainfont{Noto-Regular.ttf}[Script=Arabic, BoldFont={Noto-Bold.ttf}]
+
+		\newunicodechar{•}{{\fontspec{Noto-Regular.ttf}\symbol{"2022}}}
+
+
+
+		\newcommand{\examtitle}[1]{{\begin{center}\textbf{#1}\vskip24pt\end{center}}}
+
+
+
+		%--Section Title Color
+		\usepackage{xcolor}
+		\usepackage{sectsty}
+		\sectionfont{\fontsize{16}{0}\selectfont\color{TitlePageBlue}}
+
+
+		\usepackage{fancyhdr}
+		\pagestyle{fancy}
+		\renewcommand{\headrulewidth}{0pt}
+
+
+
+
+
+
+
+		\usepackage{lastpage}
+		\footskip=40pt
+		\headheight=40pt
+		\textheight=517pt
+		\topmargin=-34pt
+
+		\fancyhead[C]{\hspace*{-20pt}\makebox[515.3pt]{\includegraphics[width=.23\textwidth]{NagwaLogo.pdf}\hfill\parbox{100pt}{\vspace*{-32pt}\raggedleft\fontsize{10}{12}\selectfont\textbf{\textit{\textdir TRT احصُل على اﻹجابات}}\\[1pt]\textbf{\textit{\textdir TRT والمزيد من اﻻمتحانات}}\\[1pt]$\blacktriangleright\blacktriangleright\blacktriangleright$}\hspace*{9pt}\includegraphics[width=40pt]{QrCode.pdf}}}
+
+
+
+		\newcommand{\examgrade}[1]{\newcommand\theexamgrade{#1}}
+		\newcommand{\subjecttitle}[1]{\newcommand{\thesubjecttitle}{#1}}
+		\newcommand{\examnumber}[1]{\newcommand{\theexamnumber}{#1}}
+
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+		%%%%%%%%%%%%%%%%%%%%%%begin Fatma for slides
+
+		\usepackage{makecell}
+		\usepackage{multirow}
+		\usetikzlibrary{matrix}
+		\usepackage{cancel}
+		\usepackage{ulem}
+		\usepackage{slashbox}
+
+
+		\usepackage[fitting,skins]{tcolorbox}
+		\usepackage{xcolor}
+		\usepackage{graphicx}
+		\usepackage{fancybox}
+		\usepackage{tabularx}
+		\usepackage{luacolor}
+
+
+		%%%%%%%%Sizes and Dimensions
+		\geometry{papersize={800bp,600bp},margin=0bp}
+
+		\headsep=-46.5bp
+		\oddsidemargin=-72.25pt
+		\evensidemargin=-72.25pt
+
+
+		%%%%%%%Contents
+
+
+		%%%%%%%%%%%Standalone slide for direct compilation (takes title and content directly) - Arabic RTL version
+		\newcommand{\slidestandalone}[2]{{\newbox\mybox%
+				\setbox\mybox=\hbox{\fontsize{24}{28}\selectfont\begin{otherlanguage}{arabic}\begin{varwidth}[t]{720pt}#1\end{varwidth}\end{otherlanguage}\hspace{50pt}}%
+				\begin{tcolorbox}[
+					width=\textwidth, 
+					height=.73\textheight, 
+					boxsep=13pt, top=17pt,
+					arc=0mm,
+					sharp corners,
+					colback={white},
+					colframe=white,
+					enhanced, attach boxed title to top right={xshift=10pt,yshift=5pt},
+					colbacktitle=white,
+					boxed title style={empty,
+						boxsep=24pt,
+						valign=center,
+						left=31pt,right=8pt,top=-17pt,bottom=-15.5pt,
+						frame code={
+							\path[fill=DarkBlueBar](frame.north east)
+							-- (frame.north west)
+							to[out=-90,in=182,looseness=1] ([yshift=-3.8mm,xshift=30mm]frame.south west)
+							-- ([yshift=-3.8mm]frame.south east)
+							-- (frame.north east)
+							-- cycle;
+							\path[fill=LightBlueBar](frame.north east)
+							-- (frame.north west)
+							to[out=-80,in=180,looseness=1] ([yshift=0mm,xshift=30mm]frame.south west)
+							-- ([yshift=0mm]frame.south east)
+							-- (frame.north east)
+							-- cycle;
+						},
+					},
+					title={\textdir TRT \bodydir TRT \pardir TRT
+						\color{white}\fontsize{35bp}{38bp}\selectfont\bf{\begin{otherlanguage}{arabic}\begin{varwidth}[t]{720pt}#1\end{varwidth}\end{otherlanguage}}\vphantom{ﺄًّيٍﺥٍّ}},
+						boxrule=0pt]\textdir TRT \bodydir TRT \pardir TRT\begin{otherlanguage}{arabic}#2\end{otherlanguage}\end{tcolorbox}
+					}}
+
+
+
+		\newcommand{\flexiblecontainer}[2]{{\newbox\mybox%
+				% Save current page dimensions
+				\savedpageheight=\pageheight%
+				\savedtextheight=\textheight%
+				% Measure title width
+				\setbox\mybox=\hbox{\fontsize{24}{28}\selectfont\begin{otherlanguage}{arabic}\begin{varwidth}[t]{720pt}#1\end{varwidth}\end{otherlanguage}\hspace{50pt}}%
+				%
+				\begingroup
+				% 1. Zero out all margins so the box anchors to the exact top-left corner
+				\hoffset=-1in \voffset=-1.1in 
+				\topmargin=0pt \headheight=0pt \headsep=0pt
+				\oddsidemargin=0pt \evensidemargin=0pt
+				\parskip=0pt \footskip=0pt \topskip=0pt
+				%
+				% 2. Render the full tcolorbox (with title) into memory (box 0)
+				\setbox0=\vbox{%
+					\nointerlineskip\noindent
+					\begin{tcolorbox}[
+							width=\pagewidth, 
+							boxsep=0pt,
+							left=24pt,
+							right=24pt,
+							top=15pt+24pt,
+							bottom=-8pt+24pt,
+							arc=0mm,
+							sharp corners,
+							colback={white},
+							colframe=white,
+							enhanced, attach boxed title to top right={xshift=10pt,yshift=-5pt},
+							colbacktitle=white,
+							boxed title style={empty,
+								boxsep=24pt,
+								valign=center,
+								left=31pt,right=8pt,top=-17pt,bottom=-15.5pt,
+								frame code={
+									\path[fill=DarkBlueBar](frame.north east)
+									-- (frame.north west)
+									to[out=-90,in=182,looseness=1] ([yshift=-3.8mm,xshift=30mm]frame.south west)
+									-- ([yshift=-3.8mm]frame.south east)
+									-- (frame.north east)
+									-- cycle;
+									\path[fill=LightBlueBar](frame.north east)
+									-- (frame.north west)
+									to[out=-80,in=180,looseness=1] ([yshift=0mm,xshift=30mm]frame.south west)
+									-- ([yshift=0mm]frame.south east)
+									-- (frame.north east)
+									-- cycle;
+								},
+							},
+							title={\textdir TRT \bodydir TRT \pardir TRT
+								\color{white}\fontsize{35bp}{38bp}\selectfont\bf{\begin{otherlanguage}{arabic}\begin{varwidth}[t]{720pt}#1\end{varwidth}\end{otherlanguage}}\vphantom{ﺄًّيٍﺥٍّ}},
+							boxrule=0pt,
+							nobeforeafter,
+							before upper={\setlength{\parskip}{15pt plus 1pt}}
+					]\textdir TRT \bodydir TRT \pardir TRT\begin{otherlanguage}{arabic}#2\end{otherlanguage}\end{tcolorbox}%
+				}%
+				%
+				% 3. Measure the exact height of the fully rendered container
+				\ifdefined\flexContentH\else\newlength{\flexContentH}\fi%
+				\setlength{\flexContentH}{\dimexpr\ht0+\dp0\relax}%
+				% Collapse depth into height so TeX adds no extra space below baseline
+				\ht0=\flexContentH%
+				\dp0=0pt%
+				%
+				% 4. Set dynamic page height to exact content height
+				\global\pageheight=\flexContentH%
+				\global\textheight=\flexContentH%
+				\global\vsize=\flexContentH%
+				\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\flexContentH\fi
+				%
+				% 5. Output the perfect box onto the page
+				\nointerlineskip\noindent\usebox{0}%
+				%
+				\newpage
+				\endgroup
+				%
+				% Restore original page dimensions
+				\global\pageheight=\savedpageheight%
+				\global\textheight=\savedtextheight%
+				\global\vsize=\savedtextheight%
+				\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\savedpageheight\fi
+					}}
+
+
+
+
+		\newcommand{\partcontainer}[1]{%			
+			% Save current page dimensions
+			\savedpageheight=\pageheight%
+			\savedtextheight=\textheight%
+			
+			\begingroup
+			% 1. Zero out all margins so the box anchors to the exact top-left corner
+			\hoffset=-1in \voffset=-1in 
+			\topmargin=0pt \headheight=0pt \headsep=0pt
+			\oddsidemargin=0pt \evensidemargin=0pt
+			\parskip=0pt \footskip=0pt \topskip=0pt
+			
+			% 2. Render the actual tcolorbox into memory (box 0)
+			\setbox0=\vbox{%
+				\nointerlineskip\noindent
+				\begin{tcolorbox}[
+					width=\pagewidth, 
+					boxsep=0pt, 
+					left=24pt, right=24pt, top=24pt, bottom=24pt,
+					arc=0mm, sharp corners,
+					colback={white}, colframe=white, boxrule=0pt,
+					nobeforeafter,
+					before upper={\setlength{\parskip}{15pt plus 1pt}}
+				]\textdir TRT \bodydir TRT \pardir TRT\begin{otherlanguage}{arabic}#1\end{otherlanguage}\end{tcolorbox}%
+			}%
+			
+			% 3. Measure the exact height of the fully rendered tcolorbox
+			\ifdefined\flexContentH\else\newlength{\flexContentH}\fi%
+			\setlength{\flexContentH}{\dimexpr\ht0+\dp0\relax}% 
+			
+			% 4. Set dynamic page height
+			\global\pageheight=\flexContentH%
+			\global\textheight=\flexContentH%
+			\global\vsize=\flexContentH%
+			
+			% Physically crops the PDF file to match
+			\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\flexContentH\fi
+			
+			% 5. Output the perfect box onto the page
+			\nointerlineskip\noindent\usebox{0}%
+			
+			\newpage
+			\endgroup 
+			
+			% Restore original page dimensions
+			\global\pageheight=\savedpageheight%
+			\global\textheight=\savedtextheight%
+			\global\vsize=\savedtextheight%
+			\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\savedpageheight\fi
+		}
+
+
+			%%%%%%%%%%%ToC for title slide
+
+		\newlist{slideToC}{itemize}{3}
+		\setlist[slideToC,1]{label=,rightmargin=-1bp}
+		\setlist[slideToC,2]{label=,rightmargin=34bp}
+		\setlist[slideToC,3]{label=,rightmargin=40bp}
+
+
+		\newlist{Itemize}{itemize}{3}
+		\setlist[Itemize,1]{label=\textbullet,rightmargin=23bp}
+		\setlist[Itemize,2]{label=\textendash,rightmargin=15bp}
+		\setlist[Itemize,3]{label=$\ast$,rightmargin=7bp}		
+
+		\setlist[itemize,1]{label=\textbullet, rightmargin=23bp, topsep=0pt, itemsep=0pt}
+		\setlist[itemize,2]{label=\textendash, rightmargin=15bp, topsep=0pt, itemsep=0pt}
+		\setlist[itemize,3]{label=$\ast$, rightmargin=7bp, topsep=0pt, itemsep=0pt}
+
+
+		%%%%%%%%%%%%%%%%%%%%%%end Fatma for slides
+		%%%%%%%%%%%Definitions
+
+		\renewenvironment{section}[2]{%
+			\def\SessionsectionID{#1}%
+			\def\SessionsectionTitle{#2}%
+		}{}
+
+		\newenvironment{sectiongroup}[1]{%
+			\def\SessionsectionTitle{#1}%
+		}{}
+
+
+		\newenvironment{checkpoint}[2]{%
+			\def\requiredcorrectID{#1}%
+			\def\attempetwindowID{#2}%
+		}{}
+
+		\newenvironment{toc}{%
+		}{}
+
+		\newenvironment{recap}{%
+		}{}
+
+
+		\newcommand{\metasessionID}[1]{\newcommand{\themetasessionID}{#1}}
+		\newcommand{\subject}[1]{\newcommand{\thesubject}{#1}}
+		\newcommand{\grade}[1]{\newcommand{\thegrade}{#1}}
+		\newcommand{\sessioncountry}[1]{\newcommand{\thesessioncountry}{#1}}
+		\newcommand{\term}[1]{\newcommand{\theterm}{#1}}
+		\newcommand{\languageofinstruction}[1]{\newcommand{\thelanguageofinstruction}{#1}}
+		\newcommand{\sessiontitle}[1]{\newcommand{\thesessiontitle}{#1}}
+		\newcommand{\sessionnumber}[1]{\newcommand{\thesessionnumber}{#1}}
+		\newcommand{\sessiontype}[1]{\newcommand{\thesessiontype}{#1}}
+
+		%%%%%%%%%%% Title and Thank you
+
+		\usepackage{xcolor}
+		\usepackage{adjustbox}
+
+
+		\newcommand{\SessionNumber}[1]{\vspace*{202pt}\centering
+			\tcbox[
+			sharp corners,      % Makes the box rectangular
+			boxrule=0pt,        % No frame/border
+			colback=TitleLightBlue,  % Background color
+			coltext=TitlePageBlue,       % Text color
+			% Padding: combines original fboxsep (18pt) and hspace (10pt)
+			top=9.5pt, bottom=8pt, left=20pt, right=20pt
+			]
+			{\fontsize{28}{28}\selectfont
+			\ifthenelse{\equal{\thelanguageofinstruction}{ar}}%
+				{{\textdir TRT\bodydir TRT \pardir TRT \ArabicSessionPhrase{#1}}}%
+			{\ifthenelse{\equal{\thelanguageofinstruction}{de}}%
+				{Stunde #1}%
+			{\ifthenelse{\equal{\thelanguageofinstruction}{es}}%
+				{Sesión #1}%
+			{\ifthenelse{\equal{\thelanguageofinstruction}{it}}%
+				{Sessione #1}%
+				{Session #1}% en, fr (default)
+			}}}\par}%
+			\vskip-13.5pt}
+
+		\newcommand{\SessionTitle}[1]{\centering
+			\colorbox{TitlePageBlue}{%
+				\begin{adjustbox}{
+						varwidth=0.8\textwidth,
+						margin={25pt 7pt 25pt 12pt} % {left bottom right top}
+					}
+					\centering % <-- This is the fix. Use \centering inside the box.
+					\color{white}%
+					{\fontsize{38}{42}\selectfont \begin{otherlanguage}{arabic}#1\end{otherlanguage}}%
+				\end{adjustbox}%
+			}%
+			\vspace*{10pt}\par
+		}
+
+
+		\newcommand{\SessionSubject}[1]{\centering{{\color{TitlePageBlue}\fontsize{21}{24}\selectfont{#1}}}\par}%
+
+
+		\newcommand{\ThankYou}[1]{%
+			\newpage
+			\pagecolor{TitlePageBlue}
+			\begin{center}
+				\vspace*{\fill}
+				{\color{white}\fontsize{44}{52}\selectfont #1}
+				\vspace*{\fill}
+			\end{center}
+		}
+
+
+
+
+
+
+
+}
+{% ARABIC HIGH (Default)  
+
+        \newunicodechar{•}{{\fontspec{STIX2Text-Regular.otf}\symbol{"2022}}}
+		
+		\newcommand{\examtitle}[1]{{\begin{center}\textbf{#1}\vskip24pt\end{center}}}
+
+
+
+
+		%--Section Title Color
+		\usepackage{xcolor}
+		\usepackage{sectsty}
+		\sectionfont{\fontsize{16}{0}\selectfont\color{TitlePageBlue}}
+
+
+		\usepackage{fancyhdr}
+		\pagestyle{fancy}
+		\renewcommand{\headrulewidth}{0pt}
+
+
+
+
+
+
+		\usepackage{lastpage}
+		\footskip=40pt
+		\headheight=40pt
+		\textheight=517pt
+		\topmargin=-34pt
+
+		\fancyhead[C]{\hspace*{-20pt}\makebox[515.3pt]{\includegraphics[width=.23\textwidth]{NagwaLogo.pdf}\hfill\parbox{100pt}{\vspace*{-32pt}\raggedleft\fontsize{10}{12}\selectfont\textbf{\textit{\textdir TRT احصُل على اﻹجابات}}\\[1pt]\textbf{\textit{\textdir TRT والمزيد من اﻻمتحانات}}\\[1pt]$\blacktriangleright\blacktriangleright\blacktriangleright$}\hspace*{9pt}\includegraphics[width=40pt]{QrCode.pdf}}}
+
+		\newcommand{\examgrade}[1]{\newcommand\theexamgrade{#1}}
+		\newcommand{\subjecttitle}[1]{\newcommand{\thesubjecttitle}{#1}}
+		\newcommand{\examnumber}[1]{\newcommand{\theexamnumber}{#1}}
+
+
+
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%%%%%%%%%%%%%%%%%%%%%begin Fatma for slides
+
+		\usepackage{makecell}
+		\usepackage{multirow}
+		\usetikzlibrary{matrix}
+		\usepackage{cancel}
+		\usepackage{ulem}
+		\usepackage{slashbox}
+
+
+		\usepackage[fitting,skins]{tcolorbox}
+		\usepackage{xcolor}
+		\usepackage{graphicx}
+		\usepackage{fancybox}
+		\usepackage{tabularx}
+		\usepackage{luacolor}
+
+		%%%%%%%%Sizes and Dimensions
+
+		\geometry{papersize={800bp,600bp},margin=0bp}
+
+		\headsep=-46.5bp
+		\oddsidemargin=-72.25pt
+		\evensidemargin=-72.25pt
+
+
+		%%%%%%%Contents
+
+
+		%%%%%%%%%%Standalone slide for direct compilation (takes title and content directly) - Arabic RTL version
+		\newcommand{\slidestandalone}[2]{{\newbox\mybox%
+				\setbox\mybox=\hbox{\fontsize{24}{28}\selectfont\begin{otherlanguage}{arabic}\begin{varwidth}[t]{753pt}#1\end{varwidth}\end{otherlanguage}\hspace{50pt}}%
+				\begin{tcolorbox}[
+						width=\textwidth, 
+						height=.8\textheight, 
+						boxsep=14pt, top=-2pt,
+						arc=0mm,
+						sharp corners,
+						colback={white},
+						colframe=white,
+						enhanced, attach boxed title to top right={xshift=10pt,yshift=5pt},
+						colbacktitle=white,
+						title={{\begin{tcolorbox}[
+									width=\wd\mybox,
+									boxsep=24pt,
+									valign=center,
+									outer  arc=0pt,
+									sharp corners,
+									colback={TitlePageBlue},
+									left=0pt,right=0pt,top=-12pt,bottom=-13.4pt, 
+									colframe=TitlePageBlue]\textdir TRT \bodydir TRT \pardir TRT\color{white}\fontsize{24}{28}\selectfont\begin{otherlanguage}{arabic}\begin{varwidth}[t]{753pt}#1\end{varwidth}\end{otherlanguage}\vphantom{ﺄًّيٍﺥٍّ}\end{tcolorbox}}},
+						boxrule=0pt]\textdir TRT \bodydir TRT \pardir TRT\begin{otherlanguage}{arabic}#2\end{otherlanguage}\end{tcolorbox}
+					}}
+
+
+		\newcommand{\flexiblecontainer}[2]{{\newbox\mybox%
+				% Save current page dimensions
+				\savedpageheight=\pageheight%
+				\savedtextheight=\textheight%
+				% Measure title width
+				\setbox\mybox=\hbox{\fontsize{24}{28}\selectfont\begin{otherlanguage}{arabic}\begin{varwidth}[t]{753pt}#1\end{varwidth}\end{otherlanguage}\hspace{50pt}}%
+				%
+				\begingroup
+				% 1. Zero out all margins so the box anchors to the exact top-left corner
+				\hoffset=-1in \voffset=-1.1in 
+				\topmargin=0pt \headheight=0pt \headsep=0pt
+				\oddsidemargin=0pt \evensidemargin=0pt
+				\parskip=0pt \footskip=0pt \topskip=0pt
+				%
+				% 2. Render the full tcolorbox (with title) into memory (box 0)
+				\setbox0=\vbox{%
+					\nointerlineskip\noindent
+					\begin{tcolorbox}[
+							width=\pagewidth, 
+							boxsep=0pt,
+							left=24pt,
+							right=24pt,
+							top=24pt,
+							bottom=-8pt+24pt,
+							arc=0mm,
+							sharp corners,
+							colback={white},
+							colframe=white,
+							enhanced, attach boxed title to top right={xshift=10pt,yshift=-5pt},
+							colbacktitle=white,
+							title={{\begin{tcolorbox}[
+										width=\wd\mybox,
+										boxsep=24pt,
+										valign=center,
+										outer  arc=0pt,
+										sharp corners,
+										colback={TitlePageBlue},
+										left=0pt,right=0pt,top=-12pt,bottom=-13.4pt, 
+										colframe=TitlePageBlue]\textdir TRT \bodydir TRT \pardir TRT\color{white}\fontsize{24}{28}\selectfont\begin{otherlanguage}{arabic}\begin{varwidth}[t]{753pt}#1\end{varwidth}\end{otherlanguage}\vphantom{ﺄًّيٍﺥٍّ}\end{tcolorbox}}},
+							boxrule=0pt,
+							nobeforeafter,
+							before upper={\setlength{\parskip}{15pt plus 1pt}}
+					]\textdir TRT \bodydir TRT \pardir TRT\begin{otherlanguage}{arabic}#2\end{otherlanguage}\end{tcolorbox}%
+				}%
+				%
+				% 3. Measure the exact height of the fully rendered container
+				\ifdefined\flexContentH\else\newlength{\flexContentH}\fi%
+				\setlength{\flexContentH}{\dimexpr\ht0+\dp0\relax}%
+				% Collapse depth into height so TeX adds no extra space below baseline
+				\ht0=\flexContentH%
+				\dp0=0pt%
+				%
+				% 4. Set dynamic page height to exact content height
+				\global\pageheight=\flexContentH%
+				\global\textheight=\flexContentH%
+				\global\vsize=\flexContentH%
+				\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\flexContentH\fi
+				%
+				% 5. Output the perfect box onto the page
+				\nointerlineskip\noindent\usebox{0}%
+				%
+				\newpage
+				\endgroup
+				%
+				% Restore original page dimensions
+				\global\pageheight=\savedpageheight%
+				\global\textheight=\savedtextheight%
+				\global\vsize=\savedtextheight%
+				\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\savedpageheight\fi
+					}}
+
+
+			
+		\newcommand{\partcontainer}[1]{%			
+			% Save current page dimensions
+			\savedpageheight=\pageheight%
+			\savedtextheight=\textheight%
+			
+			\begingroup
+			% 1. Zero out all margins so the box anchors to the exact top-left corner
+			\hoffset=-1in \voffset=-1in 
+			\topmargin=0pt \headheight=0pt \headsep=0pt
+			\oddsidemargin=0pt \evensidemargin=0pt
+			\parskip=0pt \footskip=0pt \topskip=0pt
+			
+			% 2. Render the actual tcolorbox into memory (box 0)
+			\setbox0=\vbox{%
+				\nointerlineskip\noindent
+				\begin{tcolorbox}[
+					width=\pagewidth, 
+					boxsep=0pt, 
+					left=24pt, right=24pt, top=24pt, bottom=24pt,
+					arc=0mm, sharp corners,
+					colback={white}, colframe=white, boxrule=0pt,
+					nobeforeafter,
+					before upper={\setlength{\parskip}{15pt plus 1pt}}
+				]\textdir TRT \bodydir TRT \pardir TRT\begin{otherlanguage}{arabic}#1\end{otherlanguage}\end{tcolorbox}%
+			}%
+			
+			% 3. Measure the exact height of the fully rendered tcolorbox
+			\ifdefined\flexContentH\else\newlength{\flexContentH}\fi%
+			\setlength{\flexContentH}{\dimexpr\ht0+\dp0\relax}% 
+			
+			% 4. Set dynamic page height
+			\global\pageheight=\flexContentH%
+			\global\textheight=\flexContentH%
+			\global\vsize=\flexContentH%
+			
+			% Physically crops the PDF file to match
+			\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\flexContentH\fi
+			
+			% 5. Output the perfect box onto the page
+			\nointerlineskip\noindent\usebox{0}%
+			
+			\newpage
+			\endgroup 
+			
+			% Restore original page dimensions
+			\global\pageheight=\savedpageheight%
+			\global\textheight=\savedtextheight%
+			\global\vsize=\savedtextheight%
+			\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\savedpageheight\fi
+		}
+
+		% \newcommand{\slidestandalone}[2]{{\newbox\mybox%
+		% 		\setbox\mybox=\hbox{\hspace{20bp}\fontsize{24}{28}\selectfont\begin{otherlanguage}{arabic}#1\end{otherlanguage}\hspace{27bp}}%
+		% 		\begin{tcolorbox}[
+		% 				width=\textwidth, 
+		% 				height=.85\textheight, 
+		% 				boxsep=0pt,top=16pt,bottom=-4pt,left=20pt,right=20pt,
+		% 				arc=0mm,
+		% 				sharp corners,
+		% 				colback={white},
+		% 				colframe=white,
+		% 				enhanced, attach boxed title to top right={xshift=10pt,yshift=0pt},
+		% 				colbacktitle=white,
+		% 				title={{\begin{tcolorbox}[
+		% 							width=\wd\mybox,
+		% 							height=60bp,
+		% 							valign=center,
+		% 							outer arc=0pt,
+		% 							sharp corners,
+		% 							colback={TitlePageBlue},
+		% 							left=0bp,right=0bp,valign=center,
+		% 							colframe=TitlePageBlue]\textdir TRT \bodydir TRT \pardir TRT \hspace{20bp}\color{white}\fontsize{24}{28}\selectfont\begin{otherlanguage}{arabic}#1\end{otherlanguage}\vphantom{ﺄًّيٍﺥٍّ}\hspace{27bp}\end{tcolorbox}}}, 
+		% 				boxrule=0pt]\textdir TRT \bodydir TRT \pardir TRT\begin{otherlanguage}{arabic}#2\end{otherlanguage}\end{tcolorbox}
+		% 			}}
+
+
+			%%%%%%%%%%%ToC for title slide
+
+		\newlist{slideToC}{itemize}{3}
+		\setlist[slideToC,1]{label=,rightmargin=-1bp}
+		\setlist[slideToC,2]{label=,rightmargin=34bp}
+		\setlist[slideToC,3]{label=,rightmargin=40bp}
+
+		% \newlist{Itemize}{itemize}{3}
+		% \setlist[Itemize,1]{label=\textbullet,rightmargin=23bp}
+		% \setlist[Itemize,2]{label=\textendash,rightmargin=15bp}
+		% \setlist[Itemize,3]{label=$\ast$,rightmargin=7bp}
+
+		\newlist{Itemize}{itemize}{3}
+		\setlist[Itemize,1]{label=\textbullet,rightmargin=23bp}
+		\setlist[Itemize,2]{label=\textendash,rightmargin=15bp}
+		\setlist[Itemize,3]{label=$\ast$,rightmargin=7bp}		
+
+		\setlist[itemize,1]{label=\textbullet, rightmargin=23bp, topsep=0pt, itemsep=0pt}
+		\setlist[itemize,2]{label=\textendash, rightmargin=15bp, topsep=0pt, itemsep=0pt}
+		\setlist[itemize,3]{label=$\ast$, rightmargin=7bp, topsep=0pt, itemsep=0pt}
+
+
+		%%%%%%%%%%%%%%%%%%%%%%end Fatma for slides
+		%%%%%%%%%%%Definitions
+
+		\newenvironment{microsession}[2]{%
+			\def\SessionsectionID{#1}%
+			\def\SessionsectionTitle{#2}%
+		}{}
+
+		\newenvironment{toc}{%
+		}{}
+
+		\newenvironment{recap}{%
+		}{}
+
+
+		\newcommand{\metasessionID}[1]{\newcommand{\themetasessionID}{#1}}
+		\newcommand{\subject}[1]{\newcommand{\thesubject}{#1}}
+		\newcommand{\grade}[1]{\newcommand{\thegrade}{#1}}
+		\newcommand{\sessioncountry}[1]{\newcommand{\thesessioncountry}{#1}}
+		\newcommand{\term}[1]{\newcommand{\theterm}{#1}}
+		\newcommand{\languageofinstruction}[1]{\newcommand{\thelanguageofinstruction}{#1}}
+		\newcommand{\sessiontitle}[1]{\newcommand{\thesessiontitle}{#1}}
+		\newcommand{\sessionnumber}[1]{\newcommand{\thesessionnumber}{#1}}
+		\newcommand{\sessiontype}[1]{\newcommand{\thesessiontype}{#1}}
+
+		%%%%%%%%%%%
+
+		%%%%%%%%%%% Title and Thank you
+
+		\usepackage{xcolor}
+		\usepackage{adjustbox}
+
+
+		\newcommand{\SessionNumber}[1]{\vspace*{202pt}\centering
+			\tcbox[
+			sharp corners,      % Makes the box rectangular
+			boxrule=0pt,        % No frame/border
+			colback=TitleLightBlue,  % Background color
+			coltext=TitlePageBlue,       % Text color
+			% Padding: combines original fboxsep (18pt) and hspace (10pt)
+			top=9.5pt, bottom=8pt, left=20pt, right=20pt
+			]
+			{\fontsize{28}{28}\selectfont
+			\ifthenelse{\equal{\thelanguageofinstruction}{ar}}%
+				{{\textdir TRT\bodydir TRT \pardir TRT \ArabicSessionPhrase{#1}}}%
+			{\ifthenelse{\equal{\thelanguageofinstruction}{de}}%
+				{Stunde #1}%
+			{\ifthenelse{\equal{\thelanguageofinstruction}{es}}%
+				{Sesión #1}%
+			{\ifthenelse{\equal{\thelanguageofinstruction}{it}}%
+				{Sessione #1}%
+				{Session #1}% en, fr (default)
+			}}}\par}%
+			\vskip-13.5pt}
+
+		\newcommand{\SessionTitle}[1]{\centering
+			\colorbox{TitlePageBlue}{%
+				\begin{adjustbox}{
+						varwidth=0.8\textwidth,
+						margin={25pt 7pt 25pt 12pt} % {left bottom right top}
+					}
+					\centering % <-- This is the fix. Use \centering inside the box.
+					\color{white}%
+					{\fontsize{38}{42}\selectfont \begin{otherlanguage}{arabic}#1\end{otherlanguage}}%
+				\end{adjustbox}%
+			}%
+			\vspace*{10pt}\par
+		}
+
+
+		\newcommand{\SessionSubject}[1]{\centering{{\color{TitlePageBlue}\fontsize{21}{24}\selectfont{#1}}}\par}%
+
+
+		\newcommand{\ThankYou}[1]{%
+			\newpage
+			\pagecolor{TitlePageBlue}
+			\begin{center}
+				\vspace*{\fill}
+				{\color{white}\fontsize{44}{52}\selectfont #1}
+				\vspace*{\fill}
+			\end{center}
+		}
+
+
+
+
+}
+}
+{% ENGLISH BLOCK (Default)  
+\ifthenelse{\equal{\nagwagrade}{low}}
+{% ENGLISH LOW 
+
+		\setmainfont{KleeOne-SemiBold.ttf}
+		\setmathfont{KleeOne-SemiBold.ttf}
+
+
+		%--Section Title Color
+		\usepackage{xcolor}
+		\usepackage{sectsty}
+		\sectionfont{\fontsize{18}{21}\selectfont}
+		\subsectionfont{\fontsize{18}{21}\selectfont}
+
+
+		\usepackage{fancyhdr}
+		\pagestyle{fancy}
+		\renewcommand{\headrulewidth}{0pt}
+
+
+
+
+
+
+		\usepackage{lastpage}
+		\footskip=0pt
+		\headheight=0pt
+		\topmargin=0pt
+
+		\fancyfoot[C]{\ifthenelse{\value{page}=1}{\includegraphics[width=\textwidth]{PDFAd.jpg}\\[\baselineskip]{\fontsize{11}{0}\selectfont\hspace*{-20pt}\makebox[515.3pt]{\mbox{{\textbf{\textit{\theexamgrade~•~\thesubjecttitle~•~Paper \theexamnumber}}}}\hfill\mbox{{\textbf{\textit{Page \thepage\ of \pageref{LastPage}}}}}}}}{\fontsize{11}{0}\selectfont\hspace*{-20pt}\makebox[515.3pt]{\mbox{\textbf{\textit{\theexamgrade~•~\thesubjecttitle~•~Paper \theexamnumber}}}\hfill\mbox{\textbf{\textit{Page \thepage\ of \pageref{LastPage}}}}}}}
+
+
+		\fancyhead[C]{\hspace*{-20pt}\makebox[515.3pt]{\includegraphics[width=.23\textwidth]{NagwaLogo.pdf}\hfill\parbox{100pt}{\vspace*{-32pt}\raggedleft\fontsize{11}{12}\selectfont\textbf{\textit{Access more exams}}\\[1pt]\textbf{\textit{and answers}}\\[1pt]$\blacktriangleright\blacktriangleright\blacktriangleright$}\hspace*{9pt}\includegraphics[width=40pt]{QrCode.pdf}}}
+
+
+
+		\newcommand{\examgrade}[1]{\newcommand\theexamgrade{#1}}
+		\newcommand{\subjecttitle}[1]{\newcommand{\thesubjecttitle}{#1}}
+		\newcommand{\examnumber}[1]{\newcommand{\theexamnumber}{#1}}
+
+
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+		%%%%%%%%%%%%%%%%%%%%%%begin Fatma for slides
+
+		\usepackage{makecell}
+		\usepackage{multirow}
+		\usetikzlibrary{matrix}
+		\usepackage{cancel}
+		\usepackage{ulem}
+		\usepackage{slashbox}
+
+		\usepackage[fitting,skins]{tcolorbox}
+		\usepackage{xcolor}
+		\usepackage{graphicx}
+		\usepackage{fancybox}
+		\usepackage{tabularx}
+		\usepackage{luacolor}
+
+		%%%%%%%%Sizes and Dimensions
+
+		\geometry{papersize={800bp,600bp},margin=0bp}
+
+		\headsep=-46.5bp
+		\oddsidemargin=-72.25pt
+		\evensidemargin=-72.25pt
+
+
+
+
+		%%%%%%%%%%%Standalone slide for direct compilation (takes title and content directly)
+		\newcommand{\slidestandalone}[2]{{\newbox\mybox%
+				\setbox\mybox=\hbox{\fontsize{24}{28}\selectfont\bf{\begin{varwidth}[t]{720pt}#1\end{varwidth}}\hspace{50pt}}%
+				\begin{tcolorbox}[
+					width=\textwidth, 
+					height=.8\textheight, 
+					boxsep=13pt, top=17pt,
+					arc=0mm,
+					sharp corners,
+					colback={white},
+					colframe=white,
+					enhanced, 
+					attach boxed title to top left={xshift=-10pt,yshift=5pt},
+					colbacktitle=white,
+					boxed title style={empty,
+						boxsep=24pt,
+						valign=center,
+						left=8pt,right=31pt,top=-2.8pt,bottom=-7pt,
+						frame code={
+							\path[fill=DarkBlueBar](frame.north west)
+							-- (frame.north east)
+							to[out=-90,in=-2,looseness=1] ([yshift=-3.9mm,xshift=-30mm]frame.south east)
+							-- ([yshift=-3.9mm]frame.south west)
+							-- (frame.north west)
+							-- cycle;
+							\path[fill=LightBlueBar](frame.north west)
+							-- (frame.north east)
+							to[out=-100,in=0,looseness=1] ([yshift=0mm,xshift=-30mm]frame.south east)
+							-- ([yshift=0mm]frame.south west)
+							-- (frame.north west)
+							-- cycle;
+						},
+					},
+					title={\color{white}\fontsize{35bp}{38bp}\selectfont\bf{\begin{varwidth}[t]{720pt}#1\end{varwidth}}\vphantom{Äg}},
+					boxrule=0pt]#2\end{tcolorbox}
+					}}
+
+
+
+
+		\newcommand{\flexiblecontainer}[2]{%
+			% Save current page dimensions
+			\savedpageheight=\pageheight%
+			\savedtextheight=\textheight%
+			
+			\begingroup
+			% 1. Zero out all LaTeX layout margins and offsets
+			\hoffset=-1in \voffset=-1.1in 
+			\topmargin=0pt \headheight=0pt \headsep=0pt
+			\oddsidemargin=0pt \evensidemargin=0pt
+			\parskip=0pt \footskip=0pt \topskip=0pt
+			
+			% 2. Render the tcolorbox into memory (box 0) to get flawless text wrapping
+			\setbox0=\vbox{%
+				\nointerlineskip\noindent
+				\begin{tcolorbox}[
+					enhanced,
+					width=\pagewidth, 
+					boxsep=0pt,
+					left=24pt, right=24pt,
+					top=15pt+24pt,
+					bottom=-8pt+24pt,
+					arc=0mm, sharp corners,
+					colback={white}, colframe=white, boxrule=0pt,
+					nobeforeafter,
+					attach boxed title to top left={xshift=-10pt, yshift=-5pt},
+					colbacktitle=white,
+					boxed title style={empty,
+						boxsep=24pt, % Kept your inner title padding so your TikZ paths don't collapse
+						valign=center,
+						left=8pt, right=31pt, top=-2.8pt, bottom=-7pt,
+						frame code={
+							\path[fill=DarkBlueBar](frame.north west)
+							-- (frame.north east)
+							to[out=-90,in=-2,looseness=1] ([yshift=-3.9mm,xshift=-30mm]frame.south east)
+							-- ([yshift=-3.9mm]frame.south west)
+							-- (frame.north west)
+							-- cycle;
+							\path[fill=LightBlueBar](frame.north west)
+							-- (frame.north east)
+							to[out=-100,in=0,looseness=1] ([yshift=0mm,xshift=-30mm]frame.south east)
+							-- ([yshift=0mm]frame.south west)
+							-- (frame.north west)
+							-- cycle;
+						},
+					},
+					title={\color{white}\fontsize{35bp}{38bp}\selectfont\bfseries\begin{varwidth}[t]{720pt}#1\end{varwidth}\vphantom{Äg}},
+					before upper={\setlength{\parskip}{15pt plus 1pt}}
+				]#2\end{tcolorbox}%
+			}%
+			
+			% 3. Measure the exact height of the fully rendered container
+			\ifdefined\flexContentH\else\newlength{\flexContentH}\fi%
+			\setlength{\flexContentH}{\dimexpr\ht0+\dp0\relax}%
+			% Collapse depth into height so TeX adds no extra space below baseline
+			\ht0=\flexContentH%
+			\dp0=0pt%
+			
+			% 4. Set dynamic page height
+			\global\pageheight=\flexContentH%
+			\global\textheight=\flexContentH%
+			\global\vsize=\flexContentH%
+			\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\flexContentH\fi
+			
+			% 5. Output the perfect box onto the page
+			\nointerlineskip\noindent\usebox{0}%
+			
+			\newpage
+			\endgroup 
+			
+			% Restore original page dimensions
+			\global\pageheight=\savedpageheight%
+			\global\textheight=\savedtextheight%
+			\global\vsize=\savedtextheight%
+			\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\savedpageheight\fi
+		}
+
+
+		\newcommand{\partcontainer}[1]{%			
+			% Save current page dimensions
+			\savedpageheight=\pageheight%
+			\savedtextheight=\textheight%
+			
+			\begingroup
+			% 1. Zero out all margins so the box anchors to the exact top-left corner
+			\hoffset=-1in \voffset=-1in 
+			\topmargin=0pt \headheight=0pt \headsep=0pt
+			\oddsidemargin=0pt \evensidemargin=0pt
+			\parskip=0pt \footskip=0pt \topskip=0pt
+			
+			% 2. Render the actual tcolorbox into memory (box 0)
+			\setbox0=\vbox{%
+				\nointerlineskip\noindent
+				\begin{tcolorbox}[
+					width=\pagewidth, 
+					boxsep=0pt, 
+					left=24pt, right=24pt, top=24pt, bottom=24pt, % <--- ADDED 24pt PADDING HERE
+					arc=0mm, sharp corners,
+					colback={white}, colframe=white, boxrule=0pt,
+					nobeforeafter,
+					before upper={\setlength{\parskip}{15pt plus 1pt}}
+				]#1\end{tcolorbox}%
+			}%
+			
+			% 3. Measure the exact height of the fully rendered tcolorbox
+			\ifdefined\flexContentH\else\newlength{\flexContentH}\fi%
+			\setlength{\flexContentH}{\dimexpr\ht0+\dp0\relax}% 
+			
+			% 4. Set dynamic page height
+			\global\pageheight=\flexContentH%
+			\global\textheight=\flexContentH%
+			\global\vsize=\flexContentH%
+			
+			% Physically crops the PDF file to match
+			\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\flexContentH\fi
+			
+			% 5. Output the perfect box onto the page
+			\nointerlineskip\noindent\usebox{0}%
+			
+			\newpage
+			\endgroup 
+			
+			% Restore original page dimensions
+			\global\pageheight=\savedpageheight%
+			\global\textheight=\savedtextheight%
+			\global\vsize=\savedtextheight%
+			\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\savedpageheight\fi
+		}		
+
+
+
+		%%%%%%%%%%%ToC for title slide
+
+		\newlist{slideToC}{itemize}{3}
+		\setlist[slideToC,1]{label=,leftmargin=-1bp}
+		\setlist[slideToC,2]{label=,leftmargin=34bp}
+		\setlist[slideToC,3]{label=,leftmargin=40bp}
+
+		\setlist[itemize,1]{label=\textbullet, leftmargin=23bp, topsep=0pt, itemsep=0pt}
+		\setlist[itemize,2]{label=\textendash, leftmargin=15bp, topsep=0pt, itemsep=0pt}
+		\setlist[itemize,3]{label=$\ast$, leftmargin=7bp, topsep=0pt, itemsep=0pt}
+
+
+		%%%%%%%%%%%%%%%%%%%%%%end Fatma for slides
+		%%%%%%%%%%%Definitions
+
+		\renewenvironment{section}[2]{%
+			\def\SessionsectionID{#1}%
+			\def\SessionsectionTitle{#2}%
+		}{}
+
+		\newenvironment{sectiongroup}[1]{%
+			\def\SessionsectionTitle{#1}%
+		}{}
+
+
+		\newenvironment{checkpoint}[2]{%
+			\def\requiredcorrectID{#1}%
+			\def\attempetwindowID{#2}%
+		}{}
+
+		\newenvironment{toc}{%
+		}{}
+
+		\newenvironment{recap}{%
+		}{}
+
+
+		\newcommand{\metasessionID}[1]{\newcommand{\themetasessionID}{#1}}
+		\newcommand{\subject}[1]{\newcommand{\thesubject}{#1}}
+		\newcommand{\grade}[1]{\newcommand{\thegrade}{#1}}
+		\newcommand{\sessioncountry}[1]{\newcommand{\thesessioncountry}{#1}}
+		\newcommand{\term}[1]{\newcommand{\theterm}{#1}}
+		\newcommand{\languageofinstruction}[1]{\newcommand{\thelanguageofinstruction}{#1}}
+		\newcommand{\sessiontitle}[1]{\newcommand{\thesessiontitle}{#1}}
+
+
+		%%%%%%%%%%% Title and Thank you
+
+		\usepackage{xcolor}
+		\usepackage{adjustbox}
+
+		% --- Session word based on \languageofinstruction ---
+		\newcommand{\GetSessionWord}{%
+			\ifthenelse{\equal{\thelanguageofinstruction}{de}}%
+				{Stunde}%
+			{\ifthenelse{\equal{\thelanguageofinstruction}{es}}%
+				{Sesión}%
+			{\ifthenelse{\equal{\thelanguageofinstruction}{it}}%
+				{Sessione}%
+				{Session}% en, fr (default)
+			}}%
+		}
+
+		% --- SessionNumber command ---
+		\newcommand{\SessionNumber}[1]{%
+			\par\vspace*{202pt}\centering
+			\tcbox[
+			arc=0pt,		% Makes the box rectangular
+			boxrule=0pt,	% No frame/border
+			colback=TitleLightBlue,	% Background color
+			coltext=TitlePageBlue,	% Text color
+			top=15pt, bottom=15pt, left=20pt, right=20pt	% Padding
+			]%
+			{\fontsize{24}{24}\selectfont
+			\ifthenelse{\equal{\thelanguageofinstruction}{ar}}%
+				{\ArabicSessionPhrase{#1}}%
+				{\GetSessionWord\ #1}%
+			\par}%
+			\vskip-13.5pt\par
+		}
+
+		\newcommand{\SessionTitle}[1]{\centering
+			\colorbox{TitlePageBlue}{%
+				\begin{adjustbox}{
+						varwidth=0.8\textwidth,
+						margin={25pt 12pt 25pt 19pt} % {left bottom right top}
+					}
+					\centering % <-- This is the fix. Use \centering inside the box.
+					\color{white}%
+					\fontsize{32}{40}\selectfont #1%
+				\end{adjustbox}%
+			}%
+			\vspace*{10pt}\par
+		}
+
+
+		\newcommand{\SessionSubject}[1]{{\color{TitlePageBlue}\fontsize{18}{18}\selectfont #1}\par}%
+
+
+		\newcommand{\ThankYou}[1]{%
+			\newpage
+			\pagecolor{TitlePageBlue}
+			\begin{center}
+				\vspace*{\fill}
+				{\color{white}\fontsize{44}{52}\selectfont #1}
+				\vspace*{\fill}
+			\end{center}
+		}
+
+
+
+
+
+
+
+}
+{% ENGLISH HIGH (Default)  
+
+
+		\setmainfont{STIX2Text-Regular.otf}[
+		BoldFont = STIX2Text-Bold.otf,
+		ItalicFont = STIX2Text-Italic.otf,
+		BoldItalicFont = STIX2Text-BoldItalic.otf]
+		\setmathfont[StylisticSet=8]{NagwaMath.otf}
+
+
+		%--Section Title Color
+		\usepackage{xcolor}
+		\usepackage{sectsty}
+		\sectionfont{\fontsize{18}{21}\selectfont}
+		\subsectionfont{\fontsize{18}{21}\selectfont}
+
+
+		\usepackage{fancyhdr}
+		\pagestyle{fancy}
+		\renewcommand{\headrulewidth}{0pt}
+
+
+
+
+
+		\usepackage{lastpage}
+		\footskip=0pt
+		\headheight=0pt
+		\topmargin=0pt
+
+		\fancyfoot[C]{\ifthenelse{\value{page}=1}{\includegraphics[width=\textwidth]{PDFAd.jpg}\\[\baselineskip]{\fontsize{11}{0}\selectfont\hspace*{-20pt}\makebox[515.3pt]{\mbox{{\textbf{\textit{\theexamgrade~•~\thesubjecttitle~•~Paper \theexamnumber}}}}\hfill\mbox{{\textbf{\textit{Page \thepage\ of \pageref{LastPage}}}}}}}}{\fontsize{11}{0}\selectfont\hspace*{-20pt}\makebox[515.3pt]{\mbox{\textbf{\textit{\theexamgrade~•~\thesubjecttitle~•~Paper \theexamnumber}}}\hfill\mbox{\textbf{\textit{Page \thepage\ of \pageref{LastPage}}}}}}}
+
+
+		\fancyhead[C]{\hspace*{-20pt}\makebox[515.3pt]{\includegraphics[width=.23\textwidth]{NagwaLogo.pdf}\hfill\parbox{100pt}{\vspace*{-32pt}\raggedleft\fontsize{11}{12}\selectfont\textbf{\textit{Access more exams}}\\[1pt]\textbf{\textit{and answers}}\\[1pt]$\blacktriangleright\blacktriangleright\blacktriangleright$}\hspace*{9pt}\includegraphics[width=40pt]{QrCode.pdf}}}
+
+
+
+		\newcommand{\examgrade}[1]{\newcommand\theexamgrade{#1}}
+		\newcommand{\subjecttitle}[1]{\newcommand{\thesubjecttitle}{#1}}
+		\newcommand{\examnumber}[1]{\newcommand{\theexamnumber}{#1}}
+
+
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+		%%%%%%%%%%%%%%%%%%%%%%begin Fatma for slides
+
+		\usepackage{makecell}
+		\usepackage{multirow}
+		\usetikzlibrary{matrix}
+		\usepackage{cancel}
+		\usepackage{ulem}
+		\usepackage{slashbox}
+
+		\usepackage[fitting,skins]{tcolorbox}
+		\usepackage{xcolor}
+		\usepackage{graphicx}
+		\usepackage{fancybox}
+		\usepackage{tabularx}
+		\usepackage{luacolor}
+
+		%%%%%%%%Sizes and Dimensions
+
+		\geometry{papersize={800bp,600bp},margin=0bp}
+
+		\headsep=-46.5bp
+		\oddsidemargin=-72.25pt
+		\evensidemargin=-72.25pt
+
+
+
+
+
+		%%%%%%%Contents
+
+
+		%%%%%%%%%%Standalone slide for direct compilation (takes title and content directly)
+		\newcommand{\slidestandalone}[2]{{\newbox\mybox%
+				\setbox\mybox=\hbox{\fontsize{24}{28}\selectfont\begin{varwidth}[t]{753pt}#1\end{varwidth}\hspace{50pt}}%
+				\begin{tcolorbox}[
+						width=\textwidth, 
+						height=.8\textheight,
+						boxsep=14pt,top=0pt,
+						arc=0mm,
+						sharp corners,
+						colback={white},
+						colframe=white,
+						enhanced, attach boxed title to top left={xshift=-10pt,yshift=5pt},
+						colbacktitle=white,
+						title={{\begin{tcolorbox}[
+									width=\wd\mybox,
+									boxsep=24pt, 
+									valign=center,
+									outer  arc=0pt,
+									sharp corners,
+									colback={TitlePageBlue},
+									left=0pt,right=0pt,top=-3pt,bottom=-7.9pt, 
+									colframe=TitlePageBlue]\color{white}\fontsize{24}{28}\selectfont\begin{varwidth}[t]{753pt}#1\end{varwidth}\vphantom{Äg}\end{tcolorbox}}},
+						boxrule=0pt]#2\end{tcolorbox}
+					}}
+
+
+
+		\newcommand{\flexiblecontainer}[2]{{\newbox\mybox%
+				% Save current page dimensions
+				\savedpageheight=\pageheight%
+				\savedtextheight=\textheight%
+				% Measure title width
+				\setbox\mybox=\hbox{\fontsize{24}{28}\selectfont\begin{varwidth}[t]{752pt}#1\end{varwidth}\hspace{50pt}}%
+				%
+				\begingroup
+				% 1. Zero out all margins so the box anchors to the exact top-left corner
+				\hoffset=-1in \voffset=-1.1in 
+				\topmargin=0pt \headheight=0pt \headsep=0pt
+				\oddsidemargin=0pt \evensidemargin=0pt
+				\parskip=0pt \footskip=0pt \topskip=0pt
+				%
+				% 2. Render the full tcolorbox (with title) into memory (box 0)
+				\setbox0=\vbox{%
+					\nointerlineskip\noindent
+					\begin{tcolorbox}[
+							width=\pagewidth, 
+							boxsep=0pt,
+							left=24pt,
+							right=24pt,
+							top=24pt,
+							bottom=-8pt+24pt,
+							arc=0mm,
+							sharp corners,
+							colback={white},
+							colframe=white,
+							enhanced, attach boxed title to top left={xshift=-10pt,yshift=-6pt},
+							colbacktitle=white,
+							title={{\begin{tcolorbox}[
+										width=\wd\mybox,
+										boxsep=24pt, 
+										valign=center,
+										outer  arc=0pt,
+										sharp corners,
+										colback={TitlePageBlue},
+										left=0pt,right=0pt,top=-3pt,bottom=-7.9pt, 
+										colframe=TitlePageBlue]\color{white}\fontsize{24}{28}\selectfont\begin{varwidth}[t]{752pt}#1\end{varwidth}\vphantom{Äg}\end{tcolorbox}}},
+							boxrule=0pt,
+							nobeforeafter,
+							before upper={\setlength{\parskip}{15pt plus 1pt}}
+					]#2\end{tcolorbox}%
+				}%
+				%
+				% 3. Measure the exact height of the fully rendered container
+				\ifdefined\flexContentH\else\newlength{\flexContentH}\fi%
+				\setlength{\flexContentH}{\dimexpr\ht0+\dp0\relax}%
+				% Collapse depth into height so TeX adds no extra space below baseline
+				\ht0=\flexContentH%
+				\dp0=0pt%
+				%
+				% 4. Set dynamic page height to exact content height
+				\global\pageheight=\flexContentH%
+				\global\textheight=\flexContentH%
+				\global\vsize=\flexContentH%
+				\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\flexContentH\fi
+				%
+				% 5. Output the perfect box onto the page
+				\nointerlineskip\noindent\usebox{0}%
+				%
+				\newpage
+				\endgroup
+				%
+				% Restore original page dimensions
+				\global\pageheight=\savedpageheight%
+				\global\textheight=\savedtextheight%
+				\global\vsize=\savedtextheight%
+				\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\savedpageheight\fi
+					}}
+
+		\newcommand{\partcontainer}[1]{%			
+			% Save current page dimensions
+			\savedpageheight=\pageheight%
+			\savedtextheight=\textheight%
+			
+			\begingroup
+			% 1. Zero out all margins so the box anchors to the exact top-left corner
+			\hoffset=-1in \voffset=-1in 
+			\topmargin=0pt \headheight=0pt \headsep=0pt
+			\oddsidemargin=0pt \evensidemargin=0pt
+			\parskip=0pt \footskip=0pt \topskip=0pt
+			
+			% 2. Render the actual tcolorbox into memory (box 0)
+			\setbox0=\vbox{%
+				\nointerlineskip\noindent
+				\begin{tcolorbox}[
+					width=\pagewidth, 
+					boxsep=0pt, 
+					left=24pt, right=24pt, top=24pt, bottom=24pt,
+					arc=0mm, sharp corners,
+					colback={white}, colframe=white, boxrule=0pt,
+					nobeforeafter,
+					before upper={\setlength{\parskip}{15pt plus 1pt}}
+				]#1\end{tcolorbox}%
+			}%
+			
+			% 3. Measure the exact height of the fully rendered tcolorbox
+			\ifdefined\flexContentH\else\newlength{\flexContentH}\fi%
+			\setlength{\flexContentH}{\dimexpr\ht0+\dp0\relax}% 
+			
+			% 4. Set dynamic page height
+			\global\pageheight=\flexContentH%
+			\global\textheight=\flexContentH%
+			\global\vsize=\flexContentH%
+			
+			% Physically crops the PDF file to match
+			\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\flexContentH\fi
+			
+			% 5. Output the perfect box onto the page
+			\nointerlineskip\noindent\usebox{0}%
+			
+			\newpage
+			\endgroup 
+			
+			% Restore original page dimensions
+			\global\pageheight=\savedpageheight%
+			\global\textheight=\savedtextheight%
+			\global\vsize=\savedtextheight%
+			\ifx\pdfpageheight\undefined\else\global\pdfpageheight=\savedpageheight\fi
+		}
+
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%% New version of \slidestandalone with clearer structure
+	%%% and explicit dimensions - Title box height: 65pt
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\newcommand{\slidestandalonenew}[2]{%
+		% Define explicit dimensions
+		\newlength{\titleBoxHeight}%
+		\newlength{\titleBoxWidth}%
+		\newlength{\contentBoxWidth}%
+		\newlength{\contentBoxHeight}%
+		\newlength{\titleTextWidth}%
+		%
+		\setlength{\titleBoxHeight}{65pt}%              % Title box height (exactly 65pt as requested)
+		\setlength{\titleTextWidth}{\textwidth}%             % Title text maximum width
+		\setlength{\contentBoxWidth}{\textwidth}%       % Content box width
+		\setlength{\contentBoxHeight}{\textheight}%  % Content box height
+		%	
+
+		% Measure the actual title width
+		\newbox\titleMeasureBox%
+		\setbox\titleMeasureBox=\hbox{%
+			\fontsize{24}{28}\selectfont%
+			\begin{varwidth}[t]{\titleTextWidth}%
+				#1%
+			\end{varwidth}%
+		}%
+		\setlength{\titleBoxWidth}{\wd\titleMeasureBox}%
+		\addtolength{\titleBoxWidth}{50pt}% Add horizontal spacing
+		%
+		% Create the main content box 
+		\begin{tcolorbox}[
+			width=\contentBoxWidth,
+			height=\contentBoxHeight,
+			boxsep=0pt,
+			left=24pt,
+			right=24pt,
+			top=24pt,
+			bottom=24pt,
+			arc=0mm,
+			sharp corners,
+			colback=white,
+			colframe=white,
+			enhanced,
+			attach boxed title to top left={xshift=-10pt, yshift=-5pt},
+			colbacktitle=white,
+			boxrule=0pt,
+			title={%
+				% Create the title box with TitlePageBlue background
+				\begin{tcolorbox}[
+					width=\titleBoxWidth,
+					height=\titleBoxHeight,
+					halign=flush left,
+					valign=center,
+					boxsep=0pt,
+					left=24pt,
+					right=24pt,
+					top=0pt,
+					bottom=0pt,
+					outer arc=0pt,
+					sharp corners,
+					colback=TitlePageBlue,
+					colframe=TitlePageBlue,
+					boxrule=0pt
+				]%
+					\color{white}%
+					\fontsize{24}{28}\selectfont%
+					\begin{varwidth}[t]{\titleTextWidth}%
+						#1%
+					\end{varwidth}%
+					\vphantom{Äg}% Ensure consistent height
+				\end{tcolorbox}%
+			}
+		]%
+			#2% Content goes here
+		\end{tcolorbox}%
+	}
+
+
+
+
+		% \newcommand{\slidestandalone}[2]{{\newbox\mybox%
+		% 		\setbox\mybox=\hbox{\hspace{21bp}\fontsize{24}{28}\selectfont#1\hspace{29bp}}%
+		% 		\begin{tcolorbox}[
+		% 				width=\textwidth, 
+		% 				height=.85\textheight, 
+		% 				boxsep=0pt,top=16pt,bottom=-4pt,left=20pt,right=20pt,
+		% 				arc=0mm,
+		% 				sharp corners,
+		% 				colback={white},
+		% 				colframe=white,
+		% 				enhanced, attach boxed title to top left={xshift=-10pt,yshift=0pt},
+		% 				colbacktitle=white,
+		% 				title={{\begin{tcolorbox}[
+		% 							width=\wd\mybox,
+		% 							height=60bp,									
+		% 							outer arc=0pt,
+		% 							sharp corners,
+		% 							colback={TitlePageBlue},
+		% 							left=0bp,right=0bp,valign=center, 
+		% 							colframe=TitlePageBlue]\hspace{21bp}\color{white}\fontsize{24}{28}\selectfont#1\vphantom{Äg}\hspace{29bp}\end{tcolorbox}}},
+		% 				boxrule=0pt]#2\end{tcolorbox}
+		% 			}}
+
+
+		%%%%%%%%%%%ToC for title slide
+
+		\newlist{slideToC}{itemize}{3}
+		\setlist[slideToC,1]{label=,leftmargin=-1bp}
+		\setlist[slideToC,2]{label=,leftmargin=34bp}
+		\setlist[slideToC,3]{label=,leftmargin=40bp}
+
+		\setlist[itemize,1]{label=\textbullet, leftmargin=23bp, topsep=0pt, itemsep=0pt}
+		\setlist[itemize,2]{label=\textendash, leftmargin=15bp, topsep=0pt, itemsep=0pt}
+		\setlist[itemize,3]{label=$\ast$, leftmargin=7bp, topsep=0pt, itemsep=0pt}
+
+
+
+		\newenvironment{microsession}[2]{%
+			\def\SessionsectionID{#1}%
+			\def\SessionsectionTitle{#2}%
+		}{}
+
+		\newenvironment{toc}{%
+		}{}
+
+		\newenvironment{recap}{%
+		}{}
+
+
+		\newcommand{\metasessionID}[1]{\newcommand{\themetasessionID}{#1}}
+		\newcommand{\subject}[1]{\newcommand{\thesubject}{#1}}
+		\newcommand{\grade}[1]{\newcommand{\thegrade}{#1}}
+		\newcommand{\sessioncountry}[1]{\newcommand{\thesessioncountry}{#1}}
+		\newcommand{\term}[1]{\newcommand{\theterm}{#1}}
+		\newcommand{\languageofinstruction}[1]{\newcommand{\thelanguageofinstruction}{#1}}
+		\newcommand{\sessiontitle}[1]{\newcommand{\thesessiontitle}{#1}}
+
+
+
+		%%%%%%%%%%% Title and Thank you
+
+		\usepackage{xcolor}
+		\usepackage{adjustbox}
+
+		% --- Session word based on \languageofinstruction ---
+		\newcommand{\GetSessionWord}{%
+			\ifthenelse{\equal{\thelanguageofinstruction}{de}}%
+				{Stunde}%
+			{\ifthenelse{\equal{\thelanguageofinstruction}{es}}%
+				{Sesión}%
+			{\ifthenelse{\equal{\thelanguageofinstruction}{it}}%
+				{Sessione}%
+				{Session}% en, fr (default)
+			}}%
+		}
+
+		% --- SessionNumber command ---
+		\newcommand{\SessionNumber}[1]{%
+			\par\vspace*{202pt}\centering
+			\tcbox[
+			arc=0pt,		% Makes the box rectangular
+			boxrule=0pt,	% No frame/border
+			colback=TitleLightBlue,	% Background color
+			coltext=TitlePageBlue,	% Text color
+			top=15pt, bottom=15pt, left=20pt, right=20pt	% Padding
+			]%
+			{\fontsize{24}{24}\selectfont
+			\ifthenelse{\equal{\thelanguageofinstruction}{ar}}%
+				{\ArabicSessionPhrase{#1}}%
+				{\GetSessionWord\ #1}%
+			\par}%
+			\vskip-13.5pt\par
+		}
+
+		\newcommand{\SessionTitle}[1]{\centering
+			\colorbox{TitlePageBlue}{%
+				\begin{adjustbox}{
+						varwidth=0.8\textwidth,
+						margin={25pt 12pt 25pt 19pt} % {left bottom right top}
+					}
+					\centering % <-- This is the fix. Use \centering inside the box.
+					\color{white}%
+					\fontsize{32}{40}\selectfont #1%
+				\end{adjustbox}%
+			}%
+			\vspace*{10pt}\par
+		}
+
+
+		\newcommand{\SessionSubject}[1]{{\color{TitlePageBlue}\fontsize{18}{18}\selectfont #1}\par}%
+
+
+		\newcommand{\ThankYou}[1]{%
+			\newpage
+			\pagecolor{TitlePageBlue}
+			\begin{center}
+				\vspace*{\fill}
+				{\color{white}\fontsize{44}{52}\selectfont #1}
+				\vspace*{\fill}
+			\end{center}
+		}
+
+
+
+}
+}
+
+
+
+
+

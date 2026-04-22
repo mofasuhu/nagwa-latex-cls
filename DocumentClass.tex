@@ -1,0 +1,601 @@
+\ifthenelse{\equal{\@objecttype}{Session_Slide}}
+{%Session_Slide
+	\LoadClass[10pt]{article}
+
+	\RequirePackage{silence}
+	\WarningsOff*
+
+	\PassOptionsToPackage{bidi=basic,english}{babel}
+	\RequirePackage{babel}
+	\RequirePackage{fontspec}
+	% \RequirePackage{roughnotation}
+	\RequirePackage{fp}
+	\AtEndPreamble{%
+		\ifdefined\babelprovide
+			\babelprovide[import, onchar=ids fonts]{arabic}%
+		\fi
+		\ifdefined\babelfont
+			\babelfont[arabic]{rm}[Script=Arabic, Renderer=HarfBuzz, BoldFont={Noto-Bold.ttf}, SlantedFont={Noto-Regular.ttf}, SlantedFeatures={FakeSlant=0.15}]{Noto-Regular.ttf}%
+		\fi
+	}
+
+	\RequirePackage{ocgx2} % For freewriting layers
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\usepackage[a4paper,top=30pt,bottom=60pt]{geometry}
+	%\usepackage{amsmath}
+	\usepackage{ifthen}
+	%\usepackage{stix}
+	\usepackage{tkz-euclide}
+	\usepackage{tikz}
+	\usepackage{graphicx}
+	\usepackage{tasks}
+	\usepackage{colortbl}
+    \ifthenelse{\equal{\nagwalang}{ar}}
+	{
+		\usepackage{fontspec}
+		\defaultfontfeatures{RawFeature=+invisible}    
+	}{}
+	\usepackage{chemformula}
+	\usepackage{tabulary}
+	\usepackage{wrapfig}
+	\usepackage{alphalph}
+	\usepackage{enumitem}
+	\usepackage{svg}
+	%	\usepackage{comment}
+	\usepackage{xstring}
+	\usepackage{keyval}
+	%	\usepackage{newunicodechar}
+	\usepackage{adjustbox}
+	
+	%	\usetkzobj{all}
+	\usetikzlibrary{angles}
+	\usetikzlibrary{automata}
+	\usetikzlibrary{arrows}
+	\usetikzlibrary{arrows.meta}
+	\usetikzlibrary{calc}
+	\usetikzlibrary{decorations.markings}
+	\usetikzlibrary{intersections}
+	\usetikzlibrary{patterns}
+	\usetikzlibrary{positioning}
+	\usetikzlibrary{quotes}
+	\usetikzlibrary{shapes}
+	\usetikzlibrary{shapes.callouts}
+	\usetikzlibrary{shapes.geometric}
+	
+	%% Hyperlinks
+	\usepackage{hyperref}
+	\hypersetup{pdfborder={0 0 0}}	% White frame for links
+	\hypersetup{pdfpagemode=UseNone}   
+	
+	
+	%% Pretty Print
+	\usepackage[all]{nowidow}	% No widows
+	\widowpenalty1000			% No widows
+	\clubpenalty1000			% No orphans
+	\usepackage[none]{hyphenat}	% No hyphenation
+	\sloppy						% Fixes overful
+	%\parindent=0pt				% No paragraph indents
+	\setlength{\parskip}{1.25em plus.15em minus.15em}		% Spece between paragraphs
+	\frenchspacing 				% Decreases space after periods to be consistent with that between words
+	\raggedbottom				% Document bottom alignment
+	\makeatletter
+	\def\@textbottom{\vskip \z@ \@plus.0001fil minus \baselineskip}
+	\makeatother
+	
+
+
+
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LAYOUT & TIKZ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+	\makeatletter
+	\renewcommand\normalsize{\@setfontsize\normalsize{13.5pt}{1.5em}}
+	\normalsize  
+	\makeatother
+
+	\newcommand{\thevideourl}{}
+	\newcommand{\videourl}[1]{\renewcommand{\thevideourl}{#1}}
+	
+	\ifthenelse{\equal{\nagwalang}{ar}}
+	{
+		\ifthenelse{\equal{\numerals}{european}}
+		{
+			\ifthenelse{\equal{\directions}{rtl}}
+			{
+				\RequirePackage[ltrdocument]{arabic-math}
+				\setarabicmathfont{NagwaArabicMath-12-25}
+			}
+			{
+				\RequirePackage{unicode-math}
+				\setmathfont[StylisticSet=8]{NagwaMath.otf}
+			}
+		}
+		{
+			\RequirePackage[ltrdocument]{arabic-math}
+			\setarabicmathfont{NagwaArabicMath-12-25}
+		}
+		\setmainfont[Script=Arabic, BoldFont={Noto-Bold.ttf}]{Noto-Regular.ttf}
+		\textdir TRT
+		
+		\geometry{left=130pt,right=30pt}
+		%% To make page numbers to the left
+		\makeatletter
+		\def\ps@myPS{%
+			\def\@oddfoot{\null\hfill\thepage}
+			\def\@evenfoot{\null\hfill\thepage}}%					
+		\makeatother
+		\pagestyle{myPS}
+		%% Abjad Numerals
+		\makeatletter
+		\newcommand*{\@arabicliteral@symbol}[1]{%
+			\ifcase#1%
+			\or أ\or ب\or ج\or د\or ه\or و\or ز\or ح\or ط\or ي%
+			\or ك\or ل\or م\or ن\or س\or ع\or ف\or ص\or ق\or ر%
+			\or ش\or ت\or ث\or خ\or ذ\or ض\or ظ\or غ%
+			\else
+			\@ctrerr
+			\fi
+		}
+		\newalphalph\@arabicliteral{\@arabicliteral@symbol}{28}
+		\newcommand*{\arabicliteral}[1]{\@arabicliteral{\value{#1}}}
+		\makeatother	
+		%% Arabic Numerals
+		\makeatletter
+		\newcommand*{\@arabicnumeral@symbol}[1]{%
+			\ifcase#1%
+			\or ١\or ٢\or ٣\or ٤\or ٥\or ٦\or ٧\or ٨\or ٩\or ١٠%
+			\or ١١\or ١٢\or ١٣\or ١٤\or ١٥\or ١٦\or ١٧\or ١٨\or ١٩\or ٢٠%
+			\or ٢١\or ٢٢\or ٢٣\or ٢٤\or ٢٥\or ٢٦\or ٢٧\or ٢٨\or ٢٩\or ٣٠%
+			\or ٣١\or ٣٢\or ٣٣\or ٣٤\or ٣٥\or ٣٦\or ٣٧\or ٣٨\or ٣٩\or ٤٠%
+			\or ٤١\or ٤٢\or ٤٣\or ٤٤\or ٤٥\or ٤٦\or ٤٧\or ٤٨\or ٤٩\or ٥٠%
+			\else
+			\@ctrerr
+			\fi
+		}
+		\newalphalph\@arabicnumeral{\@arabicnumeral@symbol}{50}
+		\newcommand*{\arabicnumeral}[1]{\@arabicnumeral{\value{#1}}}
+		\makeatother
+			
+		\renewcommand*{\thepage}{\arabicnumeral{page}}
+		
+		
+		\newenvironment{enumerationnolabel}[1][]{\begin{itemize}\renewcommand{\labelitemi}{\nagwaLabel}}{\end{itemize}}
+		\define@key{keyvalpair}{type}{\def\pb@enumeratetype{#1}}
+		\setkeys{keyvalpair}{type=default}%
+		\newenvironment{enumeration}[1][]%
+		{%
+			\setkeys{keyvalpair}{#1}
+			\ifthenelse{\equal{\pb@enumeratetype}{a}}
+			{\begin{enumerate}[label=\alph*.]}
+				{%
+					\ifthenelse{\equal{\pb@enumeratetype}{A}}
+					{\begin{enumerate}[label=\Alph*.]}
+						{%
+							\ifthenelse{\equal{\pb@enumeratetype}{i}}
+							{\begin{enumerate}[label=\roman*.]}
+								{%
+									\ifthenelse{\equal{\pb@enumeratetype}{I}}
+									{\begin{enumerate}[label=\Roman*.]}
+										{\begin{enumerate}}
+										}
+									}
+								}
+							}{\end{enumerate}}
+	}
+	{
+
+		\RequirePackage{unicode-math}
+		\setmainfont{STIX2Text-Regular.otf}[
+		BoldFont = STIX2Text-Bold.otf,
+		ItalicFont = STIX2Text-Italic.otf,
+		BoldItalicFont = STIX2Text-BoldItalic.otf]
+		\setmathfont[StylisticSet=8]{NagwaMath.otf}
+		
+		\geometry{left=30pt,right=130pt}
+		%% To make page numbers to the left
+		\makeatletter
+		\def\ps@myPS{%
+			\def\@oddfoot{\null\thepage\hfill}
+			\def\@evenfoot{\null\thepage\hfill}}%
+		\makeatother
+		\pagestyle{myPS}
+		
+		
+		
+		\newenvironment{enumerationnolabel}[1][]{\begin{itemize}\renewcommand{\labelitemi}{\nagwaLabel}}{\end{itemize}}
+		
+		\define@key{keyvalpair}{type}{\def\pb@enumeratetype{#1}}
+		\setkeys{keyvalpair}{type=default}%
+		\newenvironment{enumeration}[1][]%
+		{%
+			\setkeys{keyvalpair}{#1}
+			\ifthenelse{\equal{\pb@enumeratetype}{a}}
+			{\begin{enumerate}[label=\alph*.]}
+				{%
+					\ifthenelse{\equal{\pb@enumeratetype}{A}}
+					{\begin{enumerate}[label=\Alph*.]}
+						{%
+							\ifthenelse{\equal{\pb@enumeratetype}{i}}
+							{\begin{enumerate}[label=\roman*.]}
+								{%
+									\ifthenelse{\equal{\pb@enumeratetype}{I}}
+									{\begin{enumerate}[label=\Roman*.]}
+										{\begin{enumerate}}
+										}
+									}
+								}
+							}{\end{enumerate}}
+	}
+	\parindent=0pt
+	\everymath={\displaystyle}
+
+
+
+
+
+
+
+
+	\input{nagwa.commands}
+	\ifthenelse{\equal{\numerals}{european}}{
+	\NagwaNotation{RD}{en1}
+	\NagwaNotation{Ray}{en1}
+	\NagwaNotation{Angle}{en1}
+	\NagwaNotation{Matrix}{en2}
+	\NagwaNotation{MatrixIn}{en2}
+	\NagwaNotation{Moment}{en1}
+	\NagwaNotation{StLine}{en1}
+	\NagwaNotation{Vector}{en3}
+	\NagwaNotation{VectorIn}{en3}    
+	\NagwaNotation{SeqTerm}{en2}
+	\NagwaNotation{Interval}{en2}
+	\NagwaNotation{Parallel}{en2}
+	\NagwaNotation{SetMinus}{en1}
+	\NagwaNotation{Triangle}{en1}
+	\NagwaNotation{Factorial}{en2}
+	\NagwaNotation{MathLabel}{en1}
+	\NagwaNotation{UnitVector}{en2}
+	\NagwaNotation{Combination}{en2}
+	\NagwaNotation{LineSegment}{en1}
+	\NagwaNotation{Permutation}{en2}
+	\NagwaNotation{CrossProduct}{en1}
+	\NagwaNotation{MeasureAngle}{en1}
+	\NagwaNotation{SetComplement}{en2}
+	\NagwaNotation{VectorMagnitude}{en2}
+	\NagwaNotation{ComplexConjugate}{en1}
+	\NagwaNotation{VectorComponents}{en1} 
+	}
+	{
+	\NagwaNotation{RD}{ar1}
+	\NagwaNotation{Ray}{ar1}
+	\NagwaNotation{Angle}{ar1}
+	\NagwaNotation{Matrix}{ar1}
+	\NagwaNotation{MatrixIn}{ar1}
+	\NagwaNotation{Moment}{ar1}
+	\NagwaNotation{StLine}{ar1}
+	\NagwaNotation{Vector}{ar1}
+	\NagwaNotation{VectorIn}{ar1}
+	\NagwaNotation{SeqTerm}{ar1}
+	\NagwaNotation{Interval}{ar1}
+	\NagwaNotation{Parallel}{ar1}
+	\NagwaNotation{SetMinus}{ar1}
+	\NagwaNotation{Triangle}{ar1}
+	\NagwaNotation{Factorial}{ar1}
+	\NagwaNotation{MathLabel}{ar1}
+	\NagwaNotation{UnitVector}{ar1}
+	\NagwaNotation{Combination}{ar1}
+	\NagwaNotation{LineSegment}{ar1}
+	\NagwaNotation{Permutation}{ar1}
+	\NagwaNotation{CrossProduct}{ar1}
+	\NagwaNotation{MeasureAngle}{ar1}
+	\NagwaNotation{SetComplement}{ar1}
+	\NagwaNotation{VectorMagnitude}{ar1}
+	\NagwaNotation{ComplexConjugate}{ar1}
+	\NagwaNotation{VectorComponents}{ar1}   
+	}
+
+	\input{Styles800-600}
+	
+}{%Book
+
+
+
+
+
+
+	\LoadClass[10pt]{article}
+
+	\RequirePackage{silence}
+	\WarningsOff*
+
+	\PassOptionsToPackage{bidi=basic,english}{babel}
+	\RequirePackage{babel}
+	\RequirePackage{fontspec}
+	% \RequirePackage{roughnotation}
+	\RequirePackage{fp}
+	\AtEndPreamble{%
+		\ifdefined\babelprovide
+			\babelprovide[import, onchar=ids fonts]{arabic}%
+		\fi
+		\ifdefined\babelfont
+			\babelfont[arabic]{rm}[Script=Arabic, BoldFont={Noto-Bold.ttf}, SlantedFont={Noto-Regular.ttf}, SlantedFeatures={FakeSlant=0.15},Range = {Arabic}]{Noto-Regular.ttf}%
+		\fi
+	}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\usepackage[a4paper,top=30pt,bottom=60pt]{geometry}
+	%\usepackage{amsmath}
+	\usepackage{ifthen}
+	%\usepackage{stix}
+	\usepackage{tkz-euclide}
+	\usepackage{tikz}
+	\usepackage{graphicx}
+	\usepackage{tasks}
+	\usepackage{colortbl}
+    \ifthenelse{\equal{\nagwalang}{ar}}
+	{
+		\usepackage{fontspec}
+		\defaultfontfeatures{RawFeature=+invisible}    
+	}{}
+	\usepackage{chemformula}
+	\usepackage{tabulary}
+	\usepackage{wrapfig}
+	\usepackage{alphalph}
+	\usepackage{enumitem}
+	\usepackage{svg}
+	%	\usepackage{comment}
+	\usepackage{xstring}
+	\usepackage{keyval}
+	%	\usepackage{newunicodechar}
+	\usepackage{adjustbox}
+	\usepackage{multicol}
+	
+	%	\usetkzobj{all}
+	\usetikzlibrary{angles}
+	\usetikzlibrary{automata}
+	\usetikzlibrary{arrows}
+	\usetikzlibrary{arrows.meta}
+	\usetikzlibrary{calc}
+	\usetikzlibrary{decorations.markings}
+	\usetikzlibrary{intersections}
+	\usetikzlibrary{patterns}
+	\usetikzlibrary{positioning}
+	\usetikzlibrary{quotes}
+	\usetikzlibrary{shapes}
+	\usetikzlibrary{shapes.callouts}
+	\usetikzlibrary{shapes.geometric}
+	
+	%% Hyperlinks
+	\usepackage{hyperref}
+	\hypersetup{pdfborder={0 0 0}}	% White frame for links
+	\hypersetup{pdfpagemode=UseNone}   
+	
+	
+	%% Pretty Print
+	\usepackage[all]{nowidow}	% No widows
+	\widowpenalty1000			% No widows
+	\clubpenalty1000			% No orphans
+	\usepackage[none]{hyphenat}	% No hyphenation
+	\sloppy						% Fixes overful
+	%\parindent=0pt				% No paragraph indents
+	\setlength{\parskip}{1.25em plus.15em minus.15em}		% Spece between paragraphs
+	\frenchspacing 				% Decreases space after periods to be consistent with that between words
+	\raggedbottom				% Document bottom alignment
+	\makeatletter
+	\def\@textbottom{\vskip \z@ \@plus.0001fil minus \baselineskip}
+	\makeatother
+	
+
+
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LAYOUT & TIKZ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+	\makeatletter
+	\renewcommand\normalsize{\@setfontsize\normalsize{13.5pt}{1.5em}}
+	\normalsize  
+	\makeatother
+
+	\newcommand{\thevideourl}{}
+	\newcommand{\videourl}[1]{\renewcommand{\thevideourl}{#1}}
+	
+
+	\ifthenelse{\equal{\nagwalang}{ar}}
+	{
+		\ifthenelse{\equal{\numerals}{european}}
+		{
+			\ifthenelse{\equal{\directions}{rtl}}
+			{
+				\RequirePackage[ltrdocument]{arabic-math}
+				\setarabicmathfont{NagwaArabicMath-12-25}
+			}
+			{
+				\RequirePackage{unicode-math}
+				\setmathfont[StylisticSet=8]{NagwaMath.otf}
+			}
+		}
+		{
+			\RequirePackage[ltrdocument]{arabic-math}
+			\setarabicmathfont{NagwaArabicMath-12-25}
+		}
+		\setmainfont[Script=Arabic, BoldFont={Noto-Bold.ttf}]{Noto-Regular.ttf}
+		
+		\textdir TRT \bodydir TRT \pardir TRT
+		
+		\geometry{left=30pt,right=30pt}
+		%% To make page numbers to the left
+		\makeatletter
+		\def\ps@myPS{%
+			\def\@oddfoot{\null\hfill\thepage}
+			\def\@evenfoot{\null\hfill\thepage}}%					
+		\makeatother
+		\pagestyle{myPS}
+		%% Abjad Numerals
+		\makeatletter
+		\newcommand*{\@arabicliteral@symbol}[1]{%
+			\ifcase#1%
+			\or أ\or ب\or ج\or د\or ه\or و\or ز\or ح\or ط\or ي%
+			\or ك\or ل\or م\or ن\or س\or ع\or ف\or ص\or ق\or ر%
+			\or ش\or ت\or ث\or خ\or ذ\or ض\or ظ\or غ%
+			\else
+			\@ctrerr
+			\fi
+		}
+		\newalphalph\@arabicliteral{\@arabicliteral@symbol}{28}
+		\newcommand*{\arabicliteral}[1]{\@arabicliteral{\value{#1}}}
+		\makeatother	
+		%% Arabic Numerals
+		\makeatletter
+		\newcommand*{\@arabicnumeral@symbol}[1]{%
+			\ifcase#1%
+			\or ١\or ٢\or ٣\or ٤\or ٥\or ٦\or ٧\or ٨\or ٩\or ١٠%
+			\or ١١\or ١٢\or ١٣\or ١٤\or ١٥\or ١٦\or ١٧\or ١٨\or ١٩\or ٢٠%
+			\or ٢١\or ٢٢\or ٢٣\or ٢٤\or ٢٥\or ٢٦\or ٢٧\or ٢٨\or ٢٩\or ٣٠%
+			\or ٣١\or ٣٢\or ٣٣\or ٣٤\or ٣٥\or ٣٦\or ٣٧\or ٣٨\or ٣٩\or ٤٠%
+			\or ٤١\or ٤٢\or ٤٣\or ٤٤\or ٤٥\or ٤٦\or ٤٧\or ٤٨\or ٤٩\or ٥٠%
+			\else
+			\@ctrerr
+			\fi
+		}
+		\newalphalph\@arabicnumeral{\@arabicnumeral@symbol}{50}
+		\newcommand*{\arabicnumeral}[1]{\@arabicnumeral{\value{#1}}}
+		\makeatother
+			
+		\renewcommand*{\thepage}{\arabicnumeral{page}}
+		
+		
+		\newenvironment{enumerationnolabel}[1][]{\begin{itemize}\renewcommand{\labelitemi}{\nagwaLabel}}{\end{itemize}}
+		\define@key{keyvalpair}{type}{\def\pb@enumeratetype{#1}}
+		\setkeys{keyvalpair}{type=default}%
+		\newenvironment{enumeration}[1][]%
+		{%
+			\setkeys{keyvalpair}{#1}
+			\ifthenelse{\equal{\pb@enumeratetype}{a}}
+			{\begin{enumerate}[label=\alph*.]}
+				{%
+					\ifthenelse{\equal{\pb@enumeratetype}{A}}
+					{\begin{enumerate}[label=\Alph*.]}
+						{%
+							\ifthenelse{\equal{\pb@enumeratetype}{i}}
+							{\begin{enumerate}[label=\roman*.]}
+								{%
+									\ifthenelse{\equal{\pb@enumeratetype}{I}}
+									{\begin{enumerate}[label=\Roman*.]}
+										{\begin{enumerate}}
+										}
+									}
+								}
+							}{\end{enumerate}}
+	}
+	{
+
+		\RequirePackage{unicode-math}
+		\setmainfont{STIX2Text-Regular.otf}[
+		BoldFont = STIX2Text-Bold.otf,
+		ItalicFont = STIX2Text-Italic.otf,
+		BoldItalicFont = STIX2Text-BoldItalic.otf]
+		\setmathfont[StylisticSet=8]{NagwaMath.otf}
+		
+		\geometry{left=30pt,right=30pt}
+		%% To make page numbers to the left
+		\makeatletter
+		\def\ps@myPS{%
+			\def\@oddfoot{\null\thepage\hfill}
+			\def\@evenfoot{\null\thepage\hfill}}%
+		\makeatother
+		\pagestyle{myPS}
+		
+		
+		
+		\newenvironment{enumerationnolabel}[1][]{\begin{itemize}\renewcommand{\labelitemi}{\nagwaLabel}}{\end{itemize}}
+		
+		\define@key{keyvalpair}{type}{\def\pb@enumeratetype{#1}}
+		\setkeys{keyvalpair}{type=default}%
+		\newenvironment{enumeration}[1][]%
+		{%
+			\setkeys{keyvalpair}{#1}
+			\ifthenelse{\equal{\pb@enumeratetype}{a}}
+			{\begin{enumerate}[label=\alph*.]}
+				{%
+					\ifthenelse{\equal{\pb@enumeratetype}{A}}
+					{\begin{enumerate}[label=\Alph*.]}
+						{%
+							\ifthenelse{\equal{\pb@enumeratetype}{i}}
+							{\begin{enumerate}[label=\roman*.]}
+								{%
+									\ifthenelse{\equal{\pb@enumeratetype}{I}}
+									{\begin{enumerate}[label=\Roman*.]}
+										{\begin{enumerate}}
+										}
+									}
+								}
+							}{\end{enumerate}}
+	}
+	\parindent=0pt
+	\everymath={\displaystyle}
+
+
+
+
+
+	\input{nagwa.commands}
+	\ifthenelse{\equal{\numerals}{european}}{
+	\NagwaNotation{RD}{en1}
+	\NagwaNotation{Ray}{en1}
+	\NagwaNotation{Angle}{en1}
+	\NagwaNotation{Matrix}{en2}
+	\NagwaNotation{MatrixIn}{en2}
+	\NagwaNotation{Moment}{en1}
+	\NagwaNotation{StLine}{en1}
+	\NagwaNotation{Vector}{en3}
+	\NagwaNotation{VectorIn}{en3}    
+	\NagwaNotation{SeqTerm}{en2}
+	\NagwaNotation{Interval}{en2}
+	\NagwaNotation{Parallel}{en2}
+	\NagwaNotation{SetMinus}{en1}
+	\NagwaNotation{Triangle}{en1}
+	\NagwaNotation{Factorial}{en2}
+	\NagwaNotation{MathLabel}{en1}
+	\NagwaNotation{UnitVector}{en2}
+	\NagwaNotation{Combination}{en2}
+	\NagwaNotation{LineSegment}{en1}
+	\NagwaNotation{Permutation}{en2}
+	\NagwaNotation{CrossProduct}{en1}
+	\NagwaNotation{MeasureAngle}{en1}
+	\NagwaNotation{SetComplement}{en2}
+	\NagwaNotation{VectorMagnitude}{en2}
+	\NagwaNotation{ComplexConjugate}{en1}
+	\NagwaNotation{VectorComponents}{en1} 
+	}
+	{
+	\NagwaNotation{RD}{ar1}
+	\NagwaNotation{Ray}{ar1}
+	\NagwaNotation{Angle}{ar1}
+	\NagwaNotation{Matrix}{ar1}
+	\NagwaNotation{MatrixIn}{ar1}
+	\NagwaNotation{Moment}{ar1}
+	\NagwaNotation{StLine}{ar1}
+	\NagwaNotation{Vector}{ar1}
+	\NagwaNotation{VectorIn}{ar1}
+	\NagwaNotation{SeqTerm}{ar1}
+	\NagwaNotation{Interval}{ar1}
+	\NagwaNotation{Parallel}{ar1}
+	\NagwaNotation{SetMinus}{ar1}
+	\NagwaNotation{Triangle}{ar1}
+	\NagwaNotation{Factorial}{ar1}
+	\NagwaNotation{MathLabel}{ar1}
+	\NagwaNotation{UnitVector}{ar1}
+	\NagwaNotation{Combination}{ar1}
+	\NagwaNotation{LineSegment}{ar1}
+	\NagwaNotation{Permutation}{ar1}
+	\NagwaNotation{CrossProduct}{ar1}
+	\NagwaNotation{MeasureAngle}{ar1}
+	\NagwaNotation{SetComplement}{ar1}
+	\NagwaNotation{VectorMagnitude}{ar1}
+	\NagwaNotation{ComplexConjugate}{ar1}
+	\NagwaNotation{VectorComponents}{ar1}   
+	}
+
+	\input{StylesBook}
+
+}

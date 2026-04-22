@@ -1,0 +1,385 @@
+\makeatletter
+
+\def\nagwaLmargin{60pt}
+\def\nagwaRmargin{60pt}
+\def\nagwaTmargin{60pt}
+\def\nagwaBmargin{60pt}
+
+\geometry{a4paper, lmargin=\nagwaLmargin, rmargin=\nagwaRmargin, top=\nagwaTmargin, bottom=\nagwaBmargin, headheight=0pt, headsep=0pt, footskip=0pt}
+
+% a4paper
+% Big Points (bp)	pagewidth 595.28 bp	pageheight 841.89 bp
+% TeX Points (pt)	pagewidth 597.51 pt	pageheight 845.05 pt
+
+
+% \geometry{paperwidth=600pt, paperheight=900pt, lmargin=20pt, rmargin=20pt, top=20pt, bottom=20pt}
+
+
+
+% \geometry{paperwidth=800pt, paperheight=1200pt, lmargin=80pt, rmargin=80pt, top=80pt, bottom=80pt}
+
+% \def\nagwaLmargin{80pt}
+% \def\nagwaRmargin{80pt}
+% \def\nagwaTmargin{80pt}
+% \def\nagwaBmargin{80pt}
+
+
+\usepackage{silence}
+\WarningsOff*
+
+
+
+
+\ifthenelse{\equal{\nagwalang}{ar}}
+{% ARABIC BLOCK
+% UNIFIED GRADE STYLE
+\renewcommand\normalsize{\@setfontsize\normalsize{12pt}{16pt}}
+\normalsize
+}
+{% ENGLISH BLOCK
+% UNIFIED GRADE STYLE
+\renewcommand\normalsize{\@setfontsize\normalsize{12pt}{16pt}}
+\normalsize  
+}
+
+
+\makeatother
+
+
+\ifthenelse{\equal{\nagwalang}{ar}}
+{% ARABIC BLOCK
+
+		\setmainfont{Noto-Regular.ttf}[Script=Arabic, BoldFont={Noto-Bold.ttf}]
+
+		
+		\newunicodechar{•}{{\fontspec{Noto-Regular.ttf}\symbol{"2022}}}
+
+		\newcommand{\examtitle}[1]{{\begin{center}\textbf{#1}\vskip24pt\end{center}}}
+
+		%--Section Title Color
+		\usepackage{xcolor}
+		\usepackage{sectsty}
+		\sectionfont{\fontsize{16}{0}\selectfont\color{TitlePageBlue}}
+
+
+		\usepackage{fancyhdr}
+		\pagestyle{fancy}
+		\renewcommand{\headrulewidth}{0pt}
+
+
+		\newcommand{\examgrade}[1]{\newcommand\theexamgrade{#1}}
+		\newcommand{\subjecttitle}[1]{\newcommand{\thesubjecttitle}{#1}}
+		\newcommand{\examnumber}[1]{\newcommand{\theexamnumber}{#1}}
+
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+		%%%%%%%%%%%%%%%%%%%%%%begin Fatma for slides
+
+		\usepackage{makecell}
+		\usepackage{multirow}
+		\usetikzlibrary{matrix}
+		\usepackage{cancel}
+		\usepackage{ulem}
+		\usepackage{slashbox}
+
+
+		\usepackage[fitting,skins]{tcolorbox}
+		\usepackage{xcolor}
+		\usepackage{graphicx}
+		\usepackage{fancybox}
+		\usepackage{tabularx}
+		\usepackage{luacolor}
+
+
+		%%%%%%%Contents
+
+		%%%%%%%%%%%Standalone question for direct compilation (takes title and content directly) - Arabic RTL version
+        % RENAMED TO questionstandalone and REMOVED TITLE
+		\newcommand{\questionstandalone}[2]{{\newbox\mybox%
+				\setbox\mybox=\hbox{\fontsize{18}{26}\selectfont\begin{otherlanguage}{arabic}#1\end{otherlanguage}\hspace{50pt}}%
+				\begin{tcolorbox}[
+					width=\textwidth, 
+					% height=.73\textheight, % Adjust height as needed for A4
+					boxsep=5pt, top=5pt,
+					arc=0mm,
+					sharp corners,
+					colback={white},
+					colframe=white,
+					enhanced, 
+                    % Removed title attachment
+					boxrule=0pt]\textdir TRT \bodydir TRT \pardir TRT\begin{otherlanguage}{arabic}#2\end{otherlanguage}\end{tcolorbox}
+					}}
+
+			%%%%%%%%%%%ToC for title slide
+
+		\newlist{slideToC}{itemize}{3}
+		\setlist[slideToC,1]{label=,leftmargin=-1bp} 
+		\setlist[slideToC,2]{label=,leftmargin=34bp}
+		\setlist[slideToC,3]{label=,leftmargin=40bp}
+
+		\newlist{Itemize}{itemize}{3}
+		\setlist[Itemize,1]{label=\textbullet,rightmargin=23bp}
+		\setlist[Itemize,2]{label=\textendash,rightmargin=15bp}
+		\setlist[Itemize,3]{label=$\ast$,rightmargin=7bp}
+			
+
+		%%%%%%%%%%%%%%%%%%%%%%end Fatma for slides
+		%%%%%%%%%%%Definitions
+
+		\renewenvironment{section}[2]{%
+			\def\SessionsectionID{#1}%
+			\def\SessionsectionTitle{#2}%
+		}{}
+
+		\newenvironment{sectiongroup}[1]{%
+			\def\SessionsectionTitle{#1}%
+		}{}
+
+
+		\newenvironment{checkpoint}[2]{%
+			\def\requiredcorrectID{#1}%
+			\def\attempetwindowID{#2}%
+		}{}
+
+		\newenvironment{toc}{%
+		}{}
+
+		\newenvironment{recap}{%
+		}{}
+
+
+		\newcommand{\metasessionID}[1]{\newcommand{\themetasessionID}{#1}}
+		\newcommand{\subject}[1]{\newcommand{\thesubject}{#1}}
+		\newcommand{\grade}[1]{\newcommand{\thegrade}{#1}}
+		\newcommand{\sessioncountry}[1]{\newcommand{\thesessioncountry}{#1}}
+		\newcommand{\term}[1]{\newcommand{\theterm}{#1}}
+		\newcommand{\languageofinstruction}[1]{\newcommand{\thelanguageofinstruction}{#1}}
+		\newcommand{\sessiontitle}[1]{\newcommand{\thesessiontitle}{#1}}
+		\newcommand{\sessionnumber}[1]{\newcommand{\thesessionnumber}{#1}}
+		\newcommand{\sessiontype}[1]{\newcommand{\thesessiontype}{#1}}
+
+		%%%%%%%%%%% Title and Thank you
+
+		\usepackage{xcolor}
+		\usepackage{adjustbox}
+
+
+		\newcommand{\SessionNumber}[1]{\vspace*{202pt}\centering
+			\tcbox[
+			sharp corners,      % Makes the box rectangular
+			boxrule=0pt,        % No frame/border
+			colback=TitleLightBlue,  % Background color
+			coltext=TitlePageBlue,       % Text color
+			% Padding: combines original fboxsep (18pt) and hspace (10pt)
+			top=9.5pt, bottom=8pt, left=20pt, right=20pt
+			]
+			{{\textdir TRT\bodydir TRT \pardir TRT\fontsize{18}{26}\selectfont الحصة #1}\par}%
+			\vskip-13.5pt}
+
+		\newcommand{\SessionTitle}[1]{\centering
+			\colorbox{TitlePageBlue}{%
+				\begin{adjustbox}{
+						varwidth=0.8\textwidth,
+						margin={25pt 7pt 25pt 12pt} % {left bottom right top}
+					}
+					\centering % <-- This is the fix. Use \centering inside the box.
+					\color{white}%
+					{\fontsize{38}{42}\selectfont \begin{otherlanguage}{arabic}#1\end{otherlanguage}}%
+				\end{adjustbox}%
+			}%
+			\vspace*{10pt}\par
+		}
+
+
+		\newcommand{\SessionSubject}[1]{\centering{{\color{TitlePageBlue}\fontsize{21}{24}\selectfont{#1}}}\par}%
+
+
+		\newcommand{\ThankYou}[1]{%
+			\newpage
+			\pagecolor{TitlePageBlue}
+			\begin{center}
+				\vspace*{\fill}
+				{\color{white}\fontsize{44}{52}\selectfont #1}
+				\vspace*{\fill}
+			\end{center}
+		}
+
+}
+{% ENGLISH BLOCK
+        \newunicodechar{•}{{\fontspec{STIX2Text-Regular.otf}\symbol{"2022}}}
+		
+		\newcommand{\examtitle}[1]{{\begin{center}\textbf{#1}\vskip24pt\end{center}}}
+
+
+		%--Section Title Color
+		\usepackage{xcolor}
+		\usepackage{sectsty}
+		\sectionfont{\fontsize{16}{0}\selectfont\color{TitlePageBlue}}
+
+
+		\usepackage{fancyhdr}
+		\pagestyle{fancy}
+		\renewcommand{\headrulewidth}{0pt}
+
+		\newcommand{\examgrade}[1]{\newcommand\theexamgrade{#1}}
+		\newcommand{\subjecttitle}[1]{\newcommand{\thesubjecttitle}{#1}}
+		\newcommand{\examnumber}[1]{\newcommand{\theexamnumber}{#1}}
+
+
+
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%%%%%%%%%%%%%%%%%%%%%begin Fatma for slides
+
+		\usepackage{makecell}
+		\usepackage{multirow}
+		\usetikzlibrary{matrix}
+		\usepackage{cancel}
+		\usepackage{ulem}
+		\usepackage{slashbox}
+
+
+		\usepackage[fitting,skins]{tcolorbox}
+		\usepackage{xcolor}
+		\usepackage{graphicx}
+		\usepackage{fancybox}
+		\usepackage{tabularx}
+		\usepackage{luacolor}
+
+		%%%%%%%%Sizes and Dimensions
+
+        % Handled by top-level geometry now
+		%\geometry{papersize={800bp,600bp},margin=0bp}
+        % Default A4 geometry should apply
+
+		% \headsep=-46.5bp
+		% \oddsidemargin=-72.25pt
+		% \evensidemargin=-72.25pt
+
+
+		%%%%%%%Contents
+
+
+		%%%%%%%%%%Standalone question for direct compilation (takes title and content directly)
+        % RENAMED TO questionstandalone and REMOVED TITLE
+		\newcommand{\questionstandalone}[2]{{\newbox\mybox%
+				\setbox\mybox=\hbox{\fontsize{18}{28}\selectfont#1\hspace{50pt}}%
+				\begin{tcolorbox}[
+					width=\textwidth, 
+					% height=.8\textheight, 
+					boxsep=5pt, top=5pt,
+					arc=0mm,
+					sharp corners,
+					colback={white},
+					colframe=white,
+					enhanced, 
+					boxrule=0pt]#2\end{tcolorbox}
+					}}
+
+		%%%%%%%%%%%ToC for title slide
+
+		\newlist{slideToC}{itemize}{3}
+		\setlist[slideToC,1]{label=,leftmargin=-1bp}
+		\setlist[slideToC,2]{label=,leftmargin=34bp}
+		\setlist[slideToC,3]{label=,leftmargin=40bp}
+
+		%%%%%%%%%%%%%%%%%%%%%%end Fatma for slides
+		%%%%%%%%%%%Definitions
+
+		\renewenvironment{section}[2]{%
+			\def\SessionsectionID{#1}%
+			\def\SessionsectionTitle{#2}%
+		}{}
+
+		\newenvironment{sectiongroup}[1]{%
+			\def\SessionsectionTitle{#1}%
+		}{}
+
+
+		\newenvironment{checkpoint}[2]{%
+			\def\requiredcorrectID{#1}%
+			\def\attempetwindowID{#2}%
+		}{}
+
+		\newenvironment{toc}{%
+		}{}
+
+		\newenvironment{recap}{%
+		}{}
+
+
+		\newcommand{\metasessionID}[1]{\newcommand{\themetasessionID}{#1}}
+		\newcommand{\subject}[1]{\newcommand{\thesubject}{#1}}
+		\newcommand{\grade}[1]{\newcommand{\thegrade}{#1}}
+		\newcommand{\sessioncountry}[1]{\newcommand{\thesessioncountry}{#1}}
+		\newcommand{\term}[1]{\newcommand{\theterm}{#1}}
+		\newcommand{\languageofinstruction}[1]{\newcommand{\thelanguageofinstruction}{#1}}
+		\newcommand{\sessiontitle}[1]{\newcommand{\thesessiontitle}{#1}}
+		%\newcommand{\sessionnumber}[1]{\newcommand{\thesessionnumber}{#1}}
+		%\newcommand{\sessiontype}[1]{\newcommand{\thesessiontype}{#1}}
+
+
+		%%%%%%%%%%% Title and Thank you
+
+		\usepackage{xcolor}
+		\usepackage{adjustbox}
+
+		% --- 1. Define ONLY your special translations for word "Session"---
+		\newcommand{\translationEspañol}{Sesión}
+		\newcommand{\translationItaliano}{Sessione}
+
+		% --- 2. Create the commands to manage the subject ---
+		%\renewcommand{\subject}[1]{\def\thesubject{#1}}% Already defined 
+
+		% --- 3. The new logic with a fixed default ---
+		% This command checks for a translation. If not found, it defaults to "Session".
+		\newcommand{\GetSessionWord}{%
+			\ifcsname translation\thesubject\endcsname
+			\csname translation\thesubject\endcsname
+			\else%
+			Session%  This is the default value
+			\fi
+		}
+
+		% --- 4. Your \SessionNumber command ---
+		\newcommand{\SessionNumber}[1]{%
+			\par\vspace*{202pt}\centering
+			\tcbox[
+			arc=0pt,		% Makes the box rectangular
+			boxrule=0pt,	% No frame/border
+			colback=TitleLightBlue,	% Background color
+			coltext=TitlePageBlue,	% Text color
+			top=15pt, bottom=15pt, left=20pt, right=20pt	% Padding: combines original fboxsep (18pt) and hspace (10pt)
+			]%
+			{\fontsize{24}{24}\selectfont\GetSessionWord\ #1\par}%
+			\vskip-13.5pt\par
+		}
+
+		\newcommand{\SessionTitle}[1]{\centering
+			\colorbox{TitlePageBlue}{%
+				\begin{adjustbox}{
+						varwidth=0.8\textwidth,
+						margin={25pt 12pt 25pt 19pt} % {left bottom right top}
+					}
+					\centering % <-- This is the fix. Use \centering inside the box.
+					\color{white}%
+					\fontsize{32}{40}\selectfont #1%
+				\end{adjustbox}%
+			}%
+			\vspace*{10pt}\par
+		}
+
+
+		\newcommand{\SessionSubject}[1]{{\color{TitlePageBlue}\fontsize{18}{18}\selectfont #1}\par}%
+
+
+		\newcommand{\ThankYou}[1]{%
+			\newpage
+			\pagecolor{TitlePageBlue}
+			\begin{center}
+				\vspace*{\fill}
+				{\color{white}\fontsize{44}{52}\selectfont #1}
+				\vspace*{\fill}
+			\end{center}
+		}
+
+}

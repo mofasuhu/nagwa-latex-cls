@@ -1,0 +1,2500 @@
+\usepackage{silence}
+\WarningsOff*
+
+\DeclareMathOperator\sen{sen}
+\DeclareMathOperator\tg{tg}
+\DeclareMathOperator\cotg{cotg}
+\DeclareMathOperator\cosec{cosec}
+\DeclareMathOperator\arcsen{arcsen}
+\DeclareMathOperator\arctg{arctg}
+\DeclareMathOperator\arccotg{arccotg}
+\DeclareMathOperator\arcsec{arcsec}
+\DeclareMathOperator\arccosec{arccosec}
+\DeclareMathOperator\senh{senh}
+\DeclareMathOperator\tgh{tgh}
+\DeclareMathOperator\cotgh{cotgh}
+\DeclareMathOperator\argsenh{argsenh}
+\DeclareMathOperator\argcosh{argcosh}
+\DeclareMathOperator\argtgh{argtgh}
+\DeclareMathOperator\argcotgh{argcotgh}
+
+\newbox\table
+    \newcommand{\measureme}[1]{%
+        \sbox\table{#1}
+        \ifthenelse%
+        {\lengthtest{\wd\table > \textwidth}}
+        {\begin{adjustbox}{width=\textwidth}#1\end{adjustbox}}
+        {#1}}
+
+\usepackage{xstring}
+
+
+
+\newcommand{\emptycontent}{$\ $}
+
+\def\NagwaNotation#1#2{\expandafter\def\csname Nagwa#1\endcsname{#2}}
+
+
+\usetikzlibrary{calc}
+\usetikzlibrary{math}
+
+
+
+
+
+% Add Nagwa Notations here
+
+
+
+
+% Handwriting Logic
+\makeatletter
+\AtBeginDocument{%
+\newcounter{handwriteline}
+
+\newfontfeature{RightToLeftAlt}{+rtlm;+rtla}
+
+% Dedicated handwriting font
+\ifthenelse{\equal{\nagwalang}{ar}}%
+{
+\newfontfamily\handwritingfont{NagwaTKText-Regular.otf}[
+    Script   = Arabic,
+    BoldFont = NagwaTKText-Bold.otf,
+    ItalicFont = NagwaTKText-Oblique.otf,
+    BoldItalicFont = NagwaTKText-BoldOblique.otf,
+    SlantedFont = NagwaTKText-Regular.otf,
+    SlantedFeatures = {FakeSlant=0.15}
+]
+}{
+\newfontfamily\handwritingfont{NagwaTKText-Regular.otf}[
+	Script   = Arabic,
+    BoldFont = NagwaTKText-Bold.otf,
+    ItalicFont = NagwaTKText-Oblique.otf,
+    BoldItalicFont = NagwaTKText-BoldOblique.otf,
+    SlantedFont = NagwaTKText-Regular.otf,
+    SlantedFeatures = {FakeSlant=0.15}
+]
+}%
+
+
+
+% Helper to check if document is RTL
+\newif\ifnagwa@isrtl
+\AtBeginDocument{%
+    \ifthenelse{\equal{\nagwalang}{ar}}%
+    {\nagwa@isrtltrue}{\nagwa@isrtlfalse}%
+}
+
+% Helper to check if document is European
+\newif\ifnagwa@isEu
+\AtBeginDocument{%
+    \ifthenelse{\equal{\numerals}{european}}%
+    {\nagwa@isEutrue}{\nagwa@isEufalse}%
+}
+
+
+% Global helpers for handwriting line breaks:
+%   - \\      -> \\[7pt]
+%   - \\[xpt] -> \\[xpt] (user value preserved)
+\def\nagwa@hw@newline{%
+  \@ifnextchar[{\nagwa@hw@newline@opt}{\nagwa@hw@newline@noopt}%
+}%
+\def\nagwa@hw@newline@opt[#1]{\hw@origbs[#1]}%
+\def\nagwa@hw@newline@noopt{\hw@origbs[10pt]}%
+
+% Typeset helper used at shipout: wraps content in a varwidth box and
+% locally remaps \\ so bare \\ gets extra vertical space.
+\def\nagwa@hw@typeset#1{%
+  \begingroup
+    \begin{varwidth}[t]{\maxdimen}%
+      \let\hw@origbs=\\%
+      \def\\{\nagwa@hw@newline}%
+      #1%
+    \end{varwidth}%
+  \endgroup
+}
+
+\NewDocumentCommand{\handwrite}{O{} g}{%
+    % Check if second argument (content) is provided
+    \IfNoValueTF{#2}{%
+        % Silent marker: allow \handwrite[ID] inside equations without output
+        \relax
+    }{%
+        \stepcounter{handwriteline}%
+        % Default values
+        \def\hw@id{HW\thehandwriteline}%
+        \def\hw@x{0}%
+        \def\hw@y{0}%
+        \def\hw@rot{0}%
+        \def\hw@size{20}%
+        \def\hw@color{blue}%
+        % Parse arguments: [ID,x,y,rot,size,color]
+        \def\hw@parse##1,##2,##3,##4,##5,##6,##7\relax{%
+            \ifx\relax##1\relax\else\def\hw@id{##1}\fi
+            \ifx\relax##2\relax\else\def\hw@x{##2}\fi
+            \ifx\relax##3\relax\else\def\hw@y{##3}\fi
+            \ifx\relax##4\relax\else\def\hw@rot{##4}\fi
+            \ifx\relax##5\relax\else\def\hw@size{##5}\fi
+            \ifx\relax##6\relax\else\def\hw@color{##6}\fi
+        }%
+        \hw@parse#1,,,,,,,\relax
+        %
+        % Check if ID is HW00 or 00 - if so, skip rendering entirely
+        \newif\ifhw@skip
+        \hw@skipfalse
+        \IfStrEq{\hw@id}{HW00}{\hw@skiptrue}{}%
+        \IfStrEq{\hw@id}{00}{\hw@skiptrue}{}%
+        %
+        \ifhw@skip
+            % Hidden handwriting - do nothing
+            \relax
+        \else
+            % Map color name to custom color
+            \def\hw@colorname{hwBlack}% default
+            \IfStrEq{\hw@color}{black}{\def\hw@colorname{hwBlack}}{}%
+            \IfStrEq{\hw@color}{blue}{\def\hw@colorname{hwBlue}}{}%
+            \IfStrEq{\hw@color}{red}{\def\hw@colorname{hwRed}}{}%
+            \IfStrEq{\hw@color}{green}{\def\hw@colorname{hwGreen}}{}%
+            \IfStrEq{\hw@color}{orange}{\def\hw@colorname{hwOrange}}{}%
+            \IfStrEq{\hw@color}{purple}{\def\hw@colorname{hwPurple}}{}%
+            %
+            % Determine anchor based on language (RTL = east/llap, LTR = west/rlap)
+            \ifnagwa@isrtl
+                \def\hw@anchor{base east}
+				\def\hw@xshift{+7pt}
+            \else
+                \def\hw@anchor{base west}
+				\def\hw@xshift{-1.5pt}
+            \fi
+            %
+            % Store content in a uniquely-named macro to avoid expansion issues
+            % Use the counter value to create a unique name
+            \expandafter\gdef\csname hw@content@\thehandwriteline\endcsname{#2}%
+            %
+            % Build shipout command with all values expanded except the content
+            \edef\hw@x@exp{\hw@x}%
+            \edef\hw@y@exp{\hw@y}%
+            \edef\hw@rot@exp{\hw@rot}%
+            \edef\hw@size@exp{\hw@size}%
+            \edef\hw@anchor@exp{\hw@anchor}%
+            \edef\hw@colorname@exp{\hw@colorname}%
+            \edef\hw@linenum{\thehandwriteline}%
+            %
+            \protected@edef\hw@shipout@cmd{%
+                \noexpand\AddToShipoutPictureFG*{%
+                    \noexpand\put(0,0){%
+                        \noexpand\begin{tikzpicture}[remember picture, overlay]
+                            \noexpand\begin{scope}[shift={(current page.north west)}]
+                                \noexpand\begin{ocg}{Handwriting}{ocg-handwriting}{1}
+                                    \noexpand\node[
+                                        anchor=\hw@anchor@exp,
+                                        rotate=\hw@rot@exp,
+                                        inner sep=0bp,
+                                        outer sep=0bp
+									] at (\hw@x@exp bp \hw@xshift, -\hw@y@exp bp) {%
+										\noexpand\handwritingfont
+										\noexpand\fontsize{\hw@size@exp}{1.2\hw@size@exp}\noexpand\selectfont
+										\noexpand\color{\hw@colorname@exp}%
+										\noexpand\ifdefined\setmathfont
+											\noexpand\ifnagwa@isEu
+												\noexpand\setmathfont{NagwaTKMath-Regular.otf}[StylisticSet=8]%
+											\noexpand\else
+												\noexpand\setmathfont{NagwaTKMath-Regular.otf}[RightToLeftAlt,StylisticSet=8]%
+											\noexpand\fi
+										\noexpand\fi
+										\noexpand\ifnagwa@isrtl
+											\noexpand\begin{otherlanguage*}{arabic}
+											\bodydir TRT \pardir TRT
+										\noexpand\fi
+										% Wrap content and apply automatic \\ -> \\[7pt] mapping inside
+										\noexpand\nagwa@hw@typeset{%
+											\expandafter\noexpand\csname hw@content@\hw@linenum\endcsname
+										}%
+										\noexpand\ifnagwa@isrtl
+											\noexpand\end{otherlanguage*}
+										\noexpand\fi
+                                    };
+                                \noexpand\end{ocg}
+                            \noexpand\end{scope}
+                        \noexpand\end{tikzpicture}%
+                    }%
+                }%
+            }%
+            \hw@shipout@cmd
+        \fi
+    }%
+}
+
+% Define handwriting environment (wrapper)
+\NewDocumentEnvironment{handwriting}{}{}{}
+}
+\makeatother
+
+
+% Angle
+\makeatletter
+\AtBeginDocument{%
+
+% \providecommand{\angle}[1]{}%
+% \let\oldangle\angle
+% \renewcommand{\angle}[1]{%
+% \ifthenelse{\equal{\NagwaAngle}{en1}}{\oldangle{#1}}{}%
+% \ifthenelse{\equal{\NagwaAngle}{en2}}{\widehat{#1}}{}%
+% \ifthenelse{\equal{\NagwaAngle}{en3}}{\sphericalangle{#1}}{}%
+% \ifthenelse{\equal{\NagwaAngle}{en4}}{\hat{#1}}{}%
+% \ifthenelse{\equal{\NagwaAngle}{ar1}}{\oldangle{#1}}{}%
+% \ifthenelse{\equal{\NagwaAngle}{ar2}}{\hat{#1}}{}%
+% \ifthenelse{\equal{\NagwaAngle}{ar3}}{\widehat{#1}}{}%
+% \ifthenelse{\equal{\NagwaAngle}{ar4}}{\sphericalangle{#1}}{}%
+% }
+
+\let\oldangle\angle
+\providecommand{\angle}{}% Clear existing definition safely
+
+% 1. Core rendering logic
+\def\@angle@render#1{%
+\ifthenelse{\equal{\NagwaAngle}{en1}}{\oldangle{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{en2}}{\widehat{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{en3}}{\sphericalangle{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{en4}}{\hat{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{ar1}}{\oldangle{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{ar2}}{\hat{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{ar3}}{\widehat{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{ar4}}{\sphericalangle{#1}}{}%
+}
+
+% 2. Handler specifically for \left ... \right blocks
+% It grabs \left, the left delimiter (#1), the content up to \right, and the right delimiter (#2)
+\def\@angle@handle@left\left#1\right#2{%
+\@angle@render{\left#1\right#2}%
+}
+
+% 3. Handler for commands with a braced argument (e.g., \text{ABC})
+\def\@angle@unbraced@cmd#1#2{\@angle@render{#1{#2}}}
+
+% 4. Handler for standard unbraced tokens (e.g., A, B, or \text)
+\def\@angle@handle@normal#1{%
+\@ifnextchar\bgroup{\@angle@unbraced@cmd{#1}}{\@angle@render{#1}}%
+}
+
+% 5. Logic to detect if the first unbraced token is \left
+\def\@angle@unbraced#1{%
+\ifx#1\left
+    \expandafter\@firstoftwo
+\else
+    \expandafter\@secondoftwo
+\fi
+{\@angle@handle@left\left}%
+{\@angle@handle@normal{#1}}%
+}
+
+% 6. Redefine \angle to peek ahead
+\renewcommand{\angle}{%
+\@ifnextchar\bgroup{\@angle@render}{\@angle@unbraced}%
+}
+
+% Safe version for handwriting environments
+\providecommand{\AngleNotation}[1]{}%
+\renewcommand{\AngleNotation}[1]{%
+\ifthenelse{\equal{\NagwaAngle}{en1}}{\oldangle{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{en2}}{\widehat{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{en3}}{\sphericalangle{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{en4}}{\hat{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{ar1}}{\oldangle{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{ar2}}{\hat{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{ar3}}{\widehat{#1}}{}%
+\ifthenelse{\equal{\NagwaAngle}{ar4}}{\sphericalangle{#1}}{}%
+}
+}
+\makeatother
+
+
+% Combination
+\makeatletter
+\AtBeginDocument{%
+\let\oldcombination\combination
+\providecommand{\combination}[2]{}%
+\renewcommand{\combination}[2]{%
+\ifthenelse{\equal{\NagwaCombination}{en1}}{{\vphantom{C}}_{#1}{C}_{#2}}{}%
+\ifthenelse{\equal{\NagwaCombination}{en2}}{{\vphantom{C}}^{#1}{C}_{#2}}{}%
+\ifthenelse{\equal{\NagwaCombination}{en3}}{\begin{pmatrix}#1\\#2\end{pmatrix}}{}%
+\ifthenelse{\equal{\NagwaCombination}{en4}}{\text{\vphantom{C}{C}}^{#1}_{#2}}{}%
+\ifthenelse{\equal{\NagwaCombination}{en5}}{{{C}_{#1{,}#2}}}{}%
+\ifthenelse{\equal{\NagwaCombination}{en6}}{\text{\vphantom{C}{C}}^{#2}_{#1}}{}%
+\ifthenelse{\equal{\NagwaCombination}{ar1}}{{\vphantom{\dotlessqaft}}^{#1}{\dotlessqaft}_{#2}}{}%
+\ifthenelse{\equal{\NagwaCombination}{ar2}}{\begin{pmatrix}#1\\#2\end{pmatrix}}{}%
+}%
+}
+\makeatother
+
+
+% Complex Conjugate
+\makeatletter
+\AtBeginDocument{%
+\let\oldcomplexconjugate\complexconjugate
+\providecommand{\complexconjugate}[1]{}%
+\renewcommand{\complexconjugate}[1]{%
+\ifthenelse{\equal{\NagwaComplexConjugate}{en1}}{{\overline{#1}}}{}%
+\ifthenelse{\equal{\NagwaComplexConjugate}{en2}}{{#1^{*}}}{}%
+\ifthenelse{\equal{\NagwaComplexConjugate}{ar1}}{{\overline{#1}}}{}%
+}
+}
+\makeatother
+
+
+% Cross Product
+\makeatletter
+\AtBeginDocument{%
+\let\oldcrossproduct\crossproduct
+\providecommand{\crossproduct}{}%
+\renewcommand{\crossproduct}{%
+\ifthenelse{\equal{\NagwaCrossProduct}{en1}}{\times}{}%
+\ifthenelse{\equal{\NagwaCrossProduct}{en2}}{\wedge}{}%
+\ifthenelse{\equal{\NagwaCrossProduct}{ar1}}{\times}{}%
+}%
+}
+\makeatother
+
+
+% Factorial
+\makeatletter
+\AtBeginDocument{%
+\let\oldoldfactorialaux\oldfactorialaux
+\providecommand{\oldfactorialaux}[2]{}%
+\renewcommand{\oldfactorialaux}[2]{\tikz[baseline]{%
+    \node[anchor=base,inner sep=0.3ex](mynode){\ensuremath{#2}};%
+    \draw(mynode.north west)|-(mynode.south east);%
+    \path[use as bounding box]($(mynode.south west)+(-0.3ex,-0.3ex)$)rectangle($(mynode.north east)+(0.3ex,0.3ex)$);%
+}}
+\let\oldarfactorial\arfactorial
+\providecommand{\arfactorial}[2]{}%
+\renewcommand{\arfactorial}[2]{\tikz[baseline]{%
+    \node[anchor=base,inner sep=0.3ex](mynode){\ensuremath{#2}};%
+    \draw(mynode.north east)|-(mynode.south west);%
+    \path[use as bounding box]($(mynode.south east)+(-0.3ex,-0.3ex)$)rectangle($(mynode.north west)+(0.3ex,0.3ex)$);%
+}}
+\let\oldfactorial\factorial
+\providecommand{\factorial}[2][nobrackets]{}%
+\renewcommand{\factorial}[2][nobrackets]{%
+\ifthenelse{\equal{\NagwaFactorial}{en1}}{\ifthenelse{\equal{#1}{brackets}}{\left(#2\right)!}{#2!}}{}%
+\ifthenelse{\equal{\NagwaFactorial}{en2}}{\mathpalette\oldfactorialaux{#2}}{}%
+\ifthenelse{\equal{\NagwaFactorial}{ar1}}{\mathpalette\arfactorial{#2}}{}%
+\ifthenelse{\equal{\NagwaFactorial}{ar2}}{\ifthenelse{\equal{#1}{brackets}}{\left(#2\right)!}{#2!}}{}%
+}%
+}
+\makeatother
+
+
+
+
+
+\makeatletter
+\AtBeginDocument{
+% ==========================================
+% Custom Distractors Environment (Native Lua-RTL)
+% ==========================================
+ 
+% 1. Automated Counter for Letters
+\newcounter{choiceletter}
+\newcommand{\nextchar}{%
+	\stepcounter{choiceletter}%
+	\ifcase\value{choiceletter}\or أ\or ب\or ج\or د\or هـ\fi
+}
+ 
+% 2. Box Shape (Wrapped in \mbox to protect TikZ inside RTL)
+\newcommand{\choicebox}{%
+	\mbox{%
+		\begin{tikzpicture}[baseline=(char.base)]
+			\node(char) [draw, rounded corners=3pt, minimum size=0.8cm, inner sep=0pt] {\nextchar};
+		\end{tikzpicture}%
+	}%
+}
+ 
+% 3. Counters
+\newcounter{distractorcount}
+ 
+% 4. Environment Setup
+\newenvironment{distractors}{%
+	\setcounter{choiceletter}{0}%
+	\setcounter{distractorcount}{0}%
+	\vspace{0.2cm}%
+}{%
+	% Close the row if there are only 3 options
+	\ifodd\value{distractorcount}%
+	\par
+	\fi
+}
+ 
+% 5. Distractor Command (With Text Column Indentation)
+\newcommand{\distractor}[1]{%
+	\stepcounter{distractorcount}%
+	\ifodd\value{distractorcount}%
+	% ODD (أ, ج) -> Starts natively on the Right margin
+	\noindent\hspace*{1cm}% <-- RIGHT PADDING
+	\begin{minipage}[t]{0.35\textwidth}
+		% Sub-column 1: The Box
+		\begin{minipage}[t]{0.8cm}
+			\choicebox
+		\end{minipage}%
+		\hspace*{0.15cm}% The Gap
+		% Sub-column 2: The Text
+		\begin{minipage}[t]{\dimexpr\linewidth-0.95cm\relax}\raggedright
+			#1
+		\end{minipage}%
+	\end{minipage}%
+	\else
+	% EVEN (ب, د) -> Continues natively to the Left margin
+	\hfill
+	\begin{minipage}[t]{0.35\textwidth}
+		% Sub-column 1: The Box
+		\begin{minipage}[t]{0.8cm}
+			\choicebox
+		\end{minipage}%
+		\hspace*{0.15cm}% The Gap
+		% Sub-column 2: The Text
+		\begin{minipage}[t]{\dimexpr\linewidth-0.95cm\relax}\raggedright
+			#1
+		\end{minipage}%
+	\end{minipage}%
+	\hspace*{1cm}\par\vspace{0.5cm}% <-- LEFT PADDING (Keeps grid centered)
+	\fi
+}
+}
+\makeatother
+
+
+
+
+% Interval
+\makeatletter
+\AtBeginDocument{%
+\let\oldinterval\interval
+\providecommand{\interval}[4]{}%
+\renewcommand{\interval}[4]{%
+\ifthenelse{\equal{\NagwaInterval}{en1}}{\ifthenelse{\equal{#1}{(}}{\left(}{\left#1}#2,#3\ifthenelse{\equal{#4}{)}}{\right)}{\right#4}}{}%
+\ifthenelse{\equal{\NagwaInterval}{en2}}{\ifthenelse{\equal{#1}{(}}{\left]\mkern1mu}{\left#1\mkern1mu}#2,#3\ifthenelse{\equal{#4}{)}}{\mkern1mu\right[}{\mkern1mu\right#4}}{}%
+\ifthenelse{\equal{\NagwaInterval}{en3}}{\ifthenelse{\equal{#1}{(}}{\left]\mkern1mu}{\left#1\mkern1mu}#2;#3\ifthenelse{\equal{#4}{)}}{\mkern1mu\right[}{\mkern1mu\right#4}}{}%
+\ifthenelse{\equal{\NagwaInterval}{ar1}}{\ifthenelse{\equal{#1}{(}}{\left]\mkern1mu}{\left#1\mkern1mu}#2,#3\ifthenelse{\equal{#4}{)}}{\mkern1mu\right[}{\mkern1mu\right#4}}{}%
+\ifthenelse{\equal{\NagwaInterval}{ar2}}{\ifthenelse{\equal{#1}{(}}{\left(}{\left#1}#2,#3\ifthenelse{\equal{#4}{)}}{\right)}{\right#4}}{}%
+}%
+}
+\makeatother
+
+
+% Line Segment
+\makeatletter
+\AtBeginDocument{%
+\let\oldlinesegment\linesegment
+\providecommand{\linesegment}[1]{}%
+\renewcommand{\linesegment}[1]{%
+\ifthenelse{\equal{\NagwaLineSegment}{en1}}{\overline{#1}}{}%
+\ifthenelse{\equal{\NagwaLineSegment}{en2}}{\left[#1\right]}{}%
+\ifthenelse{\equal{\NagwaLineSegment}{ar1}}{\overline{#1}}{}%
+}%
+}
+\makeatother
+
+
+% Matrix
+\ifcsname MatrixNotation\endcsname\else\newenvironment{MatrixNotation}{}{}\fi
+\makeatletter
+\renewenvironment{MatrixNotation}{%
+  \ifthenelse{\equal{\NagwaMatrix}{en1}}{%
+    \left[\mkern1mu\vcenter\bgroup\Let@\restore@math@cr\default@tag\baselineskip0pt\lineskip8pt\lineskiplimit0pt\ialign\bgroup\hfil$\m@th\displaystyle{##}$\hfil&&\quad\hfil$\m@th\displaystyle{##}$\hfil\crcr
+  }{}%
+  \ifthenelse{\equal{\NagwaMatrix}{en2}}{%
+    \left(\relax\vcenter\bgroup\Let@\restore@math@cr\default@tag\baselineskip0pt\lineskip8pt\lineskiplimit0pt\ialign\bgroup\hfil$\m@th\displaystyle{##}$\hfil&&\quad\hfil$\m@th\displaystyle{##}$\hfil\crcr
+  }{}%
+  \ifthenelse{\equal{\NagwaMatrix}{ar1}}{%
+    \left(\vcenter\bgroup\Let@\restore@math@cr\default@tag\baselineskip0pt\lineskip8pt\lineskiplimit0pt\ialign\bgroup\hfil$\m@th\displaystyle{##}$\hfil&&\quad\hfil$\m@th\displaystyle{##}$\hfil\crcr
+  }{}%
+  \ifthenelse{\equal{\NagwaMatrix}{ar2}}{%
+    \left[\mkern1mu\vcenter\bgroup\Let@\restore@math@cr\default@tag\baselineskip0pt\lineskip8pt\lineskiplimit0pt\ialign\bgroup\hfil$\m@th\displaystyle{##}$\hfil&&\quad\hfil$\m@th\displaystyle{##}$\hfil\crcr
+  }{}%
+}{%
+  \ifthenelse{\equal{\NagwaMatrix}{en1}}{\crcr\egroup\egroup\mkern1mu\right]}{}%
+  \ifthenelse{\equal{\NagwaMatrix}{en2}}{\crcr\egroup\egroup\right)}{}%
+  \ifthenelse{\equal{\NagwaMatrix}{ar1}}{\crcr\egroup\egroup\right)}{}%
+  \ifthenelse{\equal{\NagwaMatrix}{ar2}}{\crcr\egroup\egroup\mkern1mu\right]}{}%
+}
+\makeatother
+
+
+% Measure of Angle
+\makeatletter
+\AtBeginDocument{%
+\let\oldmeasureangle\measureangle
+\providecommand{\measureangle}[1]{}%
+\renewcommand{\measureangle}[1]{%
+\ifthenelse{\equal{\NagwaMeasureAngle}{en1}}{m\angle{#1}}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{en2}}{\angle{#1}}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{en3}}{\widehat{#1}}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{en4}}{m\sphericalangle{#1}}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{en5}}{m(\widehat{#1})}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{en6}}{\hat{#1}}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{en7}}{m(\hat{#1})}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{ar1}}{\dotlessqaft \angle{#1}}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{ar2}}{\dotlessqaft \sphericalangle {#1}}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{ar3}}{\dotlessqaft(\hat{#1})}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{ar4}}{\qaf \angle{#1}}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{ar5}}{\sphericalangle{#1}}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{ar6}}{\qaf(\sphericalangle{#1})}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{ar7}}{\widehat{#1}}{}%
+\ifthenelse{\equal{\NagwaMeasureAngle}{ar8}}{\hat{(#1)}}{}%
+}%
+}
+\makeatother
+
+
+% Moment about a Point
+\makeatletter
+\AtBeginDocument{%
+\let\oldvectorin\vectorin
+\providecommand{\vectorin}[1]{}%
+\renewcommand{\vectorin}[1]{%
+	\ifthenelse{\equal{\NagwaVectorIn}{en1}}{\mathbf{#1}}{}%
+	\ifthenelse{\equal{\NagwaVectorIn}{en2}}{{\mathbf{#1}}}{}%
+	\ifthenelse{\equal{\NagwaVectorIn}{en3}}{{\overrightarrow{#1}}}{}%
+	\ifthenelse{\equal{\NagwaVectorIn}{en4}}{{\overrightharpoon{#1}}}{}%
+	\ifthenelse{\equal{\NagwaVectorIn}{ar1}}{{\overleftharpoon{#1}}}{}%
+	\ifthenelse{\equal{\NagwaVectorIn}{ar2}}{{\overleftarrow{#1}}}{}%
+}%
+\let\oldmoment\moment
+\providecommand{\moment}[2][]{}%
+\renewcommand{\moment}[2][]{%
+\ifthenelse{\equal{\NagwaMoment}{en1}}{\ifthenelse{\equal{#1}{vector}}{\vectorin{M}_{#2}}{M_{#2}}}{}%
+\ifthenelse{\equal{\NagwaMoment}{en2}}{\ifthenelse{\equal{#1}{vector}}{\vectorin{M}\left(#2\right)}{M\left(#2\right)}}{}%
+\ifthenelse{\equal{\NagwaMoment}{en3}}{\ifthenelse{\equal{#1}{vector}}{\vectorin{M}_{#2}}{M_{#2}}}{}%
+\ifthenelse{\equal{\NagwaMoment}{en4}}{\ifthenelse{\equal{#1}{vector}}{\vectorin{M}_{#2}}{M_{#2}}}{}%
+\ifthenelse{\equal{\NagwaMoment}{ar1}}{\ifthenelse{\equal{#1}{vector}}{\vectorin{\jeem}_{#2}}{\jeem_{#2}}}{}%
+\ifthenelse{\equal{\NagwaMoment}{ar2}}{\ifthenelse{\equal{#1}{vector}}{\vectorin{\jeem}_{#2}}{\jeem_{#2}}}{}%
+}
+}
+\makeatother
+
+
+% Parallel
+\makeatletter
+\AtBeginDocument{%
+\let\oldparallel\parallel
+\providecommand{\parallel}{}%
+\renewcommand{\parallel}{%
+\ifthenelse{\equal{\NagwaParallel}{en1}}{{\,\oldparallel\,}}{}%
+\ifthenelse{\equal{\NagwaParallel}{en2}}{{\,\sslash\,}}{}%
+\ifthenelse{\equal{\NagwaParallel}{ar1}}{{\,\sslash\,}}{}%
+}%
+
+
+% Safe version for handwriting environments
+\providecommand{\ParallelNotation}{}%
+\renewcommand{\ParallelNotation}{%
+\ifthenelse{\equal{\NagwaParallel}{en1}}{{\,\oldparallel\,}}{}%
+\ifthenelse{\equal{\NagwaParallel}{en2}}{{\,\sslash\,}}{}%
+\ifthenelse{\equal{\NagwaParallel}{ar1}}{{\,\sslash\,}}{}%
+}%
+}
+\makeatother
+
+
+% Permutation
+\makeatletter
+\AtBeginDocument{%
+\let\oldpermutation\permutation
+\providecommand{\permutation}[2]{}%
+\renewcommand{\permutation}[2]{%
+\ifthenelse{\equal{\NagwaPermutation}{en1}}{{{\vphantom{P}}_{#1}{P}_{#2}}}{}%
+\ifthenelse{\equal{\NagwaPermutation}{en2}}{{{\vphantom{P}}^{#1}{P}_{#2}}}{}%
+\ifthenelse{\equal{\NagwaPermutation}{en3}}{{\text{\vphantom{P}{P}}^{#1}_{#2}}}{}%
+\ifthenelse{\equal{\NagwaPermutation}{en4}}{{A_{#1}^{#2}}}{}%
+\ifthenelse{\equal{\NagwaPermutation}{en5}}{{{}^{#2}A_{#1}}}{}%
+\ifthenelse{\equal{\NagwaPermutation}{en6}}{{{A}_{#1,#2}}}{}%
+\ifthenelse{\equal{\NagwaPermutation}{en7}}{{{V}_{#1{,}#2}}}{}%
+\ifthenelse{\equal{\NagwaPermutation}{en8}}{{P_{#1}^{#2}}}{}%
+\ifthenelse{\equal{\NagwaPermutation}{ar1}}{{{\vphantom{\lam}}^{#1}{\lam}_{#2}}}{}%
+}%
+}
+\makeatother
+
+
+% Ray
+\makeatletter
+\AtBeginDocument{%
+\let\oldray\ray
+\providecommand{\ray}[1]{}%
+\renewcommand{\ray}[1]{%
+\ifthenelse{\equal{\NagwaRay}{en1}}{{\overrightarrow{#1}}}{}%
+\ifthenelse{\equal{\NagwaRay}{en2}}{\left[#1\right)}{}%
+\ifthenelse{\equal{\NagwaRay}{en3}}{\RayNotation#1\relax}{}%
+\ifthenelse{\equal{\NagwaRay}{ar1}}{\overleftarrow{#1}}{}%
+\ifthenelse{\equal{\NagwaRay}{ar2}}{\left(#1\right]}{}%
+}%
+\def\RayNotation#1#2\relax{\dot{#1}#2}
+}
+\makeatother
+
+
+% Sequence Term
+\makeatletter
+\AtBeginDocument{%
+\let\oldSequenceTerm\SequenceTerm
+\providecommand{\SequenceTerm}[1]{}%
+\renewcommand{\SequenceTerm}[1]{%
+\ifthenelse{\equal{\NagwaSeqTerm}{en1}}{a_{#1}}{}%
+\ifthenelse{\equal{\NagwaSeqTerm}{en2}}{T_{#1}}{}%
+\ifthenelse{\equal{\NagwaSeqTerm}{en3}}{u_{#1}}{}%
+\ifthenelse{\equal{\NagwaSeqTerm}{ar1}}{\hah_{#1}}{}%
+}%
+}
+\makeatother
+
+
+% Set Compliment
+\makeatletter
+\AtBeginDocument{%
+\let\oldsetcomplement\setcomplement
+\providecommand{\setcomplement}[1]{}%
+\renewcommand{\setcomplement}[1]{%
+\ifthenelse{\equal{\NagwaSetComplement}{en1}}{{\overline{#1}}}{}%
+\ifthenelse{\equal{\NagwaSetComplement}{en2}}{{#1^{\prime}}}{}%
+\ifthenelse{\equal{\NagwaSetComplement}{en3}}{{#1^{C}}}{}%
+\ifthenelse{\equal{\NagwaSetComplement}{en4}}{{\text{{#1}}^\text{{c}}}}{}%
+\ifthenelse{\equal{\NagwaSetComplement}{ar1}}{{#1^{\prime}}}{}%
+\ifthenelse{\equal{\NagwaSetComplement}{ar2}}{\overline{#1}}{}%
+}
+}
+\makeatother
+
+
+% Set Minus
+\makeatletter
+\AtBeginDocument{%
+\let\oldsetminus\setminus
+\providecommand{\setminus}{}%
+\renewcommand{\setminus}{%
+\ifthenelse{\equal{\NagwaSetMinus}{en1}}{-}{}%
+\ifthenelse{\equal{\NagwaSetMinus}{en2}}{\oldsetminus}{}%
+\ifthenelse{\equal{\NagwaSetMinus}{ar1}}{-}{}%
+\ifthenelse{\equal{\NagwaSetMinus}{ar2}}{\oldsetminus}{}%
+}%
+
+
+% Safe version for handwriting environments
+\providecommand{\SetMinusNotation}{}%
+\renewcommand{\SetMinusNotation}{%
+\ifthenelse{\equal{\NagwaSetMinus}{en1}}{-}{}%
+\ifthenelse{\equal{\NagwaSetMinus}{en2}}{\oldsetminus}{}%
+\ifthenelse{\equal{\NagwaSetMinus}{ar1}}{-}{}%
+\ifthenelse{\equal{\NagwaSetMinus}{ar2}}{\oldsetminus}{}%
+}%
+}
+\makeatother
+
+
+% Straight line
+\makeatletter
+\AtBeginDocument{%
+\let\oldStraightLine\StraightLine
+\providecommand{\StraightLine}[1]{}%
+\renewcommand{\StraightLine}[1]{%
+\ifthenelse{\equal{\NagwaStLine}{en1}}{\overleftrightarrow{#1}}{}%
+\ifthenelse{\equal{\NagwaStLine}{en2}}{\left(#1\right)}{}%
+\ifthenelse{\equal{\NagwaStLine}{en3}}{{#1}}{}%
+\ifthenelse{\equal{\NagwaStLine}{ar1}}{\overleftrightarrow{#1}}{}%
+\ifthenelse{\equal{\NagwaStLine}{ar2}}{{#1}}{}%
+}%
+}
+\makeatother
+
+
+% % Triangle
+% \makeatletter
+% \AtBeginDocument{%
+% \let\oldtriangle\triangle
+% \providecommand{\triangle}[1]{}%
+% \renewcommand{\triangle}[1]{%
+% \ifthenelse{\equal{\NagwaTriangle}{en1}}{\oldtriangle \,#1}{}%
+% \ifthenelse{\equal{\NagwaTriangle}{en2}}{#1}{}%
+% \ifthenelse{\equal{\NagwaTriangle}{en3}}{\tikz[line width=0.7pt,line join=round]{%
+%     \node[baseline= a.base, inner sep=0pt](a) {$#1$};
+%     \coordinate[yshift=0.4em] (top) at (a.north);
+%     \draw([shift={(-0.1em,0.1em)}]a.north east) -- ([shift={(0.1em,0.1em)}]a.north west)-- (top)--cycle;%
+% }}{}%
+% \ifthenelse{\equal{\NagwaTriangle}{ar1}}{\oldtriangle \,#1}{}%
+% }%
+
+
+% Triangle
+\makeatletter
+\AtBeginDocument{%
+  \let\oldtriangle\triangle
+  \providecommand{\triangle}{}% Clear existing definition safely
+  
+  % 1. The core rendering logic (your original code)
+  \def\@triangle@render#1{%
+    \ifthenelse{\equal{\NagwaTriangle}{en1}}{\oldtriangle \,#1}{}%
+    \ifthenelse{\equal{\NagwaTriangle}{en2}}{#1}{}%
+    \ifthenelse{\equal{\NagwaTriangle}{en3}}{\tikz[line width=0.7pt,line join=round]{%
+        \node[baseline= a.base, inner sep=0pt](a) {$#1$};
+        \coordinate[yshift=0.4em] (top) at (a.north);
+        \draw([shift={(-0.1em,0.1em)}]a.north east) -- ([shift={(0.1em,0.1em)}]a.north west)-- (top)--cycle;%
+    }}{}%
+    \ifthenelse{\equal{\NagwaTriangle}{ar1}}{\oldtriangle \,#1}{}%
+  }
+
+  % 2. Helper to grab a command + its braced argument (e.g., \text + {ABC})
+  \def\@triangle@unbraced@cmd#1#2{\@triangle@render{#1{#2}}}
+  
+  % 3. Helper to handle unbraced tokens (e.g., 'A' or '\text')
+  \def\@triangle@unbraced#1{%
+    % If the unbraced token is followed by {, it's likely a command like \text
+    \@ifnextchar\bgroup{\@triangle@unbraced@cmd{#1}}{\@triangle@render{#1}}%
+  }
+  
+  % 4. Redefine \triangle to peek ahead instead of forcing [1] argument
+  \renewcommand{\triangle}{%
+    % If used with braces \triangle{ABC}, go straight to render
+    % If used without braces \triangle \text{ABC}, go to unbraced logic
+    \@ifnextchar\bgroup{\@triangle@render}{\@triangle@unbraced}%
+  }
+
+
+% Safe version for handwriting environments
+\providecommand{\TriangleNotation}[1]{}%
+\renewcommand{\TriangleNotation}[1]{%
+\ifthenelse{\equal{\NagwaTriangle}{en1}}{\oldtriangle \,#1}{}%
+\ifthenelse{\equal{\NagwaTriangle}{en2}}{#1}{}%
+\ifthenelse{\equal{\NagwaTriangle}{en3}}{\tikz[line width=0.7pt,line join=round]{%
+    \node[baseline= a.base, inner sep=0pt](a) {$#1$};
+    \coordinate[yshift=0.4em] (top) at (a.north);
+    \draw([shift={(-0.1em,0.1em)}]a.north east) -- ([shift={(0.1em,0.1em)}]a.north west)-- (top)--cycle;%
+}}{}%
+\ifthenelse{\equal{\NagwaTriangle}{ar1}}{\oldtriangle \,#1}{}%
+}%
+}
+\makeatother
+
+
+% Unit Vectors
+\makeatletter
+\AtBeginDocument{%
+\let\oldunitvector\unitvector
+\providecommand{\unitvector}[1]{}%
+\renewcommand{\unitvector}[1]{%
+\ifthenelse{\equal{\NagwaUnitVector}{en1}}{\mathbf{#1}}{}%
+\ifthenelse{\equal{\NagwaUnitVector}{en2}}{\overrightharpoon{#1}}{}%
+\ifthenelse{\equal{\NagwaUnitVector}{en3}}{\hat{#1}}{}%
+\ifthenelse{\equal{\NagwaUnitVector}{en4}}{\ifthenelse{\equal{#1}{i}}{\overrightarrow{\imath}}{\ifthenelse{\equal{#1}{j}}{\overrightarrow{\jmath}}{\overrightarrow{#1}}}}{}%
+\ifthenelse{\equal{\NagwaUnitVector}{en5}}{\overrightarrow{#1}}{}%%
+\ifthenelse{\equal{\NagwaUnitVector}{ar1}}{\overleftharpoon{#1}}{}%
+}%
+}
+\makeatother
+
+
+%Vectors
+\makeatletter
+\AtBeginDocument{%
+\let\oldvec\vec
+\providecommand{\vec}[1]{}%
+\renewcommand{\vec}[1]{%
+\ifthenelse{\equal{\NagwaVector}{en1}}{%
+	\StrLen{#1}[\vecLen]
+    \ifthenelse{\equal{\vecLen}{1}}{\mathbf{#1}}{\overrightharpoon{#1}}%
+}{}%
+\ifthenelse{\equal{\NagwaVector}{en2}}{%
+	\StrLen{#1}[\vecLen]
+    \ifthenelse{\equal{\vecLen}{1}}{\mathbf{#1}}{\overrightarrow{#1}}%
+}{}%
+\ifthenelse{\equal{\NagwaVector}{en3}}{{\overrightharpoon{#1}}}{}%
+\ifthenelse{\equal{\NagwaVector}{en4}}{{\overrightarrow{#1}}}{}%
+\ifthenelse{\equal{\NagwaVector}{ar1}}{{\overleftharpoon{#1}}}{}%
+\ifthenelse{\equal{\NagwaVector}{ar2}}{{\overleftarrow{#1}}}{}%
+}
+
+
+\providecommand{\VectorNotation}[1]{}%
+\renewcommand{\VectorNotation}[1]{%
+\ifthenelse{\equal{\NagwaVector}{en1}}{%
+	\StrLen{#1}[\vecLen]
+    \ifthenelse{\equal{\vecLen}{1}}{\mathbf{#1}}{\overrightharpoon{#1}}%
+}{}%
+\ifthenelse{\equal{\NagwaVector}{en2}}{%
+	\StrLen{#1}[\vecLen]
+    \ifthenelse{\equal{\vecLen}{1}}{\mathbf{#1}}{\overrightarrow{#1}}%
+}{}%
+\ifthenelse{\equal{\NagwaVector}{en3}}{{\overrightharpoon{#1}}}{}%
+\ifthenelse{\equal{\NagwaVector}{en4}}{{\overrightarrow{#1}}}{}%
+\ifthenelse{\equal{\NagwaVector}{ar1}}{{\overleftharpoon{#1}}}{}%
+\ifthenelse{\equal{\NagwaVector}{ar2}}{{\overleftarrow{#1}}}{}%
+}
+
+% \providecommand{\VectorNotation}[1]{}%
+% \renewcommand{\VectorNotation}[1]{%
+% \ifthenelse{\equal{\NagwaVector}{en3}}{
+% 	\tikz[baseline=(A.base), inner sep=0pt, outer sep=0pt,line cap=round]{
+% 		\node[inner sep=0pt] (A) {$#1$};
+% 		\draw[line width=1pt, -{Straight Barb[harpoon, length=6pt, width=6pt]}] 
+% 		([yshift=3pt]A.north west) -- ([yshift=3pt]A.north east);
+% 	}%
+% }{}%
+% \ifthenelse{\equal{\NagwaVector}{ar1}}{
+% 	\tikz[baseline=(A.base), inner sep=0pt, outer sep=0pt,line cap=round]{
+% 		\node[inner sep=0pt] (A) {$#1$};
+% 		\draw[line width=1pt, -{Straight Barb[harpoon, length=6pt, width=6pt]}] 
+% 		([yshift=3pt]A.north east) -- ([yshift=3pt]A.north west);
+% 	}%
+% }{}%
+% }
+} 
+\makeatother
+
+
+% Vector Components
+\ifcsname matrixin\endcsname\else\newenvironment{matrixin}{}{}\fi
+\makeatletter
+\AtBeginDocument{%
+\renewenvironment{matrixin}{
+	\left(\relax
+	\vcenter \bgroup
+	\Let@\restore@math@cr\default@tag
+	\baselineskip0pt \lineskip8pt \lineskiplimit0pt
+	\ialign\bgroup\hfil$\m@th\displaystyle{##}$\hfil&&\quad\hfil$\m@th\displaystyle{##}$\hfil\crcr
+}{
+	\crcr\egroup\egroup\right)
+}
+%%
+\providecommand{\vectorcomponents}[1]{}%
+\renewcommand{\vectorcomponents}[1]{%
+\ifthenelse{\equal{\NagwaVectorComponents}{en1}}{{\left\langle#1\right\rangle}}{}%
+\ifthenelse{\equal{\NagwaVectorComponents}{en2}}{{\left(#1\right)}}{}%
+\ifthenelse{\equal{\NagwaVectorComponents}{en3}}{\begin{matrixin}\relax\VecComp#1,\end{matrixin}}{}%
+\ifthenelse{\equal{\NagwaVectorComponents}{ar1}}{{\left(#1\right)}}{}%
+}%
+\def \VecComp#1,#2{#1\ifx\end#2\else\expandafter\\\expandafter\VecComp\fi#2}
+}
+\makeatother
+
+
+% Vector Magnitude
+\makeatletter
+\AtBeginDocument{%
+\let\oldvectormagnitude\vectormagnitude
+\providecommand{\vectormagnitude}[1]{}%
+\renewcommand{\vectormagnitude}[1]{%
+\ifthenelse{\equal{\NagwaVectorMagnitude}{en1}}{{\left\vert \,#1\, \right\vert}}{}%
+\ifthenelse{\equal{\NagwaVectorMagnitude}{en2}}{{\left\Vert \,#1\, \right\Vert}}{}%
+\ifthenelse{\equal{\NagwaVectorMagnitude}{ar1}}{{\left\Vert \,#1\, \right\Vert}}{}%
+\ifthenelse{\equal{\NagwaVectorMagnitude}{ar2}}{{\left\vert \,#1\, \right\vert}}{}%
+}%
+}
+\makeatother
+
+
+
+\makeatletter
+\AtBeginDocument{
+  \@ifpackageloaded{stix}{}{
+    % The first 3 are just synonyms for other symbols. Below is what stix.sty
+    % basically does, you can do the same, or use the other names directly:
+    \let\Box=\mdlgwhtsquare
+    \let\square=\mdlgwhtsquare
+    \let\blacksquare=\mdlgblksquare
+ 	\let\circlearrowleft=\acwopencirclearrow
+	\let\circlearrowright=\cwopencirclearrow
+    % The last one is a ordinary version of \mdlgblklozenge (which is defined
+    % as a binary operator itself), so if you really want a ordinary symbol you
+    % can do something like:
+    \def\blacklozenge{\mathord{\mdlgblklozenge}}
+  }
+}
+\makeatother
+
+
+\makeatletter
+\def\maxwidth#1{\ifdim\Gin@nat@width>#1 #1\else\Gin@nat@width\fi}
+\makeatother
+
+
+
+
+
+
+
+
+\newcount\tmpnum
+
+\def\tallyI{\pdfliteral{q 1 w 0 -1 m 0 15 l S Q}}
+\def\tallyV{
+\ifthenelse{\equal{\nagwalang}{arabic}\or\equal{\nagwalang}{ar}}
+{\kern3bp\pdfliteral{q 1 w -25 0 m 1 14 l S Q}\tallynum4\kern3bp} 
+{\kern3bp\pdfliteral{q 1 w -1 0 m 25 14 l S Q}\tallynum4\kern3bp }
+}
+
+\def\CounterTallyMarks#1{\leavevmode \lower1bp\vbox to30bp{}%
+  \tmpnum=#1
+  \loop \ifnum\tmpnum<5 \kern1bp \tallynum\tmpnum \else \tallyV \fi
+        \advance\tmpnum by-5
+        \ifnum\tmpnum>0 \repeat
+}
+\protected\def\pdfliteral {\pdfextension literal}
+\def\tallynum#1{\bgroup\tmpnum=#1\relax
+ \loop \ifnum\tmpnum>0
+       \kern3bp \tallyI \kern3bp
+       \advance\tmpnum by-1
+       \repeat
+ \egroup
+}
+
+
+\newcommand\Cancel[3][]{
+\tikz[baseline = (a.base),anchor=base,style={inner sep=0,outer sep=0,minimum height=1ex}]{\node(a) {$#2$};
+\draw[-] (a.south west)--(a.north east);
+\ifx&#1&
+	\node[yshift=1ex,xshift=0ex]{$^{#3}$};
+\else
+	\if\relax\detokenize\expandafter{\romannumeral-0#3}\relax
+		\node[yshift=1ex,xshift=0.8ex]{$^{#3}$};
+	\else
+		\node[yshift=1ex,xshift=0.8ex]{$^{\fontsize{10}{12}#3}$};
+	\fi
+\fi
+}}
+
+\newcommand\Carry[3][]{
+\tikz[baseline = (a.base),style={inner sep=0,outer sep=0,minimum height=1ex}]{\node(a) {$#2$};
+\ifx&#1&
+	\node[yshift=1ex,xshift=0ex]{$^{#3}$};
+\else
+	\node[yshift=1ex,xshift=0.8ex]{$^{#3}$};
+\fi
+}}
+
+
+\newcommand\CancelTwice[3]{
+\tikz[baseline = (a.base),style={inner sep=0,outer sep=0,minimum height=1ex}]{\node(a) {$#1$}; 
+\draw[-] (a.south west)--(a.north east) node(b)[yshift=5pt,xshift=-2pt]{$^{#2}$};
+\ifthenelse{\equal{\nagwalang}{arabic}\or\equal{\nagwalang}{ar}}
+{\draw[-] ([yshift=5pt,xshift=-5pt]b.south west)--([yshift=2pt,xshift=2pt]b.north east) node(c)[yshift=5pt,xshift=-2pt]{$^{#3}$};}
+{\draw[-] ([yshift=2pt]b.south west)--(b.north east) node(c)[yshift=5pt,xshift=-2pt]{$^{#3}$};}
+}}
+
+\newcommand\CancelColored[3][]{
+\tikz[baseline = (a.base),style={inner sep=0,outer sep=0,minimum height=1.7ex}]{\node(a) {$#2$};
+\draw[-,red] (a.south west)--(a.north east);
+\ifx&#1&
+\node[yshift=1ex,xshift=0ex]{$^{#3}$};
+\else
+\node[yshift=1ex,xshift=0.8ex]{$^{#3}$};
+\fi
+}}
+
+\newcommand\CancelGreen[3][]{
+	\tikz[baseline = (a.base),style={inner sep=0,outer sep=0,minimum height=1.7ex}]{\node(a) {$#2$};
+		\draw[-,green] (a.south west)--(a.north east);
+		\ifx&#1&
+		\node[yshift=1ex,xshift=0ex]{$^{#3}$};
+		\else
+		\node[yshift=1ex,xshift=0.8ex]{$^{#3}$};
+		\fi
+	}}
+
+
+
+\newcommand\CarryTwice[3]{
+\tikz[baseline = (a.base),style={inner sep=0,outer sep=0,minimum height=1ex}]{
+	\node(a) {$#1$}; 
+	\node(b)[yshift=1ex,xshift=0pt]{$^{#2}$};
+	\node(c)[yshift=2ex,xshift=0pt]{$^{#3}$};
+}}
+
+
+\newenvironment{CancelArray}[1]{\arraycolsep=2pt\begin{array}{#1}}{\end{array}}
+
+\newcommand\SkipSeparator[1]{#1}
+		
+\newcommand{\Arc}[1]{\tikz[baseline=(item.base), very thick]{\node [inner sep=0pt](item){$#1$};\draw[smooth] (item.north west) to [bend left=30]  (item.north east);}}
+
+\makeatletter
+\newenvironment{Cases}{\left\{%
+	\vcenter \bgroup
+	\Let@\restore@math@cr\default@tag
+	\baselineskip0pt \lineskip8pt \lineskiplimit0pt
+	\ialign\bgroup$\m@th\displaystyle{##}$\hfil&\quad$\m@th\displaystyle{##}$\hfil\crcr
+}{%
+	\crcr\egroup\egroup\right.%
+}
+\makeatother
+
+
+
+\newcommand{\tablehead}{\color{TableText}\cellcolor{TableBackground}}
+
+\makeatletter
+\newcommand\binomialCoefficient[2]{%
+%
+\c@pgf@counta=#1%
+\c@pgf@countb=#2%
+%
+%
+\c@pgf@countc=\c@pgf@counta%
+\advance\c@pgf@countc by-\c@pgf@countb%
+\ifnum\c@pgf@countb>\c@pgf@countc%
+\c@pgf@countb=\c@pgf@countc%
+\fi%
+%
+%
+\c@pgf@countc=1%
+\c@pgf@countd=0%
+\pgfmathloop%
+\ifnum\c@pgf@countd<\c@pgf@countb%
+\multiply\c@pgf@countc by\c@pgf@counta%
+\advance\c@pgf@counta by-1%
+\advance\c@pgf@countd by1%
+\divide\c@pgf@countc by\c@pgf@countd%
+\repeatpgfmathloop%
+\the\c@pgf@countc%
+}
+\makeatother
+
+
+
+% Arabic poetry
+\makeatletter
+\newenvironment{arabverse}[1]
+{%
+	\def\alignment{#1}
+	\ifthenelse{\equal{#1}{traditional}}
+	{\setlength{\tabcolsep}{20pt}
+		\begin{center}\begin{tabular}{ c c }}
+	{\begin{tabular}{ l l }}
+}
+{%
+	\end{tabular}
+	\ifthenelse{\equal{\alignment}{traditional}}
+	{\end{center}}{}
+}
+\makeatother
+
+
+
+
+
+
+% mind map
+\makeatletter
+\AtBeginDocument{%
+
+\usepackage[edges]{forest}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+
+\newlength{\maxboxwidth}
+
+\forestset{
+	image_below/.style n args={3}{
+		tikz+={
+			\node[anchor=north] at (.south) {
+				\includegraphics[width=#1cm,alt={#3}]{#2} 
+			};
+		},
+	},
+	image_left/.style n args={3}{
+		tikz+={
+			\node[anchor=east] at (.west) {
+				\includegraphics[width=#1cm,alt={#3}]{#2} 
+			};
+		},
+	},
+	image_right/.style n args={3}{
+		tikz+={
+			\node[anchor=west] at (.east) {
+				\includegraphics[width=#1cm,alt={#3}]{#2} 
+			};
+		},
+	},
+	auto wrap/.style={
+		before typesetting nodes={
+			for tree={
+				content/.wrap value={\setbox0=\hbox{##1}\ifdim\wd0>\maxboxwidth\relax\parbox{\maxboxwidth}{\centering ##1}\else##1\fi},
+			}
+		}
+	},
+	arabic auto wrap/.style={
+		before typesetting nodes={
+			for tree={
+				content/.wrap value={\setbox0=\hbox{##1}\ifdim\wd0>\maxboxwidth\relax\begin{otherlanguage}{arabic}\parbox{\maxboxwidth}{\centering ##1}\end{otherlanguage}\else  \begin{otherlanguage}{arabic} ##1 \end{otherlanguage}\fi},
+			}
+		}
+	},	
+	fixed width auto wrap/.style={
+		before typesetting nodes={
+			for tree={
+				content/.wrap value={\parbox{\maxboxwidth}{\centering ##1}},
+			}
+		}
+	},
+	arabic fixed width auto wrap/.style={
+		before typesetting nodes={
+			for tree={
+				content/.wrap value={\begin{otherlanguage}{arabic}\parbox{\maxboxwidth}{\centering ##1}\end{otherlanguage}},
+			}
+		}
+	},	
+	auto calign/.style={
+		before typesetting nodes={
+			for tree={
+				if n children>=2{
+					calign=center,
+				}{}
+			}
+		}
+	},
+	% Automatically adjust spacing after typesetting
+	auto adjust/.style={
+		delay={
+			for tree={
+				if n children=0{
+					if={min_y("!u")<-30pt}{
+						l sep=30mm,
+					}{
+						if={min_y("!u")<-20pt}{
+							l sep=22mm,
+						}{}
+					}
+				}{}
+			}
+		}
+	}
+}
+
+\newcommand{\tree}[4]{\centering%
+	% #1 = lang (AR or EN)
+	% #2 = direction (V or H)
+	% #3 = width
+	% #4 = content
+	\ifthenelse{\equal{#1}{AR}}{\textdir TLT}{}%
+	\setlength{\maxboxwidth}{#3cm}%
+	\ifthenelse{\equal{#2}{H}}{%
+		% Horizontal tree
+		\ifthenelse{\equal{#1}{AR}}{%
+			% Horizontal Arabic (HAR)
+			\begin{adjustbox}{max width=\textwidth, max totalheight=0.81\textheight}%
+				\begin{forest}
+					arabic auto wrap, auto calign, forked edges,
+					for tree={grow=west, reversed, line width=1pt, edge={line width=1pt},
+						draw, rectangle, rounded corners=4pt, align=center, inner sep=5.1pt,
+						parent anchor=west, child anchor=east, s sep=8mm, l sep=12mm,
+						fork sep=8mm, auto adjust},
+					#4
+				\end{forest}%
+			\end{adjustbox}%
+		}{%
+			% Horizontal English (HEN)
+			\begin{adjustbox}{max width=\textwidth, max totalheight=0.81\textheight}%
+				\begin{forest}
+					auto wrap, auto calign, forked edges,
+					for tree={grow=east, line width=1pt, edge={line width=1pt},
+						draw, rectangle, rounded corners=4pt, align=center, inner sep=5.1pt,
+						parent anchor=east, child anchor=west, s sep=8mm, l sep=12mm,
+						fork sep=8mm, auto adjust},
+					#4
+				\end{forest}%
+			\end{adjustbox}%
+		}%
+	}{%
+		% Vertical tree
+		\ifthenelse{\equal{#1}{AR}}{%
+			% Vertical Arabic (VAR)
+			\begin{adjustbox}{max width=\textwidth, max totalheight=0.81\textheight}%
+				\begin{forest}
+					arabic auto wrap, auto calign, forked edges,
+					for tree={grow=south, reversed, line width=1pt, edge={line width=1pt},
+						draw, rectangle, rounded corners=4pt, align=center, inner sep=5.1pt,
+						parent anchor=south, child anchor=north, s sep=8mm, l sep=12mm,
+						fork sep=8mm, auto adjust},
+					#4
+				\end{forest}%
+			\end{adjustbox}%
+		}{%
+			% Vertical English (VEN)
+			\begin{adjustbox}{max width=\textwidth, max totalheight=0.81\textheight}%
+				\begin{forest}
+					auto wrap, auto calign, forked edges,
+					for tree={grow=south, line width=1pt, edge={line width=1pt},
+						draw, rectangle, rounded corners=4pt, align=center, inner sep=5.1pt,
+						parent anchor=south, child anchor=north, s sep=8mm, l sep=12mm,
+						fork sep=8mm, auto adjust},
+					#4
+				\end{forest}%
+			\end{adjustbox}%
+		}%
+	}%
+
+\ifthenelse{\equal{#1}{AR}}{\raggedright \textdir TRT}{\raggedright }%
+}
+
+\newcommand{\fixedwidthtree}[4]{\centering%
+	% #1 = lang (AR or EN)
+	% #2 = direction (V or H)
+	% #3 = width
+	% #4 = content
+	\ifthenelse{\equal{#1}{AR}}{\textdir TLT}{}%
+	\setlength{\maxboxwidth}{#3cm}%
+	\ifthenelse{\equal{#2}{H}}{%
+		% Horizontal tree
+		\ifthenelse{\equal{#1}{AR}}{%
+			% Horizontal Arabic (HAR)
+			\begin{adjustbox}{max width=\textwidth, max totalheight=0.81\textheight}%
+				\begin{forest}
+					arabic fixed width auto wrap, auto calign, forked edges,
+					for tree={grow=west, reversed, line width=1pt, edge={line width=1pt},
+						draw, rectangle, rounded corners=4pt, align=center, inner sep=5.1pt,
+						parent anchor=west, child anchor=east, s sep=8mm, l sep=12mm,
+						fork sep=8mm, auto adjust},
+					#4
+				\end{forest}%
+			\end{adjustbox}%
+		}{%
+			% Horizontal English (HEN)
+			\begin{adjustbox}{max width=\textwidth, max totalheight=0.81\textheight}%
+				\begin{forest}
+					fixed width auto wrap, auto calign, forked edges,
+					for tree={grow=east, line width=1pt, edge={line width=1pt},
+						draw, rectangle, rounded corners=4pt, align=center, inner sep=5.1pt,
+						parent anchor=east, child anchor=west, s sep=8mm, l sep=12mm,
+						fork sep=8mm, auto adjust},
+					#4
+				\end{forest}%
+			\end{adjustbox}%
+		}%
+	}{%
+		% Vertical tree
+		\ifthenelse{\equal{#1}{AR}}{%
+			% Vertical Arabic (VAR)
+			\begin{adjustbox}{max width=\textwidth, max totalheight=0.81\textheight}%
+				\begin{forest}
+					arabic fixed width auto wrap, auto calign, forked edges,
+					for tree={grow=south, reversed, line width=1pt, edge={line width=1pt},
+						draw, rectangle, rounded corners=4pt, align=center, inner sep=5.1pt,
+						parent anchor=south, child anchor=north, s sep=8mm, l sep=12mm,
+						fork sep=8mm, auto adjust},
+					#4
+				\end{forest}%
+			\end{adjustbox}%
+		}{%
+			% Vertical English (VEN)
+			\begin{adjustbox}{max width=\textwidth, max totalheight=0.81\textheight}%
+				\begin{forest}
+					fixed width auto wrap, auto calign, forked edges,
+					for tree={grow=south, line width=1pt, edge={line width=1pt},
+						draw, rectangle, rounded corners=4pt, align=center, inner sep=5.1pt,
+						parent anchor=south, child anchor=north, s sep=8mm, l sep=12mm,
+						fork sep=8mm, auto adjust},
+					#4
+				\end{forest}%
+			\end{adjustbox}%
+		}%
+	}%
+
+\ifthenelse{\equal{#1}{AR}}{\raggedright \textdir TRT}{\raggedright }%
+}
+
+
+}
+\makeatother
+
+
+
+% time line arrow boxes
+\makeatletter
+\AtBeginDocument{%
+\newcommand{\DataArrow}[2][5.2]{%
+\ifthenelse{\equal{\nagwalang}{ar}}%
+{\makebox[#1cm][r]{%
+		\begin{tikzpicture}[baseline=(current bounding box.center)]
+			\node[signal, signal to=west, signal pointer angle=100, draw=gray, line width=1pt, fill=white, 
+			text width=#1cm, minimum height=1.2cm, align=center, inner sep=0pt, outer sep=0pt]{#2};
+		\end{tikzpicture}%
+	}\\[20pt]%
+}
+{\makebox[#1cm][l]{%
+		\begin{tikzpicture}[baseline=(current bounding box.center)]
+			\node[signal, signal to=east, signal pointer angle=100, draw=gray, line width=1pt, fill=white, 
+			text width=#1cm, minimum height=1.2cm, align=center, inner sep=0pt, outer sep=0pt]{#2};
+		\end{tikzpicture}%
+	}\\[20pt]%
+}
+}
+
+\newcommand{\DataBox}[2][5,5.2]{%
+	% Parse the optional argument into height and width
+	\DataBoxParse#1,\relax%
+	\fbox{\parbox[c][\DataBoxHeight]{\DataBoxWidth}{\centering #2}}%
+}
+
+% Helper command to parse the comma-separated dimensions
+\def\DataBoxParse#1,#2,#3\relax{%
+	\def\DataBoxHeight{#1cm}%
+	\def\DataBoxWidth{#2cm}%
+}
+}
+\makeatother
+
+
+
+
+% welldone star
+\makeatletter
+\AtBeginDocument{%
+\providecommand{\welldonestar}{}%
+\renewcommand{\welldonestar}{%
+\ifthenelse{\equal{\nagwalang}{ar}}%
+{% ARABIC
+  \leavevmode
+  \makebox[0pt][l]{%
+    \textdir TLT%
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=north west, xshift=17.5pt, yshift=-15pt] at (current page.north west) {%
+        \includegraphics[width=0.08\textwidth]{welldone_star.pdf}%
+      };
+    \end{tikzpicture}%
+  }%
+  \ignorespaces
+}%
+{% ENGLISH
+  \leavevmode
+  \makebox[0pt][l]{%
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=north east, xshift=-17.5pt, yshift=-15pt] at (current page.north east) {%
+        \includegraphics[width=0.08\textwidth]{welldone_star.pdf}%
+      };
+    \end{tikzpicture}%
+  }%
+  \ignorespaces
+}%
+}
+}
+\makeatother
+
+
+% ar xleftarrow and xrightarrow
+\makeatletter
+\AtBeginDocument{%
+
+\newcommand{\Xleftarrow}[2][]{%
+    \mathdir TLT % Keep the arrow going left-to-right
+    \def\temp{#1}%
+    \ifx\temp\empty
+      \xleftarrow{\text{#2}}%
+    \else
+      % \hfill on both sides forces the centering, \text protects the Arabic
+      \xleftarrow{\makebox[#1 cm]{\hfill\text{#2}\hfill}}% 
+    \fi
+}
+
+\newcommand{\Xrightarrow}[2][]{%
+    \mathdir TLT % Keep the arrow going left-to-right
+    \def\temp{#1}%
+    \ifx\temp\empty
+      \xrightarrow{\text{#2}}%
+    \else
+      % \hfill on both sides forces the centering, \text protects the Arabic
+      \xrightarrow{\makebox[#1 cm]{\hfill\text{#2}\hfill}}% 
+    \fi
+}
+}
+\makeatother
+
+
+% nagwa logo
+\makeatletter
+\AtBeginDocument{%
+\providecommand{\nagwalogo}{}%
+\renewcommand{\nagwalogo}{%
+\ifthenelse{\equal{\nagwalang}{ar}}%
+{% ARABIC
+  \leavevmode
+  \makebox[0pt][l]{%
+    \textdir TLT%
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=north east, xshift=-55pt, yshift=-50pt] at (current page.north east) {%
+        \includegraphics[width=0.28\textwidth]{logo-ar.png}%
+      };
+    \end{tikzpicture}%
+  }%
+  \ignorespaces
+}%
+{% ENGLISH
+  \leavevmode
+  \makebox[0pt][l]{%
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=north west, xshift=55pt, yshift=-50pt] at (current page.north west) {%
+        \includegraphics[width=0.28\textwidth]{logo-en.png}%
+      };
+    \end{tikzpicture}%
+  }%
+  \ignorespaces
+}%
+}
+}
+\makeatother
+
+% % welldone star
+% \makeatletter
+% \AtBeginDocument{%
+% \providecommand{\welldonestar}{}%
+% \renewcommand{\welldonestar}{%
+% \vspace*{-82pt} 
+% \begin{flushright}	
+% 	\includegraphics[width=0.08\textwidth]{welldone_star.pdf}
+% \end{flushright} 
+% }
+% }
+% \makeatother
+
+
+% newcolumntype for arabic column in EN slide and tagbtn and gaptext and correct and wrong questions sign brackets
+\makeatletter
+\AtBeginDocument{%
+\newcolumntype{A}[1]{>{\raggedright\arraybackslash\begin{otherlanguage}{arabic}}m{#1}<{\end{otherlanguage}}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash\begin{otherlanguage}{arabic}}m{#1}<{\end{otherlanguage}}}
+
+% newcolumntype for columns in ar files
+\newcolumntype{R}[1]{>{\raggedright\arraybackslash\mathdir TRT }m{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash\mathdir TRT }m{#1}}
+\newcolumntype{T}[1]{>{\centering\arraybackslash\mathdir TRT }p{#1}}
+
+\newcommand{\gaptext}{\underline{\hspace{2cm}}}
+
+
+\newcommand{\tagbtn}[1]{%
+    \tikz[baseline=(n.base)]{
+        \node[
+            fill=LightBlue!10,             % Background color
+            text=NagwaBlue,           % Text color
+            rounded corners=4pt,    % How round the corners are
+            inner sep=0,outer sep=0,minimum height=1cm,
+			inner xsep=8pt,
+            font=\bfseries % Bold
+        ] (n) {\vphantom{Äg}\vphantom{ﺄًّيٍﺥٍّ}#1};
+    }%
+}
+
+\newcommand{\tfbox}{\unskip\nobreak\hfill (\quad)\null}
+
+}
+\makeatother
+
+
+% degree
+\makeatletter
+\AtBeginDocument{%
+\newcommand{\degree}{^\circ}
+}
+\makeatother
+
+% \ThankYouText
+\makeatletter
+\AtBeginDocument{%
+
+\newcommand{\ThankYouText}{%
+    \ifthenelse{\equal{\nagwalang}{ar}}%
+        {\begin{otherlanguage}{arabic}شكراً جزيلاً!\end{otherlanguage}}%
+    {\ifthenelse{\equal{\nagwalang}{es}}%
+        {¡Gracias!}%
+    {\ifthenelse{\equal{\nagwalang}{fr}}%
+        {Merci}%
+    {\ifthenelse{\equal{\nagwalang}{it}}%
+        {Grazie}%
+    {\ifthenelse{\equal{\nagwalang}{de}}%
+        {Vielen Dank}%
+        {Thank You!}% en (default)
+    }}}}%
+}
+
+}
+\makeatother
+
+
+% \ArabicSessionPhrase - maps session number or ordinal to full Arabic phrase
+\makeatletter
+\AtBeginDocument{%
+\newcommand{\ArabicSessionPhrase}[1]{%
+    \directlua{
+        local ar_sessions = {
+            "الحصة الأولى",
+            "الحصة الثانية",
+            "الحصة الثالثة",
+            "الحصة الرابعة",
+            "الحصة الخامسة",
+            "الحصة السادسة",
+            "الحصة السابعة",
+            "الحصة الثامنة",
+            "الحصة التاسعة",
+            "الحصة العاشرة",
+            "الحصة الحادية عشرة",
+            "الحصة الثانية عشرة",
+            "الحصة الثالثة عشرة",
+            "الحصة الرابعة عشرة",
+            "الحصة الخامسة عشرة",
+            "الحصة السادسة عشرة",
+            "الحصة السابعة عشرة",
+            "الحصة الثامنة عشرة",
+            "الحصة التاسعة عشرة",
+            "الحصة العشرون",
+            "الحصة الحادية والعشرون",
+            "الحصة الثانية والعشرون",
+            "الحصة الثالثة والعشرون",
+            "الحصة الرابعة والعشرون",
+            "الحصة الخامسة والعشرون",
+            "الحصة السادسة والعشرون",
+            "الحصة السابعة والعشرون",
+            "الحصة الثامنة والعشرون",
+            "الحصة التاسعة والعشرون",
+            "الحصة الثلاثون",
+            "الحصة الحادية والثلاثون",
+            "الحصة الثانية والثلاثون",
+            "الحصة الثالثة والثلاثون",
+            "الحصة الرابعة والثلاثون",
+            "الحصة الخامسة والثلاثون",
+            "الحصة السادسة والثلاثون",
+            "الحصة السابعة والثلاثون",
+            "الحصة الثامنة والثلاثون",
+            "الحصة التاسعة والثلاثون",
+            "الحصة الأربعون",
+            "الحصة الحادية والأربعون",
+            "الحصة الثانية والأربعون",
+            "الحصة الثالثة والأربعون",
+            "الحصة الرابعة والأربعون",
+            "الحصة الخامسة والأربعون",
+            "الحصة السادسة والأربعون",
+            "الحصة السابعة والأربعون",
+            "الحصة الثامنة والأربعون",
+            "الحصة التاسعة والأربعون",
+            "الحصة الخمسون",
+            "الحصة الحادية والخمسون",
+            "الحصة الثانية والخمسون",
+            "الحصة الثالثة والخمسون",
+            "الحصة الرابعة والخمسون",
+            "الحصة الخامسة والخمسون",
+            "الحصة السادسة والخمسون",
+            "الحصة السابعة والخمسون",
+            "الحصة الثامنة والخمسون",
+            "الحصة التاسعة والخمسون",
+            "الحصة الستون",
+            "الحصة الحادية والستون",
+            "الحصة الثانية والستون",
+            "الحصة الثالثة والستون",
+            "الحصة الرابعة والستون",
+            "الحصة الخامسة والستون",
+            "الحصة السادسة والستون",
+            "الحصة السابعة والستون",
+            "الحصة الثامنة والستون",
+            "الحصة التاسعة والستون",
+            "الحصة السبعون"
+        }
+        local input = "\luaescapestring{#1}"
+        local num = tonumber(input)
+        if num and ar_sessions[num] then
+            tex.sprint(ar_sessions[num])
+        else
+            tex.sprint("الحصة " .. input)
+        end
+    }%
+}
+}
+\makeatother
+
+
+
+% underline and uline
+\makeatletter
+\AtBeginDocument{%
+    % 1. Set the depth of the underline
+    \setlength{\ULdepth}{7pt}
+    
+    % 2. Set the stroke width (thickness) of the underline
+    \renewcommand{\ULthickness}{1.2pt}
+    
+    % 3. Save the original LaTeX \underline command
+    \let\nagwa@oldunderline\underline
+    
+    % 4. Redefine \underline to be "smart"
+    \renewcommand{\underline}[1]{%
+        \ifmmode
+            % If inside an equation, use the original math underline
+            \nagwa@oldunderline{#1}%
+        \else
+            % If in regular text, use the better wrapping uline
+            \uline{#1}%
+        \fi
+    }
+}
+\makeatother
+
+
+% questionlabelbox
+\makeatletter
+\AtBeginDocument{%
+\providecommand{\questionlabelbox}{}%
+\renewcommand{\questionlabelbox}[1]{%
+\ifthenelse{\equal{\nagwalang}{ar}}%
+{% ARABIC - Top Right
+  \leavevmode
+  \makebox[0pt][l]{%
+    \textdir TLT%
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=north east, xshift=0pt, yshift=0pt, 
+            fill=TitlePageBlue, text=white,
+            inner sep=10pt, outer sep=0pt,
+            minimum height=40pt] at (current page.north east) {%
+        \fontsize{18}{18}\selectfont\bfseries\begin{otherlanguage}{arabic}#1\end{otherlanguage}%
+      };
+    \end{tikzpicture}%
+  }%
+  \ignorespaces
+}%
+{% ENGLISH - Top Left
+  \leavevmode
+  \makebox[0pt][l]{%
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=north west, xshift=0pt, yshift=0pt,
+            fill=TitlePageBlue, text=white,
+            inner sep=10pt, outer sep=0pt,
+            minimum height=40pt] at (current page.north west) {%
+        \fontsize{18}{18}\selectfont\bfseries#1%
+      };
+    \end{tikzpicture}%
+  }%
+  \ignorespaces
+}%
+}
+}
+\makeatother
+
+% questioncontent and academic year
+\makeatletter
+\AtBeginDocument{%
+\directlua{local f=kpse.find_file("nagwa_dimensions.lua", "lua"); if f then dofile(f) end}
+\global\newbox\qcontentbox
+\global\newbox\nagwasubbox
+\newdimen\savedpageheight
+\newdimen\savedtextheight
+}
+
+\newcommand{\nagwaTrackSubDimensions}[2]{%
+	\setbox\nagwasubbox=\vbox{#2}%
+	\begingroup
+	\edef\qpageheight{\number\pageheight}%
+	\edef\qtextheight{\number\dimexpr\ht\nagwasubbox+\dp\nagwasubbox\relax}%
+	\edef\qcontentheight{\qtextheight}%
+	\edef\qtextwidth{\number\textwidth}%
+	\edef\ql{\number\dimexpr\nagwaLmargin\relax}%
+	\edef\qb{\number\dimexpr\nagwaBmargin\relax}%
+	\edef\qt{\number\dimexpr\nagwaTmargin\relax}%
+	\edef\qp{\number\paperwidth}%
+	\edef\qpn{\number\c@page}%
+	\edef\qid{\nagwaCurrentQID}%
+	\directlua{if write_question_dimensions then write_question_dimensions(\qpageheight,\qtextheight,\qcontentheight,\qtextwidth,\ql,\qb,\qt,\qp,"\qid", "\luaescapestring{#1}", "\qpn") end}%
+	\endgroup
+}
+
+\newcommand{\questioncontent}[2]{%
+	\questionID{#1}%
+	\xdef\nagwaCurrentQID{#1}%
+	\savedpageheight=\pageheight%
+	\savedtextheight=\textheight%
+	\setbox\qcontentbox=\vbox{#2}%
+	\pageheight=\dimexpr\ht\qcontentbox+\dp\qcontentbox+\nagwaTmargin+\nagwaBmargin\relax%
+	\textheight=\dimexpr\ht\qcontentbox+\dp\qcontentbox\relax%
+	\vsize=\textheight%
+	\begingroup
+	\edef\qpageheight{\number\pageheight}%
+	\edef\qtextheight{\number\textheight}%
+	\edef\qcontentheight{\number\dimexpr\ht\qcontentbox+\dp\qcontentbox\relax}%
+	\edef\qtextwidth{\number\textwidth}%
+	\edef\ql{\number\dimexpr\nagwaLmargin\relax}%
+	\edef\qb{\number\dimexpr\nagwaBmargin\relax}%
+	\edef\qt{\number\dimexpr\nagwaTmargin\relax}%
+	\edef\qp{\number\paperwidth}%
+	\edef\qpn{\number\c@page}%
+	\edef\qid{\nagwaCurrentQID}%
+	\directlua{if write_question_dimensions then write_question_dimensions(\qpageheight,\qtextheight,\qcontentheight,\qtextwidth,\ql,\qb,\qt,\qp,"\qid", "", "\qpn") end}%
+	\box\qcontentbox% Output the box directly
+	\par% Ensure vertical mode
+	\newpage%
+	\global\pageheight=\savedpageheight%
+	\global\textheight=\savedtextheight%
+	\global\vsize=\savedtextheight%
+	\endgroup
+}
+
+\newcommand{\instructionalslide}[2]{%
+	\slideID{#1}%
+	\newgeometry{paperwidth=800pt,paperheight=600pt,margin=0pt,headsep=0pt,headheight=0pt,footskip=0pt}%
+	\thispagestyle{empty}%
+	\includepdf[pages=1,fitpaper=true]{#2}%
+	\restoregeometry%
+}
+
+\newcommand{\otherpages}[2]{%
+	\slideID{#1}%
+	\xdef\nagwaCurrentQID{#1}%
+	\savedpageheight=\pageheight%
+	\savedtextheight=\textheight%
+	\setbox\qcontentbox=\vbox{#2}%
+	\pageheight=\dimexpr\ht\qcontentbox+\dp\qcontentbox+\nagwaTmargin+\nagwaBmargin\relax%
+	\textheight=\dimexpr\ht\qcontentbox+\dp\qcontentbox\relax%
+	\vsize=\textheight%
+	\begingroup
+	\edef\qpageheight{\number\pageheight}%
+	\edef\qtextheight{\number\textheight}%
+	\edef\qcontentheight{\number\dimexpr\ht\qcontentbox+\dp\qcontentbox\relax}%
+	\edef\qtextwidth{\number\textwidth}%
+	\edef\ql{\number\dimexpr\nagwaLmargin\relax}%
+	\edef\qb{\number\dimexpr\nagwaBmargin\relax}%
+	\edef\qt{\number\dimexpr\nagwaTmargin\relax}%
+	\edef\qp{\number\paperwidth}%
+	\edef\qpn{\number\c@page}%
+	\edef\qid{\nagwaCurrentQID}%
+	\directlua{if write_question_dimensions then write_question_dimensions(\qpageheight,\qtextheight,\qcontentheight,\qtextwidth,\ql,\qb,\qt,\qp,"\qid", "", "\qpn") end}%
+	\box\qcontentbox% Output the box directly
+	\par% Ensure vertical mode
+	\newpage%
+	\global\pageheight=\savedpageheight%
+	\global\textheight=\savedtextheight%
+	\global\vsize=\savedtextheight%
+	\endgroup
+}
+
+\newcommand{\academicyear}[1]{%
+    \ifthenelse{\equal{\nagwalang}{ar}}%
+    {%
+        % --- ARABIC (Right Side, Rotated -90 degrees) ---
+        \AddToShipoutPictureFG{%
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[
+                anchor=center,
+                text=black,
+                scale=1,
+                rotate=-90,
+                xshift=-0.5\pageheight,
+                yshift=0.5\pagewidth - 12pt
+                ] at (current page.south)
+                {\color{Grey!70} \fontsize{16pt}{8pt}\selectfont \begin{otherlanguage}{arabic}#1\end{otherlanguage}};
+            \end{tikzpicture}%
+        }%
+    }%
+    {%
+        % --- ENGLISH (Left Side, Rotated 90 degrees) ---
+        \AddToShipoutPictureFG{%
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[
+                anchor=center,
+                text=black,
+                scale=1,
+                rotate=90,
+                xshift=0.5\pageheight,
+                yshift=0.5\pagewidth - 12pt
+                ] at (current page.south)
+                {\color{Grey!70} \fontsize{16pt}{8pt}\selectfont #1};
+            \end{tikzpicture}%
+        }%
+    }%
+}
+
+\newcommand{\academicyeartape}[1]{%
+    \ifthenelse{\equal{\nagwalang}{ar}}%
+    {%
+        % --- ARABIC (Right Side, Rotated -90 degrees) ---
+        \AddToShipoutPictureFG{%
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[
+                anchor=center,
+                text=black,
+                scale=1,
+                rotate=-90,
+                xshift=0pt,
+                yshift=0.5\pagewidth - 15pt
+                ] at (current page.south)
+                {\color{Grey!70} \fontsize{22pt}{8pt}\selectfont \begin{otherlanguage}{arabic}#1\end{otherlanguage}};
+            \end{tikzpicture}%
+        }%
+    }%
+    {%
+        % --- ENGLISH (Left Side, Rotated 90 degrees) ---
+        \AddToShipoutPictureFG{%
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[
+                anchor=west,
+                text=black,
+                scale=1,
+                rotate=90,
+                xshift=0pt,
+                yshift=0.5\pagewidth - 15pt
+                ] at (current page.south)
+                {\color{Grey!70} \fontsize{22pt}{8pt}\selectfont #1};
+            \end{tikzpicture}%
+        }%
+    }%
+}
+\makeatother
+
+
+% chemstrut
+\makeatletter
+\AtBeginDocument{%
+\newcommand{\chemstrut}[1]{%
+	\raisebox{0pt}[\dimexpr\height+1ex\relax][\dimexpr\depth+1ex\relax]{#1}%
+}
+}
+\makeatother
+
+
+
+% question - cover - year - page numbers - txtrgb for rgb textcolor
+\makeatletter
+\AtBeginDocument{%
+\usepackage{pdfpages}
+\usepackage{tikz}     % Required for drawing the text
+\usepackage{eso-pic}  % Required to place it on top (Foreground)
+\usepackage{lastpage} % Required for total page count
+\usepackage{zref-savepos}
+\usepackage{zref-abspage}
+
+\newcommand{\questionmark}[1]{%
+  \savepos
+  \zref@labelbyprops{#1}{posx,posy,abspage}%
+}
+
+\newcommand{\question}[1]{\newpage\input{#1}}
+
+\newcommand{\ExamQuestion}[1]{\raggedright
+\ifthenelse{\equal{\nagwalang}{ar}}{
+\begin{otherlanguage}{arabic}
+\input{#1}
+\end{otherlanguage}
+}{
+\input{#1}
+}
+
+\vspace{10pt}
+
+}
+
+% \newcommand{\ExamQuestion}[1]{\raggedright
+%   % Measure the question content
+%   \setbox0=\vbox{%
+%     \hsize=\textwidth
+%     \ifthenelse{\equal{\nagwalang}{ar}}
+% 	{\begin{otherlanguage}{arabic}\input{#1}\end{otherlanguage}}
+% 	{\input{#1}}
+%   }%
+%   % Check if it fits on the current page
+%   \ifdim\dimexpr\pagetotal+\ht0+\dp0+20pt\relax>\textheight
+%     \newpage
+%   \fi
+%   % Now typeset for real
+%   \ifthenelse{\equal{\nagwalang}{ar}}
+%   {\begin{otherlanguage}{arabic}\input{#1}\end{otherlanguage}}
+%   {\input{#1}}
+%   \vspace{20pt}% non-star to allow page break
+
+% }
+
+
+
+\newcommand{\examheader}[1]{\raggedright
+\ifthenelse{\equal{\nagwalang}{ar}}{
+\begin{otherlanguage}{arabic}
+\input{#1}
+\end{otherlanguage}
+}{
+\input{#1}
+}
+}
+
+
+\newcommand{\statementcontent}[1]{%
+	\nagwaTrackSubDimensions{statement}{#1}%
+	#1%
+}
+
+\newcommand{\questionpart}[2]{%
+	\questionPartID{#1}%
+	\nagwaTrackSubDimensions{part#1}{#2}%
+	#2%
+}
+
+
+\newcommand{\questionID}[1]{}
+\newcommand{\slideID}[1]{}
+\newcommand{\questionPartID}[1]{}
+
+\newcommand{\txtrgb}[2]{%
+	\directlua{
+		local s = "\luaescapestring{#1}"
+		if s:find(",") then
+			tex.sprint("\\textcolor[RGB]{" .. s .. "}")
+		else
+			tex.sprint("\\textcolor{" .. s .. "}")
+		end
+	}{#2}%
+}
+
+\newcommand{\coverpage}[2]{%
+    \thispagestyle{empty} % Remove headers/footers for the cover
+    % 1. Set the PDF as the background for THIS PAGE ONLY (*)
+    \AddToShipoutPictureBG*{%
+        \includegraphics[width=\paperwidth,height=0.85\paperheight,page=1]{#1}%
+    }%
+    % 2. Input the text content (it will sit on top of the image)
+    \input{#2}%
+	\newpage
+}
+\newcommand{\backcoverpage}[1]{%
+    \includepdf[pages=1, width=\paperwidth, height=\paperheight]{#1}%
+}
+
+\newcommand{\whitecoverpage}[1]{\newpage\input{#1}\newpage}
+\newcommand{\copyrightpage}[1]{\newpage{\input{#1}}\newpage}
+\newcommand{\tocpage}[1]{\newpage{\input{#1}}\newpage}
+\newcommand{\SessionSectionSeparatorPage}[1]{\newpage\input{#1}\newpage}
+
+% Command to convert each digit in page number to Hindi digits
+\newcommand{\hindipagenumber}{%
+    \directlua{
+        local page_str = "\luaescapestring{\thepage}"
+        local hindi_digits = {
+            ["0"] = "٠", ["1"] = "١", ["2"] = "٢", ["3"] = "٣", ["4"] = "٤",
+            ["5"] = "٥", ["6"] = "٦", ["7"] = "٧", ["8"] = "٨", ["9"] = "٩"
+        }
+        local result = ""
+        for i = 1, string.len(page_str) do
+            local c = page_str:sub(i,i)
+            result = result .. (hindi_digits[c] or c)
+        end
+        tex.sprint(result)
+    }%
+}
+
+
+% Command to convert total page count to Hindi digits
+\newcommand{\hinditotalpages}{%
+    \directlua{
+        local total_str = "\luaescapestring{\pageref{LastPage}}"
+        local hindi_digits = {
+            ["0"] = "٠", ["1"] = "١", ["2"] = "٢", ["3"] = "٣", ["4"] = "٤",
+            ["5"] = "٥", ["6"] = "٦", ["7"] = "٧", ["8"] = "٨", ["9"] = "٩"
+        }
+        local result = ""
+        for i = 1, string.len(total_str) do
+            local c = total_str:sub(i,i)
+            result = result .. (hindi_digits[c] or c)
+        end
+        tex.sprint(result)
+    }%
+}
+
+% Helper to get the localized "Page X of Y" string
+\newcommand{\localizedpagenumber}{%
+    \ifthenelse{\equal{\nagwalang}{ar}}%
+        {\begin{otherlanguage}{arabic}صفحة \hindipagenumber{} من \hinditotalpages\end{otherlanguage}}%
+    {\ifthenelse{\equal{\nagwalang}{fr}}%
+        {Page \thepage\ sur \pageref{LastPage}}%
+    {\ifthenelse{\equal{\nagwalang}{de}}%
+        {Seite \thepage\ von \pageref{LastPage}}%
+    {\ifthenelse{\equal{\nagwalang}{it}}%
+        {Pagina \thepage\ di \pageref{LastPage}}%
+    {\ifthenelse{\equal{\nagwalang}{es}}%
+        {P\'{a}gina \thepage\ de \pageref{LastPage}}%
+        {Page \thepage\ of \pageref{LastPage}}% en (default)
+    }}}}%
+}
+
+
+
+% \newcommand{\setuppagenumbers}{%
+%     \ifthenelse{\equal{\nagwalang}{ar}}%
+%     {%
+%         % --- ARABIC (Hindi Digits) ---
+%         \AddToShipoutPictureFG{%
+%             \begin{tikzpicture}[remember picture, overlay]
+%                 \node[
+%                 anchor=south,
+%                 text=black,
+%                 scale=1,
+%                 yshift=10pt 
+%                 ] at (current page.south)
+%                 {%
+%                     \color{Grey!70} 
+%                     \fontsize{16pt}{8pt}\selectfont 
+%                     \hindipagenumber
+%                 };
+%             \end{tikzpicture}%
+%         }%
+%     }%
+%     {%
+%         % --- ENGLISH (Western Digits) ---
+%         \AddToShipoutPictureFG{%
+%             \begin{tikzpicture}[remember picture, overlay]
+%                 \node[
+%                 anchor=south, 
+%                 text=black, 
+%                 scale=1,
+%                 yshift=10pt
+%                 ] at (current page.south)
+%                 {%
+%                     \color{Grey!70} 
+%                     \fontsize{16pt}{8pt}\selectfont 
+%                     \thepage
+%                 };
+%             \end{tikzpicture}%
+%         }%
+%     }%
+% }
+
+\newcommand{\setuppagenumbers}{%
+    \ifthenelse{\equal{\nagwalang}{ar}}%
+    {%
+        \AddToShipoutPictureFG{%
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[
+                anchor=south west, 
+                text=black,
+                xshift=\nagwaRmargin,
+                yshift=0pt
+                ] at (current page.south west)
+                {%
+                    \color{Grey!70} 
+                    \fontsize{11pt}{13.2pt}\selectfont 
+                    \localizedpagenumber
+                };
+            \end{tikzpicture}%
+        }%
+    }%
+    {%
+        \AddToShipoutPictureFG{%
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[
+                anchor=south east, 
+                text=black, 
+                scale=1,
+                xshift=-\nagwaLmargin,
+                yshift=0pt
+                ] at (current page.south east)
+                {%
+                    \color{Grey!70} 
+                    \fontsize{11pt}{13.2pt}\selectfont 
+                    \localizedpagenumber
+                };
+            \end{tikzpicture}%
+        }%
+    }%
+}
+
+}
+\makeatother
+
+
+
+% Define the letter mapping command globally
+\makeatletter
+\AtBeginDocument{%
+\newcommand{\abjadlabel}[1]{%
+	\ifcase\value{#1}% 0 (unused)
+	\or أ% 1
+	\or ب% 2
+	\or ج% 3
+	\or د% 4
+	\or هـ% 5
+	\or و% 6
+	\or ز% 7
+	\or ح% 8
+	\or ط% 9
+	\or ي% 10
+	\or ك% 11
+	\or ل% 12
+	\fi%
+}
+
+% Set the default tasks label based on language
+\ifthenelse{\equal{\@objecttype}{Session_Slide}}
+{ % Session Slide
+\ifthenelse{\equal{\nagwalang}{ar}}%
+{\settasks{label = (\abjadlabel*), label-width = 2.1em, item-format=\raggedright, after-item-skip = 15pt,column-sep = 20pt,item-indent = 3.5em}}
+{\settasks{label = (\Alph*), label-width = 2.1em, item-format=\raggedright, after-item-skip = 15pt, column-sep = 20pt,item-indent = 3.5em}}
+}
+{ % Book
+\ifthenelse{\equal{\nagwalang}{ar}}%
+{\settasks{label = (\abjadlabel*), label-width = 1.5em, item-format=\raggedright, after-item-skip = 5pt,column-sep = 15pt,item-indent = 2.5em}}
+{\settasks{label = (\Alph*), label-width = 1.5em, item-format=\raggedright, after-item-skip = 5pt, column-sep = 15pt,item-indent = 2.5em}}
+}
+
+
+}
+\makeatother
+
+
+
+% \verbatimreading and questioncontent command
+\makeatletter
+\AtBeginDocument{%
+\providecommand{\verbatimreading}[1]{#1}%
+}
+\makeatother
+
+
+% Recurring Decimals
+\DeclareSymbolFont{yhlargesymbols}{OMX}{yhex}{m}{n}
+\DeclareMathAccent{\wideparen}{\mathord}{yhlargesymbols}{"F3}
+\providecommand\dot[1]{\tikz{\node[inner sep=0](item){$#1$};\node[inner sep=0] at (item.north){$\cdot$};}}
+\providecommand{\RecurringDecimals}[2]{}%
+\renewcommand{\RecurringDecimals}[2]{%
+\ifthenelse{\equal{\NagwaRD}{en1}}{\replacementbarENone{#1}{#2}}{}%
+\ifthenelse{\equal{\NagwaRD}{ar1}}{\replacementdotARone{#1}{#2}}{}%
+}%
+
+% enN1
+\providecommand{\replacementbarENone}[2]{\directlua{
+str = string.gsub("\luaescapestring{#1}","[^0-9]", "")
+arr={#2} 
+str2="\luaescapestring{#1}"
+local diff = string.len(str2)-string.len(str) 
+if arr[2]==nil
+then
+    arr[1] = arr[1] - 1 + diff
+else
+    arr[1] = arr[1] - 1 + diff
+    arr[2] = arr[2] - 1 + diff
+end
+if arr[2]==nil
+    then tex.sprint(string.sub(str2, 1, arr[1]-1)..[[\string\overline{]]..string.sub(str2, arr[1], arr[1])..[[}]]..string.sub(str2, arr[1]+1))
+    else tex.sprint(string.sub(str2, 1, arr[1]-1)..[[\string\overline{]]..string.sub(str2, arr[1], arr[2])..[[}]]..string.sub(str2, arr[2]+1))
+end
+}}
+% arN1
+\providecommand{\replacementdotARone}[2]{\directlua{
+    local utf8 = unicode.utf8
+    local p = string.char(37) 
+    
+    local function arabic_to_ascii(s)
+        if not s then return "" end
+        s = s:gsub(utf8.char(0x0660), "0")
+        s = s:gsub(utf8.char(0x0661), "1")
+        s = s:gsub(utf8.char(0x0662), "2")
+        s = s:gsub(utf8.char(0x0663), "3")
+        s = s:gsub(utf8.char(0x0664), "4")
+        s = s:gsub(utf8.char(0x0665), "5")
+        s = s:gsub(utf8.char(0x0666), "6")
+        s = s:gsub(utf8.char(0x0667), "7")
+        s = s:gsub(utf8.char(0x0668), "8")
+        s = s:gsub(utf8.char(0x0669), "9")
+        return s
+    end
+    
+    local function ascii_to_arabic(s)
+        if not s then return "" end
+        s = s:gsub("0", utf8.char(0x0660))
+        s = s:gsub("1", utf8.char(0x0661))
+        s = s:gsub("2", utf8.char(0x0662))
+        s = s:gsub("3", utf8.char(0x0663))
+        s = s:gsub("4", utf8.char(0x0664))
+        s = s:gsub("5", utf8.char(0x0665))
+        s = s:gsub("6", utf8.char(0x0666))
+        s = s:gsub("7", utf8.char(0x0667))
+        s = s:gsub("8", utf8.char(0x0668))
+        s = s:gsub("9", utf8.char(0x0669))
+        return s
+    end
+    
+    local input_str = "\luaescapestring{#1}"
+    local input_ascii = arabic_to_ascii(input_str)
+    input_ascii = input_ascii:gsub(utf8.char(0x066B), ".")
+    
+    local digits_only = input_ascii:gsub("[^0-9]", "")
+    
+    local arr = {}
+    local idx_str = "\luaescapestring{#2}"
+    for part in string.gmatch(idx_str, "([^,]+)") do
+         part = part:gsub("^" .. p .. "s+", ""):gsub(p .. "s+$", "")
+         part = arabic_to_ascii(part)
+         local num = tonumber(part)
+         if num then table.insert(arr, num) end
+    end
+    
+    local str2_ascii = input_ascii
+    local diff = string.len(str2_ascii) - string.len(digits_only)
+    
+    if arr[2] == nil then
+        arr[1] = arr[1] - 1 + diff
+    else
+        arr[1] = arr[1] - 1 + diff
+        arr[2] = arr[2] - 1 + diff
+    end
+    
+    local str3_ascii
+    if arr[2] == nil then
+        str3_ascii = string.sub(str2_ascii, 1, arr[1] - 1) .. [[\string\dot{]] .. string.sub(str2_ascii, arr[1], arr[1]) .. [[}]] .. string.sub(str2_ascii, arr[1] + 1)
+    else
+        local pos1, pos2 = arr[1], arr[2]
+        if pos1 > pos2 then
+            pos1, pos2 = pos2, pos1
+        end
+        local before = string.sub(str2_ascii, 1, pos1 - 1)
+        local char1 = string.sub(str2_ascii, pos1, pos1)
+        local middle = string.sub(str2_ascii, pos1 + 1, pos2 - 1)
+        local char2 = string.sub(str2_ascii, pos2, pos2)
+        local after = string.sub(str2_ascii, pos2 + 1)
+        str3_ascii = before .. [[\string\dot{]] .. char1 .. [[}]] .. middle .. [[\string\dot{]] .. char2 .. [[}]] .. after
+    end
+    
+    local str3_arabic = ascii_to_arabic(str3_ascii)
+    str3_arabic = str3_arabic:gsub(p .. ".", utf8.char(0x066B))
+    
+    tex.print("\\mbox{\\mathdir TLT $" .. str3_arabic .. "$}")
+}}
+
+
+
+
+\makeatletter
+\AtBeginDocument{
+\newcounter{carryNYshift}
+
+\newcommand*{\CarryNumber}[2]{%
+\setcounter{carryNYshift}{2}
+\tikz[baseline = (a.base),style={inner sep=0,outer sep=0,minimum height=1ex}]{
+\node(a) {$#1$}; 
+\foreach \entry in {#2} {%
+			\node(\entry)[yshift=(0.75*\thecarryNYshift ex)]{$^{\entry}$};
+			\addtocounter{carryNYshift}{2}
+}}}
+}
+\makeatother
+
+
+%Nagwa Determinant
+\makeatletter
+\AtBeginDocument{%
+\newenvironment{Determinant}{\left\lvert\mkern4mu%
+	\vcenter \bgroup
+	\Let@\restore@math@cr\default@tag
+	\baselineskip0pt \lineskip8pt \lineskiplimit0pt
+	\ialign\bgroup\hfil$\m@th\displaystyle{##}$\hfil&&\quad\hfil$\m@th\displaystyle{##}$\hfil\crcr
+}{%
+	\crcr\egroup\egroup\mkern4mu\right\rvert%
+}
+}
+\makeatother
+
+
+
+% math thousand separators
+\makeatletter
+\AtBeginDocument{%
+\let\oldmathprintnumber\mathprintnumber
+\providecommand{\mathprintnumber}[1]{}%
+\renewcommand{\mathprintnumber}[1]{%
+\ifthenelse{\equal{\NagwaMathLabel}{en1}}{
+	\directlua{
+		local n = "\luaescapestring{#1}"
+		local p = string.char(37) 
+		n = n:gsub("^" .. p .. "s+", ""):gsub(p .. "s+$", "")
+		local sign = ""
+		if n:sub(1,1) == "-" then
+			sign = "-"
+			n = n:sub(2)
+		end
+		local int_part, dec_part = n:match("^(" .. p .. "d+)" .. p .. ".(" .. p .. "d+)$")
+		if not int_part then
+			int_part = n:match("^(" .. p .. "d+)$")
+			dec_part = nil
+		end
+		if not int_part then 
+			tex.print(sign .. n)
+		else
+			local t_sep = "{,}"
+			if string.len(int_part) > 3 then
+				local buffer = {} 
+				local count = 0
+				for i = string.len(int_part), 1, -1 do
+					count = count + 1
+					table.insert(buffer, 1, int_part:sub(i,i))
+					if math.fmod(count, 3) == 0 and i > 1 then
+						table.insert(buffer, 1, t_sep)
+					end
+				end
+				int_part = table.concat(buffer)
+			end
+			if dec_part then
+				dec_part = dec_part:gsub("0+$", "")
+				if dec_part == "" then dec_part = nil end
+			end
+			local res = int_part
+			if dec_part then res = res .. "." .. dec_part end
+			tex.print(sign .. res)
+		end
+	}
+}{}%
+\ifthenelse{\equal{\NagwaMathLabel}{ar1}}{
+	\directlua{
+		local utf8 = unicode.utf8
+		local function arabic_to_ascii(s)
+			s = s:gsub(utf8.char(0x0660), "0")
+			s = s:gsub(utf8.char(0x0661), "1")
+			s = s:gsub(utf8.char(0x0662), "2")
+			s = s:gsub(utf8.char(0x0663), "3")
+			s = s:gsub(utf8.char(0x0664), "4")
+			s = s:gsub(utf8.char(0x0665), "5")
+			s = s:gsub(utf8.char(0x0666), "6")
+			s = s:gsub(utf8.char(0x0667), "7")
+			s = s:gsub(utf8.char(0x0668), "8")
+			s = s:gsub(utf8.char(0x0669), "9")
+			return s
+		end
+		
+		local function ascii_to_arabic(s)
+			s = s:gsub("0", utf8.char(0x0660))
+			s = s:gsub("1", utf8.char(0x0661))
+			s = s:gsub("2", utf8.char(0x0662))
+			s = s:gsub("3", utf8.char(0x0663))
+			s = s:gsub("4", utf8.char(0x0664))
+			s = s:gsub("5", utf8.char(0x0665))
+			s = s:gsub("6", utf8.char(0x0666))
+			s = s:gsub("7", utf8.char(0x0667))
+			s = s:gsub("8", utf8.char(0x0668))
+			s = s:gsub("9", utf8.char(0x0669))
+			return s
+		end
+		
+		local n = "\luaescapestring{#1}"
+		local p = string.char(37) 
+		n = n:gsub("^" .. p .. "s+", ""):gsub(p .. "s+$", "")
+		local sign = ""
+		if n:sub(1,1) == "-" then
+			sign = "-"
+			n = n:sub(2)
+		end
+		n = n:gsub(utf8.char(0x066B), ".")
+		n = arabic_to_ascii(n)
+		
+		local int_part, dec_part = n:match("^(" .. p .. "d+)" .. p .. ".(" .. p .. "d+)$")
+		if not int_part then
+			int_part = n:match("^(" .. p .. "d+)$")
+			dec_part = nil
+		end
+		if not int_part then 
+			tex.print("\\textdir TRT\\mathdir TLT ")
+			if sign == "-" then tex.print("{-}") end
+			tex.print(ascii_to_arabic(n))
+		else
+			local t_sep = "\\,"
+			if string.len(int_part) > 3 then
+				local buffer = {} 
+				local count = 0
+				for i = string.len(int_part), 1, -1 do
+					count = count + 1
+					table.insert(buffer, 1, int_part:sub(i,i))
+					if math.fmod(count, 3) == 0 and i > 1 then
+						table.insert(buffer, 1, t_sep)
+					end
+				end
+				int_part = table.concat(buffer)
+			end
+			if dec_part then
+				dec_part = dec_part:gsub("0+$", "")
+				if dec_part == "" then dec_part = nil end
+			end
+			local res = int_part
+			if dec_part then res = res .. utf8.char(0x066B) .. dec_part end
+			res = ascii_to_arabic(res)
+			tex.print("\\textdir TRT\\mathdir TLT ")
+			if sign == "-" then tex.print("{-}") end
+			tex.print(res)
+		end
+	}
+}{}%
+}%
+}
+\makeatother
+
+
+
+\makeatletter
+\AtBeginDocument{%
+\providecommand{\slideinput}[1]{}%
+\renewcommand{\slideinput}[1]{%
+    \newpage
+	\directlua{
+		local slide_id = "\luaescapestring{#1}"
+		local filepath = slide_id .. "/" .. slide_id .. ".tex"
+		local p = string.char(37)
+		
+		texio.write_nl("Slide ID: " .. slide_id)
+		texio.write_nl("File path: " .. filepath)
+		
+		local file = io.open(filepath, "r")
+		if not file then
+			texio.write_nl("ERROR: Could not open file!")
+			tex.print("\\string\\par\\string\\textbf{Error: Could not open file " .. filepath .. "}")
+			return
+		end
+		
+		local content = file:read("*all")
+		file:close()
+		
+		texio.write_nl("File read successfully. Content length: " .. string.len(content))
+		        
+        local sessiontitle_pos = content:find("sessiontitle")
+        local enddoc_pos = content:find("\\end{document}")
+        
+        texio.write_nl("sessiontitle position: " .. tostring(sessiontitle_pos))
+        texio.write_nl("end document position: " .. tostring(enddoc_pos))
+        
+        if sessiontitle_pos and enddoc_pos then
+            local after_sessiontitle = content:sub(sessiontitle_pos)
+            local newline_pos = after_sessiontitle:find(string.char(10))
+            if newline_pos then
+                after_sessiontitle = after_sessiontitle:sub(newline_pos + 1)
+            end
+            
+            local start_pos = sessiontitle_pos
+            local start_content = content:sub(start_pos)
+            local line_end = start_content:find(string.char(10))
+            if line_end then
+                start_pos = start_pos + line_end
+            end
+            
+            local extracted = content:sub(start_pos, enddoc_pos - 1)
+            extracted = extracted:gsub("^" .. p .. "s+", ""):gsub(p .. "s+$", "")
+            
+            local function add_path_to_ids(text)
+				local numpattern = "(" .. p .. "d" .. p .. "d" .. p .. "d" .. p .. "d" .. p .. "d" .. p .. "d" .. p .. "d" .. p .. "d" .. p .. "d" .. p .. "d" .. p .. "d" .. p .. "d)"
+                local result = text:gsub(numpattern, function(id)
+                    return slide_id .. "/" .. id
+                end)
+                return result
+            end
+            
+            extracted = add_path_to_ids(extracted)
+            texio.write_nl("Processed content with path prefixes added to 12-digit IDs")
+                            
+            local lines = {}
+            for line in extracted:gmatch("[^" .. string.char(10) .. "]*") do
+                table.insert(lines, line)
+            end
+            tex.print(lines)
+        else
+            texio.write_nl("ERROR: Could not find markers!")
+            tex.print("\\string\\par\\string\\textbf{Error: Could not find sessiontitle or end document in " .. filepath .. "}")
+        end
+	}%
+}%
+
+}
+\makeatother
+
+
+\newcommand{\xmark}{\ding{55}}
+

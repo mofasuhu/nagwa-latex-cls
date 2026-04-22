@@ -1,0 +1,186 @@
+%%
+%% This is file `arabic-math.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% arabic-math.dtx  (with options: `package')
+%% 
+%% See the aforementioned source file(s) for copyright and licensing information.
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{arabic-math}
+    [2018/06/06 v0.2 Arabic math support for LuaTeX]
+\RequirePackage{luatexbase}[2013/05/11]
+\RequireLuaModule{arabic-math}
+\RequirePackage{amsmath}
+\RequirePackage{unicode-math}[2015/09/24]
+\RequirePackage{luacode}
+\AtBeginDocument{\directlua{arabicmath.init()}}
+
+\directlua{tex.enableprimitives('', tex.extraprimitives())}
+\directlua{luaotfload.log.set_loglevel(-1)}
+
+\ExplSyntaxOn
+\DeclareDocumentCommand \setarabicmathfont { O{} m O{} }
+  {
+    \setmathfont {#2}
+    [
+      RightToLeftAlt,
+      StylisticSet=8,
+      #1, #3,
+    ]
+
+    \setmathfont {#2}
+    [
+      RightToLeftAlt,
+      StylisticSet=8,
+      CharacterVariant=1,
+      version=alt01,
+      #1, #3,
+    ]
+  }
+\ExplSyntaxOff
+
+\newfontfeature{RightToLeftAlt}{+rtlm;+rtla}
+
+\mathdir TRT
+\pagedir TRT
+\bodydir TRT
+\textdir TRT
+\pardir  TRT
+\AtBeginDocument{
+  % \Umathcode`0="7 "0 `٠
+  % \Umathcode`1="7 "0 `١
+  % \Umathcode`2="7 "0 `٢
+  % \Umathcode`3="7 "0 `٣
+  % \Umathcode`4="7 "0 `٤
+  % \Umathcode`5="7 "0 `٥
+  % \Umathcode`6="7 "0 `٦
+  % \Umathcode`7="7 "0 `٧
+  % \Umathcode`8="7 "0 `٨
+  % \Umathcode`9="7 "0 `٩
+  % \Umathcode`\%="7 "0 `٪
+  %\Umathcode`.="0 "0 `٫
+  \Umathcode`,="6 "0 `،
+}
+
+\ExplSyntaxOn
+\AtBeginDocument{
+  \def\arsum{\arabicmaj}
+  \def\falim{\arabichad}
+  \iftoggle{arabicsum}{\let\sum\arsum}{}
+  \iftoggle{farsilim}{\let\lim\falim}{}
+  \iftoggle{altalef}{\let\old@alef=\alef \def\alef{\alt{\old@alef}}} {}
+  \iftoggle{altdal} {\let\old@dal=\dal   \def\dal{\alt{\old@dal}}}   {}
+  \iftoggle{altreh} {\let\old@reh=\reh   \def\reh{\alt{\old@reh}}}   {}
+  \iftoggle{altnoon}{\let\old@noon=\noon \def\noon{\alt{\old@noon}}} {}
+}
+\ExplSyntaxOff
+\newcommand\DeclareArabicMathOperator[5]{
+  \DeclareMathOperator{#2}{\text{#4}}
+  \DeclareMathOperator{#3}{\text{#5}}
+  \AtBeginDocument{%
+    \iftoggle{dotlessop}{\let #1 = #3}{\let #1 = #2}
+  }%
+}
+
+% Alias helper (does NOT re-define the underlying operators).
+% Use this to create additional command names (e.g. MathLive shortcuts)
+% that point to already-declared Arabic operators, without triggering:
+%   "! LaTeX Error: Command \<op> already defined."
+\newcommand\DeclareArabicMathOperatorAlias[3]{%
+  \AtBeginDocument{%
+    \iftoggle{dotlessop}{\let #1 = #3}{\let #1 = #2}%
+  }%
+}
+
+\DeclareArabicMathOperator {\sin} {\arsin} {\ardotlesssin} {جا}  {حا}
+\DeclareArabicMathOperatorAlias {\ga} {\arsin} {\ardotlesssin}
+\DeclareArabicMathOperator {\cos} {\arcos} {\ardotlesscos} {جتا} {حٮا}
+\DeclareArabicMathOperatorAlias {\gata} {\arcos} {\ardotlesscos}
+\DeclareArabicMathOperator {\tan} {\artan} {\ardotlesstan} {ظا}  {طا}
+\DeclareArabicMathOperatorAlias {\za} {\artan} {\ardotlesstan}
+\DeclareArabicMathOperator {\cot} {\arcot} {\ardotlesscot} {ظتا} {طٮا}
+\DeclareArabicMathOperatorAlias {\zata} {\arcot} {\ardotlesscot}
+\DeclareArabicMathOperator {\sec} {\arsec} {\ardotlesssec} {قا}  {ٯا}
+\DeclareArabicMathOperatorAlias {\qa} {\arsec} {\ardotlesssec}
+\DeclareArabicMathOperator {\csc} {\arcsc} {\ardotlesscsc} {قتا} {ٯٮا}
+\DeclareArabicMathOperatorAlias {\qata} {\arcsc} {\ardotlesscsc}
+\DeclareArabicMathOperator {\log} {\arlog} {\ardotlesslog} {لو}  {لو}
+%\DeclareArabicMathOperator {\ln}  {\arln}  {\ardotlessln}  {لط}  {لط}
+\DeclareArabicMathOperator {\ln}  {\arln}  {\ardotlessln}  {$\log_{\hehi}$}  {$\log_{\hehi}$}
+
+%%Added by Ahmed Farouk
+\DeclareArabicMathOperator {\arcsin} {\ararcsin} {\ardotlesarcssin} {$\arsin^{−1}$}  {$\ardotlesssin^{−1}$}
+\DeclareArabicMathOperator {\arccos} {\ararccos} {\ardotlessarccos} {$\arcos^{−1}$}  {$\ardotlesscos^{−1}$}
+\DeclareArabicMathOperator {\arctan} {\ararctan} {\ardotlessarctan} {$\artan^{−1}$}  {$\ardotlesstan^{−1}$}
+\DeclareArabicMathOperator {\arccot} {\ararccot} {\ardotlessarccot} {$\arcot^{−1}$}  {$\ardotlesscot^{−1}$}
+\DeclareArabicMathOperator {\arcsec} {\ararcsec} {\ardotlessarcsec} {$\arsec^{−1}$}  {$\ardotlesssec^{−1}$}
+\DeclareArabicMathOperator {\arccsc} {\ararccsc} {\ardotlessarccsc} {$\arcsc^{−1}$}  {$\ardotlesscsc^{−1}$}
+
+\DeclareArabicMathOperator {\sinh}  {\arsinh}  {\ardotlesssinh}  {جاز}   {حاز}
+\DeclareArabicMathOperatorAlias {\gaz} {\arsinh} {\ardotlesssinh}
+\DeclareArabicMathOperator {\cosh}  {\arcosh}  {\ardotlesscosh}  {جتاز}  {حٮاز}
+\DeclareArabicMathOperatorAlias {\gataz} {\arcosh} {\ardotlesscosh}
+\DeclareArabicMathOperator {\tanh}  {\artanh}  {\ardotlesstanh}  {ظاز}   {طاز}
+\DeclareArabicMathOperatorAlias {\zaz} {\artanh} {\ardotlesstanh}
+\DeclareArabicMathOperator {\coth}  {\arcoth}  {\ardotlesscoth}  {ظتاز}  {طٮاز}
+\DeclareArabicMathOperatorAlias {\zataz} {\arcoth} {\ardotlesscoth}
+\DeclareArabicMathOperator {\sech}  {\arsech}  {\ardotlesssech}  {قاز}  {قاز}
+\DeclareArabicMathOperatorAlias {\qaz} {\arsech} {\ardotlesssech}
+\DeclareArabicMathOperator {\csch}  {\arcsch}  {\ardotlesscsch}  {قتاز}  {قٮاز}
+\DeclareArabicMathOperatorAlias {\qataz} {\arcsch} {\ardotlesscsch}
+
+\DeclareArabicMathOperator {\arcsinh}  {\ararcsinh}  {\ardotlessarcsinh}  {$\arsinh^{−1}$}  {$\ardotlesssinh^{−1}$}
+\DeclareArabicMathOperator {\arccosh}  {\ararccosh}  {\ardotlessarccosh}  {$\arcosh^{−1}$}  {$\ardotlesscosh^{−1}$}
+\DeclareArabicMathOperator {\arctanh}  {\ararctanh}  {\ardotlessarctanh}  {$\artanh^{−1}$}  {$\ardotlesstanh^{−1}$}
+\DeclareArabicMathOperator {\arccoth}  {\ararccoth}  {\ardotlessarccoth}  {$\arcoth^{−1}$}  {$\ardotlesscoth^{−1}$}
+\DeclareArabicMathOperator {\arcsech}  {\ararcsech}  {\ardotlessarcsech}  {$\arsech^{−1}$}  {$\ardotlesssech^{−1}$}
+\DeclareArabicMathOperator {\arccsch}  {\ararccsch}  {\ardotlessarccsch}  {$\arcsch^{−1}$}  {$\ardotlesscsch^{−1}$}
+
+\DeclareMathOperator*{\arlim}{\text{نهـــــا}}
+\let\lim=\arlim
+
+\Umathchardef\arrad="7 "0 "0608
+\let\rad=\arrad
+\let\tagform@old=\tagform@
+\def\tagform@#1{\maketag@@@{\ensuremath{(#1)}}}
+\newcommand\alt[1]{%
+  \mathchoice%
+    {\hbox{\mathversion{alt01}$\m@th\displaystyle#1$}}%
+    {\hbox{\mathversion{alt01}$\m@th\textstyle#1$}}%
+    {\hbox{\mathversion{alt01}$\m@th\scriptstyle#1$}}%
+    {\hbox{\mathversion{alt01}$\m@th\scriptscriptstyle#1$}}%
+}
+\DeclareOption{ltrdocument}{%
+    \bodydir TLT
+    \pagedir TLT
+    \pardir  TLT
+    \textdir TLT
+}
+\newtoggle{dotlessop}
+\newtoggle{arabicsum}
+\newtoggle{farsilim}
+\newtoggle{altalef}
+\newtoggle{altdal}
+\newtoggle{altreh}
+\newtoggle{altnoon}
+\togglefalse{dotlessop}
+\togglefalse{arabicsum}
+\togglefalse{farsilim}
+\togglefalse{altalef}
+\togglefalse{altdal}
+\togglefalse{altreh}
+\togglefalse{altnoon}
+\DeclareOption{dotlessop}{\toggletrue{dotlessop}}
+\DeclareOption{arabicsum}{\toggletrue{arabicsum}}
+\DeclareOption{farsilim}{\toggletrue{farsilim}}
+\DeclareOption{altalef}{\toggletrue{altalef}}
+\DeclareOption{altdal}{\toggletrue{altdal}}
+\DeclareOption{altreh}{\toggletrue{altreh}}
+\DeclareOption{altnoon}{\toggletrue{altnoon}}
+\ProcessOptions\relax
+\endinput
+%%
+%% End of file `arabic-math.sty'.

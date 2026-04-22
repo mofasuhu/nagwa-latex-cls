@@ -1,0 +1,363 @@
+% roughnotation.sty
+% A LaTeX package for hand-drawn annotations inspired by Rough Notation
+% https://roughnotation.com
+%
+% Usage: \usepackage{roughnotation}
+%
+% Commands:
+%   \annotateUnderline[id]{text}   - Hand-drawn underline
+%   \annotateBox[id]{text}         - Hand-drawn box
+%   \annotateCircle[id]{text}      - Hand-drawn circle/ellipse
+%   \annotateHighlight[id]{text}   - Hand-drawn highlight
+%   \annotateStrike[id]{text}      - Hand-drawn strike-through
+%   \annotateCross[id]{text}       - Hand-drawn cross/X
+%   \annotateBracket[id]{text}     - Hand-drawn brackets
+%   \annotid                       - Returns current annotation ID
+%
+% ID values: 00 (disabled), 01-99 (enabled with ID)
+
+\ProvidesPackage{roughnotation}[2025/10/26 v1.0 Hand-drawn annotations]
+
+% Package options
+\newif\ifroughnodraw
+\DeclareOption{nodraw}{\roughnodrawtrue}
+\ProcessOptions\relax
+
+\RequirePackage{xparse}
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{ocgx2}
+\RequirePackage{xstring}
+\usetikzlibrary{calc,decorations.pathmorphing,backgrounds}
+
+
+% Helper to resolve color name into a palette color
+% Accepts one of: black, blue, red, green, orange, purple
+\newcommand{\annot@setcolor}[1]{%
+  \def\annot@colorname{hwBlack}% default
+  \IfStrEq{#1}{black}{\def\annot@colorname{hwBlack}}{}%
+  \IfStrEq{#1}{blue}{\def\annot@colorname{hwBlue}}{}%
+  \IfStrEq{#1}{red}{\def\annot@colorname{hwRed}}{}%
+  \IfStrEq{#1}{green}{\def\annot@colorname{hwGreen}}{}%
+  \IfStrEq{#1}{orange}{\def\annot@colorname{hwOrange}}{}%
+  \IfStrEq{#1}{purple}{\def\annot@colorname{hwPurple}}{}%
+}
+
+% Parse optional bracket argument in the form ID or ID,color
+% Sets \annot@id and resolves color via \annot@setcolor
+\newcommand{\annot@parseidcolor}[1]{%
+  \def\annot@id{#1}% default to whole string
+  \def\annot@colorraw{}%
+  \IfSubStr{#1}{,}{%
+    \StrBefore{#1}{,}[\annot@id]%
+    \StrBehind{#1}{,}[\annot@colorraw]%
+  }{}%
+  \annot@setcolor{\annot@colorraw}%
+}
+
+% Temporary storage for coordinate extraction
+\newdimen\annot@tmp
+
+% JSON export setup
+\newwrite\annot@jsonfile
+\AtBeginDocument{%
+  \immediate\openout\annot@jsonfile=\jobname-annotations.json
+  \immediate\write\annot@jsonfile{[}
+}
+\newif\iffirstannot
+\firstannottrue
+\AtEndDocument{%
+  \immediate\write\annot@jsonfile{}
+  \immediate\write\annot@jsonfile{]}
+  \immediate\closeout\annot@jsonfile
+}
+
+\ExplSyntaxOn
+% Accept 00 (off) or 01--99 (on with ID) — robust to spaces/catcodes
+\cs_new_protected:Npn \annot_validate_id:n #1 { }
+% Check if annotation is enabled (not 00)
+\cs_new_protected:Npn \annot_is_enabled:n #1
+  {
+    \tl_set:Nn \l_tmpa_tl {#1}
+    \tl_trim_spaces:N \l_tmpa_tl
+    \tl_set:Nx \l_tmpa_tl { \tl_to_str:N \l_tmpa_tl }
+    \str_if_eq:VnTF \l_tmpa_tl {00}
+      { \c_false_bool } { \c_true_bool }
+  }
+\tl_new:N \g_annot_current_id_tl
+\cs_new_protected:Npn \annot_set_current_id:n #1
+  {
+    \tl_set:Nn \l_tmpa_tl {#1}
+    \tl_trim_spaces:N \l_tmpa_tl
+    \tl_set:Nx \g_annot_current_id_tl { \tl_to_str:N \l_tmpa_tl }
+  }
+\cs_new:Npn \annotid { \tl_use:N \g_annot_current_id_tl }
+
+% Wrapper commands that can be called from normal LaTeX
+\cs_new_protected:Npn \annot_validate_and_set:n #1
+  {
+    \annot_validate_id:n{#1}
+    \annot_set_current_id:n{#1}
+  }
+% Conditional command for checking if enabled
+\NewDocumentCommand{\IfAnnotEnabled}{m m m}{%
+  \str_if_eq:nnTF {#1} {00}
+    {#3}% If 00, execute "off" branch
+    {#2}% Otherwise, execute "on" branch
+}
+\cs_set_eq:NN \annotvalidateandset \annot_validate_and_set:n
+\ExplSyntaxOff
+
+% Helper to write JSON annotation data (id, type, bbox x/y/w/h)
+\edef\openbrace{\string{}
+\edef\closebrace{\string}}
+\NewDocumentCommand{\WriteAnnotJSON}{m m m m m m}{%
+  \iffirstannot
+    \immediate\write\annot@jsonfile{  \openbrace}
+    \global\firstannotfalse
+  \else
+    \immediate\write\annot@jsonfile{,}
+    \immediate\write\annot@jsonfile{  \openbrace}
+  \fi
+  \immediate\write\annot@jsonfile{    "id": "#1",}
+  \immediate\write\annot@jsonfile{    "type": "#2",}
+  \immediate\write\annot@jsonfile{    "bbox": \openbrace "x": #3, "y": #4, "width": #5, "height": #6 \closebrace}
+  \immediate\write\annot@jsonfile{  \closebrace}
+}
+
+% --------------------- Annotation Commands ---------------------
+
+% Underline (hand-drawn style)
+\NewDocumentCommand{\annotateUnderline}{r[] m}{%
+  \annot@parseidcolor{#1}%
+  \annotvalidateandset{\annot@id}%
+  \tikz[remember picture, baseline=(T.base)]{
+    \node[anchor=base, inner sep=0pt, outer sep=0pt] (T) {#2};
+  }%
+  \IfAnnotEnabled{\annot@id}{%
+    \tikz[remember picture, overlay]{
+      \ifroughnodraw\else
+        \begin{ocg}{Annotations}{ocg-annotations}{1}
+          % color already set by parser
+          \draw[draw=\annot@colorname, line width=1pt, decorate, decoration={random steps, segment length=3pt, amplitude=0.5pt}]
+            ([yshift=-1pt]T.south west) -- ([yshift=-1pt]T.south east);
+        \end{ocg}
+      \fi
+      % Extract coordinates for JSON (top-left origin, Y down)
+      \path let \p1=(T.south west), \p2=(T.north east), \p3=([yshift=-1pt]T.south west), \p4=([yshift=-1pt]T.south east),
+                \p{page}=(current page.south west), \p{pagetop}=(current page.north west) in
+        \pgfextra{
+          \pgfmathsetmacro{\pageheight}{(\y{pagetop}-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxx}{(\x1-\x{page})/1pt}
+          \pgfmathsetmacro{\bboxy}{\pageheight - (\y2-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxw}{(\x2-\x1)/1pt}
+          \pgfmathsetmacro{\bboxh}{(\y2-\y1)/1pt}
+          \WriteAnnotJSON{\annot@id}{underline}{\bboxx}{\bboxy}{\bboxw}{\bboxh}
+        };
+    }%
+  }{}%
+}
+
+% Box (hand-drawn style)
+\NewDocumentCommand{\annotateBox}{r[] m}{%
+  \annot@parseidcolor{#1}%
+  \annotvalidateandset{\annot@id}%
+  \tikz[remember picture, baseline=(T.base)]{
+    \node[anchor=base, inner sep=0pt, outer sep=0pt] (T) {#2};
+  }%
+  \IfAnnotEnabled{\annot@id}{%
+    \tikz[remember picture, overlay]{
+      \ifroughnodraw\else
+        \begin{ocg}{Annotations}{ocg-annotations}{1}
+          % color already set by parser
+          \draw[draw=\annot@colorname, line width=1pt, decorate, decoration={random steps, segment length=3pt, amplitude=0.6pt}]
+            ([xshift=-2pt,yshift=-2pt]T.south west) rectangle
+            ([xshift= 2pt,yshift= 2pt]T.north east);
+        \end{ocg}
+      \fi
+      % Extract coordinates for JSON (top-left origin, Y down)
+      \path let \p1=(T.south west), \p2=(T.north east), 
+                \p3=([xshift=-2pt,yshift=-2pt]T.south west), \p4=([xshift=2pt,yshift=2pt]T.north east),
+                \p{page}=(current page.south west), \p{pagetop}=(current page.north west) in
+        \pgfextra{
+          \pgfmathsetmacro{\pageheight}{(\y{pagetop}-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxx}{(\x1-\x{page})/1pt}
+          \pgfmathsetmacro{\bboxy}{\pageheight - (\y2-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxw}{(\x2-\x1)/1pt}
+          \pgfmathsetmacro{\bboxh}{(\y2-\y1)/1pt}
+          \WriteAnnotJSON{\annot@id}{box}{\bboxx}{\bboxy}{\bboxw}{\bboxh}
+        };
+    }%
+  }{}%
+}
+
+% Circle (hand-drawn style)
+\NewDocumentCommand{\annotateCircle}{r[] m}{%
+  \annot@parseidcolor{#1}%
+  \annotvalidateandset{\annot@id}%
+  \tikz[remember picture, baseline=(T.base)]{
+    \node[anchor=base, inner sep=0pt, outer sep=0pt] (T) {#2};
+  }%
+  \IfAnnotEnabled{\annot@id}{%
+    \tikz[remember picture, overlay]{
+      \ifroughnodraw\else
+        % x-radius ≈ 60% of width + 2pt padding
+        \begin{ocg}{Annotations}{ocg-annotations}{1}
+          % color already set by parser
+          \draw[draw=\annot@colorname, line width=1pt, decorate, decoration={random steps, segment length=2.5pt, amplitude=0.7pt}] let \p1=(T.east), \p2=(T.west) in
+            (T.center) ellipse [x radius={0.60*(\x1-\x2)+2pt}, y radius=1.4ex];
+        \end{ocg}
+      \fi
+      % Extract coordinates for JSON (top-left origin, Y down)
+      \path let \p1=(T.south west), \p2=(T.north east), \p3=(T.center), \p4=(T.east), \p5=(T.west),
+                \p{page}=(current page.south west), \p{pagetop}=(current page.north west) in
+        \pgfextra{
+          \pgfmathsetmacro{\pageheight}{(\y{pagetop}-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxx}{(\x1-\x{page})/1pt}
+          \pgfmathsetmacro{\bboxy}{\pageheight - (\y2-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxw}{(\x2-\x1)/1pt}
+          \pgfmathsetmacro{\bboxh}{(\y2-\y1)/1pt}
+          \WriteAnnotJSON{\annot@id}{circle}{\bboxx}{\bboxy}{\bboxw}{\bboxh}
+        };
+    }%
+  }{}%
+}
+
+% Highlight (hand-drawn marker-style bar behind text)
+\NewDocumentCommand{\annotateHighlight}{r[] m}{%
+  \annot@parseidcolor{#1}%
+  \annotvalidateandset{\annot@id}%
+  \tikz[remember picture, baseline=(T.base)]{
+    % Create invisible node first to get dimensions
+    \node[anchor=base, inner sep=0pt, outer sep=0pt, opacity=0] (T) {#2};
+    % Draw highlight behind
+    \IfAnnotEnabled{\annot@id}{%
+      \ifroughnodraw\else
+        \begin{ocg}{Annotations}{ocg-annotations}{1}
+          % color already set by parser
+          \fill[fill=\annot@colorname, opacity=0.40, decorate, decoration={random steps, segment length=3pt, amplitude=0.8pt}]
+            ([yshift=-2pt]T.south west) rectangle
+            ([yshift= 2pt]T.north east);
+        \end{ocg}
+      \fi
+      % Extract coordinates for JSON (top-left origin, Y down)
+      \path let \p1=(T.south west), \p2=(T.north east), 
+                \p3=([yshift=-2pt]T.south west), \p4=([yshift=2pt]T.north east),
+                \p{page}=(current page.south west), \p{pagetop}=(current page.north west) in
+        \pgfextra{
+          \pgfmathsetmacro{\pageheight}{(\y{pagetop}-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxx}{(\x1-\x{page})/1pt}
+          \pgfmathsetmacro{\bboxy}{\pageheight - (\y2-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxw}{(\x2-\x1)/1pt}
+          \pgfmathsetmacro{\bboxh}{(\y2-\y1)/1pt}
+          \WriteAnnotJSON{\annot@id}{highlight}{\bboxx}{\bboxy}{\bboxw}{\bboxh}
+        };
+    }{}%
+    % Draw text on top
+    \node[anchor=base, inner sep=0pt, outer sep=0pt] at (T.base) {#2};
+  }%
+}
+
+% Strike-through (hand-drawn style)
+\NewDocumentCommand{\annotateStrike}{r[] m}{%
+  \annot@parseidcolor{#1}%
+  \annotvalidateandset{\annot@id}%
+  \tikz[remember picture, baseline=(T.base)]{
+    \node[anchor=base, inner sep=0pt, outer sep=0pt] (T) {#2};
+  }%
+  \IfAnnotEnabled{\annot@id}{%
+    \tikz[remember picture, overlay]{
+      \ifroughnodraw\else
+        \begin{ocg}{Annotations}{ocg-annotations}{1}
+          % color already set by parser
+          \draw[draw=\annot@colorname, line width=1pt, decorate, decoration={random steps, segment length=3pt, amplitude=0.5pt}]
+            ([yshift=0.7pt]T.west) -- ([yshift=0.7pt]T.east);
+        \end{ocg}
+      \fi
+      % Extract coordinates for JSON (top-left origin, Y down)
+      \path let \p1=(T.south west), \p2=(T.north east), \p3=([yshift=0.7pt]T.west), \p4=([yshift=0.7pt]T.east),
+                \p{page}=(current page.south west), \p{pagetop}=(current page.north west) in
+        \pgfextra{
+          \pgfmathsetmacro{\pageheight}{(\y{pagetop}-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxx}{(\x1-\x{page})/1pt}
+          \pgfmathsetmacro{\bboxy}{\pageheight - (\y2-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxw}{(\x2-\x1)/1pt}
+          \pgfmathsetmacro{\bboxh}{(\y2-\y1)/1pt}
+          \WriteAnnotJSON{\annot@id}{strike}{\bboxx}{\bboxy}{\bboxw}{\bboxh}
+        };
+    }%
+  }{}%
+}
+
+% Cross (hand-drawn X over the text)
+\NewDocumentCommand{\annotateCross}{r[] m}{%
+  \annot@parseidcolor{#1}%
+  \annotvalidateandset{\annot@id}%
+  \tikz[remember picture, baseline=(T.base)]{
+    \node[anchor=base, inner sep=0pt, outer sep=0pt] (T) {#2};
+  }%
+  \IfAnnotEnabled{\annot@id}{%
+    \tikz[remember picture, overlay]{
+      \ifroughnodraw\else
+        \begin{ocg}{Annotations}{ocg-annotations}{1}
+          % color already set by parser
+          \draw[draw=\annot@colorname, line width=1pt, decorate, decoration={random steps, segment length=3pt, amplitude=0.6pt}]
+            ([xshift=-1pt,yshift=-1pt]T.south west) -- ([xshift=1pt,yshift=1pt]T.north east);
+          \draw[draw=\annot@colorname, line width=1pt, decorate, decoration={random steps, segment length=3pt, amplitude=0.6pt}]
+            ([xshift=-1pt,yshift= 1pt]T.north west) -- ([xshift=1pt,yshift=-1pt]T.south east);
+        \end{ocg}
+      \fi
+      % Extract coordinates for JSON (top-left origin, Y down)
+      \path let \p1=(T.south west), \p2=(T.north east), 
+                \p3=([xshift=-1pt,yshift=-1pt]T.south west), \p4=([xshift=1pt,yshift=1pt]T.north east),
+                \p5=([xshift=-1pt,yshift=1pt]T.north west), \p6=([xshift=1pt,yshift=-1pt]T.south east),
+                \p{page}=(current page.south west), \p{pagetop}=(current page.north west) in
+        \pgfextra{
+          \pgfmathsetmacro{\pageheight}{(\y{pagetop}-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxx}{(\x1-\x{page})/1pt}
+          \pgfmathsetmacro{\bboxy}{\pageheight - (\y2-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxw}{(\x2-\x1)/1pt}
+          \pgfmathsetmacro{\bboxh}{(\y2-\y1)/1pt}
+          \WriteAnnotJSON{\annot@id}{cross}{\bboxx}{\bboxy}{\bboxw}{\bboxh}
+        };
+    }%
+  }{}%
+}
+
+% Brackets (hand-drawn style on both sides)
+\NewDocumentCommand{\annotateBracket}{r[] m}{%
+  \annot@parseidcolor{#1}%
+  \annotvalidateandset{\annot@id}%
+  \tikz[remember picture, baseline=(T.base)]{
+    \node[anchor=base, inner sep=0pt, outer sep=0pt] (T) {#2};
+  }%
+  \IfAnnotEnabled{\annot@id}{%
+    \tikz[remember picture, overlay]{
+      \ifroughnodraw\else
+        \begin{ocg}{Annotations}{ocg-annotations}{1}
+          % color already set by parser
+          \draw[draw=\annot@colorname, line width=1pt, decorate, decoration={random steps, segment length=3pt, amplitude=0.6pt}]
+            ([xshift=-3pt,yshift=-3pt]T.south west) -- ([xshift=-3pt,yshift=3pt]T.north west);
+          \draw[draw=\annot@colorname, line width=1pt, decorate, decoration={random steps, segment length=3pt, amplitude=0.6pt}]
+            ([xshift= 3pt,yshift=-3pt]T.south east) -- ([xshift= 3pt,yshift=3pt]T.north east);
+        \end{ocg}
+      \fi
+      % Extract coordinates for JSON (top-left origin, Y down)
+      \path let \p1=(T.south west), \p2=(T.north east),
+                \p3=([xshift=-3pt,yshift=-3pt]T.south west), \p4=([xshift=-3pt,yshift=3pt]T.north west),
+                \p5=([xshift=3pt,yshift=-3pt]T.south east), \p6=([xshift=3pt,yshift=3pt]T.north east),
+                \p{page}=(current page.south west), \p{pagetop}=(current page.north west) in
+        \pgfextra{
+          \pgfmathsetmacro{\pageheight}{(\y{pagetop}-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxx}{(\x1-\x{page})/1pt}
+          \pgfmathsetmacro{\bboxy}{\pageheight - (\y2-\y{page})/1pt}
+          \pgfmathsetmacro{\bboxw}{(\x2-\x1)/1pt}
+          \pgfmathsetmacro{\bboxh}{(\y2-\y1)/1pt}
+          \WriteAnnotJSON{\annot@id}{bracket}{\bboxx}{\bboxy}{\bboxw}{\bboxh}
+        };
+    }%
+  }{}%
+}
+
+\endinput
+
