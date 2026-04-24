@@ -1633,6 +1633,18 @@
 \makeatother
 
 
+% bigcircle bigcirc
+\makeatletter
+\AtBeginDocument{%
+\let\oldbigcirc\bigcirc
+\providecommand{\bigcirc}{}%
+\renewcommand{\bigcirc}{%
+\ \circled{\phantom{A}}\ 
+}
+}
+\makeatother
+
+
 % questionlabelbox
 \makeatletter
 \AtBeginDocument{%
