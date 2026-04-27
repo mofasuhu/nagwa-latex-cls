@@ -1897,7 +1897,7 @@
 \newcommand{\ExamDivision}[1]{\raggedright
 \ifthenelse{\equal{\nagwalang}{ar}}{
 \begin{otherlanguage}{arabic}
-{\fontsize{20}{20}\selectfont \textbf{#1}}
+{\fontsize{18}{18}\selectfont \textbf{#1}}
 \end{otherlanguage}
 }{
 #1
@@ -2117,6 +2117,49 @@
         }%
     }%
 }
+
+
+\newcommand{\setuppagenumberswithtitle}[1]{%
+    \ifthenelse{\equal{\nagwalang}{ar}}%
+    {%
+        \AddToShipoutPictureFG{%
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[
+                anchor=south, 
+                text=black,
+                xshift=0pt,
+                yshift=0pt
+                ] at (current page.south)
+                {%
+                    \color{Grey!70} 
+                    \fontsize{11pt}{13.2pt}\selectfont 
+                    \begin{otherlanguage}{arabic}#1 | \localizedpagenumber\end{otherlanguage}
+                };
+            \end{tikzpicture}%
+        }%
+    }%
+    {%
+        \AddToShipoutPictureFG{%
+            \begin{tikzpicture}[remember picture, overlay]
+                \node[
+                anchor=south, 
+                text=black, 
+                scale=1,
+                xshift=0pt,
+                yshift=0pt
+                ] at (current page.south)
+                {%
+                    \color{Grey!70} 
+                    \fontsize{11pt}{13.2pt}\selectfont 
+                    #1 | \localizedpagenumber
+                };
+            \end{tikzpicture}%
+        }%
+    }%
+}
+
+
+
 
 }
 \makeatother
