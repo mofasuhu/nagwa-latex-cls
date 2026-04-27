@@ -1894,6 +1894,19 @@
 
 }
 
+\newcommand{\ExamDivision}[1]{\raggedright
+\ifthenelse{\equal{\nagwalang}{ar}}{
+\begin{otherlanguage}{arabic}
+{\fontsize{20}{20}\selectfont \textbf{#1}}
+\end{otherlanguage}
+}{
+#1
+}
+
+\vspace{5pt}
+
+}
+
 % \newcommand{\ExamQuestion}[1]{\raggedright
 %   % Measure the question content
 %   \setbox0=\vbox{%
