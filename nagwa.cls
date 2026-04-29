@@ -61,6 +61,7 @@ luatexbase.add_to_callback('show_warning_message', be_quiet, 'stop show warning 
 \RequirePackage{tipa}  % Required for vowel sounds symbols
 
 \RequirePackage{pdfrender} 
+\RequirePackage{parskip}
 
 \RequirePackage{newunicodechar} % Required to process the commands in Unicodes.tex
 \input{Unicodes.tex}            % Loads the character definitions
