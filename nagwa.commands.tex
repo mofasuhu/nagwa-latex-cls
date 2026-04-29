@@ -2005,26 +2005,35 @@
 
 
 % Command to convert total page count to Hindi digits
+% NOTE: \pageref is protected (non-expandable) and cannot be used inside
+% \directlua. Instead, we use Lua's token.get_macro to read the \r@LastPage
+% label data directly and extract the page number with a Lua pattern.
 \newcommand{\hinditotalpages}{%
     \directlua{
-        local total_str = "\luaescapestring{\pageref{LastPage}}"
-        local hindi_digits = {
-            ["0"] = "٠", ["1"] = "١", ["2"] = "٢", ["3"] = "٣", ["4"] = "٤",
-            ["5"] = "٥", ["6"] = "٦", ["7"] = "٧", ["8"] = "٨", ["9"] = "٩"
-        }
-        local result = ""
-        for i = 1, string.len(total_str) do
-            local c = total_str:sub(i,i)
-            result = result .. (hindi_digits[c] or c)
+        local ref = ""
+        pcall(function() ref = token.get_macro("r@LastPage") or "" end)
+        local page = ref:match("^{.-}{(.-)}")
+        if page and string.len(page) > 0 then
+            local hindi_digits = {
+                ["0"] = "٠", ["1"] = "١", ["2"] = "٢", ["3"] = "٣", ["4"] = "٤",
+                ["5"] = "٥", ["6"] = "٦", ["7"] = "٧", ["8"] = "٨", ["9"] = "٩"
+            }
+            local result = ""
+            for i = 1, string.len(page) do
+                local c = page:sub(i,i)
+                result = result .. (hindi_digits[c] or c)
+            end
+            tex.sprint(result)
+        else
+            tex.sprint("??")
         end
-        tex.sprint(result)
     }%
 }
 
 % Helper to get the localized "Page X of Y" string
 \newcommand{\localizedpagenumber}{%
     \ifthenelse{\equal{\nagwalang}{ar}}%
-        {\begin{otherlanguage}{arabic}صفحة \hindipagenumber{} من \hinditotalpages\end{otherlanguage}}%
+        {\begin{otherlanguage}{arabic}صفحة \hindipagenumber{} من \hinditotalpages{}\end{otherlanguage}}%
     {\ifthenelse{\equal{\nagwalang}{fr}}%
         {Page \thepage\ sur \pageref{LastPage}}%
     {\ifthenelse{\equal{\nagwalang}{de}}%

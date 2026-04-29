@@ -118,14 +118,14 @@
 		\setmainfont[Script=Arabic, BoldFont={Noto-Bold.ttf}]{Noto-Regular.ttf}
 		\textdir TRT
 		
-		\geometry{left=130pt,right=30pt}
-		%% To make page numbers to the left
-		\makeatletter
-		\def\ps@myPS{%
-			\def\@oddfoot{\null\hfill\thepage}
-			\def\@evenfoot{\null\hfill\thepage}}%					
-		\makeatother
-		\pagestyle{myPS}
+		% \geometry{left=130pt,right=30pt}
+		% %% To make page numbers to the left
+		% \makeatletter
+		% \def\ps@myPS{%
+		% 	\def\@oddfoot{\null\hfill\thepage}
+		% 	\def\@evenfoot{\null\hfill\thepage}}%					
+		% \makeatother
+		% \pagestyle{myPS}
 		%% Abjad Numerals
 		\makeatletter
 		\newcommand*{\@arabicliteral@symbol}[1]{%
@@ -157,7 +157,7 @@
 		\newcommand*{\arabicnumeral}[1]{\@arabicnumeral{\value{#1}}}
 		\makeatother
 			
-		\renewcommand*{\thepage}{\arabicnumeral{page}}
+		% \renewcommand*{\thepage}{\arabicnumeral{page}}
 		
 		
 		\newenvironment{enumerationnolabel}[1][]{\begin{itemize}\renewcommand{\labelitemi}{\nagwaLabel}}{\end{itemize}}
@@ -192,14 +192,14 @@
 		BoldItalicFont = STIX2Text-BoldItalic.otf]
 		\setmathfont[StylisticSet=8]{NagwaMath.otf}
 		
-		\geometry{left=30pt,right=130pt}
-		%% To make page numbers to the left
-		\makeatletter
-		\def\ps@myPS{%
-			\def\@oddfoot{\null\thepage\hfill}
-			\def\@evenfoot{\null\thepage\hfill}}%
-		\makeatother
-		\pagestyle{myPS}
+		% \geometry{left=30pt,right=130pt}
+		% %% To make page numbers to the left
+		% \makeatletter
+		% \def\ps@myPS{%
+		% 	\def\@oddfoot{\null\thepage\hfill}
+		% 	\def\@evenfoot{\null\thepage\hfill}}%
+		% \makeatother
+		% \pagestyle{myPS}
 		
 		
 		
@@ -422,14 +422,14 @@
 		
 		\textdir TRT \bodydir TRT \pardir TRT
 		
-		\geometry{left=30pt,right=30pt}
-		%% To make page numbers to the left
-		\makeatletter
-		\def\ps@myPS{%
-			\def\@oddfoot{\null\hfill\thepage}
-			\def\@evenfoot{\null\hfill\thepage}}%					
-		\makeatother
-		\pagestyle{myPS}
+		% \geometry{left=30pt,right=30pt}
+		% %% To make page numbers to the left
+		% \makeatletter
+		% \def\ps@myPS{%
+		% 	\def\@oddfoot{\null\hfill\thepage}
+		% 	\def\@evenfoot{\null\hfill\thepage}}%					
+		% \makeatother
+		% \pagestyle{myPS}
 		%% Abjad Numerals
 		\makeatletter
 		\newcommand*{\@arabicliteral@symbol}[1]{%
@@ -461,7 +461,7 @@
 		\newcommand*{\arabicnumeral}[1]{\@arabicnumeral{\value{#1}}}
 		\makeatother
 			
-		\renewcommand*{\thepage}{\arabicnumeral{page}}
+		% \renewcommand*{\thepage}{\arabicnumeral{page}}
 		
 		
 		\newenvironment{enumerationnolabel}[1][]{\begin{itemize}\renewcommand{\labelitemi}{\nagwaLabel}}{\end{itemize}}
@@ -496,14 +496,14 @@
 		BoldItalicFont = STIX2Text-BoldItalic.otf]
 		\setmathfont[StylisticSet=8]{NagwaMath.otf}
 		
-		\geometry{left=30pt,right=30pt}
-		%% To make page numbers to the left
-		\makeatletter
-		\def\ps@myPS{%
-			\def\@oddfoot{\null\thepage\hfill}
-			\def\@evenfoot{\null\thepage\hfill}}%
-		\makeatother
-		\pagestyle{myPS}
+		% \geometry{left=30pt,right=30pt}
+		% %% To make page numbers to the left
+		% \makeatletter
+		% \def\ps@myPS{%
+		% 	\def\@oddfoot{\null\thepage\hfill}
+		% 	\def\@evenfoot{\null\thepage\hfill}}%
+		% \makeatother
+		% \pagestyle{myPS}
 		
 		
 		
