@@ -398,7 +398,11 @@
 \newcounter{choiceletter}
 \newcommand{\nextchar}{%
 	\stepcounter{choiceletter}%
-	\ifcase\value{choiceletter}\or أ\or ب\or ج\or د\or هـ\fi
+	\ifthenelse{\equal{\nagwalang}{ar}}{%
+		\ifcase\value{choiceletter}\or أ\or ب\or ج\or د\or هـ\or و\or ز\or ح\fi
+	}{%
+		\ifcase\value{choiceletter}\or A\or B\or C\or D\or E\or F\or G\or H\fi
+	}%
 }
  
 % 2. Box Shape (Wrapped in \mbox to protect TikZ inside RTL)
@@ -410,26 +414,47 @@
 	}%
 }
  
-% 3. Counters
+% 3. Counters and layout flag
 \newcounter{distractorcount}
+\newif\ifdistractoronecol
  
 % 4. Environment Setup
-\newenvironment{distractors}{%
+% Optional argument: [1col] for single-column layout, default is two-column
+\NewDocumentEnvironment{distractors}{O{}}{%
 	\setcounter{choiceletter}{0}%
 	\setcounter{distractorcount}{0}%
+	\IfStrEq{#1}{1col}{\distractoronecoltrue}{\distractoronecolfalse}%
 	\vspace{0.2cm}%
 }{%
-	% Close the row if there are only 3 options
-	\ifodd\value{distractorcount}%
-	\par
+	% Close the row if there are only 3 options (two-column mode only)
+	\ifdistractoronecol\else
+		\ifodd\value{distractorcount}%
+		\par
+		\fi
 	\fi
 }
  
 % 5. Distractor Command (With Text Column Indentation)
 \newcommand{\distractor}[1]{%
 	\stepcounter{distractorcount}%
+	\ifdistractoronecol
+	% SINGLE-COLUMN: Each distractor on its own line
+	\noindent\hspace*{1cm}%
+	\begin{minipage}[t]{\dimexpr\textwidth-2cm\relax}
+		% Sub-column 1: The Box
+		\begin{minipage}[t]{0.8cm}
+			\choicebox
+		\end{minipage}%
+		\hspace*{0.15cm}% The Gap
+		% Sub-column 2: The Text
+		\begin{minipage}[t]{\dimexpr\linewidth-0.95cm\relax}\raggedright
+			#1
+		\end{minipage}%
+	\end{minipage}%
+	\hspace*{1cm}\par\vspace{0.5cm}%
+	\else
 	\ifodd\value{distractorcount}%
-	% ODD (أ, ج) -> Starts natively on the Right margin
+	% ODD (A, C / أ, ج) -> Starts natively on the Right margin
 	\noindent\hspace*{1cm}% <-- RIGHT PADDING
 	\begin{minipage}[t]{0.35\textwidth}
 		% Sub-column 1: The Box
@@ -443,7 +468,7 @@
 		\end{minipage}%
 	\end{minipage}%
 	\else
-	% EVEN (ب, د) -> Continues natively to the Left margin
+	% EVEN (B, D / ب, د) -> Continues natively to the Left margin
 	\hfill
 	\begin{minipage}[t]{0.35\textwidth}
 		% Sub-column 1: The Box
@@ -457,6 +482,7 @@
 		\end{minipage}%
 	\end{minipage}%
 	\hspace*{1cm}\par\vspace{0.5cm}% <-- LEFT PADDING (Keeps grid centered)
+	\fi
 	\fi
 }
 }
