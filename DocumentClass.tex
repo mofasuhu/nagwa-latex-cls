@@ -238,6 +238,66 @@
 
 
 	\input{nagwa.commands}
+	\ifthenelse{\equal{\country}{us}}
+	{
+	\ifthenelse{\equal{\numerals}{european}}{
+	\NagwaNotation{RD}{en1}
+	\NagwaNotation{Ray}{en1}
+	\NagwaNotation{Angle}{en1}
+	\NagwaNotation{Matrix}{en1}
+	\NagwaNotation{MatrixIn}{en1}
+	\NagwaNotation{Moment}{en1}
+	\NagwaNotation{StLine}{en1}
+	\NagwaNotation{Vector}{en1}
+	\NagwaNotation{VectorIn}{en3} % for Moment en1
+	\NagwaNotation{SeqTerm}{en1}
+	\NagwaNotation{Interval}{en1}
+	\NagwaNotation{Parallel}{en1}
+	\NagwaNotation{SetMinus}{en1}
+	\NagwaNotation{Triangle}{en1}
+	\NagwaNotation{Factorial}{en1}
+	\NagwaNotation{MathLabel}{en3}
+	\NagwaNotation{UnitVector}{en1}
+	\NagwaNotation{Combination}{en1}
+	\NagwaNotation{LineSegment}{en1}
+	\NagwaNotation{Permutation}{en1}
+	\NagwaNotation{CrossProduct}{en1}
+	\NagwaNotation{MeasureAngle}{en1}
+	\NagwaNotation{SetComplement}{en1}
+	\NagwaNotation{VectorMagnitude}{en1}
+	\NagwaNotation{ComplexConjugate}{en1}
+	\NagwaNotation{VectorComponents}{en1} 
+	}
+	{
+	\NagwaNotation{RD}{ar1}
+	\NagwaNotation{Ray}{ar1}
+	\NagwaNotation{Angle}{ar1}
+	\NagwaNotation{Matrix}{ar1}
+	\NagwaNotation{MatrixIn}{ar1}
+	\NagwaNotation{Moment}{ar1}
+	\NagwaNotation{StLine}{ar1}
+	\NagwaNotation{Vector}{ar1}
+	\NagwaNotation{VectorIn}{ar1}
+	\NagwaNotation{SeqTerm}{ar1}
+	\NagwaNotation{Interval}{ar1}
+	\NagwaNotation{Parallel}{ar1}
+	\NagwaNotation{SetMinus}{ar1}
+	\NagwaNotation{Triangle}{ar1}
+	\NagwaNotation{Factorial}{ar1}
+	\NagwaNotation{MathLabel}{ar1}
+	\NagwaNotation{UnitVector}{ar1}
+	\NagwaNotation{Combination}{ar1}
+	\NagwaNotation{LineSegment}{ar1}
+	\NagwaNotation{Permutation}{ar1}
+	\NagwaNotation{CrossProduct}{ar1}
+	\NagwaNotation{MeasureAngle}{ar1}
+	\NagwaNotation{SetComplement}{ar1}
+	\NagwaNotation{VectorMagnitude}{ar1}
+	\NagwaNotation{ComplexConjugate}{ar1}
+	\NagwaNotation{VectorComponents}{ar1}   
+	}		
+	}
+	{
 	\ifthenelse{\equal{\numerals}{european}}{
 	\NagwaNotation{RD}{en1}
 	\NagwaNotation{Ray}{en1}
@@ -293,6 +353,7 @@
 	\NagwaNotation{VectorMagnitude}{ar1}
 	\NagwaNotation{ComplexConjugate}{ar1}
 	\NagwaNotation{VectorComponents}{ar1}   
+	}
 	}
 
 	\input{Styles800-600}

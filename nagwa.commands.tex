@@ -2255,6 +2255,7 @@
 \providecommand{\RecurringDecimals}[2]{}%
 \renewcommand{\RecurringDecimals}[2]{%
 \ifthenelse{\equal{\NagwaRD}{en1}}{\replacementbarENone{#1}{#2}}{}%
+\ifthenelse{\equal{\NagwaRD}{en2}}{\replacementdotENtwo{#1}{#2}}{}%
 \ifthenelse{\equal{\NagwaRD}{ar1}}{\replacementdotARone{#1}{#2}}{}%
 }%
 
@@ -2276,6 +2277,81 @@ if arr[2]==nil
     else tex.sprint(string.sub(str2, 1, arr[1]-1)..[[\string\overline{]]..string.sub(str2, arr[1], arr[2])..[[}]]..string.sub(str2, arr[2]+1))
 end
 }}
+
+
+% enN2
+\providecommand{\replacementdotENtwo}[2]{\directlua{
+    str = string.gsub("\luaescapestring{#1}","[^0-9]", "")
+    arr={#2} 
+    str2="\luaescapestring{#1}"
+    local diff = string.len(str2)-string.len(str)
+    if arr[2]==nil then
+        arr[1] = arr[1] - 1 + diff
+    else
+        arr[1] = arr[1] - 1 + diff
+        arr[2] = arr[2] - 1 + diff
+    end
+    if arr[2]==nil
+        then tex.sprint(string.sub(str2, 1, arr[1]-1)..[[\string\dot{]]..string.sub(str2, arr[1], arr[1])..[[}]]..string.sub(str2, arr[1]+1))
+        else tex.sprint(string.sub(str2, 1, arr[1]-1)..[[\string\dot{]]..string.sub(str2, arr[1], arr[1])..[[}]]..string.sub(str2, arr[1]+1, arr[2]-1)..[[\string\dot{]]..string.sub(str2, arr[2], arr[2])..[[}]]..string.sub(str2, arr[2]+1))
+    end
+}}
+
+% enN3
+\providecommand{\replacementarcENthree}[2]{\directlua{
+    str = string.gsub("\luaescapestring{#1}","[^0-9]", "")
+    arr={#2} 
+    str2="\luaescapestring{#1}"
+    local diff = string.len(str2)-string.len(str) 
+    if arr[2]==nil
+    then
+        arr[1] = arr[1] - 1 + diff
+    else
+        arr[1] = arr[1] - 1 + diff
+        arr[2] = arr[2] - 1 + diff
+    end
+    if arr[2]==nil
+        then tex.sprint(string.sub(str2, 1, arr[1]-1)..[[\string\wideparen{]]..string.sub(str2, arr[1], arr[1])..[[}]]..string.sub(str2, arr[1]+1))
+        else tex.sprint(string.sub(str2, 1, arr[1]-1)..[[\string\wideparen{]]..string.sub(str2, arr[1], arr[2])..[[}]]..string.sub(str2, arr[2]+1))
+    end
+}}
+
+% enN4
+\providecommand{\replacementbracketENfour}[2]{\directlua{
+    str = string.gsub("\luaescapestring{#1}","[^0-9]", "")
+    arr={#2} 
+    str2="\luaescapestring{#1}"
+    local diff = string.len(str2)-string.len(str)
+    if arr[2]==nil then
+		arr[1] = arr[1] - 1 + diff
+		tex.sprint(string.sub(str2, 1, arr[1]-1)..[[\string(]]..string.sub(str2, arr[1], arr[1])..[[)]]..string.sub(str2, arr[1]+1))
+	else
+		arr[1] = arr[1] - 1 + diff
+		arr[2] = arr[2] - 1 + diff
+		%tex.sprint(arr[1])
+		tex.sprint(string.sub(str2, 1, arr[1]-1)..[[\string(]]..string.sub(str2, arr[1], arr[2])..[[)]]..string.sub(str2, arr[2]+1))
+    end
+}}
+
+% enN5
+\providecommand{\replacementbarENfive}[2]{\directlua{
+    str = string.gsub("\luaescapestring{#1}","[^0-9]", "")
+    arr={#2} 
+    str2="\luaescapestring{#1}"
+    local diff = string.len(str2)-string.len(str)
+    if arr[2]==nil then
+        arr[1] = arr[1] - 1 + diff
+    else
+        arr[1] = arr[1] - 1 + diff
+        arr[2] = arr[2] - 1 + diff
+    end
+    if arr[2]==nil
+        then tex.sprint(string.sub(str2, 1, arr[1]-1)..[[\string\underline{]]..string.sub(str2, arr[1], arr[1])..[[}]]..string.sub(str2, arr[1]+1))
+        else tex.sprint(string.sub(str2, 1, arr[1]-1)..[[\string\underline{]]..string.sub(str2, arr[1], arr[2])..[[}]]..string.sub(str2, arr[2]+1))
+    end
+}}
+
+
 % arN1
 \providecommand{\replacementdotARone}[2]{\directlua{
     local utf8 = unicode.utf8
@@ -2350,6 +2426,86 @@ end
         local char2 = string.sub(str2_ascii, pos2, pos2)
         local after = string.sub(str2_ascii, pos2 + 1)
         str3_ascii = before .. [[\string\dot{]] .. char1 .. [[}]] .. middle .. [[\string\dot{]] .. char2 .. [[}]] .. after
+    end
+    
+    local str3_arabic = ascii_to_arabic(str3_ascii)
+    str3_arabic = str3_arabic:gsub(p .. ".", utf8.char(0x066B))
+    
+    tex.print("\\mbox{\\mathdir TLT $" .. str3_arabic .. "$}")
+}}
+
+% arN2
+\providecommand{\replacementbarARtwo}[2]{\directlua{
+    local utf8 = unicode.utf8
+    local p = string.char(37) 
+    
+    local function arabic_to_ascii(s)
+        if not s then return "" end
+        s = s:gsub(utf8.char(0x0660), "0")
+        s = s:gsub(utf8.char(0x0661), "1")
+        s = s:gsub(utf8.char(0x0662), "2")
+        s = s:gsub(utf8.char(0x0663), "3")
+        s = s:gsub(utf8.char(0x0664), "4")
+        s = s:gsub(utf8.char(0x0665), "5")
+        s = s:gsub(utf8.char(0x0666), "6")
+        s = s:gsub(utf8.char(0x0667), "7")
+        s = s:gsub(utf8.char(0x0668), "8")
+        s = s:gsub(utf8.char(0x0669), "9")
+        return s
+    end
+    
+    local function ascii_to_arabic(s)
+        if not s then return "" end
+        s = s:gsub("0", utf8.char(0x0660))
+        s = s:gsub("1", utf8.char(0x0661))
+        s = s:gsub("2", utf8.char(0x0662))
+        s = s:gsub("3", utf8.char(0x0663))
+        s = s:gsub("4", utf8.char(0x0664))
+        s = s:gsub("5", utf8.char(0x0665))
+        s = s:gsub("6", utf8.char(0x0666))
+        s = s:gsub("7", utf8.char(0x0667))
+        s = s:gsub("8", utf8.char(0x0668))
+        s = s:gsub("9", utf8.char(0x0669))
+        return s
+    end
+    
+    local input_str = "\luaescapestring{#1}"
+    local input_ascii = arabic_to_ascii(input_str)
+    input_ascii = input_ascii:gsub(utf8.char(0x066B), ".")
+    
+    local digits_only = input_ascii:gsub("[^0-9]", "")
+    
+    local arr = {}
+    local idx_str = "\luaescapestring{#2}"
+    for part in string.gmatch(idx_str, "([^,]+)") do
+         part = part:gsub("^" .. p .. "s+", ""):gsub(p .. "s+$", "")
+         part = arabic_to_ascii(part)
+         local num = tonumber(part)
+         if num then table.insert(arr, num) end
+    end
+    
+    local str2_ascii = input_ascii
+    local diff = string.len(str2_ascii) - string.len(digits_only)
+    
+    if arr[2] == nil then
+        arr[1] = arr[1] - 1 + diff
+    else
+        arr[1] = arr[1] - 1 + diff
+        arr[2] = arr[2] - 1 + diff
+    end
+    
+    local str3_ascii
+    if arr[2] == nil then
+        str3_ascii = string.sub(str2_ascii, 1, arr[1] - 1) .. [[\string\overline{]] .. string.sub(str2_ascii, arr[1], arr[1]) .. [[}]] .. string.sub(str2_ascii, arr[1] + 1)
+    else
+        local pos1, pos2 = arr[1], arr[2]
+        if pos1 > pos2 then
+            pos1, pos2 = pos2, pos1
+        end
+        local before = string.sub(str2_ascii, 1, pos1 - 1)
+        local overlined_part = string.sub(str2_ascii, pos1, pos2)
+        local after = string.sub(str2_ascii, pos2 + 1)
+        str3_ascii = before .. [[\string\overline{]] .. overlined_part .. [[}]] .. after
     end
     
     local str3_arabic = ascii_to_arabic(str3_ascii)
