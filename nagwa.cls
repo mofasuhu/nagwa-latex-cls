@@ -343,7 +343,7 @@ end, "show_error_hook")
         \tl_set:Nn \l__nagwa_cols_tl { #2 }
       }
       {
-        \dim_set:Nn \l__nagwa_threshold_dim { ( \pagewidth - \nagwaLmargin - \nagwaRmargin - 100pt ) / 2 }
+        \dim_set:Nn \l__nagwa_threshold_dim { ( \pagewidth - \nagwaLmargin - \nagwaRmargin - 145pt ) / 2 }
         \dim_zero:N \l__nagwa_max_task_width_dim
 
         \seq_set_split:Nnn \l__nagwa_tasks_seq { \task } { #3 }
