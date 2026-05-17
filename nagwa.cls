@@ -66,6 +66,8 @@ luatexbase.add_to_callback('show_warning_message', be_quiet, 'stop show warning 
 \RequirePackage{newunicodechar} % Required to process the commands in Unicodes.tex
 \input{Unicodes.tex}            % Loads the character definitions
 
+\RequirePackage{luacode}
+
 \typeout{Packages loaded...}
 
 %==========================Options==========================
@@ -428,3 +430,16 @@ end, "show_error_hook")
 \fancyfoot[C]{}
 \fancyhead[C]{}
 
+
+
+\begin{luacode*}
+function fix_chemistry_subscripts(line)
+    line = string.gsub(line, "_{%s*%(aq%)%s*}", "{}%0")
+    line = string.gsub(line, "_{%s*%(s%)%s*}", "{}%0")
+    line = string.gsub(line, "_{%s*%(l%)%s*}", "{}%0")
+    line = string.gsub(line, "_{%s*%(g%)%s*}", "{}%0")
+    return line
+end
+
+luatexbase.add_to_callback("process_input_buffer", fix_chemistry_subscripts, "Fix chemistry double subscripts")
+\end{luacode*}
