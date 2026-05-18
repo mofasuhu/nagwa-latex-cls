@@ -1490,6 +1490,18 @@
 \newcolumntype{M}[1]{>{\centering\arraybackslash\mathdir TRT }m{#1}}
 \newcolumntype{T}[1]{>{\centering\arraybackslash\mathdir TRT }p{#1}}
 
+
+\renewcommand{\tabularxcolumn}[1]{m{#1}}
+
+\ifthenelse{\equal{\nagwalang}{ar}}
+{
+\newcolumntype{U}{>{\centering\arraybackslash\begin{otherlanguage}{arabic}}X<{\end{otherlanguage}}}
+}
+{
+\newcolumntype{U}{>{\centering\arraybackslash}X}
+}
+
+
 \newcommand{\gaptext}{\underline{\hspace{2cm}}}
 
 

@@ -67,6 +67,7 @@ luatexbase.add_to_callback('show_warning_message', be_quiet, 'stop show warning 
 \input{Unicodes.tex}            % Loads the character definitions
 
 \RequirePackage{luacode}
+\RequirePackage{adjustbox}
 
 \typeout{Packages loaded...}
 
@@ -431,15 +432,26 @@ end, "show_error_hook")
 \fancyhead[C]{}
 
 
+\newfontfamily\emojifont{Noto Color Emoji}[Renderer=Harfbuzz]
+
 
 \begin{luacode*}
-function fix_chemistry_subscripts(line)
+function clean_nagwa_tex_input(line)
     line = string.gsub(line, "_{%s*%(aq%)%s*}", "{}%0")
     line = string.gsub(line, "_{%s*%(s%)%s*}", "{}%0")
     line = string.gsub(line, "_{%s*%(l%)%s*}", "{}%0")
     line = string.gsub(line, "_{%s*%(g%)%s*}", "{}%0")
+    line = string.gsub(line, "👍", "{\\emojifont 👍}")
+    line = string.gsub(line, "👎", "{\\emojifont 👎}")
+    line = string.gsub(line, "%$([^%$]+)%$", function(math_content)
+        if string.find(math_content, "\\begin{") then
+            return "$" .. math_content .. "$"
+        end
+        local fixed_content = string.gsub(math_content, "\\\\", "$ \\\\ $")
+        return "$" .. fixed_content .. "$"
+    end)
     return line
 end
 
-luatexbase.add_to_callback("process_input_buffer", fix_chemistry_subscripts, "Fix chemistry double subscripts")
+luatexbase.add_to_callback("process_input_buffer", clean_nagwa_tex_input, "Clean Nagwa TeX Input")
 \end{luacode*}
