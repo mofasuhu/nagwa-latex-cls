@@ -2705,12 +2705,23 @@ end
 		texio.write_nl("Slide ID: " .. slide_id)
 		texio.write_nl("File path: " .. filepath)
 		
-		local file = io.open(filepath, "r")
-		if not file then
-			texio.write_nl("ERROR: Could not open file!")
-			tex.print("\\string\\par\\string\\textbf{Error: Could not open file " .. filepath .. "}")
-			return
-		end
+        local file = io.open(filepath, "r")
+        if not file then
+            local pdfpath = slide_id .. "/" .. slide_id .. ".pdf"
+            local pdffile = io.open(pdfpath, "rb")
+        
+            if pdffile then
+                pdffile:close()
+                texio.write_nl("TeX file not found. Including PDF instead: " .. pdfpath)
+        
+                tex.print("\\includepdf[pages=1,pagecommand={},fitpaper=true]{" .. pdfpath .. "}")
+                return
+            end
+        
+            texio.write_nl("ERROR: Could not open TeX or PDF file!")
+            tex.print("\\string\\par\\string\\textbf{Error: Could not open file " .. filepath .. " or PDF fallback}")
+            return
+        end
 		
 		local content = file:read("*all")
 		file:close()
@@ -2762,6 +2773,22 @@ end
         end
 	}%
 }%
+
+
+
+\newcommand{\pdfinput}[2][]{%
+  \clearpage
+  \IfFileExists{#2/#2.pdf}{%
+    \includepdf[
+      pages=1,
+      pagecommand={},
+      fitpaper=true,
+      #1
+    ]{#2/#2.pdf}%
+  }{%
+    \par\textbf{Error: Could not open PDF file #2/#2.pdf}%
+  }%
+}
 
 }
 \makeatother
