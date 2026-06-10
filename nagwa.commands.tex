@@ -2559,7 +2559,13 @@ end
 }
 \makeatother
 
-
+%Nagwa X Mark
+\makeatletter
+\AtBeginDocument{%
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\correctmark}{\ding{51}}
+}
+\makeatother
 
 % math thousand separators
 \makeatletter
@@ -2794,5 +2800,5 @@ end
 \makeatother
 
 
-\newcommand{\xmark}{\ding{55}}
+
 
