@@ -2,6 +2,11 @@
 \newcommand{\mathOrText}[1]{\ifmmode#1 \else$#1 $\fi}
 \newcommand{\mathOrChar}[2]{\ifmmode#1\else\char#2 \fi}
 
+% Isolate Arabic comma from adjacent inline math (RTL bidi boundary fix)
+\newcommand{\nagwaArabicComma}{%
+  \ifmmode{\char"060C}\else\mbox{\char"060C}\fi
+}
+\newunicodechar{،}{\nagwaArabicComma}
 
 \newunicodechar{−}{\mathOrText{-}}
 
