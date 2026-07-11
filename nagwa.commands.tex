@@ -42,193 +42,188 @@
 
 
 
-% Add Nagwa Notations here
+% % Handwriting Logic
+% \makeatletter
+% \AtBeginDocument{%
+% \newcounter{handwriteline}
+
+% \newfontfeature{RightToLeftAlt}{+rtlm;+rtla}
+
+% % Dedicated handwriting font
+% \ifthenelse{\equal{\nagwalang}{ar}}%
+% {
+% \newfontfamily\handwritingfont{NagwaTKText-Regular.otf}[
+%     Script   = Arabic,
+%     BoldFont = NagwaTKText-Bold.otf,
+%     ItalicFont = NagwaTKText-Oblique.otf,
+%     BoldItalicFont = NagwaTKText-BoldOblique.otf,
+%     SlantedFont = NagwaTKText-Regular.otf,
+%     SlantedFeatures = {FakeSlant=0.15}
+% ]
+% }{
+% \newfontfamily\handwritingfont{NagwaTKText-Regular.otf}[
+% 	Script   = Arabic,
+%     BoldFont = NagwaTKText-Bold.otf,
+%     ItalicFont = NagwaTKText-Oblique.otf,
+%     BoldItalicFont = NagwaTKText-BoldOblique.otf,
+%     SlantedFont = NagwaTKText-Regular.otf,
+%     SlantedFeatures = {FakeSlant=0.15}
+% ]
+% }%
 
 
 
+% % Helper to check if document is RTL
+% \newif\ifnagwa@isrtl
+% \AtBeginDocument{%
+%     \ifthenelse{\equal{\nagwalang}{ar}}%
+%     {\nagwa@isrtltrue}{\nagwa@isrtlfalse}%
+% }
 
-% Handwriting Logic
-\makeatletter
-\AtBeginDocument{%
-\newcounter{handwriteline}
-
-\newfontfeature{RightToLeftAlt}{+rtlm;+rtla}
-
-% Dedicated handwriting font
-\ifthenelse{\equal{\nagwalang}{ar}}%
-{
-\newfontfamily\handwritingfont{NagwaTKText-Regular.otf}[
-    Script   = Arabic,
-    BoldFont = NagwaTKText-Bold.otf,
-    ItalicFont = NagwaTKText-Oblique.otf,
-    BoldItalicFont = NagwaTKText-BoldOblique.otf,
-    SlantedFont = NagwaTKText-Regular.otf,
-    SlantedFeatures = {FakeSlant=0.15}
-]
-}{
-\newfontfamily\handwritingfont{NagwaTKText-Regular.otf}[
-	Script   = Arabic,
-    BoldFont = NagwaTKText-Bold.otf,
-    ItalicFont = NagwaTKText-Oblique.otf,
-    BoldItalicFont = NagwaTKText-BoldOblique.otf,
-    SlantedFont = NagwaTKText-Regular.otf,
-    SlantedFeatures = {FakeSlant=0.15}
-]
-}%
+% % Helper to check if document is European
+% \newif\ifnagwa@isEu
+% \AtBeginDocument{%
+%     \ifthenelse{\equal{\numerals}{european}}%
+%     {\nagwa@isEutrue}{\nagwa@isEufalse}%
+% }
 
 
+% % Global helpers for handwriting line breaks:
+% %   - \\      -> \\[7pt]
+% %   - \\[xpt] -> \\[xpt] (user value preserved)
+% \def\nagwa@hw@newline{%
+%   \@ifnextchar[{\nagwa@hw@newline@opt}{\nagwa@hw@newline@noopt}%
+% }%
+% \def\nagwa@hw@newline@opt[#1]{\hw@origbs[#1]}%
+% \def\nagwa@hw@newline@noopt{\hw@origbs[10pt]}%
 
-% Helper to check if document is RTL
-\newif\ifnagwa@isrtl
-\AtBeginDocument{%
-    \ifthenelse{\equal{\nagwalang}{ar}}%
-    {\nagwa@isrtltrue}{\nagwa@isrtlfalse}%
-}
+% % Typeset helper used at shipout: wraps content in a varwidth box and
+% % locally remaps \\ so bare \\ gets extra vertical space.
+% \def\nagwa@hw@typeset#1{%
+%   \begingroup
+%     \begin{varwidth}[t]{\maxdimen}%
+%       \let\hw@origbs=\\%
+%       \def\\{\nagwa@hw@newline}%
+%       #1%
+%     \end{varwidth}%
+%   \endgroup
+% }
 
-% Helper to check if document is European
-\newif\ifnagwa@isEu
-\AtBeginDocument{%
-    \ifthenelse{\equal{\numerals}{european}}%
-    {\nagwa@isEutrue}{\nagwa@isEufalse}%
-}
+% \NewDocumentCommand{\handwrite}{O{} g}{%
+%     % Check if second argument (content) is provided
+%     \IfNoValueTF{#2}{%
+%         % Silent marker: allow \handwrite[ID] inside equations without output
+%         \relax
+%     }{%
+%         \stepcounter{handwriteline}%
+%         % Default values
+%         \def\hw@id{HW\thehandwriteline}%
+%         \def\hw@x{0}%
+%         \def\hw@y{0}%
+%         \def\hw@rot{0}%
+%         \def\hw@size{20}%
+%         \def\hw@color{blue}%
+%         % Parse arguments: [ID,x,y,rot,size,color]
+%         \def\hw@parse##1,##2,##3,##4,##5,##6,##7\relax{%
+%             \ifx\relax##1\relax\else\def\hw@id{##1}\fi
+%             \ifx\relax##2\relax\else\def\hw@x{##2}\fi
+%             \ifx\relax##3\relax\else\def\hw@y{##3}\fi
+%             \ifx\relax##4\relax\else\def\hw@rot{##4}\fi
+%             \ifx\relax##5\relax\else\def\hw@size{##5}\fi
+%             \ifx\relax##6\relax\else\def\hw@color{##6}\fi
+%         }%
+%         \hw@parse#1,,,,,,,\relax
+%         %
+%         % Check if ID is HW00 or 00 - if so, skip rendering entirely
+%         \newif\ifhw@skip
+%         \hw@skipfalse
+%         \IfStrEq{\hw@id}{HW00}{\hw@skiptrue}{}%
+%         \IfStrEq{\hw@id}{00}{\hw@skiptrue}{}%
+%         %
+%         \ifhw@skip
+%             % Hidden handwriting - do nothing
+%             \relax
+%         \else
+%             % Map color name to custom color
+%             \def\hw@colorname{hwBlack}% default
+%             \IfStrEq{\hw@color}{black}{\def\hw@colorname{hwBlack}}{}%
+%             \IfStrEq{\hw@color}{blue}{\def\hw@colorname{hwBlue}}{}%
+%             \IfStrEq{\hw@color}{red}{\def\hw@colorname{hwRed}}{}%
+%             \IfStrEq{\hw@color}{green}{\def\hw@colorname{hwGreen}}{}%
+%             \IfStrEq{\hw@color}{orange}{\def\hw@colorname{hwOrange}}{}%
+%             \IfStrEq{\hw@color}{purple}{\def\hw@colorname{hwPurple}}{}%
+%             %
+%             % Determine anchor based on language (RTL = east/llap, LTR = west/rlap)
+%             \ifnagwa@isrtl
+%                 \def\hw@anchor{base east}
+% 				\def\hw@xshift{+7pt}
+%             \else
+%                 \def\hw@anchor{base west}
+% 				\def\hw@xshift{-1.5pt}
+%             \fi
+%             %
+%             % Store content in a uniquely-named macro to avoid expansion issues
+%             % Use the counter value to create a unique name
+%             \expandafter\gdef\csname hw@content@\thehandwriteline\endcsname{#2}%
+%             %
+%             % Build shipout command with all values expanded except the content
+%             \edef\hw@x@exp{\hw@x}%
+%             \edef\hw@y@exp{\hw@y}%
+%             \edef\hw@rot@exp{\hw@rot}%
+%             \edef\hw@size@exp{\hw@size}%
+%             \edef\hw@anchor@exp{\hw@anchor}%
+%             \edef\hw@colorname@exp{\hw@colorname}%
+%             \edef\hw@linenum{\thehandwriteline}%
+%             %
+%             \protected@edef\hw@shipout@cmd{%
+%                 \noexpand\AddToShipoutPictureFG*{%
+%                     \noexpand\put(0,0){%
+%                         \noexpand\begin{tikzpicture}[remember picture, overlay]
+%                             \noexpand\begin{scope}[shift={(current page.north west)}]
+%                                 \noexpand\begin{ocg}{Handwriting}{ocg-handwriting}{1}
+%                                     \noexpand\node[
+%                                         anchor=\hw@anchor@exp,
+%                                         rotate=\hw@rot@exp,
+%                                         inner sep=0bp,
+%                                         outer sep=0bp
+% 									] at (\hw@x@exp bp \hw@xshift, -\hw@y@exp bp) {%
+% 										\noexpand\handwritingfont
+% 										\noexpand\fontsize{\hw@size@exp}{1.2\hw@size@exp}\noexpand\selectfont
+% 										\noexpand\color{\hw@colorname@exp}%
+% 										\noexpand\ifdefined\setmathfont
+% 											\noexpand\ifnagwa@isEu
+% 												\noexpand\setmathfont{NagwaTKMath-Regular.otf}[StylisticSet=8]%
+% 											\noexpand\else
+% 												\noexpand\setmathfont{NagwaTKMath-Regular.otf}[RightToLeftAlt,StylisticSet=8]%
+% 											\noexpand\fi
+% 										\noexpand\fi
+% 										\noexpand\ifnagwa@isrtl
+% 											\noexpand\begin{otherlanguage*}{arabic}
+% 											\bodydir TRT \pardir TRT
+% 										\noexpand\fi
+% 										% Wrap content and apply automatic \\ -> \\[7pt] mapping inside
+% 										\noexpand\nagwa@hw@typeset{%
+% 											\expandafter\noexpand\csname hw@content@\hw@linenum\endcsname
+% 										}%
+% 										\noexpand\ifnagwa@isrtl
+% 											\noexpand\end{otherlanguage*}
+% 										\noexpand\fi
+%                                     };
+%                                 \noexpand\end{ocg}
+%                             \noexpand\end{scope}
+%                         \noexpand\end{tikzpicture}%
+%                     }%
+%                 }%
+%             }%
+%             \hw@shipout@cmd
+%         \fi
+%     }%
+% }
 
-
-% Global helpers for handwriting line breaks:
-%   - \\      -> \\[7pt]
-%   - \\[xpt] -> \\[xpt] (user value preserved)
-\def\nagwa@hw@newline{%
-  \@ifnextchar[{\nagwa@hw@newline@opt}{\nagwa@hw@newline@noopt}%
-}%
-\def\nagwa@hw@newline@opt[#1]{\hw@origbs[#1]}%
-\def\nagwa@hw@newline@noopt{\hw@origbs[10pt]}%
-
-% Typeset helper used at shipout: wraps content in a varwidth box and
-% locally remaps \\ so bare \\ gets extra vertical space.
-\def\nagwa@hw@typeset#1{%
-  \begingroup
-    \begin{varwidth}[t]{\maxdimen}%
-      \let\hw@origbs=\\%
-      \def\\{\nagwa@hw@newline}%
-      #1%
-    \end{varwidth}%
-  \endgroup
-}
-
-\NewDocumentCommand{\handwrite}{O{} g}{%
-    % Check if second argument (content) is provided
-    \IfNoValueTF{#2}{%
-        % Silent marker: allow \handwrite[ID] inside equations without output
-        \relax
-    }{%
-        \stepcounter{handwriteline}%
-        % Default values
-        \def\hw@id{HW\thehandwriteline}%
-        \def\hw@x{0}%
-        \def\hw@y{0}%
-        \def\hw@rot{0}%
-        \def\hw@size{20}%
-        \def\hw@color{blue}%
-        % Parse arguments: [ID,x,y,rot,size,color]
-        \def\hw@parse##1,##2,##3,##4,##5,##6,##7\relax{%
-            \ifx\relax##1\relax\else\def\hw@id{##1}\fi
-            \ifx\relax##2\relax\else\def\hw@x{##2}\fi
-            \ifx\relax##3\relax\else\def\hw@y{##3}\fi
-            \ifx\relax##4\relax\else\def\hw@rot{##4}\fi
-            \ifx\relax##5\relax\else\def\hw@size{##5}\fi
-            \ifx\relax##6\relax\else\def\hw@color{##6}\fi
-        }%
-        \hw@parse#1,,,,,,,\relax
-        %
-        % Check if ID is HW00 or 00 - if so, skip rendering entirely
-        \newif\ifhw@skip
-        \hw@skipfalse
-        \IfStrEq{\hw@id}{HW00}{\hw@skiptrue}{}%
-        \IfStrEq{\hw@id}{00}{\hw@skiptrue}{}%
-        %
-        \ifhw@skip
-            % Hidden handwriting - do nothing
-            \relax
-        \else
-            % Map color name to custom color
-            \def\hw@colorname{hwBlack}% default
-            \IfStrEq{\hw@color}{black}{\def\hw@colorname{hwBlack}}{}%
-            \IfStrEq{\hw@color}{blue}{\def\hw@colorname{hwBlue}}{}%
-            \IfStrEq{\hw@color}{red}{\def\hw@colorname{hwRed}}{}%
-            \IfStrEq{\hw@color}{green}{\def\hw@colorname{hwGreen}}{}%
-            \IfStrEq{\hw@color}{orange}{\def\hw@colorname{hwOrange}}{}%
-            \IfStrEq{\hw@color}{purple}{\def\hw@colorname{hwPurple}}{}%
-            %
-            % Determine anchor based on language (RTL = east/llap, LTR = west/rlap)
-            \ifnagwa@isrtl
-                \def\hw@anchor{base east}
-				\def\hw@xshift{+7pt}
-            \else
-                \def\hw@anchor{base west}
-				\def\hw@xshift{-1.5pt}
-            \fi
-            %
-            % Store content in a uniquely-named macro to avoid expansion issues
-            % Use the counter value to create a unique name
-            \expandafter\gdef\csname hw@content@\thehandwriteline\endcsname{#2}%
-            %
-            % Build shipout command with all values expanded except the content
-            \edef\hw@x@exp{\hw@x}%
-            \edef\hw@y@exp{\hw@y}%
-            \edef\hw@rot@exp{\hw@rot}%
-            \edef\hw@size@exp{\hw@size}%
-            \edef\hw@anchor@exp{\hw@anchor}%
-            \edef\hw@colorname@exp{\hw@colorname}%
-            \edef\hw@linenum{\thehandwriteline}%
-            %
-            \protected@edef\hw@shipout@cmd{%
-                \noexpand\AddToShipoutPictureFG*{%
-                    \noexpand\put(0,0){%
-                        \noexpand\begin{tikzpicture}[remember picture, overlay]
-                            \noexpand\begin{scope}[shift={(current page.north west)}]
-                                \noexpand\begin{ocg}{Handwriting}{ocg-handwriting}{1}
-                                    \noexpand\node[
-                                        anchor=\hw@anchor@exp,
-                                        rotate=\hw@rot@exp,
-                                        inner sep=0bp,
-                                        outer sep=0bp
-									] at (\hw@x@exp bp \hw@xshift, -\hw@y@exp bp) {%
-										\noexpand\handwritingfont
-										\noexpand\fontsize{\hw@size@exp}{1.2\hw@size@exp}\noexpand\selectfont
-										\noexpand\color{\hw@colorname@exp}%
-										\noexpand\ifdefined\setmathfont
-											\noexpand\ifnagwa@isEu
-												\noexpand\setmathfont{NagwaTKMath-Regular.otf}[StylisticSet=8]%
-											\noexpand\else
-												\noexpand\setmathfont{NagwaTKMath-Regular.otf}[RightToLeftAlt,StylisticSet=8]%
-											\noexpand\fi
-										\noexpand\fi
-										\noexpand\ifnagwa@isrtl
-											\noexpand\begin{otherlanguage*}{arabic}
-											\bodydir TRT \pardir TRT
-										\noexpand\fi
-										% Wrap content and apply automatic \\ -> \\[7pt] mapping inside
-										\noexpand\nagwa@hw@typeset{%
-											\expandafter\noexpand\csname hw@content@\hw@linenum\endcsname
-										}%
-										\noexpand\ifnagwa@isrtl
-											\noexpand\end{otherlanguage*}
-										\noexpand\fi
-                                    };
-                                \noexpand\end{ocg}
-                            \noexpand\end{scope}
-                        \noexpand\end{tikzpicture}%
-                    }%
-                }%
-            }%
-            \hw@shipout@cmd
-        \fi
-    }%
-}
-
-% Define handwriting environment (wrapper)
-\NewDocumentEnvironment{handwriting}{}{}{}
-}
-\makeatother
+% % Define handwriting environment (wrapper)
+% \NewDocumentEnvironment{handwriting}{}{}{}
+% }
+% \makeatother
 
 
 % Angle

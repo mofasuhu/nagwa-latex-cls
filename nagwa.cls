@@ -12,7 +12,7 @@
 \WarningFilter{latex}{Command \underline}
 \WarningFilter{latex}{Font shape}
 \WarningFilter{fontspec}{Font shape}
-\WarningFilter{ocgx2}{Rerun to get}
+% \WarningFilter{ocgx2}{Rerun to get}
 \WarningFilter{rerunfilecheck}{File}
 \WarningFilter{lastpage}{Rerun to get}
 
@@ -119,13 +119,13 @@ luatexbase.add_to_callback('show_warning_message', be_quiet, 'stop show warning 
 \definecolor{coverblue}{cmyk}{0.91, 0.5, 0.03, 0.0}
 \definecolor{coverblack}{cmyk}{0.0, 0.0, 0.0, 1.0}
 
-% Define named colors for handwriting
-\definecolor{hwBlack}{HTML}{4D4D4F}
-\definecolor{hwBlue}{HTML}{56A5E1}
-\definecolor{hwRed}{HTML}{E24C3C}
-\definecolor{hwGreen}{HTML}{119F25}
-\definecolor{hwOrange}{HTML}{F4A304}
-\definecolor{hwPurple}{HTML}{FF2AFF}
+% % Define named colors for handwriting
+% \definecolor{hwBlack}{HTML}{4D4D4F}
+% \definecolor{hwBlue}{HTML}{56A5E1}
+% \definecolor{hwRed}{HTML}{E24C3C}
+% \definecolor{hwGreen}{HTML}{119F25}
+% \definecolor{hwOrange}{HTML}{F4A304}
+% \definecolor{hwPurple}{HTML}{FF2AFF}
 
 
 %% Bright Colours
