@@ -336,6 +336,14 @@
 }
 \makeatother
 
+% longdownarrow command
+\makeatletter
+\AtBeginDocument{%
+\newcommand{\longdownarrow}{\mathop{\vcenter{\hbox{\scalebox{1}[2.5]{$\downarrow$}}}}}
+
+}
+\makeatother
+
 
 % Cross Product
 \makeatletter
