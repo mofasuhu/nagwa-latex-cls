@@ -319,6 +319,13 @@
 \ifthenelse{\equal{\NagwaCombination}{ar1}}{{\vphantom{\dotlessqaft}}^{#1}{\dotlessqaft}_{#2}}{}%
 \ifthenelse{\equal{\NagwaCombination}{ar2}}{\begin{pmatrix}#1\\#2\end{pmatrix}}{}%
 }%
+
+\providecommand{\Combination}[2]{}%
+\renewcommand{\Combination}[2]{%
+{\vphantom{C}}_{#1}{C}_{#2}
+}%
+
+
 }
 \makeatother
 
