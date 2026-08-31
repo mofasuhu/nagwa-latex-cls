@@ -322,7 +322,8 @@
 
 \providecommand{\Combination}[2]{}%
 \renewcommand{\Combination}[2]{%
-{\vphantom{C}}_{#1}{C}_{#2}
+\ifthenelse{\equal{\NagwaCombination}{en2}}{{\vphantom{C}}_{#1}{C}_{#2}}{}%
+\ifthenelse{\equal{\NagwaCombination}{ar1}}{{\vphantom{\dotlessqaft}}_{#1}{\dotlessqaft}_{#2}}{}%
 }%
 
 
@@ -390,6 +391,15 @@
 \ifthenelse{\equal{\NagwaFactorial}{ar1}}{\mathpalette\arfactorial{#2}}{}%
 \ifthenelse{\equal{\NagwaFactorial}{ar2}}{\ifthenelse{\equal{#1}{brackets}}{\left(#2\right)!}{#2!}}{}%
 }%
+
+
+\providecommand{\Factorial}[2][nobrackets]{}%
+\renewcommand{\Factorial}[2][nobrackets]{%
+\ifthenelse{\equal{\NagwaFactorial}{en2}}{\ifthenelse{\equal{#1}{brackets}}{\left(#2\right)!}{#2!}}{}%
+\ifthenelse{\equal{\NagwaFactorial}{ar1}}{\ifthenelse{\equal{#1}{brackets}}{\left(#2\right)!}{#2!}}{}%
+}%
+
+
 }
 \makeatother
 
