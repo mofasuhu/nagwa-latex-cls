@@ -689,6 +689,13 @@
 \ifthenelse{\equal{\NagwaSeqTerm}{en3}}{u_{#1}}{}%
 \ifthenelse{\equal{\NagwaSeqTerm}{ar1}}{\hah_{#1}}{}%
 }%
+
+\providecommand{\sequenceterm}[1]{}%
+\renewcommand{\sequenceterm}[1]{%
+\ifthenelse{\equal{\NagwaSeqTerm}{en2}}{a_{#1}}{}%
+\ifthenelse{\equal{\NagwaSeqTerm}{ar1}}{\alef_{#1}}{}%
+}
+
 }
 \makeatother
 
