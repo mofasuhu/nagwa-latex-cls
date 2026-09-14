@@ -998,6 +998,29 @@
 }
 
 
+\def\tallyH{
+\ifthenelse{\equal{\nagwalang}{arabic}\or\equal{\nagwalang}{ar}}
+{\kern3bp\pdfliteral{q 1 w -25 7 m 1 7 l S Q}\tallynum4\kern3bp}
+{\kern3bp\pdfliteral{q 1 w -1 7 m 25 7 l S Q}\tallynum4\kern3bp }
+}
+ 
+\def\CounterTallyMarksH#1{\leavevmode \lower1bp\vbox to30bp{}%
+  \tmpnum=#1
+  \loop \ifnum\tmpnum<5 \kern1bp \tallynum\tmpnum \else \tallyH \fi
+        \advance\tmpnum by-5
+        \ifnum\tmpnum>0 \repeat
+}
+\protected\def\pdfliteral {\pdfextension literal}
+\def\tallynum#1{\bgroup\tmpnum=#1\relax
+\loop \ifnum\tmpnum>0
+       \kern3bp \tallyI \kern3bp
+       \advance\tmpnum by-1
+       \repeat
+\egroup
+}
+
+
+
 \newcommand\Cancel[3][]{
 \tikz[baseline = (a.base),anchor=base,style={inner sep=0,outer sep=0,minimum height=1ex}]{\node(a) {$#2$};
 \draw[-] (a.south west)--(a.north east);
